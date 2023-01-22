@@ -43,8 +43,9 @@
                 <td scope="col">{{$usersv->telefono_usuario}}</td>
                 <td scope="col">{{$usersv->email}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary">EDITAR</button>
-                    <button  wire:click="eliminar({{$usersv->id}})" type="button" class="btn btn-danger">ELIMINAR</button>
+                    <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-primary">EDITAR</a>
+                    <a  href="{{ route('user.create') }}"  type="button" class="btn btn-primary">ELIMINAR</a>
+                    <!-- <button  wire:click="eliminar({{$usersv->id}})" type="button" class="btn btn-danger">ELIMINAR</button> -->
                 </td>
         
             </tr>

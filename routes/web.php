@@ -38,6 +38,9 @@ Route::get('/', function () {
     })->name('crearusuario');  
     Route::get('/guardarusuario', [UsersController::class,'create'])->name('user.create');
 
+    Route::get('/actualizarusuario/{id}',[UsersController::class,'edit'])->name('user.editarusuarios');  
+    Route::get('/editarusuario/{id}', [UsersController::class,'update'])->name('user.update');
+
     
 
    

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\UsersController;
 use Livewire\Component;
 use App\Models\User;
@@ -43,23 +43,24 @@ class Users extends Component
         $this->password='';
          
     } */
-    public function editar($id)
+    public function editar(Request $request)
     { 
-        $usersv = Users::finOrFail($id);
+        /* $usersv = Users::finOrFail($request->id);
         $this-> id = $id;
-        $this->Carnet_usuario = $usersv->Carnet_usuario;
-        $this->name=$usersv->name;
-        $this->apellido_usuario=$usersv->apellido_usuario;
-        $this->Nombre_usuario=$usersv->Nombre_usuario;
-        $this->cargo_usuario =$usersv->cargo_usuario;
-        $this->direccion_usuario =$usersv->direccion_usuario;
-        $this->telefono_usuario=$usersv->telefono_usuario;
-        $this-> email=$usersv->email;
-        $this->password=$usersv->password;
+        $usersv->Carnet_usuario = request()->Carnet_usuario;
+        $usersv->name=$usersv->name;
+        $usersv->apellido_usuario=$usersv->apellido_usuario;
+        $usersv->Nombre_usuario=$usersv->Nombre_usuario;
+        $usersv->cargo_usuario =$usersv->cargo_usuario;
+        $usersv->direccion_usuario =$usersv->direccion_usuario;
+        $usersv->telefono_usuario=$usersv->telefono_usuario;
+        $usersv-> email=$usersv->email;
+        $usersv->password=$usersv->password;
+        $usersv->save(); */
     }
     public function eliminar($id) { 
     
-        Users::find($id)->delete;
+        User::find($id)->delete();
     }
 
 

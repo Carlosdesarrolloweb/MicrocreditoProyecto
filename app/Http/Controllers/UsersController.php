@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsersController extends Controller
 {
@@ -73,7 +75,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usersv = User::findOrFail($id);
+        return view('usuarios.editarusuarios', compact('usersv') );
     }
 
     /**
@@ -83,10 +86,23 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request)
+    {   
+        $usersv = User::findOrFail($request->id);
+        $usersv->Carnet_usuario = $request->Carnet_usuario;
+        $usersv->name=$request->name;
+        $usersv->apellido_usuario=$request->apellido_usuario;
+        $usersv->Nombre_usuario=$request->Nombre_usuario;
+        $usersv->cargo_usuario =$request->cargo_usuario;
+        $usersv->direccion_usuario =$request->direccion_usuario;
+        $usersv->telefono_usuario=$request->telefono_usuario;
+        $usersv-> email=$request->email;
+        $usersv->password=Hash::make($request->password);
+        $usersv->save();
+        $usersv=User::all();
+        return view('livewire.Users',['Users'=>$usersv ]);
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -96,6 +112,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        $usersv=User::all();
+        return view('livewire.Users',['Users'=>$usersv ]);
     }
 }
