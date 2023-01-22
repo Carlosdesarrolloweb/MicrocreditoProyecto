@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Log;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -18,7 +19,11 @@ class CreateNewUser implements CreatesNewUsers
      * @param  array<string, string>  $input
      */
     public function create(array $input): User
-    {
+
+    {   
+        Log::info(json_encode($input));
+        Log::info(json_encode($this->passwordRules()));
+        Log::info(Jetstream::hasTermsAndPrivacyPolicyFeature());
         Validator::make($input, [
             'Carnet_usuario' => ['required', 'string', 'max:10','min:4'],
             'name' => ['required', 'string', 'max:15','min:4'],

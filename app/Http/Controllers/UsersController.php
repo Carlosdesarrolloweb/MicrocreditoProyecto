@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -22,9 +23,22 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $usuario = new User();
+
+       
+        $usuario->Carnet_usuario = $request->Carnet_usuario;
+        $usuario->name=$request->name;
+        $usuario->apellido_usuario=$request->apellido_usuario;
+        $usuario->Nombre_usuario=$request->Nombre_usuario;
+        $usuario->cargo_usuario =$request->cargo_usuario;
+        $usuario->direccion_usuario =$request->direccion_usuario;
+        $usuario->telefono_usuario=$request->telefono_usuario;
+        $usuario-> email=$request->email;
+        $usuario->password=$request->password;
+        $usuario->save();
+        return view('usuarios.crearusuarios');
     }
 
     /**
@@ -33,9 +47,11 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
-        //
+        Log::info(json_encode($request->all()));
+        return 1;
     }
 
     /**

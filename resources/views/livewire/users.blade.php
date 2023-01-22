@@ -5,33 +5,47 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Usuarios</h1>
+    <h1>Usuarios Registrados</h1>
 @stop
 
 @section('content')
 
-    <table class="table-fixed w-full">
+    <x-slot name="header">
+        <h1 class="text-gray-900">crudddddddd</h1>
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7x1 mx-auto sm:px6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-x1 sm:rounded-lg px-4 py-4">
+            
+            <button  type="button" class="btn btn-success" wire:click="crear(register)">NUEVO</button>
+
+            
+        <table class="table">
         <thead>
-            <tr class="bg-indigo-600 text-Black">
-            <th class="px-4 py-2">ID</th>
-            <th class="px-4 py-2">CARNET</th>
-            <th class="px-4 py-2">NOMBRE</th>
-            <th class="px-4 py-2">APELLIDO</th>
-            <th class="px-4 py-2">USUARIO</th>
-            <th class="px-4 py-2">TELEFONO</th>
-            <th class="px-4 py-2">EMAIL</th>
+            <tr scope="col">
+            <th scope="col">ID</th>
+            <th scope="col">CARNET</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">APELLIDO</th>
+            <th scope="col">USUARIO</th>
+            <th scope="col">TELEFONO</th>
+            <th scope="col">EMAIL</th>
             </tr>
         </thead>
         <tbody>
             @foreach($Users as $usersv)
             <tr>
-                <td class="px-4 py-2">{{$usersv->id}}</td>
-                <td class="px-4 py-2">{{$usersv->Carnet_usuario}}</td>
-                <td class="px-4 py-2">{{$usersv->name}}</td>
-                <td class="px-4 py-2">{{$usersv->apellido_usuario}}</td>
-                <td class="px-4 py-2">{{$usersv->Nombre_usuario}}</td>
-                <td class="px-4 py-2">{{$usersv->telefono_usuario}}</td>
-                <td class="px-4 py-2">{{$usersv->email}}</td>
+                <td scope="col">{{$usersv->id}}</td>
+                <td scope="col">{{$usersv->Carnet_usuario}}</td>
+                <td scope="col">{{$usersv->name}}</td>
+                <td scope="col">{{$usersv->apellido_usuario}}</td>
+                <td scope="col">{{$usersv->Nombre_usuario}}</td>
+                <td scope="col">{{$usersv->telefono_usuario}}</td>
+                <td scope="col">{{$usersv->email}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary">EDITAR</button>
+                    <button  wire:click="eliminar({{$usersv->id}})" type="button" class="btn btn-danger">ELIMINAR</button>
+                </td>
         
             </tr>
             @endforeach
@@ -40,8 +54,10 @@
         </tbody>
 
 
-    </table>
-            
+        </table>
+            </div>
+        </div>
+    </div> 
 
 @stop
 

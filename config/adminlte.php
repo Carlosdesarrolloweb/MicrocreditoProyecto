@@ -341,33 +341,10 @@ return [
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],
-           /*   [
-                    'text'    => 'Prestamos',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ], */
+
                 [
                     'text' => 'Crear Usuarios',
-                    'route'  => 'register',
+                    'route'  => 'crearusuario',
                     'icon_color' => 'red',
                 ],
                 [

@@ -17,12 +17,10 @@ use App\Http\Controllers\UsersController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register'); 
 
+ 
  Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -34,7 +32,16 @@ Route::get('/register', function () {
     Route::get('/crearclientes', function () {
         return view('crearclientes');
     })->name('crearclientes');
+    
+    Route::get('/crearusuario', function () {
+        return view('usuarios.crearusuarios');
+    })->name('crearusuario');  
+    Route::get('/guardarusuario', [UsersController::class,'create'])->name('user.create');
+
+    
+
    
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
+    Route::post('/usersv', [UsersController::class,'store'])->name('usersv');
  });
 
