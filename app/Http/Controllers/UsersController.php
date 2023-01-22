@@ -89,7 +89,7 @@ class UsersController extends Controller
     public function update(Request $request)
     {   
         $usersv = User::findOrFail($request->id);
-        $usersv->Carnet_usuario = $request->Carnet_usuario;
+        $usersv->Carnet_usuario = $request->Carnet_usuario ;
         $usersv->name=$request->name;
         $usersv->apellido_usuario=$request->apellido_usuario;
         $usersv->Nombre_usuario=$request->Nombre_usuario;

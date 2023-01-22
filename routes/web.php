@@ -41,6 +41,7 @@ Route::get('/', function () {
     Route::get('/actualizarusuario/{id}',[UsersController::class,'edit'])->name('user.editarusuarios');  
     Route::get('/editarusuario/{id}', [UsersController::class,'update'])->name('user.update');
 
+    Route::get('/eliminarusuarios/{id}',[UsersController::class,'destroy'])->name('user.eliminarusuarios');  
     
 
    

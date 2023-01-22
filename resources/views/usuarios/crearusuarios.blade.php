@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-     <h1>Registrar assssssssssssssss</h1> 
+     <h1>CREAR NUEVO USUARIO</h1> 
 @stop
 
 @section('content')
@@ -20,37 +20,37 @@
             @csrf
             <div>
                 <x-jet-label for="Carnet" value="{{ __('Carnet/Dni') }}" />
-                <x-jet-input  id="Carnet_usuario" class="block mt-1 w-full" type="text" name="Carnet_usuario" :value="old('Carnet_usuario')" required autofocus autocomplete="Carnet_usuario" />
+                <x-jet-input  maxlength="15" id="Carnet_usuario" class="block mt-1 w-full" type="text" name="Carnet_usuario" :value="old('Carnet_usuario')" required autofocus autocomplete="Carnet_usuario" />
             </div>
 
             <div>
                 <x-jet-label for="name" value="{{ __('Nombres') }}" />
-                <x-jet-input  id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-jet-input maxlength="20" id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
             <div>
                 <x-jet-label for="Apellidos" value="{{ __('Apellidos') }}" />
-                <x-jet-input  id="apellido_usuario" class="block mt-1 w-full" type="text" name="apellido_usuario" :value="old('apellido_usuario')" required autofocus autocomplete="apellido_usuario" />
+                <x-jet-input maxlength="20" id="apellido_usuario" class="block mt-1 w-full" type="text" name="apellido_usuario" :value="old('apellido_usuario')" required autofocus autocomplete="apellido_usuario" />
             </div>
             <div>
                 <x-jet-label for="NombreUsuario" value="{{ __('Nombre de Usuario') }}" />
-                <x-jet-input   id="Nombre_usuario" class="block mt-1 w-full" type="text" name="Nombre_usuario" :value="old('Nombre_usuario')" required autofocus autocomplete="Nombre_usuario" />
+                <x-jet-input maxlength="15"  id="Nombre_usuario" class="block mt-1 w-full" type="text" name="Nombre_usuario" :value="old('Nombre_usuario')" required autofocus autocomplete="Nombre_usuario" />
             </div>
             <div>
                 <x-jet-label for="Cargo" value="{{ __('Cargo Laboral') }}" />
-                <x-jet-input id="cargo_usuario" class="block mt-1 w-full" type="text" name="cargo_usuario" :value="old('cargo_usuario')" required autofocus autocomplete="cargo_usuario" />
+                <x-jet-input maxlength="15" id="cargo_usuario" class="block mt-1 w-full" type="text" name="cargo_usuario" :value="old('cargo_usuario')" required autofocus autocomplete="cargo_usuario" />
             </div>
             <div>
                 <x-jet-label for="Direccion" value="{{ __('Direccion') }}" />
-                <x-jet-input  id="direccion_usuario" class="block mt-1 w-full" type="text" name="direccion_usuario" :value="old('direccion_usuario')" required autofocus autocomplete="direccion_usuario" />
+                <x-jet-input maxlength="25" id="direccion_usuario" class="block mt-1 w-full" type="text" name="direccion_usuario" :value="old('direccion_usuario')" required autofocus autocomplete="direccion_usuario" />
             </div>
             <div>
                 <x-jet-label for="Telefono" value="{{ __('Telefono') }}" />
-                <x-jet-input  id="telefono_usuario" class="block mt-1 w-full" type="text" name="telefono_usuario" :value="old('telefono_usuario')" required autofocus autocomplete="telefono_usuario" />
+                <x-jet-input maxlength="8" id="telefono_usuario" class="block mt-1 w-full" type="text" name="telefono_usuario" :value="old('telefono_usuario')" required autofocus autocomplete="telefono_usuario" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Correo Electronico') }}" />
-                <x-jet-input  id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-input maxlength="30" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <div class="mt-4">

@@ -131,7 +131,7 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-warning justify-content-center',
+    'usermenu_header_class' => 'bg-success justify-content-center',
     'usermenu_image' => true,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,

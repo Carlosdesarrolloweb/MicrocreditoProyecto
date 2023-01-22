@@ -16,7 +16,7 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="GET" action="{{ route('user.update',$usersv->id) }}">
+        <form method="get" action="{{ route('user.update',$usersv->id) }}">
             @csrf
             <input type="hidden" value="{{$usersv->id}}">
             <div>
