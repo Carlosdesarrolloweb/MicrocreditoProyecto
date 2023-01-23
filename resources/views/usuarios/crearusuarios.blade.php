@@ -16,7 +16,7 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="GET" action="{{ route('user.create') }}">
+        <form method="post" action="{{ route('user.create') }}">
             @csrf
             <div>
                 <x-jet-label for="Carnet" value="{{ __('Carnet/Dni') }}" />

@@ -336,8 +336,7 @@ return [
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'Consultar Usuarios',
-                   
+                    'text' => 'Consultar Usuarios',                  
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],
@@ -448,13 +447,13 @@ return [
             'submenu' => [
                 [
                     'text' => 'Consultar Clientes',
-                    'url'  => '#',
+                    'route'  => 'clientesv',
                     'icon_color' => 'red',
                 ],
 
                 [
                     'text' => 'Crear Clientes',
-                    'route'  => 'crearclientes',
+                    'route'  => 'clientes.show',
                     'icon_color' => 'red',
                 ],
                 [
