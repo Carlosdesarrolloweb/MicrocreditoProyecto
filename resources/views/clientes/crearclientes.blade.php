@@ -52,10 +52,15 @@
                 <x-jet-label for="telefono_referencia" value="{{ __('Telefono Referencia') }}" />
                 <x-jet-input maxlength="30" id="telefono_referencia" class="block mt-1 w-full" type="text" name="telefono_referencia" :value="old('telefono_referencia')" required />
             </div>
-            <div class="mt-4">
+          <!--   <div class="mt-4">
                 <x-jet-label for="estado_cliente" value="{{ __('Estado') }}" />
                 <x-jet-input maxlength="30" id="estado_cliente" class="block mt-1 w-full" type="text" name="estado_cliente" :value="old('estado_cliente')" required />
-            </div>
+            </div> -->
+             <x-jet-label for="estado_cliente" value="{{ __('ESTADO CLIENTE') }}" />
+                <select name="estado_cliente">
+                <option value="ADMINISTRADOR">DEUDA PENDIENTE</option>
+                <option value="ENCARGADO">DEUDA CANCELADA</option>
+                </select>
             <div class="mt-4">
                 <x-jet-label for="id_foto" value="{{ __('FOTO ANVERSO CARNET') }}" />
                 <x-jet-input  id="id_foto" class="block mt-1 w-full" type="FILE" name="id_foto" :value="old('id_foto')" required />

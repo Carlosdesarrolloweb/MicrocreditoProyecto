@@ -29,7 +29,7 @@
             <th scope="col">NOMBRE</th>
             <th scope="col">APELLIDO</th>
             <th scope="col">USUARIO</th>
-            <th scope="col">TELEFONO</th>
+            <th scope="col">CARGO</th>
             <th scope="col">EMAIL</th>
             </tr>
         </thead>
@@ -41,7 +41,7 @@
                 <td scope="col">{{$usersv->name}}</td>
                 <td scope="col">{{$usersv->apellido_usuario}}</td>
                 <td scope="col">{{$usersv->Nombre_usuario}}</td>
-                <td scope="col">{{$usersv->telefono_usuario}}</td>
+                <td scope="col">{{$usersv->cargo_usuario}}</td>
                 <td scope="col">{{$usersv->email}}</td>
                 <td>
                     <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>

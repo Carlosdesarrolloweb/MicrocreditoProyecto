@@ -28,22 +28,22 @@ class ClienteController extends Controller
         
         if($request->hasfile('id_foto','id_fotocarnet','id_fotorecibo','id_fotocroquis'));
         {
-            $file = $request->file('id_foto','id_fotocarnet','id_fotorecibo','id_fotocroquis');
+            $id_foto = $request->file('id_foto');
+            $id_fotocarnet = $request->file('id_fotocarnet');
+            $id_fotorecibo = $request->file('id_fotorecibo');
+            $id_fotocroquis = $request->file('id_fotocroquis');
      
-            $destinationPath = 'storage/imgclientes/';
-            $filename = time() . '-' . $file->getClientOriginalName();
-           
-            if ($request->file('id_foto','id_fotocarnet','id_fotorecibo','id_fotocroquis')->move($destinationPath,$filename)){
-                $foto->direccion_imagen = $destinationPath . $filename;
-                $foto->url_imagen = env('APP_URL'). $destinationPath . $filename;
-                $foto->save();
-                //obtener las coincidencias que pille first
-                $Foto=Foto::where('url_imagen',config('url') . $destinationPath . $filename)->first();
+            if($id_foto != null) {
+                $destinationPath = 'public\storage';
+                $filename = time() . '-' . $id_foto->getClientOriginalName();
+                if ($id_foto->move($destinationPath,$filename)){
+                    $foto->direccion_imagen = $destinationPath . $filename;
+                    $foto->url_imagen = env('APP_URL'). $destinationPath . $filename;
+                    $foto->save();
+                    //obtener las coincidencias que pille first
+                    $Foto=Foto::where('url_imagen',config('url') . $destinationPath . $filename)->first();
+                }
             }
-          
-          
- 
-        }
 
         $cliente->Carnet_cliente = $request->Carnet_cliente;
         $cliente->nombre_cliente=$request->nombre_cliente;
@@ -68,7 +68,7 @@ class ClienteController extends Controller
         
         return view('clientes.crearclientes');
         
-
+         }
     }
     public function show(){
        

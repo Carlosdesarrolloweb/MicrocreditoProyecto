@@ -35,10 +35,15 @@
                 <x-jet-label for="NombreUsuario" value="{{ __('Nombre de Usuario') }}" />
                 <x-jet-input maxlength="15"  id="Nombre_usuario" class="block mt-1 w-full" type="text" name="Nombre_usuario" :value="old('Nombre_usuario')" required autofocus autocomplete="Nombre_usuario" />
             </div>
-            <div>
+            <!--<div>
                 <x-jet-label for="Cargo" value="{{ __('Cargo Laboral') }}" />
-                <x-jet-input maxlength="15" id="cargo_usuario" class="block mt-1 w-full" type="text" name="cargo_usuario" :value="old('cargo_usuario')" required autofocus autocomplete="cargo_usuario" />
-            </div>
+               <x-jet-input maxlength="15" id="cargo_usuario" class="block mt-1 w-full" type="text" name="cargo_usuario" :value="old('cargo_usuario')" required autofocus autocomplete="cargo_usuario" />
+            </div> -->
+            <x-jet-label for="Cargo" value="{{ __('Cargo Laboral') }}" />
+                <select name="cargo_usuario">
+                <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                <option value="ENCARGADO">ENCARGADO</option>
+                </select>
             <div>
                 <x-jet-label for="Direccion" value="{{ __('Direccion') }}" />
                 <x-jet-input maxlength="40" id="direccion_usuario" class="block mt-1 w-full" type="text" name="direccion_usuario" :value="old('direccion_usuario')" required autofocus autocomplete="direccion_usuario" />

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\MustVerifyEmail;
 
 
 class UsersController extends Controller
@@ -38,7 +39,7 @@ class UsersController extends Controller
         $usuario->direccion_usuario =$request->direccion_usuario;
         $usuario->telefono_usuario=$request->telefono_usuario;
         $usuario-> email=$request->email;
-        $usuario->password=$request->password;
+        $usuario->password = Hash::make($request->password);
         $usuario->save();
         return view('usuarios.crearusuarios');
     }
