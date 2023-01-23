@@ -17,7 +17,7 @@ use App\Http\Controllers\UsersController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
  
@@ -47,10 +47,6 @@ Route::get('/', function () {
 
 
     
-
-
-
-   
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
     Route::post('/usersv', [UsersController::class,'store'])->name('usersv');
     Route::get('/clientesv', [UsersController::class,'index'])->name('clientesv');

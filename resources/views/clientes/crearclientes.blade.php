@@ -57,8 +57,20 @@
                 <x-jet-input maxlength="30" id="estado_cliente" class="block mt-1 w-full" type="text" name="estado_cliente" :value="old('estado_cliente')" required />
             </div>
             <div class="mt-4">
-                <x-jet-label for="id_foto" value="{{ __('CARGAR FOTO') }}" />
+                <x-jet-label for="id_foto" value="{{ __('FOTO ANVERSO CARNET') }}" />
                 <x-jet-input  id="id_foto" class="block mt-1 w-full" type="FILE" name="id_foto" :value="old('id_foto')" required />
+            </div>
+            <div class="mt-4">
+                <x-jet-label for="id_fotocarnet" value="{{ __('FOTO REVERSO CARNET') }}" />
+                <x-jet-input  id="id_fotocarnet" class="block mt-1 w-full" type="FILE" name="id_fotocarnet" :value="old('id_fotocarnet')" required />
+            </div>
+            <div class="mt-4">
+                <x-jet-label for="id_fotorecibo" value="{{ __('FOTO RECIBO AGUA/LUZ') }}" />
+                <x-jet-input  id="id_fotorecibo" class="block mt-1 w-full" type="FILE" name="id_fotorecibo" :value="old('id_fotorecibo')" required />
+            </div>
+            <div class="mt-4">
+                <x-jet-label for="id_fotocroquis" value="{{ __('FOTO CROQUIS CASA') }}" />
+                <x-jet-input  id="id_fotocroquis" class="block mt-1 w-full" type="FILE" name="id_fotocroquis" :value="old('id_fotocroquis')" required />
             </div>
 
         

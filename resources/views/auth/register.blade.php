@@ -41,7 +41,7 @@
             </div>
             <div>
                 <x-jet-label for="Direccion" value="{{ __('Direccion') }}" />
-                <x-jet-input maxlength="25" id="direccion_usuario" class="block mt-1 w-full" type="text" name="direccion_usuario" :value="old('direccion_usuario')" required autofocus autocomplete="direccion_usuario" />
+                <x-jet-input maxlength="30" id="direccion_usuario" class="block mt-1 w-full" type="text" name="direccion_usuario" :value="old('direccion_usuario')" required autofocus autocomplete="direccion_usuario" />
             </div>
             <div>
                 <x-jet-label for="Telefono" value="{{ __('Telefono') }}" />

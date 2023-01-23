@@ -28,6 +28,7 @@ class Cliente extends Model
         'telefono_referencia',
         'estado_cliente',
        
+       
 
         
     
