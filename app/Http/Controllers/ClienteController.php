@@ -26,7 +26,7 @@ class ClienteController extends Controller
         $foto = new Foto();
         $Foto = null;
         
-        if($request->hasfile('id_foto','id_fotocarnet','id_fotorecibo','id_fotocroquis'));
+        if($request->hasfile('id_foto'))
         {
             $id_foto = $request->file('id_foto');
             $id_fotocarnet = $request->file('id_fotocarnet');
@@ -44,6 +44,7 @@ class ClienteController extends Controller
                     $Foto=Foto::where('url_imagen',config('url') . $destinationPath . $filename)->first();
                 }
             }
+            
 
         $cliente->Carnet_cliente = $request->Carnet_cliente;
         $cliente->nombre_cliente=$request->nombre_cliente;

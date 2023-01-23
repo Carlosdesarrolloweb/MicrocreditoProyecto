@@ -17,14 +17,14 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-  /*   $role1= Role::create(['name' => 'Admin']);
-       $role2= Role::create(['name' => 'Encargado']);
+/*          $role1= Role::create(['name' => 'Admin']);
+         $role2= Role::create(['name' => 'Encargado']);
 
-       Permission::create(['name' => 'welcome']);
-       Permission::create(['name' => 'dashboard']);
-       Permission::create(['name' => 'dashboard']);
-       Permission::create(['name' => 'dashboard']);
-       Permission::create(['name' => 'dashboard']); */
+         Permission::create(['name' => 'welcome']);
+         Permission::create(['name' => 'dashboard']);
+         Permission::create(['name' => 'dashboard']);
+         Permission::create(['name' => 'dashboard']);
+         Permission::create(['name' => 'dashboard']);  */
 
     }
 }
