@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Foto;
 use Illuminate\Support\Facades\Log;
+use App\Helper\Images;
 
 class ClienteController extends Controller
 {
-
+    protected $images;
+    public function __construct(){
+        $this->images = new Images();
+    }
     public function index()
     {
         return view('livewire.clientes',['Clientes'=>Cliente::all()]);
@@ -23,28 +27,34 @@ class ClienteController extends Controller
     public function create(Request $request)
     {
         $cliente = new Cliente();
-        $foto = new Foto();
-        $Foto = null;
-        
-        if($request->hasfile('id_foto'))
+        $id_foto = null;
+        $id_fotocarnet = null;
+        $id_fotorecibo = null;
+        $id_fotocroquis = null;
+        if(
+            $request->hasfile('id_foto') && 
+            $request->hasfile('id_fotocarnet') && 
+            $request->hasfile('id_fotorecibo') && 
+            $request->hasfile('id_fotocroquis')
+        )
         {
-            $id_foto = $request->file('id_foto');
-            $id_fotocarnet = $request->file('id_fotocarnet');
-            $id_fotorecibo = $request->file('id_fotorecibo');
-            $id_fotocroquis = $request->file('id_fotocroquis');
-     
-            if($id_foto != null) {
-                $destinationPath = 'public\storage';
-                $filename = time() . '-' . $id_foto->getClientOriginalName();
-                if ($id_foto->move($destinationPath,$filename)){
-                    $foto->direccion_imagen = $destinationPath . $filename;
-                    $foto->url_imagen = env('APP_URL'). $destinationPath . $filename;
-                    $foto->save();
-                    //obtener las coincidencias que pille first
-                    $Foto=Foto::where('url_imagen',config('url') . $destinationPath . $filename)->first();
-                }
-            }
-            
+            $id_foto = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_foto')
+            );
+            $id_fotocarnet = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_fotocarnet')
+            );
+            $id_fotorecibo = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_fotorecibo')
+            );
+            $id_fotocroquis = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_fotocroquis')
+            );
+        }
 
         $cliente->Carnet_cliente = $request->Carnet_cliente;
         $cliente->nombre_cliente=$request->nombre_cliente;
@@ -55,21 +65,13 @@ class ClienteController extends Controller
         $cliente->edad_cliente=$request->edad_cliente;
         $cliente-> telefono_referencia=$request->telefono_referencia;
         $cliente->estado_cliente=$request->estado_cliente;
-        //el if solo si la foto se guardo en la base de datos
-        $fotos = ['id_foto','id_fotocarnet','id_fotorecibo','id_fotocroquis'];
-
-        for ($i = 0; $i < count($fotos); $i++) {
-            if ($request->hasFile($fotos[$i])) {
-                $foto = new Foto();
-                $foto->foto = $request->file($fotos[$i])->store('imgclientes');
-                $cliente->{$fotos[$i]}()->save($foto);
-            }
-        }
+        $cliente->id_foto = $id_foto;
+        $cliente->id_fotocarnet = $id_fotocarnet;
+        $cliente->id_fotorecibo = $id_fotorecibo;
+        $cliente->id_fotocroquis = $id_fotocroquis;
         $cliente->save();
         
         return view('clientes.crearclientes');
-        
-         }
     }
     public function show(){
        
