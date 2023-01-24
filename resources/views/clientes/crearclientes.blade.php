@@ -33,24 +33,24 @@
             </div>
             <div>
                 <x-jet-label for="direccion_cliente" value="{{ __('Direccion cliente') }}" />
-                <x-jet-input maxlength="15"  id="direccion_cliente" class="block mt-1 w-full" type="text" name="direccion_cliente" :value="old('direccion_cliente')" required autofocus autocomplete="direccion_cliente" />
+                <x-jet-input maxlength="30"  id="direccion_cliente" class="block mt-1 w-full" type="text" name="direccion_cliente" :value="old('direccion_cliente')" required autofocus autocomplete="direccion_cliente" />
             </div>
             <div>
                 <x-jet-label for="email_cliente" value="{{ __('Email') }}" />
-                <x-jet-input maxlength="15" id="email_cliente" class="block mt-1 w-full" type="email" name="email_cliente" :value="old('email_cliente')" required autofocus autocomplete="email_cliente" />
+                <x-jet-input maxlength="20" id="email_cliente" class="block mt-1 w-full" type="email" name="email_cliente" :value="old('email_cliente')" required autofocus autocomplete="email_cliente" />
             </div>
             <div>
                 <x-jet-label for="telefono_cliente" value="{{ __('Telefono') }}" />
-                <x-jet-input maxlength="25" id="telefono_cliente" class="block mt-1 w-full" type="text" name="telefono_cliente" :value="old('telefono_cliente')" required autofocus autocomplete="telefono_cliente" />
+                <x-jet-input maxlength="8" id="telefono_cliente" class="block mt-1 w-full" type="text" name="telefono_cliente" :value="old('telefono_cliente')" required autofocus autocomplete="telefono_cliente" />
             </div>
             <div>
                 <x-jet-label for="edad_cliente" value="{{ __('Edad') }}" />
-                <x-jet-input maxlength="8" id="edad_cliente" class="block mt-1 w-full" type="text" name="edad_cliente" :value="old('edad_cliente')" required autofocus autocomplete="edad_cliente" />
+                <x-jet-input maxlength="2" id="edad_cliente" class="block mt-1 w-full" type="text" name="edad_cliente" :value="old('edad_cliente')" required autofocus autocomplete="edad_cliente" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="telefono_referencia" value="{{ __('Telefono Referencia') }}" />
-                <x-jet-input maxlength="30" id="telefono_referencia" class="block mt-1 w-full" type="text" name="telefono_referencia" :value="old('telefono_referencia')" required />
+                <x-jet-input maxlength="8" id="telefono_referencia" class="block mt-1 w-full" type="text" name="telefono_referencia" :value="old('telefono_referencia')" required />
             </div>
           <!--   <div class="mt-4">
                 <x-jet-label for="estado_cliente" value="{{ __('Estado') }}" />

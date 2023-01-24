@@ -26,7 +26,7 @@ class CreateNewUser implements CreatesNewUsers
         Log::info(Jetstream::hasTermsAndPrivacyPolicyFeature());
         Validator::make($input, [
             'Carnet_usuario' => ['required', 'string', 'max:10','min:4'],
-            'name' => ['required', 'string', 'max:15','min:4'],
+            'name' => ['required', 'string', 'max:18','min:4'],
             'apellido_usuario' => ['required', 'string', 'max:30','min:4'],
             'Nombre_usuario'=> ['required', 'string', 'max:12','min:4'],
             'cargo_usuario' => ['required', 'string', 'max:15','min:4'],

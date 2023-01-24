@@ -33,7 +33,7 @@
             </div>
             <div>
                 <x-jet-label for="NombreUsuario" value="{{ __('Nombre de Usuario') }}" />
-                <x-jet-input maxlength="15"  id="Nombre_usuario" class="block mt-1 w-full" type="text" name="Nombre_usuario" :value="old('Nombre_usuario')" required autofocus autocomplete="Nombre_usuario" />
+                <x-jet-input maxlength="20"  id="Nombre_usuario" class="block mt-1 w-full" type="text" name="Nombre_usuario" :value="old('Nombre_usuario')" required autofocus autocomplete="Nombre_usuario" />
             </div>
             <!--<div>
                 <x-jet-label for="Cargo" value="{{ __('Cargo Laboral') }}" />

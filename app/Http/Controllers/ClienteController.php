@@ -55,6 +55,32 @@ class ClienteController extends Controller
                 $request->file('id_fotocroquis')
             );
         }
+        
+        $validatedData = $request->validate([
+            'Carnet_cliente' => 'required|min:5',
+        ]);
+        $validatedData = $request->validate([
+            'nombre_cliente' => 'required|min:5',
+        ]);
+        $validatedData = $request->validate([
+            'apellido_cliente' => 'required|min:5',
+        ]);
+        $validatedData = $request->validate([
+            'direccion_cliente' => 'required|min:10',
+        ]);
+        $validatedData = $request->validate([
+            'email_cliente' => 'required|min:5',
+        ]);
+        $validatedData = $request->validate([
+            'telefono_cliente' => 'required|min:8',
+        ]);
+        $validatedData = $request->validate([
+            'edad_cliente' => 'required|min:2',
+        ]);
+        $validatedData = $request->validate([
+            'telefono_referencia' => 'required|min:8',
+        ]);
+
 
         $cliente->Carnet_cliente = $request->Carnet_cliente;
         $cliente->nombre_cliente=$request->nombre_cliente;

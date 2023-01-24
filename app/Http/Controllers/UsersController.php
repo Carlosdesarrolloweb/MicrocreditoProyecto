@@ -30,7 +30,25 @@ class UsersController extends Controller
     {
         $usuario = new User();
 
-       
+        $validatedData = $request->validate([
+            'password' => 'required|min:8',
+        ]);
+        $validatedData = $request->validate([
+            'Carnet_usuario' => 'required|min:5',
+        ]);
+        $validatedData = $request->validate([
+            'name' => 'required|min:5',
+        ]);
+        $validatedData = $request->validate([
+            'Nombre_usuario' => 'required|min:5',
+        ]);
+        $validatedData = $request->validate([
+            'direccion_usuario' => 'required|min:10',
+        ]);
+        $validatedData = $request->validate([
+            'telefono_usuario' => 'required|min:8',
+        ]);
+      
         $usuario->Carnet_usuario = $request->Carnet_usuario;
         $usuario->name=$request->name;
         $usuario->apellido_usuario=$request->apellido_usuario;

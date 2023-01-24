@@ -45,11 +45,12 @@ Route::get('/', function () {
     Route::post('/clientes/crearclientes',[App\Http\Controllers\ClienteController::class,'create'])->name('clientes.crearclientes'); 
     Route::get('/clientes/show',[App\Http\Controllers\ClienteController::class,'show'])->name('clientes.show'); 
 
-
+    Route::post('/clientes',[App\Http\Controllers\ClienteController::class,'index'])->name('clientesv'); 
+    Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv'); 
     
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
     Route::post('/usersv', [UsersController::class,'store'])->name('usersv');
-    Route::get('/clientesv', [UsersController::class,'index'])->name('clientesv');
-    Route::post('/clientesv', [UsersController::class,'store'])->name('clientesv');
+/*     Route::get('/clientesv', [UsersController::class,'index'])->name('clientesv');
+    Route::post('/clientesv', [UsersController::class,'store'])->name('clientesv'); */
  });
 
