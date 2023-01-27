@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 
@@ -50,7 +50,11 @@ Route::get('/', function () {
     
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
     Route::post('/usersv', [UsersController::class,'store'])->name('usersv');
-/*     Route::get('/clientesv', [UsersController::class,'index'])->name('clientesv');
-    Route::post('/clientesv', [UsersController::class,'store'])->name('clientesv'); */
+    Route::get('/clientesv', [ClienteController::class,'index'])->name('clientesv');
+    Route::post('/clientesv', [ClienteController::class,'store'])->name('clientesv'); 
+    //editar clientes
+    Route::get('/actualizarclientes/{id}',[ClienteController::class,'edit'])->name('clientes.editarclientes');   
+    Route::get('/editarclientes/{id}', [ClienteController::class,'update'])->name('clientes.update');
+    Route::get('/eliminarclientes/{id}',[ClienteController::class,'destroy'])->name('clientes.eliminarclientes');  
  });
 

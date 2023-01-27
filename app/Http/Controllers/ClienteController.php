@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Foto;
 use Illuminate\Support\Facades\Log;
 use App\Helper\Images;
+use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
@@ -104,5 +105,56 @@ class ClienteController extends Controller
         return view('clientes.crearclientes');
 
     }
+    public function edit($id)
+    {
+        $clientesv = Cliente::findOrFail($id);
+        return view('clientes.editarclientes', compact('clientesv') );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update(Request $request)
+    {   
+        $clientesv = Cliente::findOrFail($request->id);
+        $clientesv->Carnet_cliente = $request->Carnet_cliente ;
+        $clientesv->nombre_cliente=$request->nombre_cliente;
+        $clientesv->apellido_cliente=$request->apellido_cliente;
+        $clientesv->direccion_cliente=$request->direccion_cliente;
+        $clientesv->email_cliente =$request->email_cliente;
+        $clientesv->telefono_cliente =$request->telefono_cliente;
+        $clientesv->edad_cliente=$request->edad_cliente;
+        $clientesv-> telefono_referencia=$request->telefono_referencia;
+        $clientesv-> estado_cliente=$request->estado_cliente;
+        $clientesv-> id_foto=$request->id_foto;
+        $clientesv-> id_fotocarnet=$request->id_fotocarnet;
+        $clientesv-> id_fotorecibo=$request->id_fotorecibo;
+        $clientesv-> id_fotocroquis=$request->id_fotocroquis;
+        $clientesv->save();
+        $clientesv=Cliente::all();
+        return view('livewire.Clientes',['Clientes'=>$clientesv ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Cliente::find($id)->delete();
+        $clientesv=Cliente::all();
+        return view('livewire.Clientes',['Clientes'=>$clientesv ]);
+    }
+    
+
+
+
 
 }

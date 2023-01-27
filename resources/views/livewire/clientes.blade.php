@@ -36,17 +36,16 @@
             @foreach($Clientes as $clientesv)
             <tr>
             
-                <td scope="col">{{$clientesv->carnet_cliente}}</td>
+                <td scope="col">{{$clientesv->Carnet_cliente}}</td>
                 <td scope="col">{{$clientesv->nombre_cliente}}</td>
                 <td scope="col">{{$clientesv->apellido_cliente}}</td>
-                <td scope="col">{{$clientesv->email}}</td>
+                <td scope="col">{{$clientesv->email_cliente}}</td>
                 <td scope="col">{{$clientesv->estado_cliente}}</td>
                 
-                
                 <td>
-                  <!--   <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>
-                    <a  href="{{ route('user.eliminarusuarios',$usersv->id) }}"  type="button" class="btn btn-danger">ELIMINAR</a> -->
-                    <!-- <button  wire:click="eliminar({{$usersv->id}})" type="button" class="btn btn-danger">ELIMINAR</button> -->
+
+                <a  href="{{ route('clientes.editarclientes',$clientesv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>
+                    <a  href="{{ route('clientes.eliminarclientes',$clientesv->id) }}"  type="button" class="btn btn-danger">ELIMINAR</a>
                 </td>
         
             </tr>
