@@ -9,7 +9,7 @@ use \Illuminate\Http\UploadedFile;
 
 class Images
 {
-    CONST PATH_LOCAL = "public\storage";
+    CONST PATH_LOCAL = "public/storage";
     public function __construct(){
         //
     }

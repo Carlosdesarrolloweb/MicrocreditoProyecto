@@ -29,6 +29,7 @@
             <th scope="col">APELLIDO</th>
             <th scope="col">EMAIL</th>
             <th scope="col">ESTADO</th>
+            <th scope="col">IMAGENES</th>
           
             </tr>
         </thead>
@@ -43,19 +44,36 @@
                 <td scope="col">{{$clientesv->estado_cliente}}</td>
                 
                 <td>
+                    <img src="{{$clientesv->foto->direccion_imagen}}" width="50px" height="50px" onclick="mostrarimagen('<?= $clientesv->foto->direccion_imagen;?>','FOTO CARNET ANVERSO')" >
+                    <img src="{{$clientesv->fotocarnet->direccion_imagen}}" width="50px" height="50px" onclick="mostrarimagen('<?= $clientesv->fotocarnet->direccion_imagen;?>','FOTO CARNET REVERSO')">
+                    <img src="{{$clientesv->fotorecibo ->direccion_imagen}}" width="50px" height="50px" onclick="mostrarimagen('<?= $clientesv->fotorecibo->direccion_imagen;?>','FOTO RECIBO')">
+                    <img src="{{$clientesv->fotocroquis->direccion_imagen}}" width="50px" height="50px" onclick="mostrarimagen('<?= $clientesv->fotocroquis->direccion_imagen;?>','FOTO CROQUIS')">  
+                </td>
+                <td>
 
                 <a  href="{{ route('clientes.editarclientes',$clientesv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>
-                    <a  href="{{ route('clientes.eliminarclientes',$clientesv->id) }}"  type="button" class="btn btn-danger">ELIMINAR</a>
+                <a  href="{{ route('clientes.eliminarclientes',$clientesv->id) }}"  type="button" class="btn btn-danger">ELIMINAR</a>
                 </td>
-        
+                       
             </tr>
             @endforeach
 
-
-        </tbody>
-
-
+        </tbody>    
         </table>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Título del modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <img id="mi_imagen"/>
+            </div>
+           
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div> 
@@ -67,5 +85,18 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script> 
+     function mostrarimagen(url,titulo) {
+        $("#mi_imagen").attr("src",url);    
+        $('#exampleModalLabel').html(titulo);
+        $('#exampleModal').modal('show'); 
+
+      
+        
+    }
+
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+   
 @stop

@@ -63,7 +63,7 @@
                 <option value="DEUDA CANCELADA">DEUDA CANCELADA</option>
                 <option value="DEUDOR MOROSO">DEUDOR MOROSO</option>
                 </select>
-            <div class="mt-4">
+        <!--     <div class="mt-4">
                 <x-jet-label for="id_foto" value="{{ __('FOTO ANVERSO CARNET') }}" />
                 <x-jet-input  id="id_foto" class="block mt-1 w-full" type="FILE" name="id_foto" value="old('id_foto')" required />
             </div>
@@ -78,7 +78,7 @@
             <div class="mt-4">
                 <x-jet-label for="id_fotocroquis" value="{{ __('FOTO CROQUIS CASA') }}" />
                 <x-jet-input  id="id_fotocroquis" class="block mt-1 w-full" type="FILE" name="id_fotocroquis" value="old('id_fotocroquis')" required />
-            </div>
+            </div> -->
 
         
             <div class="flex items-center justify-end mt-4">          

@@ -61,10 +61,10 @@ class ClienteController extends Controller
             'Carnet_cliente' => 'required|min:5',
         ]);
         $validatedData = $request->validate([
-            'nombre_cliente' => 'required|min:5',
+            'nombre_cliente' => 'required|min:3',
         ]);
         $validatedData = $request->validate([
-            'apellido_cliente' => 'required|min:5',
+            'apellido_cliente' => 'required|min:3',
         ]);
         $validatedData = $request->validate([
             'direccion_cliente' => 'required|min:10',
@@ -131,10 +131,10 @@ class ClienteController extends Controller
         $clientesv->edad_cliente=$request->edad_cliente;
         $clientesv-> telefono_referencia=$request->telefono_referencia;
         $clientesv-> estado_cliente=$request->estado_cliente;
-        $clientesv-> id_foto=$request->id_foto;
+      /*   $clientesv-> id_foto=$request->id_foto;
         $clientesv-> id_fotocarnet=$request->id_fotocarnet;
         $clientesv-> id_fotorecibo=$request->id_fotorecibo;
-        $clientesv-> id_fotocroquis=$request->id_fotocroquis;
+        $clientesv-> id_fotocroquis=$request->id_fotocroquis; */
         $clientesv->save();
         $clientesv=Cliente::all();
         return view('livewire.Clientes',['Clientes'=>$clientesv ]);

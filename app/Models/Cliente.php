@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Foto;
 
 class Cliente extends Model
 {
@@ -33,5 +34,24 @@ class Cliente extends Model
         
     
     ];
+    public function foto()
+    {
+        return $this->hasOne(Foto::class,"id","id_foto");
+    }
+    public function fotocarnet()
+    {
+        return $this->hasOne(Foto::class,"id","id_fotocarnet");
+    }
+    public function fotorecibo()
+    {
+        return $this->hasOne(Foto::class,"id","id_fotorecibo");
+    }
+    public function fotocroquis()
+    {
+        return $this->hasOne(Foto::class,"id","id_fotocroquis");
+    }
+
+    
     public $timestamps = false;
+
 }
