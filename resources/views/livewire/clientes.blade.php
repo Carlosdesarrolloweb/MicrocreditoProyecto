@@ -17,9 +17,21 @@
         <div class="max-w-7x1 mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-x1 sm:rounded-lg px-4 py-4">
             
-            
+        <div>
+            <form action="">
+                <div class="form-row">
+                <div class="col-sm-4"  >
+                    <input type="text" class="form-control" name="texto">
+                </div>
+                <div class="col-auto">
+                    <input type="submit" class="btn btn-primary" value="Buscar">
+                </div>
+                </div>
 
-      
+            </form>
+        </div>
+
+      <!-- tabla base de datos abajo -->
         <table class="table">
         <thead>
             <tr scope="col">
@@ -60,6 +72,7 @@
 
         </tbody>    
         </table>
+        <center>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
@@ -68,8 +81,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <img id="mi_imagen"/>
+                 <img id="mi_imagen"/>
             </div>
+            </center>
            
                         </div>
                     </div>
@@ -89,14 +103,9 @@
      function mostrarimagen(url,titulo) {
         $("#mi_imagen").attr("src",url);    
         $('#exampleModalLabel').html(titulo);
-        $('#exampleModal').modal('show'); 
-
-      
-        
+        $('#exampleModal').modal('show');       
     }
 
     </script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-   
 @stop

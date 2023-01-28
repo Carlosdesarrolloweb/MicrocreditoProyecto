@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use App\Helper\Images;
 use Illuminate\Support\Facades\Hash;
 
+
+
 class ClienteController extends Controller
 {
     protected $images;
