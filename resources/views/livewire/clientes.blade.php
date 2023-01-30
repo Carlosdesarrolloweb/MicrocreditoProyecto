@@ -13,15 +13,15 @@
     <x-slot name="header">
         <h1 class="text-gray-900">crudddddddd</h1>
     </x-slot>
-    <div class="py-12">
+  <!--   <div class="py-12">
         <div class="max-w-7x1 mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-x1 sm:rounded-lg px-4 py-4">
             
         <div>
-            <form action="">
+            <form action="" method="get">
                 <div class="form-row">
                 <div class="col-sm-4"  >
-                    <input type="text" class="form-control" name="texto">
+                    <input type="text" class="form-control" name="texto" value="">
                 </div>
                 <div class="col-auto">
                     <input type="submit" class="btn btn-primary" value="Buscar">
@@ -29,7 +29,7 @@
                 </div>
 
             </form>
-        </div>
+        </div> -->
 
       <!-- tabla base de datos abajo -->
         <table class="table">
@@ -99,6 +99,8 @@
 @stop
 
 @section('js')
+
+    <script> console.log('Hi!'); </script>
     <script> 
      function mostrarimagen(url,titulo) {
         $("#mi_imagen").attr("src",url);    
@@ -107,5 +109,6 @@
     }
 
     </script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+    
 @stop

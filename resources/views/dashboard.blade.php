@@ -12,7 +12,7 @@
             <center>
                 <img src="{{URL::asset('https://files.fm/thumb_show.php?i=rh59me2xy')}}">
              </center>
-             
+       
         </body>
  
  
@@ -25,6 +25,9 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+    <script src= "{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    
+
 @stop
 
 

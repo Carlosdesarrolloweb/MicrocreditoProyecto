@@ -19,6 +19,8 @@ class ClienteController extends Controller
     }
     public function index()
     {
+  
+
         return view('livewire.clientes',['Clientes'=>Cliente::all()]);
     }
     public function store(Request $request)

@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpKernel\Profiler\Profile;
+
 return [
 
     /*
@@ -84,7 +86,7 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'Auth Logo',
@@ -129,12 +131,13 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+   
+    'usermenu_enabled' => false,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-success justify-content-center',
+    'usermenu_header_class' => 'bg-danger justify-content-center',
     'usermenu_image' => true,
     'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -192,7 +195,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-red elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-red navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -211,7 +214,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -259,7 +262,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => 'user/profile',
+     'profile_url' => 'user/profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -294,7 +297,7 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => false,
+            'topnav_right' => true,
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -311,6 +314,8 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+ 
+        
         [
             'text'        => 'INICIO',
             'route'  => 'dashboard',
@@ -319,6 +324,29 @@ return [
             'label_color' => 'success',
             'icon_color' => 'red',
         ],
+        [
+            'text'    => 'PERFIL',
+            'icon'    => 'fa fa-user',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Ver Perfil',                  
+                    'route'  => 'profile.show',
+                    'icon'    => 'fa fa-user',
+                    'icon_color' => 'red',
+                ],
+
+                [
+                    'text' => 'Cerrar Sesion',
+                    'route'  => 'logout',
+                    'icon'    => 'fa fa-power-off',
+                    'icon_color' => 'red',
+                ],
+             
+            ],
+            
+        ],
+
         ['header' => 'ADMINISTRADOR'],
      /*    [
             'text' => 'profile',
@@ -332,29 +360,33 @@ return [
         ], */
         [
             'text'    => 'Usuarios',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-user-shield',
             'icon_color' => 'red',
             'submenu' => [
                 [
                     'text' => 'Consultar Usuarios',                  
                     'url'  => '#',
+                    'icon'    => 'fa fa-search',           
                     'icon_color' => 'red',
                 ],
 
                 [
                     'text' => 'Crear Usuarios',
                     'route'  => 'crearusuario',
+                    'icon'    => 'fa fa-user-plus',              
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Dar de Baja',
                     'route'  => 'usersv',
+                    'icon'    => 'fa fa-user-times',        
                     'icon_color' => 'red',
                    
                 ],
                 [
                     'text' => 'Asignar Roles',
                     'url'  => '#',
+                    'icon'    => 'fas fa-user-lock',             
                     'icon_color' => 'red',
                    
                 ],
@@ -362,24 +394,27 @@ return [
             
         ],
         [
-            'text'    => 'Reportes',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => ' Reportes',
+            'icon'    => 'fa fa-file',
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => ' Ingresos Diarios',
                     'url'  => '#',
+                    'icon'    => 'fa fa-file',
                     'icon_color' => 'red',
                 ],
 
                 [
-                    'text' => 'level_one',
+                    'text' => 'Ingresos Mes',
                     'url'  => '#',
+                    'icon'    => 'fa fa-file',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'level_one',
+                    'text' => 'Movimiento Usuarios',
                     'url'  => '#',
+                    'icon'    => 'fas fa-diagnoses',             
                     'icon_color' => 'red',
                 ],
             ],
@@ -387,30 +422,16 @@ return [
         ],
         [
             'text'    => 'Ingresos',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-money-bill',
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'Ganancias',
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],
 
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                    'icon_color' => 'red',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                    'icon_color' => 'red',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                    'icon_color' => 'red',
-                ],
+      
             ],
             
         ],
@@ -418,47 +439,54 @@ return [
         ['header' => 'OPCIONES'],
         [
             'text'    => 'Prestamos',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fa fa-percent',
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'Realizar Prestamo',
                     'url'  => '#',
+                    'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
 
                 [
-                    'text' => 'level_one',
+                    'text' => 'Seguimiento Prestamos',
                     'url'  => '#',
+                    'icon'    => 'fa fa-percent', 
                     'icon_color' => 'red',
                 ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                    'icon_color' => 'red',
-                ],
+       
             ],
             
         ],
         [
             'text'    => 'Clientes',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fa fa-users',
             'icon_color' => 'red',
             'submenu' => [
                 [
                     'text' => 'Consultar Clientes',
                     'route'  => 'clientesv',
+                    'icon'    => 'fa fa-users',
                     'icon_color' => 'red',
                 ],
 
                 [
                     'text' => 'Crear Clientes',
                     'route'  => 'clientes.show',
+                    'icon'    => 'fa fa-user-plus',         
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'level_one',
+                    'text' => 'Eliminar Clientes',
+                    'route'  => 'clientes.show',
+                    'icon'    => 'fa fa-user-times',         
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Asignar Garantias',
                     'url'  => '#',
+                    'icon'    => 'fa fa-check-square',  
                     'icon_color' => 'red',
                 ],
             ],
@@ -470,18 +498,18 @@ return [
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'Extras',
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],
 
                 [
-                    'text' => 'level_one',
+                    'text' => 'Extras',
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'level_one',
+                    'text' => 'Extras',
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],
