@@ -82,7 +82,7 @@
         
             <div class="flex items-center justify-end mt-4">          
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4"><i class='fa fa-user-plus'></i> 
                     {{ __('CREAR') }}
                 </x-jet-button>
             </div>

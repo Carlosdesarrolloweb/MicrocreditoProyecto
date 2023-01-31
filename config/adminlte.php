@@ -479,7 +479,7 @@ return [
                 ],
                 [
                     'text' => 'Eliminar Clientes',
-                    'route'  => 'clientes.show',
+                    'route'  => 'clientesv',
                     'icon'    => 'fa fa-user-times',         
                     'icon_color' => 'red',
                 ],

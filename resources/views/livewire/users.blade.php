@@ -45,12 +45,12 @@
                 <td scope="col">{{$usersv->email}}</td>
                 <td>
                 
-                <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>   
+                <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR</a>   
                  <form action="{{ route('user.eliminarusuarios',$usersv->id) }}" class="d-inline formulario-eliminaru">
 
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> ELIMINAR</button>
                 </form>
 
 

@@ -64,12 +64,12 @@
                 </td>
                 <td>
 
-                <a  href="{{ route('clientes.editarclientes',$clientesv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>
+                <a  href="{{ route('clientes.editarclientes',$clientesv->id) }}"  type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
                 <form action="{{ route('clientes.eliminarclientes',$clientesv->id) }}" class="d-inline formulario-eliminar">
 
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="btn btn-danger">eliminar</button>
+                <button type="submit" class="btn btn-danger" > <i class='fa fa-trash'></i> ELIMINAR</button>
                 </form>
                 
                 </td>
