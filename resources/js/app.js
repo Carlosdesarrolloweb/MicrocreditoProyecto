@@ -9,3 +9,5 @@ Alpine.plugin(focus);
 
 Alpine.start();
 
+window.Swal = require('sweetalert2')
+

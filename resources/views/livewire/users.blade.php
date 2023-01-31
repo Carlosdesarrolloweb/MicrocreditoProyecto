@@ -44,9 +44,17 @@
                 <td scope="col">{{$usersv->cargo_usuario}}</td>
                 <td scope="col">{{$usersv->email}}</td>
                 <td>
-                    <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>
-                    <a  href="{{ route('user.eliminarusuarios',$usersv->id) }}"  type="button" class="btn btn-danger">ELIMINAR</a>
-                    <!-- <button  wire:click="eliminar({{$usersv->id}})" type="button" class="btn btn-danger">ELIMINAR</button> -->
+                
+                <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning">EDITAR</a>   
+                 <form action="{{ route('user.eliminarusuarios',$usersv->id) }}" class="d-inline formulario-eliminaru">
+
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+
+
+
                 </td>
         
             </tr>
@@ -69,4 +77,46 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+
+
+     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('eliminaru') == 'ok')
+        <script>
+            Swal.fire(
+                'Eliminado',
+                'El Usuario se elimino con exito',
+                'success'
+                )
+        </script>
+
+    @endif
+
+        <script>
+            $('.formulario-eliminaru').submit(function(e){
+                e.preventDefault();
+   
+                Swal.fire({
+                title: 'Estas Seguro?',
+                text: "Estos datos se eliminaran definitivamente",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si,Eliminar!',
+                cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                if (result.isConfirmed) {
+              
+
+                    this.submit();
+                }
+
+                })
+            });
+
+        </script>
+         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+
+
 @stop

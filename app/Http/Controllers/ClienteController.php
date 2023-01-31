@@ -154,7 +154,7 @@ class ClienteController extends Controller
     {
         Cliente::find($id)->delete();
         $clientesv=Cliente::all();
-        return view('livewire.Clientes',['Clientes'=>$clientesv ]);
+        return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok');
     }
     
 

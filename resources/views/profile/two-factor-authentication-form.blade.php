@@ -99,7 +99,7 @@
                 @else
                     <x-jet-confirms-password wire:then="showRecoveryCodes">
                         <x-jet-secondary-button class="mr-3">
-                            {{ __('Show Recovery Codes') }}
+                            {{ __('Mostrar Cod de Recuperacion') }}
                         </x-jet-secondary-button>
                     </x-jet-confirms-password>
                 @endif

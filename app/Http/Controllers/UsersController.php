@@ -133,6 +133,6 @@ class UsersController extends Controller
     {
         User::find($id)->delete();
         $usersv=User::all();
-        return view('livewire.Users',['Users'=>$usersv ]);
+        return view('livewire.Users',['Users'=>$usersv ])->with('eliminaru','ok');
     }
 }
