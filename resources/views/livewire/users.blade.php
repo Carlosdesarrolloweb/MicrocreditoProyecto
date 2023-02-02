@@ -5,7 +5,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1 class="fw-bold">Usuarios Registrados </h1>
+    <h1 style="text-align: center;">Usuarios Registrados </h1>
 @stop
 
 @section('content')
@@ -16,11 +16,11 @@
     <div class="py-12">
         <div class="max-w-7x1 mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-x1 sm:rounded-lg px-4 py-4">
-            
-            
 
-        
-            
+
+
+
+
         <table class="table">
         <thead>
             <tr scope="col">
@@ -44,8 +44,8 @@
                 <td scope="col">{{$usersv->cargo_usuario}}</td>
                 <td scope="col">{{$usersv->email}}</td>
                 <td>
-                
-                <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR</a>   
+
+                <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR</a>
                  <form action="{{ route('user.eliminarusuarios',$usersv->id) }}" class="d-inline formulario-eliminaru">
 
                 @method('DELETE')
@@ -56,7 +56,7 @@
 
 
                 </td>
-        
+
             </tr>
             @endforeach
 
@@ -67,7 +67,7 @@
         </table>
             </div>
         </div>
-    </div> 
+    </div>
 
 @stop
 
@@ -95,7 +95,7 @@
         <script>
             $('.formulario-eliminaru').submit(function(e){
                 e.preventDefault();
-   
+
                 Swal.fire({
                 title: 'Estas Seguro?',
                 text: "Estos datos se eliminaran definitivamente",
@@ -107,7 +107,7 @@
                 cancelButtonText: 'Cancelar'
                 }).then((result) => {
                 if (result.isConfirmed) {
-              
+
 
                     this.submit();
                 }
@@ -116,7 +116,7 @@
             });
 
         </script>
-         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 @stop
