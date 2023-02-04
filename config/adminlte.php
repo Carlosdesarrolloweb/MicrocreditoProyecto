@@ -131,7 +131,7 @@ return [
     |
     */
 
-   
+
     'usermenu_enabled' => false,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-danger justify-content-center',
@@ -314,8 +314,8 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
- 
-        
+
+
         [
             'text'        => 'INICIO',
             'route'  => 'dashboard',
@@ -330,7 +330,7 @@ return [
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'Ver Perfil',                  
+                    'text' => 'Ver Perfil',
                     'route'  => 'profile.show',
                     'icon'    => 'fa fa-user',
                     'icon_color' => 'red',
@@ -342,9 +342,9 @@ return [
                     'icon'    => 'fa fa-power-off',
                     'icon_color' => 'red',
                 ],
-             
+
             ],
-            
+
         ],
 
         ['header' => 'ADMINISTRADOR'],
@@ -364,34 +364,34 @@ return [
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'Consultar Usuarios',                  
+                    'text' => 'Consultar Usuarios',
                     'url'  => '#',
-                    'icon'    => 'fa fa-search',           
+                    'icon'    => 'fa fa-search',
                     'icon_color' => 'red',
                 ],
 
                 [
                     'text' => 'Crear Usuarios',
                     'route'  => 'crearusuario',
-                    'icon'    => 'fa fa-user-plus',              
+                    'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Dar de Baja',
                     'route'  => 'usersv',
-                    'icon'    => 'fa fa-user-times',        
+                    'icon'    => 'fa fa-user-times',
                     'icon_color' => 'red',
-                   
+
                 ],
                 [
                     'text' => 'Asignar Roles',
                     'url'  => '#',
-                    'icon'    => 'fas fa-user-lock',             
+                    'icon'    => 'fas fa-user-lock',
                     'icon_color' => 'red',
-                   
+
                 ],
             ],
-            
+
         ],
         [
             'text'    => ' Reportes',
@@ -414,11 +414,11 @@ return [
                 [
                     'text' => 'Movimiento Usuarios',
                     'url'  => '#',
-                    'icon'    => 'fas fa-diagnoses',             
+                    'icon'    => 'fas fa-diagnoses',
                     'icon_color' => 'red',
                 ],
             ],
-            
+
         ],
         [
             'text'    => 'Ingresos',
@@ -431,9 +431,9 @@ return [
                     'icon_color' => 'red',
                 ],
 
-      
+
             ],
-            
+
         ],
 
         ['header' => 'OPCIONES'],
@@ -450,14 +450,26 @@ return [
                 ],
 
                 [
-                    'text' => 'Seguimiento Prestamos',
+                    'text' => 'Pago de Cuotas',
                     'url'  => '#',
-                    'icon'    => 'fa fa-percent', 
+                    'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
-       
+                [
+                    'text' => 'Pago Solo Interes',
+                    'url'  => '#',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Seguimiento Prestamos',
+                    'url'  => '#',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+
             ],
-            
+
         ],
         [
             'text'    => 'Clientes',
@@ -474,23 +486,23 @@ return [
                 [
                     'text' => 'Crear Clientes',
                     'route'  => 'clientes.show',
-                    'icon'    => 'fa fa-user-plus',         
+                    'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Eliminar Clientes',
                     'route'  => 'clientesv',
-                    'icon'    => 'fa fa-user-times',         
+                    'icon'    => 'fa fa-user-times',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Asignar Garantias',
                     'url'  => '#',
-                    'icon'    => 'fa fa-check-square',  
+                    'icon'    => 'fa fa-check-square',
                     'icon_color' => 'red',
                 ],
             ],
-            
+
         ],
         [
             'text'    => 'Otros',
@@ -514,9 +526,9 @@ return [
                     'icon_color' => 'red',
                 ],
             ],
-            
+
         ],
- 
+
 
     /*     ['header' => 'labels'],
         [
