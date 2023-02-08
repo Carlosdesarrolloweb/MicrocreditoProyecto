@@ -7,16 +7,15 @@
 @stop
 
 @section('content')
-    <x-app-layout>
+
         <body style="background-color: white;">
             <center>
                 <img src="{{URL::asset('https://files.fm/thumb_show.php?i=rh59me2xy')}}">
              </center>
-       
+
         </body>
- 
- 
-    </x-app-layout>
+
+
 @stop
 
 @section('css')
@@ -26,7 +25,7 @@
 @section('js')
     <script> console.log('Hi!'); </script>
     <script src= "{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    
+
 
 @stop
 

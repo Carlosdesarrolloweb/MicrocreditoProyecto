@@ -90,7 +90,7 @@
             <div class="flex items-center justify-end mt-4">
 
 
-                <x-jet-button type="button" class="btn btn-success btn-lg mb-2"><i class='fa fa-user-plus' ></i>
+                <x-jet-button  class="btn btn-success btn-lg mb-2"><i class='fa fa-user-plus' ></i>
                     {{ __('CREAR') }}
                 </x-jet-button>
 

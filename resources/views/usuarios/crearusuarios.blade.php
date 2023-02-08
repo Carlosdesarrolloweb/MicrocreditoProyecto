@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="form-row">
-                 <div class="form-group">
+                 <div class="form-group col-md-12">
                      <x-jet-label for="Direccion" value="{{ __('DIRECCION') }}" />
                     <x-jet-input maxlength="40" id="direccion_usuario"  class="form-control" type="text" name="direccion_usuario" :value="old('direccion_usuario')" required autofocus autocomplete="direccion_usuario" />
                  </div>
