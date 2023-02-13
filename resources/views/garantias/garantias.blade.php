@@ -5,7 +5,7 @@
 
 @section('content_header')
 <center>
-    <h1>REGISTRAR NUEVO PRESTAMO</h1>
+    <h1>REGISTRAR GARANTIA</h1>
 </center>
 @stop
 
@@ -17,7 +17,7 @@
                     </p>
                 </p>
 
-        <form action="" method="POST">
+        <form method="post" action="" enctype="multipart/form-data">
             @csrf
 
             <div class="container">
@@ -28,49 +28,54 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="amount">MONTO PRESTADO</label>
+                        <label for="amount">NOMBRE GARANTIA</label>
                         <input type="text" class="form-control" id="amount" name="amount">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="payment_mode">MODO DE PAGO</label>
-                                <select class="form-control" id="payment_mode" name="payment_mode">
-                                <option value="daily">DIARIO</option>
-                                <option value="weekly">SEMANAL</option>
-                                <option value="weekly">QUINCENAL</option>
-                                <option value="monthly">MENSUAL</option>
-                                </select>
+                        <label for="amount">VALOR PRENDA "BS"</label>
+                        <input type="text" class="form-control" id="amount" name="amount">
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                                <label for="interest_rate">INTERES %</label>
+                    <div class="form-group col-md-12">
+                                <label for="interest_rate">DETALLE DE LA GARANTIA</label>
                                 <input type="text" class="form-control" id="interest_rate" name="interest_rate">
                     </div>
 
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-6">
-                                <label for="number_of_installments">CANTIDAD DE CUOTAS</label>
-                                <input type="text" class="form-control" id="number_of_installments" name="number_of_installments">
+                        <x-jet-label for="id_foto" value="" />
+                        <x-jet-input  id="id_foto" class="form-control" type="FILE" name="id_foto" :value="old('id_foto')" required />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <x-jet-label for="id_fotocarnet" value="" />
+                        <x-jet-input  id="id_fotocarnet" class="form-control" type="FILE" name="id_fotocarnet" :value="old('id_fotocarnet')" required />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                                <label for="loan_profit">GANANCIA</label>
-                                <input type="text" class="form-control" id="loan_profit" name="loan_profit">
+                        <x-jet-label for="id_fotorecibo" value="" />
+                        <x-jet-input  id="id_fotorecibo" class="form-control" type="FILE" name="id_fotorecibo" :value="old('id_fotorecibo')" required />
                     </div>
+                    <div class="form-group col-md-6">
+                        <x-jet-label for="id_fotocroquis" value="" />
+                        <x-jet-input  id="id_fotocroquis" class="form-control" type="FILE" name="id_fotocroquis" :value="old('id_fotocroquis')" required />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="payment_mode">OBSERVACIONES</label>
+                                <select class="form-control" id="payment_mode" name="payment_mode">
+                                <option value="daily">CUMPLE REQUISITOS</option>
+                                <option value="weekly">NO CUMPLE</option>
+                                </select>
+                    </div>
+                </div>
 
-                    <div class="form-group col-md-6">
-                                <label for="start_date">FECHA INICIO PRESTAMO</label>
-                                <input type="date" name="start_date" id="start_date" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="number_of_installments">TOTAL A PAGAR</label>
-                        <input type="text" class="form-control" id="number_of_installments" name="number_of_installments">
-                    </div>
-                </div>
+
 
                             <button type="submit" class="btn btn-success">REGISTRAR</button>
                             </form>

@@ -444,14 +444,20 @@ return [
             'submenu' => [
                 [
                     'text' => 'Realizar Prestamo',
-                    'url'  => '#',
+                    'route'  => 'nuevoprestamo',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Registrar Garantia',
+                    'route'  => 'garantia',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
 
                 [
                     'text' => 'Pago de Cuotas',
-                    'url'  => '#',
+                    'route'  => 'pagos',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],

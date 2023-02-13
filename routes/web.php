@@ -56,5 +56,21 @@ Route::get('/', function () {
     Route::get('/actualizarclientes/{id}',[ClienteController::class,'edit'])->name('clientes.editarclientes');
     Route::get('/editarclientes/{id}', [ClienteController::class,'update'])->name('clientes.update');
     Route::get('/eliminarclientes/{id}',[ClienteController::class,'destroy'])->name('clientes.eliminarclientes');
+
+    //Registrar nuevo Prestamo
+    Route::get('/nuevoprestamo', function () {
+        return view('prestamos.nuevoprestamo');
+    })->name('nuevoprestamo');
+
+    //Registrar Garantia
+     Route::get('/garantia', function () {
+        return view('garantias.garantias');
+    })->name('garantia');
+
+    //Registrar Pago
+    Route::get('/pagos', function () {
+        return view('prestamos.pagos');
+    })->name('pagos');
+
  });
 
