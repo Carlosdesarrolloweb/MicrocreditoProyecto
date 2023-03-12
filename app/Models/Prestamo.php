@@ -22,11 +22,26 @@ class Prestamo extends Model
         'id_cliente',
         'id_usuario',
         'id_interes',
-        'id_mododepago',
+        'id_modo_pago'
     ];
 
     public function cliente()
     {
         return $this->belongsTo(Cliente::class, 'id_cliente');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function interes()
+    {
+        return $this->belongsTo(Interes::class, 'id_interes');
+    }
+
+    public function modoPago()
+    {
+        return $this->belongsTo(ModoPago::class, 'id_modo_pago');
     }
 }

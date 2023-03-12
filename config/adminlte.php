@@ -439,7 +439,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Realizar Prestamo',
-                    'route'  => 'nuevoprestamo',
+                    'route'  => 'prestamos.create',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],

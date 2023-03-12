@@ -67,6 +67,15 @@ Route::get('/', function () {
     })->name('nuevoprestamo');
     Route::resource('prestamos', PrestamoController::class);
 
+
+    Route::get('/prestamos', [App\Http\Controllers\PrestamoController::class, 'index'])->name('prestamos.index');
+    Route::get('/prestamos/create', [App\Http\Controllers\PrestamoController::class, 'create'])->name('prestamos.create');
+    Route::post('/prestamos', [App\Http\Controllers\PrestamoController::class, 'store'])->name('prestamos.store');
+    Route::get('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'show'])->name('prestamos.show');
+    Route::get('/prestamos/{prestamo}/edit', [App\Http\Controllers\PrestamoController::class, 'edit'])->name('prestamos.edit');
+    Route::put('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'update'])->name('prestamos.update');
+    Route::delete('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'destroy'])->name('prestamos.destroy');
+
     //Registrar Garantia
      Route::get('/garantia', function () {
         return view('garantias.garantias');

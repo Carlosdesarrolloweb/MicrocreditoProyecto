@@ -2,66 +2,83 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prestamo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PrestamoController extends Controller
 {
     public function index()
     {
-        $prestamos = DB::table('prestamo')->get();
-        return view('prestamos.index', ['prestamos' => $prestamos]);
+        $prestamos = Prestamo::with(['cliente', 'usuario', 'interes', 'modoPago'])->get();
+        return view('prestamos.index', compact('prestamos'));
     }
 
     public function create()
     {
-        $clientes = DB::table('cliente')->get();
-        return view('prestamos.create', ['clientes' => $clientes]);
+        return view('prestamos.create');
     }
 
     public function store(Request $request)
     {
-        DB::table('prestamo')->insert([
-            'monto_prestamo' => $request->input('monto_prestamo'),
-            'duracion_prestamo' => $request->input('duracion_prestamo'),
-            'calculo_cuota' => $request->input('calculo_cuota'),
-            'garantia' => $request->input('garantia'),
-            'cantidad_cuotas' => $request->input('cantidad_cuotas'),
-            'monto_pagado' => $request->input('monto_pagado'),
-            'id_cliente' => $request->input('id_cliente'),
+        $request->validate([
+            'monto_prestamo' => 'required|numeric',
+            'duracion_prestamo' => 'required|numeric',
+            'calculo_cuota' => 'required|numeric',
+            'garantia' => 'required|max:255',
+            'cantidad_cuotas' => 'required|numeric',
+            'monto_prestado' => 'required|numeric',
+            'id_cliente' => 'required|exists:clientes,id',
+            'id_usuario' => 'required|exists:usuarios,id',
+            'id_interes' => 'required|exists:intereses,id',
+            'id_modo_pago' => 'required|exists:modos_pago,id',
         ]);
 
+        Prestamo::create($request->all());
+
         return redirect()->route('prestamos.index')
-                         ->with('success','Préstamo creado satisfactoriamente');
+            ->with('success', 'Prestamo creado exitosamente.');
+    }
+
+    public function show($id)
+    {
+        $prestamo = Prestamo::with(['cliente', 'usuario', 'interes', 'modoPago'])->findOrFail($id);
+        return view('prestamos.show', compact('prestamo'));
     }
 
     public function edit($id)
     {
-        $prestamo = DB::table('prestamo')->where('id', $id)->first();
-        $clientes = DB::table('cliente')->get();
-        return view('prestamos.edit', ['prestamo' => $prestamo, 'clientes' => $clientes]);
+        $prestamo = Prestamo::with(['cliente', 'usuario', 'interes', 'modoPago'])->findOrFail($id);
+        return view('prestamos.edit', compact('prestamo'));
     }
 
     public function update(Request $request, $id)
     {
-        DB::table('prestamo')->where('id', $id)->update([
-            'monto_prestamo' => $request->input('monto_prestamo'),
-            'duracion_prestamo' => $request->input('duracion_prestamo'),
-            'calculo_cuota' => $request->input('calculo_cuota'),
-            'garantia' => $request->input('garantia'),
-            'cantidad_cuotas' => $request->input('cantidad_cuotas'),
-            'monto_pagado' => $request->input('monto_pagado'),
-            'id_cliente' => $request->input('id_cliente'),
+        $request->validate([
+            'monto_prestamo' => 'required|numeric',
+            'duracion_prestamo' => 'required|numeric',
+            'calculo_cuota' => 'required|numeric',
+            'garantia' => 'required|max:255',
+            'cantidad_cuotas' => 'required|numeric',
+            'monto_prestado' => 'required|numeric',
+            'id_cliente' => 'required|exists:clientes,id',
+            'id_usuario' => 'required|exists:usuarios,id',
+            'id_interes' => 'required|exists:intereses,id',
+            'id_modo_pago' => 'required|exists:modos_pago,id',
         ]);
 
+        $prestamo = Prestamo::findOrFail($id);
+        $prestamo->update($request->all());
+
         return redirect()->route('prestamos.index')
-                         ->with('success','Préstamo actualizado satisfactoriamente');
+            ->with('success', 'Prestamo actualizado exitosamente.');
     }
 
     public function destroy($id)
     {
-        DB::table('prestamo')->where('id', $id)->delete();
+        $prestamo = Prestamo::findOrFail($id);
+        $prestamo->delete();
+
         return redirect()->route('prestamos.index')
-                         ->with('success','Préstamo eliminado satisfactoriamente');
+            ->with('success', 'Prestamo eliminado exitosamente.');
     }
 }
