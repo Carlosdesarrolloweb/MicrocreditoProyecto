@@ -10,7 +10,7 @@ class Foto extends Model
     use HasFactory;
 
 
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -18,14 +18,10 @@ class Foto extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-       
+
         'direccion_imagen',
         'url_imagen',
-      
-       
-        
-        
-    
+
     ];
 
     protected $table = 'foto';

@@ -20,42 +20,50 @@
                 <div class="form-group col-md-6">
                     <x-jet-label for="Carnet_cliente" value="{{ __('CARNET/DNI') }}"/>
                     <x-jet-input  maxlength="15" id="Carnet_cliente" class="form-control" type="text" name="Carnet_cliente" value="{{$clientesv->Carnet_cliente}}" required autofocus autocomplete="Carnet_cliente" />
+                    <x-jet-input-error for="Carnet_cliente" class="mt-2 text-danger" />
                 </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="nombre_cliente" value="{{ __('NOMBRES') }}" />
                     <x-jet-input maxlength="20" id="nombre_cliente" class="form-control" type="text" name="nombre_cliente" value="{{$clientesv->nombre_cliente}}" required autofocus autocomplete="nombre_cliente" />
+                    <x-jet-input-error for="nombre_cliente" class="mt-2 text-danger" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <x-jet-label for="apellido_cliente" value="{{ __('APELLIDOS') }}" />
                     <x-jet-input maxlength="20" id="apellido_cliente" class="form-control" type="text" name="apellido_cliente" value="{{$clientesv->apellido_cliente}}" required autofocus autocomplete="apellido_cliente" />
+                    <x-jet-input-error for="apellido_cliente" class="mt-2 text-danger" />
                 </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="direccion_cliente" value="{{ __('DIRECCION CLIENTE') }}" />
                     <x-jet-input maxlength="30"  id="direccion_cliente" class="form-control" type="text" name="direccion_cliente" value="{{$clientesv->direccion_cliente}}" required autofocus autocomplete="direccion_cliente" />
+                    <x-jet-input-error for="direccion_cliente" class="mt-2 text-danger" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <x-jet-label for="email_cliente" value="{{ __('EMAIL') }}" />
                     <x-jet-input maxlength="20" id="email_cliente" class="form-control" type="email" name="email_cliente" value="{{$clientesv->email_cliente}}" required autofocus autocomplete="email_cliente" />
+                    <x-jet-input-error for="email_cliente" class="mt-2 text-danger" />
                 </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="telefono_cliente" value="{{ __('TELEFONO') }}" />
                     <x-jet-input maxlength="8" id="telefono_cliente" class="form-control" type="text" name="telefono_cliente" value="{{$clientesv->telefono_cliente}}" required autofocus autocomplete="telefono_cliente" />
+                    <x-jet-input-error for="telefono_cliente" class="mt-2 text-danger" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <x-jet-label for="edad_cliente" value="{{ __('EDAD') }}" />
                     <x-jet-input maxlength="2" id="edad_cliente" class="form-control" type="text" name="edad_cliente" value="{{$clientesv->edad_cliente}}" required autofocus autocomplete="edad_cliente" />
+                    <x-jet-input-error for="edad_cliente" class="mt-2 text-danger" />
                 </div>
 
                 <div class="form-group col-md-6">
                     <x-jet-label for="telefono_referencia" value="{{ __('TELEFONO RESIDENCIA') }}" />
                     <x-jet-input maxlength="8" id="telefono_referencia" class="form-control" type="text" name="telefono_referencia" value="{{$clientesv->telefono_referencia}}" required />
-            </div>
+                    <x-jet-input-error for="telefono_referencia" class="mt-2 text-danger" />
+                </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <x-jet-label for="estado_cliente" value="{{ __('ESTADO CLIENTE') }}" />

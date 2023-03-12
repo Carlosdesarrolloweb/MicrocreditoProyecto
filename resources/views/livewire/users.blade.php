@@ -22,7 +22,7 @@
 
 
         <table class="table">
-        <thead>
+        <thead class="bg-dark">
             <tr scope="col">
             <th scope="col">ID</th>
             <th scope="col">CARNET</th>

@@ -336,12 +336,7 @@ return [
                     'icon_color' => 'red',
                 ],
 
-                [
-                    'text' => 'Cerrar Sesion',
-                    'route'  => 'logout',
-                    'icon'    => 'fa fa-power-off',
-                    'icon_color' => 'red',
-                ],
+
 
             ],
 
@@ -377,7 +372,7 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'Dar de Baja',
+                    'text' => 'Ver Clientes',
                     'route'  => 'usersv',
                     'icon'    => 'fa fa-user-times',
                     'icon_color' => 'red',
@@ -445,6 +440,24 @@ return [
                 [
                     'text' => 'Realizar Prestamo',
                     'route'  => 'nuevoprestamo',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Interes',
+                    'route'  => 'interests.create',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Agregar Modos de Pago',
+                    'route'  => 'modosPago.create',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                 [
+                    'text' => 'Ver Modos de Pago',
+                    'route'  => 'modos_pago.index',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],

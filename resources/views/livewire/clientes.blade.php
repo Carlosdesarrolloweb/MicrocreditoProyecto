@@ -37,7 +37,7 @@
 
       <!-- tabla base de datos abajo -->
         <table class="table">
-        <thead class="bg-info">
+        <thead class="bg-dark">
             <tr scope="col">
 
             <th scope="col">CARNET</th>

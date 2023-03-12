@@ -19,7 +19,7 @@ class ClienteController extends Controller
     }
     public function index()
     {
-  
+
 
         return view('livewire.clientes',['Clientes'=>Cliente::all()]);
     }
@@ -31,36 +31,7 @@ class ClienteController extends Controller
 
     public function create(Request $request)
     {
-        $cliente = new Cliente();
-        $id_foto = null;
-        $id_fotocarnet = null;
-        $id_fotorecibo = null;
-        $id_fotocroquis = null;
-        if(
-            $request->hasfile('id_foto') && 
-            $request->hasfile('id_fotocarnet') && 
-            $request->hasfile('id_fotorecibo') && 
-            $request->hasfile('id_fotocroquis')
-        )
-        {
-            $id_foto = $this->images->uploadFile(
-                $request->Carnet_cliente,
-                $request->file('id_foto')
-            );
-            $id_fotocarnet = $this->images->uploadFile(
-                $request->Carnet_cliente,
-                $request->file('id_fotocarnet')
-            );
-            $id_fotorecibo = $this->images->uploadFile(
-                $request->Carnet_cliente,
-                $request->file('id_fotorecibo')
-            );
-            $id_fotocroquis = $this->images->uploadFile(
-                $request->Carnet_cliente,
-                $request->file('id_fotocroquis')
-            );
-        }
-        
+
         $validatedData = $request->validate([
             'Carnet_cliente' => 'required|min:5',
         ]);
@@ -86,6 +57,36 @@ class ClienteController extends Controller
             'telefono_referencia' => 'required|min:8',
         ]);
 
+        $cliente = new Cliente();
+        $id_foto = null;
+        $id_fotocarnet = null;
+        $id_fotorecibo = null;
+        $id_fotocroquis = null;
+        if(
+            $request->hasfile('id_foto') &&
+            $request->hasfile('id_fotocarnet') &&
+            $request->hasfile('id_fotorecibo') &&
+            $request->hasfile('id_fotocroquis')
+        )
+        {
+            $id_foto = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_foto')
+            );
+            $id_fotocarnet = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_fotocarnet')
+            );
+            $id_fotorecibo = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_fotorecibo')
+            );
+            $id_fotocroquis = $this->images->uploadFile(
+                $request->Carnet_cliente,
+                $request->file('id_fotocroquis')
+            );
+        }
+
 
         $cliente->Carnet_cliente = $request->Carnet_cliente;
         $cliente->nombre_cliente=$request->nombre_cliente;
@@ -101,11 +102,11 @@ class ClienteController extends Controller
         $cliente->id_fotorecibo = $id_fotorecibo;
         $cliente->id_fotocroquis = $id_fotocroquis;
         $cliente->save();
-        
+
         return view('clientes.crearclientes');
     }
     public function show(){
-       
+
         return view('clientes.crearclientes');
 
     }
@@ -124,7 +125,7 @@ class ClienteController extends Controller
      */
 
     public function update(Request $request)
-    {   
+    {
         $clientesv = Cliente::findOrFail($request->id);
         $clientesv->Carnet_cliente = $request->Carnet_cliente ;
         $clientesv->nombre_cliente=$request->nombre_cliente;
@@ -135,10 +136,6 @@ class ClienteController extends Controller
         $clientesv->edad_cliente=$request->edad_cliente;
         $clientesv-> telefono_referencia=$request->telefono_referencia;
         $clientesv-> estado_cliente=$request->estado_cliente;
-      /*   $clientesv-> id_foto=$request->id_foto;
-        $clientesv-> id_fotocarnet=$request->id_fotocarnet;
-        $clientesv-> id_fotorecibo=$request->id_fotorecibo;
-        $clientesv-> id_fotocroquis=$request->id_fotocroquis; */
         $clientesv->save();
         $clientesv=Cliente::all();
         return view('livewire.Clientes',['Clientes'=>$clientesv ]);
@@ -156,7 +153,7 @@ class ClienteController extends Controller
         $clientesv=Cliente::all();
         return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok');
     }
-    
+
 
 
 

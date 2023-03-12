@@ -19,21 +19,25 @@
                 <div class="form-group col-md-6">
                     <x-jet-label for="Carnet_cliente" value="{{ __('CARNET/DNI') }}" />
                     <x-jet-input  maxlength="15" id="Carnet_cliente" class="form-control" type="text" name="Carnet_cliente" :value="old('Carnet_cliente')" required autofocus autocomplete="Carnet_cliente" />
+                    <x-jet-input-error for="Carnet_cliente" class="mt-2 text-danger" />
                 </div>
 
                 <div class="form-group col-md-6">
                     <x-jet-label for="nombre_cliente" value="{{ __('NOMBRES') }}" />
                     <x-jet-input maxlength="20" id="nombre_cliente" class="form-control" type="text" name="nombre_cliente" :value="old('nombre_cliente')" required autofocus autocomplete="nombre_cliente" />
+                    <x-jet-input-error for="nombre_cliente" class="mt-2 text-danger" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <x-jet-label for="apellido_cliente" value="{{ __('APELLIDOS') }}" />
                     <x-jet-input maxlength="20" id="apellido_cliente" class="form-control" type="text" name="apellido_cliente" :value="old('apellido_cliente')" required autofocus autocomplete="apellido_cliente" />
+                    <x-jet-input-error for="apellido_cliente" class="mt-2 text-danger" />
                 </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="direccion_cliente" value="{{ __('DIRECCION') }}" />
                     <x-jet-input maxlength="30"  id="direccion_cliente" class="form-control" type="text" name="direccion_cliente" :value="old('direccion_cliente')" required autofocus autocomplete="direccion_cliente" />
+                    <x-jet-input-error for="direccion_cliente" class="mt-2 text-danger" />
                 </div>
             </div>
 
@@ -41,20 +45,24 @@
                 <div class="form-group col-md-6">
                     <x-jet-label for="email_cliente" value="{{ __('CORREO ELECTRONICO/EMAIL') }}" />
                     <x-jet-input maxlength="20" id="email_cliente" class="form-control" type="email" name="email_cliente" :value="old('email_cliente')" required autofocus autocomplete="email_cliente" />
+                    <x-jet-input-error for="email_cliente" class="mt-2 text-danger" />
                 </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="telefono_cliente" value="{{ __('TELEFONO') }}" />
                     <x-jet-input maxlength="8" id="telefono_cliente" class="form-control" type="text" name="telefono_cliente" :value="old('telefono_cliente')" required autofocus autocomplete="telefono_cliente" />
+                    <x-jet-input-error for="telefono_cliente" class="mt-2 text-danger" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <x-jet-label for="edad_cliente" value="{{ __('EDAD') }}" />
                     <x-jet-input maxlength="2" id="edad_cliente" class="form-control" type="text" name="edad_cliente" :value="old('edad_cliente')" required autofocus autocomplete="edad_cliente" />
+                    <x-jet-input-error for="edad_cliente" class="mt-2" />
                 </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="telefono_referencia" value="{{ __('TELEFONO REFERENCIA') }}" />
                     <x-jet-input maxlength="8" id="telefono_referencia" class="form-control" type="text" name="telefono_referencia" :value="old('telefono_referencia')" required />
+                    <x-jet-input-error for="telefono_referencia" class="mt-2 text-danger" />
                 </div>
             </div>
             <div class="form-row">
@@ -71,7 +79,7 @@
                 <div class="form-group col-md-6">
                     <x-jet-label for="id_foto" value="{{ __('FOTO ANVERSO CARNET') }}" />
                     <x-jet-input  id="id_foto" class="form-control" type="FILE" name="id_foto" :value="old('id_foto')" required />
-                </div>
+               </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="id_fotocarnet" value="{{ __('FOTO REVERSO CARNET') }}" />
                     <x-jet-input  id="id_fotocarnet" class="form-control" type="FILE" name="id_fotocarnet" :value="old('id_fotocarnet')" required />
