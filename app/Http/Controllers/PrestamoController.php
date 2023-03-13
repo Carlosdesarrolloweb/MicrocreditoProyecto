@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Prestamo;
 use Illuminate\Http\Request;
+use App\Models\Cliente;
+use App\Models\Interes;
+use App\Models\ModoPago;
+use App\Models\User;
 
 class PrestamoController extends Controller
 {
@@ -15,7 +19,12 @@ class PrestamoController extends Controller
 
     public function create()
     {
-        return view('prestamos.create');
+        $clientes = Cliente::all();
+        $intereses =  Interes::all();
+        $modos_pago = ModoPago::all();
+        $usuarios = User::all();
+        return view('prestamos.create',compact("clientes","intereses","modos_pago","usuarios"));
+
     }
 
     public function store(Request $request)
