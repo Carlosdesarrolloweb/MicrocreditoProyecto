@@ -14,13 +14,14 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-body">
                     <form action="{{ route('prestamos.store') }}" method="POST">
                         @csrf
 
-                        <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
                             <label for="id_cliente">Cliente</label>
                             <select name="id_cliente" class="form-control" required>
                                 <option value="">Seleccione un cliente</option>
@@ -29,7 +30,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <label for="id_usuario">Usuario que otorga el préstamo</label>
                             <select name="id_usuario" class="form-control" required>
                                 <option value="">Seleccione un usuario</option>
@@ -38,7 +39,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <label for="id_interes">Tipo de Interés</label>
                             <select name="id_interes" id="interes" class="form-control" required>
                                 <option value="">Seleccione un tipo de interés</option>
@@ -47,49 +50,51 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <label for="id_modo_pago">Modo de Pago</label>
-                            <select name="id_modo_pago" class="form-control" required>
+                            <select name="id_modo_pago" id="id_modo_pago" class="form-control" required>
                                 <option value="">Seleccione un modo de pago</option>
                                 @foreach($modos_pago as $modo_pago)
                                     <option value="{{ $modo_pago->id }}">{{ $modo_pago->modalidad_pago }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <label for="monto_prestamo">Monto del Préstamo</label>
-                            <input type="number" id="monto"name="monto_prestamo" class="form-control" required>
+                            <input type="number" id="monto" name="monto_prestamo" class="form-control" required>
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <label for="duracion_prestamo">Duración del Préstamo (en meses)</label>
                             <input type="number" id="duracion" name="duracion_prestamo" class="form-control" required>
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <label for="cantidad_cuotas">Cantidad de Cuotas</label>
                             <input type="number" id="cantidad_cuotas" name="cantidad_cuotas" class="form-control" required>
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <label for="calculo_cuota">Cálculo de Cuota</label>
-                            <input type="number" id="calculo_cuota" name="calculo_cuota" class="form-control" required>
+                            <input type="number" id="calculo_cuota" name="calculo_cuota" class="form-control" readonly>
                         </div>
-
-                        <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <label for="monto_prestado">Monto Prestado</label>
                             <input type="number" id="monto_prestado" name="monto_prestado" class="form-control" required>
                         </div>
-
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <label for="monto_cancelado">Monto Cancelado</label>
-                            <input type="number"  id="monto_cancelar"name="monto_cancelado" class="form-control" required>
+                            <input type="number" id="monto_cancelado" name="monto_cancelado" class="form-control" required>
                         </div>
-
-                        <div class="form-group">
-                            <label for="garantia">Garantía</label>
-                            <input type="text" id="garantia" name="garantia" class="form-control" required>
-                        </div>
-
-
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     @stop
 
 @section('css')
@@ -98,31 +103,64 @@
 
 @section('js')
 <script>
-    // Seleccionamos el input
+    // Seleccionamos los inputs
     const input1 = document.getElementById("interes");
     const input2 = document.getElementById("id_modo_pago");
     const input3 = document.getElementById("monto");
     const input4 = document.getElementById("duracion");
     const input5 = document.getElementById("cantidad_cuotas");
-    const input5 = document.getElementById("monto_cancelar");
+    const input6 = document.getElementById("calculo_cuota");
+    const input7 = document.getElementById("monto_prestado");
+    const input8 = document.getElementById("monto_cancelado");
 
-    // Agregamos un listener para el evento input
+    // Agregamos un listener para el evento input en cada input
     input1.addEventListener("input", () => {
-        if(input1.value.length>0){
-
-            if(input2.value.length>0){
-
-                if(imput3.value.length>0 && input4.value.length>0)
-                var division=Number(input1.value)/10;
-                var montofinal=Number(input1.value)+division;
-
-            }
-
-        }
-      // Aquí puedes agregar la lógica que necesites para detectar el input
+        calcularCuota();
     });
-  </script>
+
+    input2.addEventListener("input", () => {
+        calcularCuota();
+    });
+
+    input3.addEventListener("input", () => {
+        calcularCuota();
+        actualizarMontoPrestado();
+    });
+
+    input4.addEventListener("input", () => {
+        calcularCuota();
+    });
+
+    input5.addEventListener("input", () => {
+        calcularCuota();
+    });
+
+    // Definimos la función para calcular la cuota
+    function calcularCuota() {
+        const interes = parseFloat(input1.value)/100;
+        const modo_pago = parseFloat(input2.value);
+        const monto = parseFloat(input3.value);
+        const duracion = parseFloat(input4.value);
+        const cantidad_cuotas = parseFloat(input5.value);
+
+        // Calculamos la cuota
+       // const cuota = ((monto * interes) + monto) / (cantidad_cuotas * modo_pago);
+        const cuota = ((monto / cantidad_cuotas) + (interes/cantidad_cuotas));
+        // Actualizamos el valor del input "calculo_cuota"
+        input6.value = cuota.toFixed(2);
+    }
+
+    function actualizarMontoPrestado() {
+        const interes = parseFloat(input1.value)/100;
+        const monto = parseFloat(input3.value);
+        const monto_prestado = monto * (1 + interes);
+
+       /*  const monto_prestado = (cuota * cantidad_cuotas); */
 
 
+        input7.value = monto_prestado.toFixed(2);
+        input8.value = "0.00";
+    }
+</script>
 
 @stop
