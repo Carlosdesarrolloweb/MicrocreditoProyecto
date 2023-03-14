@@ -34,7 +34,7 @@
                             <label for="id_usuario">Usuario que otorga el préstamo</label>
                             <select name="id_usuario" class="form-control" required>
                                 <option value="">Seleccione un usuario</option>
-                                @foreach($usuarios as $usuario)
+                                @foreach($users as $usuario)
                                     <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
                                 @endforeach
                             </select>
@@ -54,8 +54,8 @@
                             <label for="id_modo_pago">Modo de Pago</label>
                             <select name="id_modo_pago" id="id_modo_pago" class="form-control" required>
                                 <option value="">Seleccione un modo de pago</option>
-                                @foreach($modos_pago as $modo_pago)
-                                    <option value="{{ $modo_pago->id }}">{{ $modo_pago->modalidad_pago }}</option>
+                                @foreach($modo_pago as $modos_pago)
+                                    <option value="{{ $modos_pago->id }}">{{ $modos_pago->modalidad_pago }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -95,6 +95,14 @@
                             <input type="number" id="monto_cancelado" name="monto_cancelado" class="form-control" readonly>
                         </div>
                     </div>
+                            <p><p>
+                            </p></p>
+                        <div class="flex items-center justify-end mt-4">
+                            <x-jet-button  class="btn btn-success btn-lg mb-2"><i class='fa fa-user-plus' ></i>
+                             {{ __('CREAR') }}
+                            </x-jet-button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

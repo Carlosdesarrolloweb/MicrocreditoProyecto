@@ -19,13 +19,14 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use Hasroles;
-    
+
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+  
     protected $fillable = [
         'Carnet_usuario',
         'name',
@@ -36,8 +37,8 @@ class User extends Authenticatable
         'telefono_usuario',
         'email',
         'password',
-        
-    
+
+
     ];
 
     /**

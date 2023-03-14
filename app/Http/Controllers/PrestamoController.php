@@ -21,9 +21,9 @@ class PrestamoController extends Controller
     {
         $clientes = Cliente::all();
         $intereses =  Interes::all();
-        $modos_pago = ModoPago::all();
-        $usuarios = User::all();
-        return view('prestamos.create',compact("clientes","intereses","modos_pago","usuarios"));
+        $modo_pago = ModoPago::all();
+        $users = User::all();
+        return view('prestamos.create',compact("clientes","intereses","modo_pago","users"));
 
     }
 
@@ -37,9 +37,9 @@ class PrestamoController extends Controller
             'cantidad_cuotas' => 'required|numeric',
             'monto_prestado' => 'required|numeric',
             'id_cliente' => 'required|exists:clientes,id',
-            'id_usuario' => 'required|exists:usuarios,id',
+            'id_usuario' => 'required|exists:users,id',
             'id_interes' => 'required|exists:intereses,id',
-            'id_modo_pago' => 'required|exists:modos_pago,id',
+            'id_modo_pago' => 'required|exists:modo_pago,id',
         ]);
 
         Prestamo::create($request->all());
