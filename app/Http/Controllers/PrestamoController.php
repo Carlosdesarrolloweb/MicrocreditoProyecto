@@ -29,12 +29,14 @@ class PrestamoController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'monto_prestamo' => 'required|numeric',
             'duracion_prestamo' => 'required|numeric',
             'calculo_cuota' => 'required|numeric',
             'garantia' => 'required|max:255',
             'cantidad_cuotas' => 'required|numeric',
+            'monto_cancelado' => 'required|numeric',
             'monto_prestado' => 'required|numeric',
             'id_cliente' => 'required|exists:clientes,id',
             'id_usuario' => 'required|exists:users,id',
@@ -42,7 +44,23 @@ class PrestamoController extends Controller
             'id_modo_pago' => 'required|exists:modo_pago,id',
         ]);
 
-        Prestamo::create($request->all());
+/*         $Prestamo=new Prestamo();
+        $Prestamo->monto_prestamo = $request->monto_prestamo;
+        $Prestamo->duracion_prestamo = $request->duracion_prestamo;
+        $Prestamo->calculo_cuota = $request->calculo_cuota;
+        $Prestamo->cantidad_cuotas = $request->cantidad_cuotas;
+        $Prestamo->garantia = $request->garantia;
+        $Prestamo->monto_prestado = $request->monto_prestado;
+        $Prestamo->monto_cancelado = $request->monto_cancelado;
+        $Prestamo->id_cliente = $request->id_cliente;
+        $Prestamo->id_usuario = $request->id_usuario;
+        $Prestamo->id_interes = $request->id_interes;
+        $Prestamo->id_modo_pago = $request->id_modo_pago;
+
+
+        $Prestamo->save(); */
+
+        Prestamo::create($request->all()); 
 
         return redirect()->route('prestamos.index')
             ->with('success', 'Prestamo creado exitosamente.');

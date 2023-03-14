@@ -70,7 +70,7 @@ Route::get('/', function () {
 
     Route::get('/prestamos', [App\Http\Controllers\PrestamoController::class, 'index'])->name('prestamos.index');
     Route::get('/prestamos/create', [App\Http\Controllers\PrestamoController::class, 'create'])->name('prestamos.create');
-    Route::post('/prestamos', [App\Http\Controllers\PrestamoController::class, 'store'])->name('prestamos.store');
+    Route::post('/prestamos/store', [App\Http\Controllers\PrestamoController::class, 'store'])->name('prestamos.store');
     Route::get('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'show'])->name('prestamos.show');
     Route::get('/prestamos/{prestamo}/edit', [App\Http\Controllers\PrestamoController::class, 'edit'])->name('prestamos.edit');
     Route::put('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'update'])->name('prestamos.update');

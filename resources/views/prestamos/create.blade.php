@@ -84,7 +84,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="ganancia">Ganancia</label>
-                            <input type="number" id="ganancia" name="ganancia" class="form-control" readonly>
+                            <input type="number" id="ganancia" name="garantia" class="form-control" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="monto_prestado">Monto Prestado</label>
@@ -99,7 +99,7 @@
                             </p></p>
                         <div class="flex items-center justify-end mt-4">
                             <x-jet-button  class="btn btn-success btn-lg mb-2"><i class='fa fa-user-plus' ></i>
-                             {{ __('CREAR') }}
+                             {{ __('REGISTRAR PRESTAMO') }}
                             </x-jet-button>
                         </div>
                     </form>
