@@ -46,7 +46,7 @@
                             <select name="id_interes" id="interes" class="form-control" required>
                                 <option value="">Seleccione un tipo de interés</option>
                                 @foreach($intereses as $interes)
-                                    <option value="{{ $interes->id }}">{{ $interes->interes_prestamo }}</option>
+                                    <option value="{{ $interes->interes_prestamo }}">{{ $interes->interes_prestamo }}%</option>
                                 @endforeach
                             </select>
                         </div>
@@ -65,10 +65,7 @@
                             <label for="monto_prestamo">Monto del Préstamo</label>
                             <input type="number" id="monto" name="monto_prestamo" class="form-control" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="ganancia">Ganancia</label>
-                            <input type="number" id="ganancia" name="ganancia" class="form-control" readonly>
-                        </div>
+
                         <div class="col-md-6">
                             <label for="duracion_prestamo">Duración del Préstamo (en meses)</label>
                             <input type="number" id="duracion" name="duracion_prestamo" class="form-control" required>
@@ -85,6 +82,10 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-6">
+                            <label for="ganancia">Ganancia</label>
+                            <input type="number" id="ganancia" name="ganancia" class="form-control" readonly>
+                        </div>
                         <div class="col-md-6">
                             <label for="monto_prestado">Monto Prestado</label>
                             <input type="number" id="monto_prestado" name="monto_prestado" class="form-control" readonly>
@@ -141,35 +142,30 @@
 
     // Definimos la función para calcular la cuota
     function calcularCuota() {
-    const interes = input1.value;
-    const modo_pago = input2.value;
-    const monto = input3.value;
-    const duracion = input4.value;
-    const cantidad_cuotas = input5.value;
+        const interes = input1.value;
+        const monto = input3.value;
+        const cantidad_cuotas = input5.value;
 
-    let cuota = 0;
-    let ganancia = 0;
-    if (interes !== "" && modo_pago !== "" && monto !== "" && duracion !== "" && cantidad_cuotas !== "") {
-        const interes_decimal = interes / 100;
-        const cuota_interes = (monto * interes_decimal) / (1 - (1 / Math.pow(1 + interes_decimal, duracion)));
-        const cuota_modo_pago = cuota_interes * modo_pago;
-        cuota = cuota_interes + cuota_modo_pago;
-        ganancia = cuota * cantidad_cuotas - monto;
+        let cuota = 0;
+        let ganancia = 0;
+
+        if (interes !== "" && monto !== "" && cantidad_cuotas !== "") {
+            const interes_decimal = parseFloat(interes) / 100;
+            ganancia = parseFloat(monto) * interes_decimal;
+            const deuda_total = parseFloat(monto) + ganancia;
+            cuota = deuda_total / parseFloat(cantidad_cuotas);
+        }
+
+        input6.value = cuota.toFixed(2);
+        input7.value = (parseFloat(monto) + ganancia).toFixed(2);
+        input8.value = "0.00";
+        document.getElementById("ganancia").value = ganancia.toFixed(2);
     }
-
-    input6.value = cuota.toFixed(2);
-    input7.value = monto;
-    input8.value = (cuota * cantidad_cuotas).toFixed(2);
-    document.getElementById("ganancia").value = ganancia.toFixed(2);
-}
 
     function actualizarMontoPrestado() {
         const interes = parseFloat(input1.value)/100;
         const monto = parseFloat(input3.value);
         const monto_prestado = monto * (1 + interes);
-
-       /*  const monto_prestado = (cuota * cantidad_cuotas); */
-
 
         input7.value = monto_prestado.toFixed(2);
         input8.value = "0.00";
