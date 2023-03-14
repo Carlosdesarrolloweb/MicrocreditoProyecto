@@ -43,7 +43,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <x-jet-label for="email_cliente" value="{{ __('EMAIL') }}" />
-                    <x-jet-input maxlength="20" id="email_cliente" class="form-control" type="email" name="email_cliente" value="{{$clientesv->email_cliente}}" required autofocus autocomplete="email_cliente" />
+                    <x-jet-input maxlength="30" id="email_cliente" class="form-control" type="email" name="email_cliente" value="{{$clientesv->email_cliente}}" required autofocus autocomplete="email_cliente" />
                     <x-jet-input-error for="email_cliente" class="mt-2 text-danger" />
                 </div>
                 <div class="form-group col-md-6">
