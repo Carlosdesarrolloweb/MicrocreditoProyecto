@@ -97,11 +97,12 @@
                     </div>
                             <p><p>
                             </p></p>
-                        <div class="flex items-center justify-end mt-4">
-                            <x-jet-button  class="btn btn-success btn-lg mb-2"><i class='fa fa-user-plus' ></i>
-                             {{ __('REGISTRAR PRESTAMO') }}
-                            </x-jet-button>
-                        </div>
+                            <div class="flex items-center justify-end mt-4">
+                                 <x-jet-button class="btn btn-success btn-lg mb-2" onclick="Swal.fire('Good job!', 'You clicked the button!', 'success')">
+                                    <i class='fa fa-user-plus'></i>
+                                     {{ __('REGISTRAR PRESTAMO') }}
+                                </x-jet-button>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -115,7 +116,7 @@
 @stop
 
 @section('js')
-<script>
+ <script>
     // Seleccionamos los inputs
     const input1 = document.getElementById("interes");
     const input2 = document.getElementById("id_modo_pago");
@@ -158,8 +159,11 @@
         let ganancia = 0;
 
         if (interes !== "" && monto !== "" && cantidad_cuotas !== "") {
+
             const interes_decimal = parseFloat(interes) / 100;
+            console.log(interes_decimal);
             ganancia = parseFloat(monto) * interes_decimal;
+             console.log(ganancia);
             const deuda_total = parseFloat(monto) + ganancia;
             cuota = deuda_total / parseFloat(cantidad_cuotas);
         }
@@ -179,5 +183,7 @@
         input8.value = "0.00";
     }
 </script>
+
+
 
 @stop

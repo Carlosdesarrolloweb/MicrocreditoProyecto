@@ -28,7 +28,7 @@ class InteresController extends Controller
         return view('interests.create');
     }
 
-    public function store(Request $request)
+     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'interes_prestamo' => 'required|numeric'
@@ -41,6 +41,7 @@ class InteresController extends Controller
         return redirect()->route('interests.index')
             ->with('success', 'El interés se ha agregado correctamente.');
     }
+
 
     /**
      * Display the specified resource.
