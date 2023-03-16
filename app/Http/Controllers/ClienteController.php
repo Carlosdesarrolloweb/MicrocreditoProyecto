@@ -57,6 +57,7 @@ class ClienteController extends Controller
             'telefono_referencia' => 'required|min:8',
         ]);
 
+
         $cliente = new Cliente();
         $id_foto = null;
         $id_fotocarnet = null;
@@ -103,13 +104,26 @@ class ClienteController extends Controller
         $cliente->id_fotocroquis = $id_fotocroquis;
         $cliente->save();
 
+
+
         return view('clientes.crearclientes');
     }
-    public function show(){
+   /*  public function show(){
 
         return view('clientes.crearclientes');
 
-    }
+    } */
+
+    public function show($id)
+{
+    $cliente = Cliente::findOrFail($id);
+
+    return response()->json([
+        'apellido_cliente' => $cliente->apellido_cliente,
+        'Carnet_cliente' => $cliente->Carnet_cliente,
+        'telefono_cliente' => $cliente->telefono_cliente,
+    ]);
+}
     public function edit($id)
     {
         $clientesv = Cliente::findOrFail($id);
@@ -154,7 +168,14 @@ class ClienteController extends Controller
         return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok');
     }
 
-
+/*     public function buscar(Request $request)
+    {
+        $query = $request->input('query');
+        // Realiza la búsqueda de clientes según el valor de la variable $query
+        // y devuelve los resultados en una vista parcial (por ejemplo, resultados_busqueda.blade.php)
+        $clientes = Cliente::where('nombre', 'like', '%'.$query.'%')->get();
+        return view('resultados_busqueda', ['clientes' => $clientes]);
+    } */
 
 
 

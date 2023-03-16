@@ -5,7 +5,7 @@
 
 @section('content_header')
 <center>
-    <h1>REGISTRAR GARANTIA</h1>
+    {{-- <h1>REGISTRAR GARANTIA</h1> --}}
 </center>
 @stop
 
@@ -17,7 +17,7 @@
                     </p>
                 </p>
 
-        <form method="post" action="" enctype="multipart/form-data">
+   {{--      <form method="post" action="" enctype="multipart/form-data">
             @csrf
 
             <div class="container">
@@ -78,7 +78,14 @@
 
 
                             <button type="submit" class="btn btn-success">REGISTRAR</button>
-                            </form>
+                            </form> --}}
+
+<CENTER>
+    {{-- <iframe title="AZZ - Análisis del Faltante & Sobrantes Líneas" width="100%" height="800" src="https://app.powerbi.com/reportEmbed?reportId=199f4aca-1ec3-4cfb-87db-13f99282aa1a&autoAuth=true&ctid=b690017d-ae11-42b5-9f37-74728c6d266d" frameborder="0" allowFullScreen="true"></iframe> --}}
+    <iframe title="REPORTEPRESTAMOS" width="100%" height="800" src="https://app.powerbi.com/reportEmbed?reportId=089e77df-542d-4172-b65b-518c460a81ff&autoAuth=true&ctid=b690017d-ae11-42b5-9f37-74728c6d266d" frameborder="0" allowFullScreen="true"></iframe>
+</CENTER>
+
+
 
     @stop
 

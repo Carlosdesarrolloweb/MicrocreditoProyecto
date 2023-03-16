@@ -51,6 +51,10 @@ Route::get('/', function () {
     Route::post('/clientes',[App\Http\Controllers\ClienteController::class,'index'])->name('clientesv');
     Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv');
 
+    Route::get('/clientes/buscar', 'ClientesController@buscar')->name('clientes.buscar');
+
+
+
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
     Route::post('/usersv', [UsersController::class,'store'])->name('usersv');
     Route::get('/clientesv', [ClienteController::class,'index'])->name('clientesv');

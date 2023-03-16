@@ -9,6 +9,8 @@
 <center>
     <h1>NUEVO PRESTAMO</h1>
 </center>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @stop
 
 @section('content')
@@ -21,23 +23,19 @@
                         @csrf
 
                     <div class="row">
-                        <div class="col-md-6">
+                      <div class="col-md-6">
                             <label for="id_cliente">Cliente</label>
                             <select name="id_cliente" class="form-control" required>
                                 <option value="">Seleccione un cliente</option>
                                 @foreach($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }}</option>
+                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}.  . {{ $cliente->Carnet_cliente }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="id_usuario">Usuario que otorga el préstamo</label>
-                            <select name="id_usuario" class="form-control" required>
-                                <option value="">Seleccione un usuario</option>
-                                @foreach($users as $usuario)
-                                    <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
+                            <input type="text" class="form-control" value="{{ Auth::user()->name . ' ' . Auth::user()->apellido_usuario }}" disabled>
                         </div>
                     </div>
                     <div class="row">
@@ -182,6 +180,28 @@
         input7.value = monto_prestado.toFixed(2);
         input8.value = "0.00";
     }
+
+
+
+/* $(document).ready(function() {
+    $('#busqueda_cliente').on('keyup', function(){
+        var query = $(this).val();
+        $.ajax({
+            url:"{{ route('clientes.buscar') }}",
+            type:"GET",
+            data:{'query':query},
+            success:function (data) {
+                $('#resultados_busqueda').html(data);
+            }
+        })
+    })
+}); */
+
+
+
+
+
+
 </script>
 
 
