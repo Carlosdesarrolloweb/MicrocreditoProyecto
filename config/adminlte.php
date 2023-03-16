@@ -372,7 +372,7 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'Ver Clientes',
+                    'text' => 'Ver Usuarios',
                     'route'  => 'usersv',
                     'icon'    => 'fa fa-user-times',
                     'icon_color' => 'red',

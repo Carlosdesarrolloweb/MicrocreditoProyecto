@@ -108,22 +108,14 @@ class ClienteController extends Controller
 
         return view('clientes.crearclientes');
     }
-   /*  public function show(){
+    public function show(){
 
         return view('clientes.crearclientes');
 
-    } */
+    }
 
-    public function show($id)
-{
-    $cliente = Cliente::findOrFail($id);
 
-    return response()->json([
-        'apellido_cliente' => $cliente->apellido_cliente,
-        'Carnet_cliente' => $cliente->Carnet_cliente,
-        'telefono_cliente' => $cliente->telefono_cliente,
-    ]);
-}
+
     public function edit($id)
     {
         $clientesv = Cliente::findOrFail($id);
