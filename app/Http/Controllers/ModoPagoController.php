@@ -25,7 +25,7 @@ class ModoPagoController extends Controller
         ]);
 
         ModoPago::create([
-            'modalidad_pago' => $request->modalidad_pago
+            'modalidad_pago' => mb_strtoupper($request->modalidad_pago)
         ]);
 
         return redirect()->route('modos_pago.index')->with('success', 'Modo de pago agregado exitosamente.');
@@ -45,7 +45,7 @@ class ModoPagoController extends Controller
 
         $modoPago = ModoPago::findOrFail($id);
         $modoPago->update([
-            'modalidad_pago' => $request->modalidad_pago
+            'modalidad_pago' =>  mb_strtoupper($request->modalidad_pago)
         ]);
 
         return redirect()->route('modos_pago.index')->with('success', 'Modo de pago actualizado exitosamente.');

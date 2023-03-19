@@ -48,15 +48,15 @@ class UsersController extends Controller
         $validatedData = $request->validate([
             'telefono_usuario' => 'required|min:8',
         ]);
-      
+
         $usuario->Carnet_usuario = $request->Carnet_usuario;
-        $usuario->name=$request->name;
-        $usuario->apellido_usuario=$request->apellido_usuario;
-        $usuario->Nombre_usuario=$request->Nombre_usuario;
-        $usuario->cargo_usuario =$request->cargo_usuario;
-        $usuario->direccion_usuario =$request->direccion_usuario;
+        $usuario->name= mb_strtoupper($request->name);
+        $usuario->apellido_usuario= mb_strtoupper($request->apellido_usuario);
+        $usuario->Nombre_usuario=mb_strtoupper($request->Nombre_usuario);
+        $usuario->cargo_usuario =mb_strtoupper($request->cargo_usuario);
+        $usuario->direccion_usuario =mb_strtoupper($request->direccion_usuario);
         $usuario->telefono_usuario=$request->telefono_usuario;
-        $usuario-> email=$request->email;
+        $usuario-> email=mb_strtoupper($request->email);
         $usuario->password = Hash::make($request->password);
         $usuario->save();
         return view('usuarios.crearusuarios');
@@ -68,7 +68,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
+
     public function store(Request $request)
     {
         Log::info(json_encode($request->all()));
@@ -106,22 +106,22 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {   
+    {
         $usersv = User::findOrFail($request->id);
         $usersv->Carnet_usuario = $request->Carnet_usuario ;
-        $usersv->name=$request->name;
-        $usersv->apellido_usuario=$request->apellido_usuario;
-        $usersv->Nombre_usuario=$request->Nombre_usuario;
-        $usersv->cargo_usuario =$request->cargo_usuario;
-        $usersv->direccion_usuario =$request->direccion_usuario;
+        $usersv->name=mb_strtoupper($request->name);
+        $usersv->apellido_usuario=mb_strtoupper($request->apellido_usuario);
+        $usersv->Nombre_usuario=mb_strtoupper($request->Nombre_usuario);
+        $usersv->cargo_usuario =mb_strtoupper($request->cargo_usuario);
+        $usersv->direccion_usuario =mb_strtoupper($request->direccion_usuario);
         $usersv->telefono_usuario=$request->telefono_usuario;
-        $usersv-> email=$request->email;
+        $usersv-> email=mb_strtoupper($request->email);
         $usersv->password=Hash::make($request->password);
         $usersv->save();
         $usersv=User::all();
         return view('livewire.Users',['Users'=>$usersv ]);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.

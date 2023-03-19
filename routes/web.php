@@ -6,6 +6,10 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\InteresController;
 use App\Http\Controllers\ModoPagoController;
+use App\Http\Controllers\ZonaController;
+use App\Http\Controllers\CiudadController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +68,30 @@ Route::get('/', function () {
     Route::get('/actualizarclientes/{id}',[ClienteController::class,'edit'])->name('clientes.editarclientes');
     Route::get('/editarclientes/{id}', [ClienteController::class,'update'])->name('clientes.update');
     Route::get('/eliminarclientes/{id}',[ClienteController::class,'destroy'])->name('clientes.eliminarclientes');
+
+    //Zona
+    Route::resource('/zonas', ZonaController::class)->names([
+        'index' => 'zonas.index',
+        'create' => 'zonas.create',
+        'store' => 'zonas.store',
+        'show' => 'zonas.show', // Aquí se define la ruta para mostrar una zona específica
+        'edit' => 'zonas.edit',
+        'update' => 'zonas.update',
+        'destroy' => 'zonas.destroy',
+    ]);
+    Route::get('/clientes/zona', [ZonaController::class, 'create'])->name('zona.create');
+   /*  Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create'); */
+
+   //CIUDAD
+   Route::get('/ciudades', [App\Http\Controllers\CiudadController::class, 'index'])->name('ciudades.index');
+   Route::post('/ciudades', [App\Http\Controllers\CiudadController::class, 'store'])->name('ciudades.store');
+   Route::get('/ciudades/create', [App\Http\Controllers\CiudadController::class, 'create'])->name('ciudades.create');
+   Route::get('/ciudades/{id}/edit', [App\Http\Controllers\CiudadController::class, 'edit'])->name('ciudades.edit');
+   Route::put('/ciudades/{id}', [App\Http\Controllers\CiudadController::class, 'update'])->name('ciudades.update');
+
+
+
+
 
     //Registrar nuevo Prestamo
      Route::get('/nuevoprestamo', function () {

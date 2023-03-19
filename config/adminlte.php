@@ -520,6 +520,24 @@ return [
                     'icon'    => 'fa fa-check-square',
                     'icon_color' => 'red',
                 ],
+                [
+                    'text' => 'Crear Zona',
+                    'route'  => 'zona.create',
+                    'icon'    => 'fa fa-user-plus',
+                    'icon_color' => 'red',
+                ],
+          /*       [
+                    'text' => 'Asignar Ciudad',
+                    'route'  => 'ciudades.index',
+                    'icon'    => 'fa fa-user-plus',
+                    'icon_color' => 'red',
+                ], */
+                [
+                    'text' => 'Asignar Ciudad',
+                    'route'  => 'ciudades.create',
+                    'icon'    => 'fa fa-user-plus',
+                    'icon_color' => 'red',
+                ],
             ],
 
         ],

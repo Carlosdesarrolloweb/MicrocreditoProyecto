@@ -34,6 +34,15 @@
                     <x-jet-input maxlength="20" id="apellido_cliente" class="form-control" type="text" name="apellido_cliente" value="{{$clientesv->apellido_cliente}}" required autofocus autocomplete="apellido_cliente" />
                     <x-jet-input-error for="apellido_cliente" class="mt-2 text-danger" />
                 </div>
+
+                <div class="form-group">
+                    <label for="zona_id">Zona</label>
+                    <select class="form-control" id="zona_id" name="zona_id">
+                        @foreach ($zonas as $zona)
+                            <option value="{{ $zona->id }}">{{ $zona->nombre_zona }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="direccion_cliente" value="{{ __('DIRECCION CLIENTE') }}" />
                     <x-jet-input maxlength="30"  id="direccion_cliente" class="form-control" type="text" name="direccion_cliente" value="{{$clientesv->direccion_cliente}}" required autofocus autocomplete="direccion_cliente" />

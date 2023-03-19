@@ -11,7 +11,7 @@ class Cliente extends Model
     use HasFactory;
 
 
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,11 +28,12 @@ class Cliente extends Model
         'edad_cliente',
         'telefono_referencia',
         'estado_cliente',
-       
-       
+        'zona_id',
 
-        
-    
+
+
+
+
     ];
     public function foto()
     {
@@ -50,8 +51,12 @@ class Cliente extends Model
     {
         return $this->hasOne(Foto::class,"id","id_fotocroquis");
     }
+    public function zona()
+    {
+        return $this->belongsTo(Zona::class);
+    }
 
-    
+
     public $timestamps = false;
 
 }

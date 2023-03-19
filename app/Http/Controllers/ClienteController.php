@@ -8,7 +8,7 @@ use App\Models\Foto;
 use Illuminate\Support\Facades\Log;
 use App\Helper\Images;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\Zona;
 
 
 class ClienteController extends Controller
@@ -31,6 +31,9 @@ class ClienteController extends Controller
 
     public function create(Request $request)
     {
+        $validatedData = $request->validate([
+            'zona_id' => 'required',
+        ]);
 
         $validatedData = $request->validate([
             'Carnet_cliente' => 'required|min:5',
@@ -59,6 +62,7 @@ class ClienteController extends Controller
 
 
         $cliente = new Cliente();
+        $zonas = Zona::all();
         $id_foto = null;
         $id_fotocarnet = null;
         $id_fotorecibo = null;
@@ -90,27 +94,30 @@ class ClienteController extends Controller
 
 
         $cliente->Carnet_cliente = $request->Carnet_cliente;
-        $cliente->nombre_cliente=$request->nombre_cliente;
-        $cliente->apellido_cliente=$request->apellido_cliente;
-        $cliente->direccion_cliente=$request->direccion_cliente;
-        $cliente->email_cliente =$request->email_cliente;
+        $cliente->nombre_cliente= mb_strtoupper($request->nombre_cliente);
+        $cliente->apellido_cliente=mb_strtoupper($request->apellido_cliente);
+        $cliente->direccion_cliente=mb_strtoupper($request->direccion_cliente);
+        $cliente->email_cliente =mb_strtoupper($request->email_cliente);
         $cliente->telefono_cliente =$request->telefono_cliente;
         $cliente->edad_cliente=$request->edad_cliente;
         $cliente-> telefono_referencia=$request->telefono_referencia;
-        $cliente->estado_cliente=$request->estado_cliente;
+        $cliente->estado_cliente=mb_strtoupper($request->estado_cliente);
         $cliente->id_foto = $id_foto;
         $cliente->id_fotocarnet = $id_fotocarnet;
         $cliente->id_fotorecibo = $id_fotorecibo;
         $cliente->id_fotocroquis = $id_fotocroquis;
+        $cliente->zona_id = $request->zona_id;
         $cliente->save();
 
 
 
-        return view('clientes.crearclientes');
+        return view('clientes.crearclientes', compact('zonas'));
+
     }
     public function show(){
 
-        return view('clientes.crearclientes');
+        $zonas = Zona::all();
+        return view('clientes.crearclientes',compact('zonas'));
 
     }
 
@@ -118,8 +125,12 @@ class ClienteController extends Controller
 
     public function edit($id)
     {
+      /*   $clientesv = Cliente::findOrFail($id);
+        return view('clientes.editarclientes', compact('clientesv') ); */
+
         $clientesv = Cliente::findOrFail($id);
-        return view('clientes.editarclientes', compact('clientesv') );
+        $zonas = Zona::all();
+        return view('clientes.editarclientes', compact('clientesv', 'zonas'));
     }
 
     /**
@@ -134,14 +145,15 @@ class ClienteController extends Controller
     {
         $clientesv = Cliente::findOrFail($request->id);
         $clientesv->Carnet_cliente = $request->Carnet_cliente ;
-        $clientesv->nombre_cliente=$request->nombre_cliente;
-        $clientesv->apellido_cliente=$request->apellido_cliente;
-        $clientesv->direccion_cliente=$request->direccion_cliente;
-        $clientesv->email_cliente =$request->email_cliente;
+        $clientesv->nombre_cliente=mb_strtoupper($request->nombre_cliente);
+        $clientesv->apellido_cliente=mb_strtoupper($request->apellido_cliente);
+        $clientesv->direccion_cliente=mb_strtoupper($request->direccion_cliente);
+        $clientesv->email_cliente =mb_strtoupper($request->email_cliente);
         $clientesv->telefono_cliente =$request->telefono_cliente;
         $clientesv->edad_cliente=$request->edad_cliente;
         $clientesv-> telefono_referencia=$request->telefono_referencia;
-        $clientesv-> estado_cliente=$request->estado_cliente;
+        $clientesv-> estado_cliente=mb_strtoupper($request->estado_cliente);
+        $clientesv->zona_id = $request->zona_id;
         $clientesv->save();
         $clientesv=Cliente::all();
         return view('livewire.Clientes',['Clientes'=>$clientesv ]);
@@ -159,16 +171,6 @@ class ClienteController extends Controller
         $clientesv=Cliente::all();
         return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok');
     }
-
-/*     public function buscar(Request $request)
-    {
-        $query = $request->input('query');
-        // Realiza la búsqueda de clientes según el valor de la variable $query
-        // y devuelve los resultados en una vista parcial (por ejemplo, resultados_busqueda.blade.php)
-        $clientes = Cliente::where('nombre', 'like', '%'.$query.'%')->get();
-        return view('resultados_busqueda', ['clientes' => $clientes]);
-    } */
-
 
 
 }
