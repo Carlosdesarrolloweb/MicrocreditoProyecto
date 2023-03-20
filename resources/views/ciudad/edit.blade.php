@@ -3,7 +3,7 @@
 @section('title', 'Editar Ciudad')
 
 @section('content_header')
-     <h1 style="text-align: center;">Editar Ciudad</h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">EDITAR CIUDAD</h1>
 @stop
 
 @section('content')

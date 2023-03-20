@@ -4,7 +4,7 @@
 
 @section('content_header')
 <center>
-    <h1>MODALIDAD DE PAGO</h1>
+    <h1 style="text-align: center;font-weight: bold; color: black;">MODALIDAD DE PAGO</h1>
 </center>
 @stop
 

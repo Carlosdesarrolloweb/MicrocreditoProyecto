@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-     <h1 style="text-align: center;">CREAR NUEVO CLIENTES</h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">CREAR NUEVO CLIENTE</h1>
 @stop
 
 @section('content')

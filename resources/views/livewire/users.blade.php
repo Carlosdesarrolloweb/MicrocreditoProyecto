@@ -5,7 +5,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1 style="text-align: center;">Usuarios Registrados </h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">USUARIOS REGISTRADOS</h1>
 @stop
 
 @section('content')

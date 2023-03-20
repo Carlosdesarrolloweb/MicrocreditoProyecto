@@ -7,7 +7,7 @@
 
 @section('content_header')
 <center>
-    <h1>NUEVO PRESTAMO</h1>
+    <h1 style="text-align: center;font-weight: bold; color: black;">NUEVO PRESTAMO</h1>
 </center>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

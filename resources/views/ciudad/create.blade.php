@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-     <h1 style="text-align: center;">CIUDADES</h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">CIUDADES</h1>
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
         @csrf
 
         <div class="container">
-            <h1>Ciudades</h1>
+            {{-- <h1>Ciudades</h1> --}}
         <div class="form-group">
             <label for="cod_ciudad">Código de ciudad</label>
             <input type="text" class="form-control" id="cod_ciudad" name="cod_ciudad">
@@ -35,18 +35,23 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-success fa fa-save"> Guardar</button>
     </form>
 
     <br>
+<p>
+    <p>
 
+    </p>
+</p>
     <table class="table">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Código de ciudad</th>
                 <th>Nombre de ciudad</th>
                 <th>Zona</th>
+                <th>Accion</th>
             </tr>
         </thead>
         <tbody>
@@ -58,7 +63,7 @@
                     <td>{{ $ciudad->zona->nombre_zona }}</td>
 
                         <td>
-                            <a href="{{ route('ciudades.edit', $ciudad->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ route('ciudades.edit', $ciudad->id) }}" class="btn btn-warning fa fa-edit"> Editar</a>
                         </td>
                 </tr>
             @endforeach

@@ -509,7 +509,7 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'Eliminar Clientes',
+                    'text' => 'Clientes Creados',
                     'route'  => 'clientesv',
                     'icon'    => 'fa fa-user-times',
                     'icon_color' => 'red',
@@ -526,12 +526,12 @@ return [
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
-          /*       [
-                    'text' => 'Asignar Ciudad',
-                    'route'  => 'ciudades.index',
+                [
+                    'text' => 'Ver Zonas',
+                    'route'  => 'zonas.index',
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
-                ], */
+                ],
                 [
                     'text' => 'Asignar Ciudad',
                     'route'  => 'ciudades.create',

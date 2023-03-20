@@ -6,7 +6,7 @@
 
 @section('content_header')
 <center>
-    <h1>REGISTRAR NUEVO INTERÉS %</h1>
+    <h1 style="text-align: center;font-weight: bold; color: black;">REGISTRAR NUEVO INTERES %</h1>
 </center>
 @stop
 

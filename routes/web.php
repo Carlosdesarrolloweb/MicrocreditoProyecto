@@ -80,7 +80,9 @@ Route::get('/', function () {
         'destroy' => 'zonas.destroy',
     ]);
     Route::get('/clientes/zona', [ZonaController::class, 'create'])->name('zona.create');
-   /*  Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create'); */
+    Route::get('zonas/{zona}/editar', [ZonaController::class, 'edit'])->name('zonas.edit');
+    Route::get('zonas', [ZonaController::class, 'index'])->name('zonas.index');
+    /*  Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create'); */
 
    //CIUDAD
    Route::get('/ciudades', [App\Http\Controllers\CiudadController::class, 'index'])->name('ciudades.index');

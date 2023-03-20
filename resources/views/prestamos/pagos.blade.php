@@ -5,7 +5,7 @@
 
 @section('content_header')
 <center>
-    <h1>REGISTRAR PAGO</h1>
+    <h1 style="text-align: center;font-weight: bold; color: black;">REGISTRAR PAGO</h1>
 </center>
 @stop
 

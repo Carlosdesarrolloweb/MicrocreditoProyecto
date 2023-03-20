@@ -3,11 +3,11 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-     <h1 style="text-align: center;">AGREGAR NUEVA ZONA</h1>
+     <h1 style="text-align: center;font-weight: bold; color: black;">AGREGAR NUEVA ZONA</h1>
 @stop
 
 @section('content')
-
+<div class="container">
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <div class="card">
@@ -31,13 +31,13 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-success fa fa-save"> Crear</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 
 
 

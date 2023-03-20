@@ -14,7 +14,8 @@ class ZonaController extends Controller
      */
     public function index()
     {
-        //
+        $zonas = Zona::all();
+        return view('zona.index', compact('zonas'));
     }
 
     /**
@@ -61,9 +62,10 @@ class ZonaController extends Controller
      * @param  \App\Models\Zona  $zona
      * @return \Illuminate\Http\Response
      */
-    public function edit(Zona $zona)
+    public function edit($id)
     {
-        //
+        $zona = Zona::find($id);
+        return view('zona.edit', ['zona' => $zona]);
     }
 
     /**
@@ -73,9 +75,14 @@ class ZonaController extends Controller
      * @param  \App\Models\Zona  $zona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Zona $zona)
+    public function update(Request $request, $id)
     {
-        //
+        $zona = Zona::findOrFail($id);
+        $zona->cod_zona = $request->cod_zona;
+        $zona->nombre_zona = $request->nombre_zona;
+        $zona->save();
+
+        return redirect()->route('zonas.index');
     }
 
     /**
