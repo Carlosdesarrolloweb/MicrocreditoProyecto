@@ -3,13 +3,24 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Panel Administrativo</h1>
+<h1 style="text-align: center;font-weight: bold; color: black; font-size: 6em;">BIENVENID@</h1>
+
 @stop
 
 @section('content')
 
         <body style="background-color: white;">
             <center>
+
+
+                <h1 style="text-align: center;font-weight: bold; color: red;"> {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</h1>
+                <p>
+                    <p>
+                        <p>
+
+                        </p>
+                    </p>
+                </p>
                 <img src="{{URL::asset('https://files.fm/thumb_show.php?i=rh59me2xy')}}">
              </center>
 

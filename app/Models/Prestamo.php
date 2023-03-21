@@ -23,7 +23,8 @@ class Prestamo extends Model
         'id_cliente',
         'id_usuario',
         'id_interes',
-        'id_modo_pago'
+        'id_modo_pago',
+        'fecha_prestamo',
     ];
 
     public function cliente()
@@ -45,4 +46,5 @@ class Prestamo extends Model
     {
         return $this->belongsTo(ModoPago::class, 'id_modo_pago');
     }
+
 }

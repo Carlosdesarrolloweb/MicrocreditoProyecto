@@ -444,6 +444,12 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
+                    'text' => 'Prestamos Realizados',
+                    'route'  => 'prestamos.index',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                [
                     'text' => 'Interes',
                     'route'  => 'interests.create',
                     'icon'    => 'fa fa-percent',
@@ -463,7 +469,7 @@ return [
                 ],
                 [
                     'text' => 'Registrar Garantia',
-                    'route'  => 'garantia',
+                    'route'  => 'garantias.create',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
@@ -542,15 +548,16 @@ return [
 
         ],
         [
-            'text'    => 'Otros',
+            'text'    => 'REPORTES',
             'icon'    => 'fas fa-fw fa-share',
             'icon_color' => 'red',
             'submenu' => [
-                [
-                    'text' => 'Extras',
-                    'url'  => '#',
-                    'icon_color' => 'red',
-                ],
+                // [
+                //     'text' => 'Reporte Prestamos',
+                //     'route'  => 'garantia',
+                //     'icon'    => 'fa fa-percent',
+                //     'icon_color' => 'red',
+                // ],
 
                 [
                     'text' => 'Extras',

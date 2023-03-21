@@ -6,6 +6,8 @@
 @section('content_header')
 <center>
     <h1 style="text-align: center;font-weight: bold; color: black;">REGISTRAR NUEVO PRESTAMO</h1>
+
+    <p style="text-align: center;font-weight: bold; color: black;"> {{ Auth::user()->name }}</P>
 </center>
 @stop
 

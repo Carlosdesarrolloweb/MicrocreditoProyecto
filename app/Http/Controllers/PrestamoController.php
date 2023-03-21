@@ -15,6 +15,7 @@ class PrestamoController extends Controller
     {
         $prestamos = Prestamo::with(['cliente', 'usuario', 'interes', 'modoPago'])->get();
         return view('prestamos.index', compact('prestamos'));
+
     }
 
     public function create()
@@ -42,6 +43,7 @@ class PrestamoController extends Controller
             'id_usuario' => 'required|exists:users,id',
             // 'id_interes' => 'required|exists:intereses,id',
             'id_modo_pago' => 'required|exists:modo_pago,id',
+            'fecha_prestamo'=> 'required',
         ]);
 
         $interes=Interes::where('interes_prestamo',$request->id_interes)->first();
@@ -59,6 +61,7 @@ class PrestamoController extends Controller
         $Prestamo->id_usuario = $request->id_usuario;
         $Prestamo->id_interes = $idinteres;
         $Prestamo->id_modo_pago = $request->id_modo_pago;
+        $Prestamo->fecha_prestamo = $request->fecha_prestamo;
 
         $Prestamo->save();
 
@@ -95,6 +98,7 @@ class PrestamoController extends Controller
             'id_usuario' => 'required|exists:users,id',
             // 'id_interes' => 'required|exists:intereses,id',
             'id_modo_pago' => 'required|exists:modo_pago,id',
+            'fecha_prestamo'=> 'required',
         ]);
 
         $interes=Interes::where('interes_prestamo',$request->id_interes)->first();
@@ -112,7 +116,7 @@ class PrestamoController extends Controller
         $prestamo->id_usuario = $request->id_usuario;
         $prestamo->id_interes = $idinteres;
         $prestamo->id_modo_pago = $request->id_modo_pago;
-
+        $prestamo->fecha_prestamo = $request->fecha_prestamo;
         $prestamo->save();
 
 

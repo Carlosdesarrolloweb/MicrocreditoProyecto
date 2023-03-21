@@ -8,6 +8,11 @@
 @section('content_header')
 <center>
     <h1 style="text-align: center;font-weight: bold; color: black;">NUEVO PRESTAMO</h1>
+
+    <th>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+    </th>
+
 </center>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -92,7 +97,15 @@
                             <label for="monto_cancelado">Monto Cancelado</label>
                             <input type="number" id="monto_cancelado" name="monto_cancelado" class="form-control" readonly>
                         </div>
+
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        <p></p>
+                        <?php date_default_timezone_set('America/La_Paz'); ?>
+                        <input type="datetime-local" id="fecha_prestamo" name="fecha_prestamo" class="form-control" value="<?= date('Y-m-d\TH:i:s'); ?>" readonly>
+                      </div>
+                      </div>
                             <p><p>
                             </p></p>
                             <div class="flex items-center justify-end mt-4">

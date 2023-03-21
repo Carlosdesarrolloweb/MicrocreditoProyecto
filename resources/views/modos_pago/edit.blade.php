@@ -20,7 +20,7 @@
                     <label for="modalidad_pago">Modalidad de Pago</label>
                     <input type="text" class="form-control" name="modalidad_pago" value="{{ $modoPago->modalidad_pago }}" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <button type="submit" class="btn btn-success">Actualizar</button>
             </form>
         </div>
     </div>

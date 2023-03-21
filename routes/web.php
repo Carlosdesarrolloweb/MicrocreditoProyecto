@@ -8,6 +8,7 @@ use App\Http\Controllers\InteresController;
 use App\Http\Controllers\ModoPagoController;
 use App\Http\Controllers\ZonaController;
 use App\Http\Controllers\CiudadController;
+use App\Http\Controllers\GarantiaController;
 
 
 /*
@@ -111,9 +112,13 @@ Route::get('/', function () {
     Route::delete('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'destroy'])->name('prestamos.destroy');
 
     //Registrar Garantia
-     Route::get('/garantia', function () {
-        return view('garantias.garantias');
-    })->name('garantia');
+    //  Route::get('/garantia', function () {
+    //     return view('garantias.garantias');
+    // })->name('garantia');
+ 
+    Route::get('/garantias', [GarantiaController::class, 'index'])->name('garantias.index');
+     Route::get('/garantias/create', [GarantiaController::class, 'create'])->name('garantias.create');
+    Route::post('/garantias', [GarantiaController::class, 'store'])->name('garantias.store');
 
     //Registrar Pago
     Route::get('/pagos', function () {

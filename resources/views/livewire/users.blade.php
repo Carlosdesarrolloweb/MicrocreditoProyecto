@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-
+    <center>
     <x-slot name="header">
         <h1 class="text-gray-900">crudddddddd</h1>
     </x-slot>
@@ -24,10 +24,10 @@
         <table class="table">
         <thead class="bg-dark">
             <tr scope="col">
-            <th scope="col">ID</th>
+            {{-- <th scope="col">ID</th> --}}
             <th scope="col">CARNET</th>
             <th scope="col">NOMBRE</th>
-            <th scope="col">APELLIDO</th>
+            {{-- <th scope="col">APELLIDO</th> --}}
             <th scope="col">USUARIO</th>
             <th scope="col">CARGO</th>
             <th scope="col">EMAIL</th>
@@ -36,10 +36,10 @@
         <tbody>
             @foreach($Users as $usersv)
             <tr>
-                <td scope="col">{{$usersv->id}}</td>
+                {{-- <td scope="col">{{$usersv->id}}</td> --}}
                 <td scope="col">{{$usersv->Carnet_usuario}}</td>
-                <td scope="col">{{$usersv->name}}</td>
-                <td scope="col">{{$usersv->apellido_usuario}}</td>
+                <td scope="col">{{$usersv->name}} {{$usersv->apellido_usuario}}</td>
+                {{-- <td scope="col">{{$usersv->apellido_usuario}}</td> --}}
                 <td scope="col">{{$usersv->Nombre_usuario}}</td>
                 <td scope="col">{{$usersv->cargo_usuario}}</td>
                 <td scope="col">{{$usersv->email}}</td>
@@ -69,6 +69,7 @@
         </div>
     </div>
 
+</center>
 @stop
 
 @section('css')
