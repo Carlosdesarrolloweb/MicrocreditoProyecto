@@ -134,4 +134,16 @@ class PrestamoController extends Controller
         return redirect()->route('prestamos.index')
             ->with('success', 'Prestamo eliminado exitosamente.');
     }
+    public function buscarPrestamo($cliente_id)
+{
+    $prestamo = Prestamo::where('cliente_id', $cliente_id)->first();
+    return response()->json(['id' => $prestamo->id, 'monto' => $prestamo->monto]);
+}
+public function getPrestamos(Request $request)
+{
+    $clienteId = $request->input('cliente_id');
+    $prestamos = Prestamo::where('id_cliente', $clienteId)->get();
+
+    return response()->json($prestamos);
+}
 }

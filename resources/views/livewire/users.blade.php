@@ -30,7 +30,7 @@
             {{-- <th scope="col">APELLIDO</th> --}}
             <th scope="col">USUARIO</th>
             <th scope="col">CARGO</th>
-            <th scope="col">EMAIL</th>
+            <th scope="col">ESTADO</th>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +42,22 @@
                 {{-- <td scope="col">{{$usersv->apellido_usuario}}</td> --}}
                 <td scope="col">{{$usersv->Nombre_usuario}}</td>
                 <td scope="col">{{$usersv->cargo_usuario}}</td>
-                <td scope="col">{{$usersv->email}}</td>
+                <td scope="col">{{$usersv->estado_usuario}}</td>
+          {{--       <td>
+                    @if($usersv->estado_usuario == 'activo')
+                        <span class="badge badge-success">Activo</span>
+                            <form action="{{ route('user.updateEstado', [$usersv->id, 'inactivo']) }}" method="POST"> @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-warning">Cambiar estado</button>
+                        </form>
+                    @else
+                        <span class="badge badge-danger">Inactivo</span>
+                            <form action="{{ route('user.updateEstado', [$usersv->id, 'activo']) }}" method="POST"> @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-success">Cambiar estado</button>
+                        </form>
+                    @endif
+                </td> --}}
                 <td>
 
                 <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR</a>

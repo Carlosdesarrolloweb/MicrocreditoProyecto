@@ -43,6 +43,7 @@ return [
     | guards that is already present in your "auth" configuration file.
     |
     */
+   
 
     'guard' => 'sanctum',
 

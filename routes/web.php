@@ -9,6 +9,11 @@ use App\Http\Controllers\ModoPagoController;
 use App\Http\Controllers\ZonaController;
 use App\Http\Controllers\CiudadController;
 use App\Http\Controllers\GarantiaController;
+use App\Http\Middleware\CheckUserStatus;
+use App\Http\Controllers\PagoController;
+
+
+
 
 
 /*
@@ -22,6 +27,8 @@ use App\Http\Controllers\GarantiaController;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -30,7 +37,9 @@ Route::get('/', function () {
  Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
+   /*   CheckUserStatus::class // Nuevo middleware */
+
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -48,6 +57,20 @@ Route::get('/', function () {
     Route::get('/actualizarusuario/{id}',[UsersController::class,'edit'])->name('user.editarusuarios');
     Route::get('/editarusuario/{id}', [UsersController::class,'update'])->name('user.update');
     Route::get('/eliminarusuarios/{id}',[UsersController::class,'destroy'])->name('user.eliminarusuarios');
+
+
+/*     Route::middleware(['auth'])->group(function () {
+        // Otras rutas para usuarios autenticados...
+
+        Route::put('/usuarios/{id}/estado/{estado}', [UserController::class, 'updateEstado'])
+            ->name('usuarios.estado.update')
+            ->middleware(['can:updateEstado,App\Models\User']);
+    }); */
+/*    Route::put('/usuarios/{id}/estado/{estado}', [UserController::class, 'updateEstado'])
+    ->name('usuarios.estado.update')
+    ->middleware(['auth', 'can:updateEstado,App\Models\User']); */
+
+
 
     //clientes
     Route::post('/clientes/crearclientes',[App\Http\Controllers\ClienteController::class,'create'])->name('clientes.crearclientes');
@@ -115,15 +138,19 @@ Route::get('/', function () {
     //  Route::get('/garantia', function () {
     //     return view('garantias.garantias');
     // })->name('garantia');
- 
+
     Route::get('/garantias', [GarantiaController::class, 'index'])->name('garantias.index');
      Route::get('/garantias/create', [GarantiaController::class, 'create'])->name('garantias.create');
     Route::post('/garantias', [GarantiaController::class, 'store'])->name('garantias.store');
+    Route::get('/prestamos/{id_cliente}', 'PrestamoController@buscarPrestamos');
 
-    //Registrar Pago
-    Route::get('/pagos', function () {
-        return view('prestamos.pagos');
-    })->name('pagos');
+
+    //PAGOS
+    Route::get('/pagos', [App\Http\Controllers\PagoController::class, 'index'])->name('pagos.index');
+    Route::get('/pagos/get-monto-cuota', [App\Http\Controllers\PagoController::class, 'getMontoCuota'])->name('pagos.getMontoCuota');
+    Route::post('/pagos', [App\Http\Controllers\PagoController::class, 'store'])->name('pagos.store');
+
+
 
     //Registrar Interes
     Route::get('/interests', [InteresController::class, 'index'])->name('interests.index');

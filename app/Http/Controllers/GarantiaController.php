@@ -56,4 +56,5 @@ class GarantiaController extends Controller
         $prestamo = Prestamo::where('cliente_id', $clienteId)->first();
         return response()->json($prestamo);
     }
+
 }

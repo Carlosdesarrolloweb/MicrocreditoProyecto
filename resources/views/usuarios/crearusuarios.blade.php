@@ -40,13 +40,21 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                     <x-jet-label for="Cargo" value="{{ __('CARGO LABORAL') }}" />
-                     <select name="cargo_usuario">
-                      <option value="ADMINISTRADOR">ADMINISTRADOR</option>
-                      <option value="ENCARGADO">ENCARGADO</option>
+                     <x-jet-label for="estado_usuario" value="{{ __('ESTADO USUARIO') }}" />
+                     <select name="estado_usuario">
+                      <option value="ACTIVO">ACTIVO</option>
+                      <option value="INACTIVO">INACTIVO</option>
                      </select>
 
                 </div>
+                <div class="form-group col-md-6">
+                    <x-jet-label for="Cargo" value="{{ __('CARGO LABORAL') }}" />
+                    <select name="cargo_usuario">
+                     <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                     <option value="ENCARGADO">ENCARGADO</option>
+                    </select>
+
+               </div>
             </div>
             <div class="form-row">
                  <div class="form-group col-md-12">

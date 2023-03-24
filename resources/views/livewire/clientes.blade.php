@@ -43,7 +43,7 @@
             <th scope="col">CARNET</th>
             <th scope="col">NOMBRE</th>
             <th scope="col">APELLIDO</th>
-            <th scope="col">EMAIL</th>
+            <th scope="col">ZONA</th>
             <th scope="col">ESTADO</th>
             <th scope="col">IMAGENES</th>
 
@@ -56,7 +56,7 @@
                 <td scope="col">{{$clientesv->Carnet_cliente}}</td>
                 <td scope="col">{{$clientesv->nombre_cliente}}</td>
                 <td scope="col">{{$clientesv->apellido_cliente}}</td>
-                <td scope="col">{{$clientesv->email_cliente}}</td>
+                <td scope="col">{{$clientesv->zona_id}}</td>
                 <td scope="col">{{$clientesv->estado_cliente}}</td>
 
                 <td>

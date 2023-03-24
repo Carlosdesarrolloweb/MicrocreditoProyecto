@@ -444,6 +444,18 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
+                    'text' => 'Registrar Pagos',
+                    'route'  => 'pagos.getMontoCuota',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Registrar ',
+                    'route'  => 'pagos.index',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
+                [
                     'text' => 'Prestamos Realizados',
                     'route'  => 'prestamos.index',
                     'icon'    => 'fa fa-percent',
@@ -476,7 +488,7 @@ return [
 
                 [
                     'text' => 'Pago de Cuotas',
-                    'route'  => 'pagos',
+                    // 'route'  => 'pagos',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],

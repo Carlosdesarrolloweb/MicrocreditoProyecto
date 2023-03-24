@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 
 
 class UsersController extends Controller
@@ -58,6 +59,7 @@ class UsersController extends Controller
         $usuario->telefono_usuario=$request->telefono_usuario;
         $usuario-> email=mb_strtoupper($request->email);
         $usuario->password = Hash::make($request->password);
+        $usuario->estado_usuario  =mb_strtoupper($request->estado_usuario);
         $usuario->save();
         return view('usuarios.crearusuarios');
     }
@@ -117,6 +119,7 @@ class UsersController extends Controller
         $usersv->telefono_usuario=$request->telefono_usuario;
         $usersv-> email=mb_strtoupper($request->email);
         $usersv->password=Hash::make($request->password);
+        $usersv->estado_usuario  =mb_strtoupper($request->estado_usuario);
         $usersv->save();
         $usersv=User::all();
         return view('livewire.Users',['Users'=>$usersv ]);
@@ -135,4 +138,40 @@ class UsersController extends Controller
         $usersv=User::all();
         return view('livewire.Users',['Users'=>$usersv ])->with('eliminaru','ok');
     }
+
+/*     public function login(Request $request)
+    {
+        $credentials = $request->only('Nombre_usuario', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->estado_usuario === 'inactivo') {
+                Auth::logout();
+                return redirect('/')->with('status', 'Tu cuenta ha sido desactivada.');
+            }
+            return redirect()->intended('/dashboard');
+        } else {
+            return redirect()->back()->withErrors([
+                'email' => 'Las credenciales proporcionadas son inválidas.',
+            ]);
+        }
+    }
+
+
+public function updateEstado($id, $estado)
+{
+    $user = User::findOrFail($id);
+
+    // Verificar que el estado sea válido
+    if (!in_array($estado, ['activo', 'inactivo'])) {
+        abort(400, 'Estado inválido');
+    }
+
+    // Actualizar el estado del usuario
+    $user->estado_usuario = $estado;
+    $user->save();
+
+    return redirect()->back()->with('message', 'El estado del usuario se actualizó correctamente.');
+} */
+
 }

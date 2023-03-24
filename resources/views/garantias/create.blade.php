@@ -18,7 +18,7 @@
             <div class="form-group col-md-6">
                  <label for="id_cliente" class="col-md-4 col-form-label text-md-right">{{ __('Cliente') }}</label>
 
-                 <select name="id_cliente" id="id_cliente" class="form-control" required>
+                 <select name="id_cliente" id="id_cliente" class="form-control" required onChange="buscarPrestamos()">
                     <option value="">Seleccione un cliente</option>
                     @foreach($clientes as $cliente)
                         <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}.  . {{ $cliente->Carnet_cliente }}</option>
@@ -131,25 +131,21 @@
 
     @section('js')
     <script>
-    $(document).ready(function () {
-        $('#id_cliente').on('change', function () {
-            var cliente_id = $(this).val();
-            if (cliente_id) {
-                $.ajax({
-                    url: '/prestamos/detalles/' + cliente_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        $('#id_prestamo').val(data.id);
-                        $('#monto_prestamo').val(data.monto);
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(xhr.responseText);
-                    }
-                });
+  function buscarPrestamos() {
+    var cliente_id = document.getElementById('id_cliente').value;
+    if (cliente_id != '') {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var prestamo = JSON.parse(this.responseText);
+                document.getElementById('id_prestamo').value = prestamo.id;
+                document.getElementById('monto_prestamo').value = prestamo.monto;
             }
-        });
-    });
+        };
+        xhttp.open('GET', '/prestamos/' + cliente_id, true);
+        xhttp.send();
+    }
+}
     </script>
 
     @stop

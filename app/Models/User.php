@@ -26,7 +26,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-  
+
     protected $fillable = [
         'Carnet_usuario',
         'name',
@@ -37,6 +37,7 @@ class User extends Authenticatable
         'telefono_usuario',
         'email',
         'password',
+        'estado_usuario',
 
 
     ];
@@ -77,4 +78,20 @@ class User extends Authenticatable
     {
         return'profile/username';
     }
+
+/*     public function can($ability, $arguments = [])
+{
+    // Verificar si el usuario autenticado es un administrador
+    if ($this->esAdmin()) {
+        return true;
+    }
+
+    // Verificar si el usuario autenticado intenta cambiar su propio estado
+    if ($ability === 'updateEstado' && isset($arguments[0]) && $arguments[0]->id === $this->id) {
+        return false;
+    }
+
+    return parent::can($ability, $arguments);
+} */
+
 }
