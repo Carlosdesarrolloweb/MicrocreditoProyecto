@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pago;
 use App\Models\Prestamo;
 use App\Models\Cliente;
+use App\Models\DetallePago;
 use Illuminate\Support\Facades\DB;
 
 
@@ -25,7 +26,7 @@ class PagoController extends Controller
         return view('pagos.create', compact('prestamos', 'clientes'));
     }
 
-    public function store(Request $request)
+     public function store(Request $request)
     {
         $request->validate([
             'prestamo_id' => 'required|exists:prestamos,id',
@@ -44,7 +45,22 @@ class PagoController extends Controller
 
         return redirect()->route('pagos.index')->with('status', 'Pago registrado correctamente.');
     }
+/*     public function store(Request $request)
+{
+    $pago = new Pago;
+    $pago->id_prestamo = $request->input('id_prestamo');
+    $pago->id_usuario = $request->input('id_usuario');
+    $pago->save();
 
+    $detalle_pago = new DetallePago;
+    $detalle_pago->fecha_pago = now();
+    $detalle_pago->monto = $request->input('monto');
+    $detalle_pago->id_prestamo = $request->input('id_prestamo');
+    $detalle_pago->id_pago = $pago->id;
+    $detalle_pago->save();
+
+    return redirect()->route('prestamos.index')->with('success', 'Pago registrado exitosamente');
+} */
 
     public function getPrestamosByCliente($clienteId)
     {

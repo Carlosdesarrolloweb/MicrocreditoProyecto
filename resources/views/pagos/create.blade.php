@@ -35,7 +35,11 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <div class="col-md-6">
+                            <label for="id_usuario">Usuario Que Registra el Pago</label>
+                            <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
+                            <input type="text" class="form-control" value="{{ Auth::user()->name . ' ' . Auth::user()->apellido_usuario }}" disabled>
+                        </div>
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <h2>Detalles del préstamo</h2>
