@@ -445,12 +445,12 @@ return [
                 ],
                 [
                     'text' => 'Registrar Pagos',
-                    'route'  => 'pagos.getMontoCuota',
+                    'route'  => 'pagos.create',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'Registrar ',
+                    'text' => 'ver pagos ',
                     'route'  => 'pagos.index',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',

@@ -2,59 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Garantia;
 use App\Models\Cliente;
 use App\Models\Prestamo;
-use App\Models\Foto;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GarantiaController extends Controller
 {
     public function create()
     {
         $clientes = Cliente::all();
-        return view('garantias.create', compact('clientes'));
+        $prestamos = Prestamo::all();
 
-
+        return view('garantias.create', compact('clientes', 'prestamos'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'garantia' => 'required|max:255',
-            'Valor_Prenda' => 'required|max:255',
-            'Detalle_Prenda' => 'required|max:255',
-            'id_cliente' => 'required',
-            'foto' => 'required|image|max:2048'
+        $request->validate([
+            'garantia' => 'required|string|max:255',
+            'Valor_Prenda' => 'required|string|max:255',
+            'Detalle_Prenda' => 'required|string|max:255',
+            'id_cliente' => 'required|integer|exists:clientes,id',
+            'id_prestamo' => 'required|integer',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $prestamo = Prestamo::where('id_cliente', $request->id_cliente)->first();
+        $garantia = Garantia::create($request->all());
 
-        $garantia = new Garantia();
-        $garantia->garantia = $validated['garantia'];
-        $garantia->Valor_Prenda = $validated['Valor_Prenda'];
-        $garantia->Detalle_Prenda = $validated['Detalle'];
-        $garantia->id_cliente = $validated['id_cliente'];
-        $garantia->id_prestamo = $prestamo->id;
-        $garantia->save();
+        // Verificar si se subió una foto
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $filename = $garantia->cliente->Carnet_cliente . '/' . time() . '.' . $image->getClientOriginalExtension();
+            Storage::putFileAs('public/garantias/' . $garantia->cliente->Carnet_cliente, $image, $filename);
 
-        $foto = new Foto();
-        $foto->nombre = $request->file('foto')->getClientOriginalName();
-        $foto->url = $request->file('foto')->store('public/fotos');
-        $foto->id_garantia = $garantia->id;
-        $foto->save();
+            // Actualizar el campo de la foto en la garantía
+            $garantia->id_foto = $filename;
+            $garantia->save();
+        }
 
         return redirect()->route('garantias.index')->with('success', 'Garantía creada exitosamente.');
     }
-
-    public function index()
+    public function getPrestamosCliente(Cliente $cliente)
     {
-        $garantias = Garantia::all();
-        return view('garantias.index', compact('garantias'));
-    }
-    public function getDatosPrestamo($clienteId) {
-        $prestamo = Prestamo::where('cliente_id', $clienteId)->first();
-        return response()->json($prestamo);
+        $ids_prestamos_con_garantia = Garantia::pluck('id_prestamo')->toArray();
+
+        $prestamos = $cliente->prestamos()
+            ->select('id', 'monto_prestamo')
+            ->whereNotIn('id', $ids_prestamos_con_garantia)
+            ->get();
+
+        return $prestamos;
+
     }
 
 }

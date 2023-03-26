@@ -15,7 +15,7 @@ class Garantia extends Model
         'Detalle_Prenda',
         'id_cliente',
         'id_prestamo',
-        'id_foto'
+        'id_foto',
     ];
 
     public function cliente()
@@ -26,10 +26,5 @@ class Garantia extends Model
     public function prestamo()
     {
         return $this->belongsTo(Prestamo::class, 'id_prestamo');
-    }
-
-    public function foto()
-    {
-        return $this->belongsTo(Foto::class, 'id_foto');
     }
 }

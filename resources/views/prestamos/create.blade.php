@@ -102,6 +102,7 @@
                     <div class="row">
                         <div class="col-md-6">
                         <p></p>
+                        <label for="fecha_prestamo">Fecha Prestamo</label>
                         <?php date_default_timezone_set('America/La_Paz'); ?>
                         <input type="datetime-local" id="fecha_prestamo" name="fecha_prestamo" class="form-control" value="<?= date('Y-m-d\TH:i:s'); ?>" readonly>
                       </div>
@@ -159,18 +160,14 @@
     input5.addEventListener("input", () => {
         calcularCuota();
     });
-
     // Definimos la función para calcular la cuota
     function calcularCuota() {
         const interes = input1.value;
         const monto = input3.value;
         const cantidad_cuotas = input5.value;
-
         let cuota = 0;
         let ganancia = 0;
-
         if (interes !== "" && monto !== "" && cantidad_cuotas !== "") {
-
             const interes_decimal = parseFloat(interes) / 100;
             console.log(interes_decimal);
             ganancia = parseFloat(monto) * interes_decimal;
@@ -178,7 +175,6 @@
             const deuda_total = parseFloat(monto) + ganancia;
             cuota = deuda_total / parseFloat(cantidad_cuotas);
         }
-
         input6.value = cuota.toFixed(2);
         input7.value = (parseFloat(monto) + ganancia).toFixed(2);
         input8.value = "0.00";
@@ -193,30 +189,5 @@
         input7.value = monto_prestado.toFixed(2);
         input8.value = "0.00";
     }
-
-
-
-/* $(document).ready(function() {
-    $('#busqueda_cliente').on('keyup', function(){
-        var query = $(this).val();
-        $.ajax({
-            url:"{{ route('clientes.buscar') }}",
-            type:"GET",
-            data:{'query':query},
-            success:function (data) {
-                $('#resultados_busqueda').html(data);
-            }
-        })
-    })
-}); */
-
-
-
-
-
-
 </script>
-
-
-
 @stop

@@ -139,11 +139,10 @@ class PrestamoController extends Controller
     $prestamo = Prestamo::where('cliente_id', $cliente_id)->first();
     return response()->json(['id' => $prestamo->id, 'monto' => $prestamo->monto]);
 }
-public function getPrestamos(Request $request)
+public function getPrestamosByCliente($clienteId)
 {
-    $clienteId = $request->input('cliente_id');
-    $prestamos = Prestamo::where('id_cliente', $clienteId)->get();
+    $prestamos = Prestamo::where('cliente_id', $clienteId)->with('pagos')->get();
 
-    return response()->json($prestamos);
+    return view('prestamos.index', ['prestamos' => $prestamos]);
 }
 }

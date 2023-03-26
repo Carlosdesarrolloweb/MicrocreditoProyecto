@@ -145,10 +145,13 @@ Route::get('/', function () {
     Route::get('/prestamos/{id_cliente}', 'PrestamoController@buscarPrestamos');
 
 
+
+
     //PAGOS
-    Route::get('/pagos', [App\Http\Controllers\PagoController::class, 'index'])->name('pagos.index');
-    Route::get('/pagos/get-monto-cuota', [App\Http\Controllers\PagoController::class, 'getMontoCuota'])->name('pagos.getMontoCuota');
-    Route::post('/pagos', [App\Http\Controllers\PagoController::class, 'store'])->name('pagos.store');
+    Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
+    Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');
+    Route::post('/pagos', [PagoController::class, 'store'])->name('pagos.store');
+    Route::get('pagos/prestamos_by_cliente/{clienteId}', [PagoController::class, 'getPrestamosByCliente'])->name('pagos.prestamos_by_cliente');
 
 
 

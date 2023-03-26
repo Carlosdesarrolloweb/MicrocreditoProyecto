@@ -6,104 +6,113 @@
 @section('content_header')
 <center>
     {{-- <h1>REGISTRAR GARANTIA</h1> --}}
+
+
 </center>
+
 @stop
 
 @section('content')
 <div class="container">
-    <h1>Crear Garantía</h1>
-    <form method="POST" action="{{ route('garantias.store') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                 <label for="id_cliente" class="col-md-4 col-form-label text-md-right">{{ __('Cliente') }}</label>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Crear Garantía') }}</div>
 
-                 <select name="id_cliente" id="id_cliente" class="form-control" required onChange="buscarPrestamos()">
-                    <option value="">Seleccione un cliente</option>
-                    @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}.  . {{ $cliente->Carnet_cliente }}</option>
-                    @endforeach
-                </select>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('garantias.store') }}" enctype="multipart/form-data">
+                        @csrf
 
-                @error('id_cliente')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
+                        <div class="form-group row">
+                            <label for="garantia" class="col-md-4 col-form-label text-md-right">{{ __('Garantía') }}</label>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="id_prestamo" class="col-md-4 col-form-label text-md-right">{{ __('Préstamo') }}</label>
-                <input id="id_prestamo" type="text" class="form-control @error('id_prestamo') is-invalid @enderror" name="id_prestamo" value="{{ $idPrestamo ?? null }}" required autocomplete="id_prestamo" readonly>
-                @error('id_prestamo')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="form-group col-md-6">
-                <label for="monto_prestamo" class="col-md-4 col-form-label text-md-right">{{ __('Monto del préstamo') }}</label>
-                <input id="monto_prestamo" type="text" class="form-control @error('monto_prestamo') is-invalid @enderror" name="monto_prestamo" value="{{ $montoPrestamo ?? null }}" required autocomplete="monto_prestamo" readonly>
-                @error('monto_prestamo')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
+                            <div class="col-md-6">
+                                <input id="garantia" type="text" class="form-control @error('garantia') is-invalid @enderror" name="garantia" value="{{ old('garantia') }}" required autocomplete="garantia" autofocus>
 
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="garantia" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de la garantía') }}</label>
-                    <input id="garantia" type="text" class="form-control @error('garantia') is-invalid @enderror" name="garantia" value="{{ old('garantia') }}" required autocomplete="garantia" autofocus>
-
-                    @error('garantia')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                        <label for="Valor_Prenda" class="col-md-4 col-form-label text-md-right">{{ __('Valor de la prenda') }}</label>
-                        <div class="col-md-6">
-                            <input id="Valor_Prenda" type="text" class="form-control @error('Valor_Prenda') is-invalid @enderror" name="Valor_Prenda" value="{{ old('Valor_Prenda') }}" required autocomplete="Valor_Prenda" autofocus>
-
-                            @error('Valor_Prenda')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                @error('garantia')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                </div>
-            </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="Detalle_Prenda" class="col-md-4 col-form-label text-md-right">{{ __('Detalle de la prenda') }}</label>
 
+                        <div class="form-group row">
+                            <label for="Valor_Prenda" class="col-md-4 col-form-label text-md-right">{{ __('Valor Prenda') }}</label>
 
-                            <textarea id="Detalle_Prenda" class="form-control @error('Detalle_Prenda') is-invalid @enderror" name="Detalle_Prenda" required autocomplete="Detalle_Prenda">{{ old('Detalle_Prenda') }}</textarea>
+                            <div class="col-md-6">
+                                <input id="Valor_Prenda" type="text" class="form-control @error('Valor_Prenda') is-invalid @enderror" name="Valor_Prenda" value="{{ old('Valor_Prenda') }}" required autocomplete="Valor_Prenda">
 
-                            @error('Detalle_Prenda')
+                                @error('Valor_Prenda')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Detalle_Prenda" class="col-md-4 col-form-label text-md-right">{{ __('Detalle Prenda') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="Detalle_Prenda" class="form-control @error('Detalle_Prenda') is-invalid @enderror" name="Detalle_Prenda" required>{{ old('Detalle_Prenda') }}</textarea>
+
+                                @error('Detalle_Prenda')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="id_cliente">Cliente</label>
+                            <select name="id_cliente" class="form-control" required>
+                                <option value="">Seleccione un cliente</option>
+                                @foreach($clientes as $cliente)
+                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}.  . {{ $cliente->Carnet_cliente }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fecha_entrega" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de Entrega') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="fecha_entrega" type="date" class="form-control @error('fecha_entrega') is-invalid @enderror" name="fecha_entrega" value="{{ old('fecha_entrega') }}" required autocomplete="fecha_entrega">
+
+                            @error('fecha_entrega')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto de la garantía') }}</label>
+                    <div class="form-group row">
+                        <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
+                        <div class="col-md-6">
+                            <select id="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" required>
+                                <option value="">Seleccione el estado de la garantía</option>
+                                <option value="En Trámite">ARTICULO NUEVO</option>
+                                <option value="Entregada">ARTICULO USADO</option>
+                            </select>
 
-                            <input id="foto" type="file" class="form-control-file @error('foto') is-invalid @enderror" name="foto" required>
+                            @error('estado')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
-                            @error('foto')
+                    <div class="form-group row">
+                        <label for="imagen" class="col-md-4 col-form-label text-md-right">{{ __('Imagen de la Prenda') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="imagen" type="file" class="form-control @error('imagen') is-invalid @enderror" name="imagen" required>
+
+                            @error('imagen')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -114,15 +123,15 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Guardar') }}
+                                {{ __('Crear Garantía') }}
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
-
         </div>
-
+    </div>
+</div>
     @stop
 
     @section('css')
@@ -130,22 +139,68 @@
     @stop
 
     @section('js')
-    <script>
-  function buscarPrestamos() {
-    var cliente_id = document.getElementById('id_cliente').value;
-    if (cliente_id != '') {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var prestamo = JSON.parse(this.responseText);
-                document.getElementById('id_prestamo').value = prestamo.id;
-                document.getElementById('monto_prestamo').value = prestamo.monto;
+    <script src="{{ asset('vendor/components/jquery/jquery.min.js') }}"></script>
+ <script>
+   $(document).ready(function() {
+    // Obtener los selects de préstamos y clientes
+    var prestamoSelect = $('#id_prestamo');
+    var clienteSelect = $('#id_cliente');
+
+    // Al cambiar el select de clientes
+    clienteSelect.on('change', function() {
+        // Obtener el id del cliente seleccionado
+        var clienteId = $(this).val();
+
+        // Si no se seleccionó ningún cliente, deshabilitar y limpiar el select de préstamos
+        if (!clienteId) {
+            prestamoSelect.prop('disabled', true);
+            prestamoSelect.empty();
+            prestamoSelect.append($('<option/>', {
+                value: '',
+                text: '-- Seleccionar préstamo --'
+            }));
+            return;
+        }
+
+        // Hacer una petición AJAX para obtener los préstamos del cliente seleccionado
+        $.ajax({
+            url: '/prestamos/' + clienteId + '/cliente',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                // Limpiar el select de préstamos y agregar opción por defecto
+                prestamoSelect.empty();
+                prestamoSelect.append($('<option/>', {
+                    value: '',
+                    text: '-- Seleccionar préstamo --'
+                }));
+
+                // Agregar las opciones de préstamos correspondientes al cliente seleccionado
+                $.each(response, function(i, prestamo) {
+                    prestamoSelect.append($('<option>', {
+                        value: prestamo.id,
+                        text: 'Préstamo #' + prestamo.id + ' - ' + prestamo.created_at
+                    }));
+                });
+
+                // Habilitar el select de préstamos
+                prestamoSelect.prop('disabled', false);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log('Error al obtener los préstamos: ' + errorThrown);
             }
-        };
-        xhttp.open('GET', '/prestamos/' + cliente_id, true);
-        xhttp.send();
-    }
-}
-    </script>
+        });
+    });
+
+    // Agregar una nueva opción al select de préstamos al hacer click en el botón "Agregar"
+    $('#agregar_prestamo').on('click', function() {
+        var option = $('<option>', {
+            value: 'nuevaopcion',
+            text: 'Nueva opción'
+        });
+        prestamoSelect.append(option);
+    });
+});
+ </script>
 
     @stop

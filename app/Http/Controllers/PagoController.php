@@ -3,68 +3,61 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cliente;
-use App\Models\Prestamo;
 use App\Models\Pago;
+use App\Models\Prestamo;
+use App\Models\Cliente;
+use Illuminate\Support\Facades\DB;
+
+
 
 class PagoController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::all();
-        $pagos = Pago::all();
-
-        return view('pagos.index', compact('clientes','pagos'));
-
-
+        $pagos = Pago::paginate(10);;
+        return view('pagos.index', compact('pagos'));
     }
 
-/*     public function getMontoCuota(Request $request)
+    public function create()
     {
-        $prestamo = Prestamo::where('id_cliente', $request->input('cliente_id'))->first();
-
-        if (!$prestamo) {
-            return response()->json(['error' => 'No se encontró un préstamo para este cliente. Por favor, ingrese un préstamo válido.'], 404);
-        }
-
-        $monto_cuota = $prestamo->monto_prestamo / $prestamo->cantidad_cuotas;
-
-        return response()->json([
-            'monto_cuota' => $monto_cuota,
-        ]);
-    } */
-
-
-
-    public function getMontoCuota(Request $request)
-{
-    $prestamo = Prestamo::where('id_cliente', $request->input('cliente_id'))->first();
-
-    if (!$prestamo) {
-        return response()->json(['error' => 'No se encontró un préstamo para este cliente.'], 404);
+        $prestamos = Prestamo::all();
+        $clientes = Cliente::all();
+        return view('pagos.create', compact('prestamos', 'clientes'));
     }
 
-    return response()->json([
-        'monto_cuota' => $prestamo->monto_prestamo / $prestamo->cantidad_cuotas,
-    ]);
-}
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'cliente_id' => 'required|exists:clientes,id',
+        $request->validate([
             'prestamo_id' => 'required|exists:prestamos,id',
-            'monto_pagado' => 'required|numeric',
-            'fecha_pago' => 'required|date',
+            'fecha_pago' => 'required',
+            'monto' => 'required|numeric',
         ]);
 
-        $pago = new Pago;
-        $pago->id_cliente = $data['cliente_id'];
-        $pago->id_prestamo = $data['prestamo_id'];
-        $pago->monto_pagado = $data['monto_pagado'];
-        $pago->fecha_pago = $data['fecha_pago'];
-        $pago->save();
+        DB::transaction(function () use ($request) {
+            $pago = new Pago();
+            $pago->id_prestamo = $request->prestamo_id;
+            $pago->id_usuario = auth()->id();
+            $pago->fecha_pago = $request->fecha_pago;
+            $pago->monto = $request->monto;
+            $pago->save();
+        });
 
-        return redirect()->route('pagos.index')->with('success', 'Pago registrado correctamente.');
+        return redirect()->route('pagos.index')->with('status', 'Pago registrado correctamente.');
     }
 
+
+    public function getPrestamosByCliente($clienteId)
+    {
+        $prestamos = Prestamo::where('id_cliente', $clienteId)->get();
+
+        return response()->json(['prestamos' => $prestamos]);
+    }
+    public function obtenerPrestamos(Request $request)
+{
+    $clienteId = $request->input('cliente_id');
+    $prestamos = Prestamo::where('id_cliente', $clienteId)->get();
+
+    return response()->json($prestamos);
+
+}
 }
