@@ -24,7 +24,6 @@ class CreateGarantias extends Migration
             $table->unsignedBigInteger('id_prestamo');
             $table->foreign('id_prestamo')->references('id')->on('prestamo')->onDelete('cascade');
 
-
         });
     }
 
@@ -35,14 +34,14 @@ class CreateGarantias extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('garantias', function (Blueprint $table) {            
+        Schema::dropIfExists('garantias', function (Blueprint $table) {
             $table->dropForeign('id_cliente');
             $table->dropIndex('id_cliente');
-            $table->dropColumn('id_cliente');          
+            $table->dropColumn('id_cliente');
             $table->dropForeign('id_prestamo');
             $table->dropIndex('id_prestamo');
             $table->dropColumn('id_prestamo');
-     
+
         });
 
     }

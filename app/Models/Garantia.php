@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Garantia extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $fillable = [
         'garantia',
         'Valor_Prenda',
@@ -16,6 +16,8 @@ class Garantia extends Model
         'id_cliente',
         'id_prestamo',
         'id_foto',
+        'fecha_entrega',
+        'estado',
     ];
 
     public function cliente()
@@ -26,5 +28,9 @@ class Garantia extends Model
     public function prestamo()
     {
         return $this->belongsTo(Prestamo::class, 'id_prestamo');
+    }
+    public function foto()
+    {
+        return $this->hasOne(Foto::class,"id","id_foto");
     }
 }

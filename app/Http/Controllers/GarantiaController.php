@@ -7,54 +7,67 @@ use App\Models\Cliente;
 use App\Models\Prestamo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use App\Helper\Images;
 
 class GarantiaController extends Controller
 {
-    public function create()
-    {
-        $clientes = Cliente::all();
-        $prestamos = Prestamo::all();
+    protected $images;
 
-        return view('garantias.create', compact('clientes', 'prestamos'));
+    public function __construct()
+    {
+        $this->images = new Images();
+    }
+
+    public function create(Request $request)
+    {
+        $prestamos = Prestamo::all();
+        $clientes = Cliente::all();
+        return view('garantias.create', compact('prestamos', 'clientes'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'garantia' => 'required|string|max:255',
-            'Valor_Prenda' => 'required|string|max:255',
-            'Detalle_Prenda' => 'required|string|max:255',
-            'id_cliente' => 'required|integer|exists:clientes,id',
-            'id_prestamo' => 'required|integer',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'garantia' => 'required',
+            'Detalle_Prenda' => 'required',
+            'estado' => 'required',
+            'id_cliente' => 'required',
+            'id_prestamo' => 'required',
         ]);
 
-        $garantia = Garantia::create($request->all());
+        $garantia = new Garantia();
 
-        // Verificar si se subió una foto
-        if ($request->hasFile('foto')) {
-            $image = $request->file('foto');
-            $filename = $garantia->cliente->Carnet_cliente . '/' . time() . '.' . $image->getClientOriginalExtension();
-            Storage::putFileAs('public/garantias/' . $garantia->cliente->Carnet_cliente, $image, $filename);
+        $garantia->garantia = mb_strtoupper($request->garantia);
+        $garantia->Detalle_Prenda = mb_strtoupper($request->Detalle_Prenda);
+        $garantia->estado = mb_strtoupper($request->estado);
 
-            // Actualizar el campo de la foto en la garantía
-            $garantia->id_foto = $filename;
-            $garantia->save();
+        if ($request->has('Valor_Prenda')) {
+            $garantia->Valor_Prenda = $request->Valor_Prenda;
         }
 
-        return redirect()->route('garantias.index')->with('success', 'Garantía creada exitosamente.');
+        if ($request->has('fecha_entrega')) {
+            $garantia->fecha_entrega = $request->fecha_entrega;
+        }
+
+        if ($request->hasFile('id_foto')) {
+            $path = $request->file('id_foto')->store('public/images');
+            $garantia->id_foto = $path;
+        }
+
+        $garantia->id_cliente = $request->id_cliente;
+        $garantia->id_prestamo = $request->id_prestamo;
+        $garantia->save();
+
+        return redirect()->route('garantias.index');
     }
-    public function getPrestamosCliente(Cliente $cliente)
+
+
+     public function getPrestamosByCliente($clienteId)
     {
-        $ids_prestamos_con_garantia = Garantia::pluck('id_prestamo')->toArray();
+        $prestamos = Prestamo::where('id_cliente', $clienteId)->get();
 
-        $prestamos = $cliente->prestamos()
-            ->select('id', 'monto_prestamo')
-            ->whereNotIn('id', $ids_prestamos_con_garantia)
-            ->get();
-
-        return $prestamos;
-
+        return response()->json(['prestamos' => $prestamos]);
     }
 
 }

@@ -142,8 +142,7 @@ Route::get('/', function () {
     Route::get('/garantias', [GarantiaController::class, 'index'])->name('garantias.index');
      Route::get('/garantias/create', [GarantiaController::class, 'create'])->name('garantias.create');
     Route::post('/garantias', [GarantiaController::class, 'store'])->name('garantias.store');
-    Route::get('/prestamos/{id_cliente}', 'PrestamoController@buscarPrestamos');
-
+    Route::get('garantias/prestamos_by_cliente/{clienteId}', [GarantiaController::class, 'getPrestamosByCliente'])->name('garantias.prestamos_by_cliente');
 
 
 
