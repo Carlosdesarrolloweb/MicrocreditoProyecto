@@ -68,14 +68,16 @@ class GarantiaController extends Controller
         $garantia->id_cliente = $request->cliente_id;
         $garantia->id_prestamo = $request->id_prestamo;
         $garantia->save();
-        
+
         return redirect()->route('garantias.index');
     }
 
-    public  function index (){
-        return view ('garantias.index');
+  public function index()
+{
+    $garantias = Garantia::all();
 
-    }
+    return view('garantias.index', compact('garantias'));
+}
      public function getPrestamosByCliente($clienteId)
     {
         $prestamos = Prestamo::where('id_cliente', $clienteId)->get();

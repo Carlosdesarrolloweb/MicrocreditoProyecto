@@ -485,6 +485,12 @@ return [
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
+                [
+                    'text' => 'Consultar Garantias',
+                    'route'  => 'garantias.index',
+                    'icon'    => 'fa fa-percent',
+                    'icon_color' => 'red',
+                ],
 
                 [
                     'text' => 'Pago de Cuotas',
