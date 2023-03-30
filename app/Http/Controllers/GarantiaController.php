@@ -32,7 +32,7 @@ class GarantiaController extends Controller
             'garantia' => 'required',
             'Detalle_Prenda' => 'required',
             'estado' => 'required',
-            'id_cliente' => 'required',
+            'cliente_id' => 'required',
             'id_prestamo' => 'required',
         ]);
 
@@ -51,18 +51,31 @@ class GarantiaController extends Controller
         }
 
         if ($request->hasFile('id_foto')) {
-            $path = $request->file('id_foto')->store('public/images');
-            $garantia->id_foto = $path;
+            $path = public_path('public/garantias/' . $request->cliente_id);
+            if (!file_exists($path)) {
+                 mkdir($path, 0777, true);
+            }
+            $image = $request->file('id_foto');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+            $rutaImagen = 'public/garantias/' . $request->cliente_id . '/' . $filename;
+            $this->images->setImage($rutaImagen);
+            $fotoid=$this->images->getImage($rutaImagen);
+
+            $garantia->id_foto = $fotoid;
         }
 
-        $garantia->id_cliente = $request->id_cliente;
+        $garantia->id_cliente = $request->cliente_id;
         $garantia->id_prestamo = $request->id_prestamo;
         $garantia->save();
-
+        
         return redirect()->route('garantias.index');
     }
 
+    public  function index (){
+        return view ('garantias.index');
 
+    }
      public function getPrestamosByCliente($clienteId)
     {
         $prestamos = Prestamo::where('id_cliente', $clienteId)->get();

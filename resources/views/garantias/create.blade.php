@@ -97,8 +97,8 @@
                                     <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
                                     <select id="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" required>
                                         <option value="">Seleccione el estado de la garantía</option>
-                                        <option value="En Trámite">ARTICULO NUEVO</option>
-                                        <option value="Entregada">ARTICULO USADO</option>
+                                        <option value="ARTICULO NUEVO">ARTICULO NUEVO</option>
+                                        <option value="ARTICULO USADO">ARTICULO USADO</option>
                                     </select>
 
                                     @error('estado')
@@ -162,7 +162,7 @@
                 success: function (data) {
                     var prestamo = data.prestamos[0]; // asumiendo que solo hay un préstamo por cliente
                     console.log(data);
-                    $('#id_prestamo').val(prestamo.monto_prestado);
+                    $('#id_prestamo').val(prestamo.id);
                     // $('#monto_cancelado').val(prestamo.monto_cancelado);
                     // $('#fecha_inicio').val(prestamo.fecha_prestamo);
                     // $('#num_pagos').val(prestamo.cantidad_cuotas);

@@ -17,7 +17,7 @@ class Images
     /**
      * @param string $path
      */
-    private function setImage($path){
+    public function setImage($path){
         $foto = new Foto();
         $foto->direccion_imagen = $path;
         $foto->url_imagen = env('APP_URL').$path;
@@ -28,7 +28,7 @@ class Images
      * @param string $path
      * @return null|int
      */
-    private function getImage($path){
+    public function getImage($path){
         $Foto=Foto::where('direccion_imagen', $path)->first();
         if (!is_null($Foto)) {
             return $Foto->id;

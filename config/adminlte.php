@@ -358,12 +358,12 @@ return [
             'icon'    => 'fas fa-user-shield',
             'icon_color' => 'red',
             'submenu' => [
-                [
-                    'text' => 'Consultar Usuarios',
-                    'url'  => '#',
-                    'icon'    => 'fa fa-search',
-                    'icon_color' => 'red',
-                ],
+                // [
+                //     'text' => 'Consultar Usuarios',
+                //     'url'  => '#',
+                //     'icon'    => 'fa fa-search',
+                //     'icon_color' => 'red',
+                // ],
 
                 [
                     'text' => 'Crear Usuarios',
@@ -378,13 +378,13 @@ return [
                     'icon_color' => 'red',
 
                 ],
-                [
+/*                 [
                     'text' => 'Asignar Roles',
                     'url'  => '#',
                     'icon'    => 'fas fa-user-lock',
                     'icon_color' => 'red',
 
-                ],
+                ], */
             ],
 
         ],
@@ -492,7 +492,7 @@ return [
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
-                [
+ /*                [
                     'text' => 'Pago Solo Interes',
                     'url'  => '#',
                     'icon'    => 'fa fa-percent',
@@ -503,7 +503,7 @@ return [
                     'url'  => '#',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
-                ],
+                ], */
 
             ],
 
@@ -532,12 +532,12 @@ return [
                     'icon'    => 'fa fa-user-times',
                     'icon_color' => 'red',
                 ],
-                [
+         /*        [
                     'text' => 'Asignar Garantias',
                     'url'  => '#',
                     'icon'    => 'fa fa-check-square',
                     'icon_color' => 'red',
-                ],
+                ], */
                 [
                     'text' => 'Crear Zona',
                     'route'  => 'zona.create',
@@ -572,12 +572,12 @@ return [
                 // ],
 
                 [
-                    'text' => 'Extras',
+                    'text' => 'Prestamos ',
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'Extras',
+                    'text' => 'Clientes',
                     'url'  => '#',
                     'icon_color' => 'red',
                 ],

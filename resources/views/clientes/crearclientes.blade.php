@@ -21,7 +21,6 @@
                     <x-jet-input  maxlength="15" id="Carnet_cliente" class="form-control" type="text" name="Carnet_cliente" :value="old('Carnet_cliente')" required autofocus autocomplete="Carnet_cliente" />
                     <x-jet-input-error for="Carnet_cliente" class="mt-2 text-danger" />
                 </div>
-
                 <div class="form-group col-md-6">
                     <x-jet-label for="nombre_cliente" value="{{ __('NOMBRES') }}" />
                     <x-jet-input maxlength="20" id="nombre_cliente" class="form-control" type="text" name="nombre_cliente" :value="old('nombre_cliente')" required autofocus autocomplete="nombre_cliente" />

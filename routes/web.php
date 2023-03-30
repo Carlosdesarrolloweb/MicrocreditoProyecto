@@ -139,9 +139,9 @@ Route::get('/', function () {
     //     return view('garantias.garantias');
     // })->name('garantia');
 
-    Route::get('/garantias', [GarantiaController::class, 'index'])->name('garantias.index');
+    Route::get('/garantias/index', [GarantiaController::class, 'index'])->name('garantias.index');
      Route::get('/garantias/create', [GarantiaController::class, 'create'])->name('garantias.create');
-    Route::post('/garantias', [GarantiaController::class, 'store'])->name('garantias.store');
+    Route::post('/garantias/store', [GarantiaController::class, 'store'])->name('garantias.store');
     Route::get('garantias/prestamos_by_cliente/{clienteId}', [GarantiaController::class, 'getPrestamosByCliente'])->name('garantias.prestamos_by_cliente');
 
 
