@@ -4,11 +4,11 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<center>
-     <h1>REGISTRAR GARANTIA</h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">AGREGAR GARANTIAS</h1>
 
-
-</center>
+<th>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+</th>
 
 @stop
 

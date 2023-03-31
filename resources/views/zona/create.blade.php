@@ -4,6 +4,7 @@
 
 @section('content_header')
      <h1 style="text-align: center;font-weight: bold; color: black;">AGREGAR NUEVA ZONA</h1>
+     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
 @stop
 
 @section('content')

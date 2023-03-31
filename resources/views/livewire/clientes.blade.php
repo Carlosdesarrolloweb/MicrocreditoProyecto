@@ -5,11 +5,19 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">CLIENTES REGISTRADOS</h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">CLIENTES</h1>
 
+<th>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+</th>
 @stop
 
 @section('content')
+<div class="container">
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="bg-dark text-white">
 
     <x-slot name="header">
         <h1 class="text-gray-900">crudddddddd</h1>
@@ -31,9 +39,7 @@
 
             </form>
         </div>
-        <p>
-
-        </p>
+        <p></p>
 
       <!-- tabla base de datos abajo -->
         <table class="table">
@@ -42,7 +48,7 @@
 
             <th scope="col">CARNET</th>
             <th scope="col">NOMBRE</th>
-            <th scope="col">APELLIDO</th>
+            {{-- <th scope="col">APELLIDO</th> --}}
             <th scope="col">ZONA</th>
             <th scope="col">ESTADO</th>
             <th scope="col">IMAGENES</th>
@@ -54,11 +60,10 @@
             <tr>
 
                 <td scope="col">{{$clientesv->Carnet_cliente}}</td>
-                <td scope="col">{{$clientesv->nombre_cliente}}</td>
-                <td scope="col">{{$clientesv->apellido_cliente}}</td>
+                <td scope="col">{{$clientesv->nombre_cliente}} {{$clientesv->apellido_cliente}}</td>
+                {{-- <td scope="col">{{$clientesv->apellido_cliente}}</td> --}}
                 <td scope="col">{{$clientesv->zona_id}}</td>
                 <td scope="col">{{$clientesv->estado_cliente}}</td>
-
                 <td>
                     <img src="{{$clientesv->foto->direccion_imagen}}" width="75px" height="75px" onclick="mostrarimagen('<?= $clientesv->foto->direccion_imagen;?>','FOTO CARNET ANVERSO')" >
                     <img src="{{$clientesv->fotocarnet->direccion_imagen}}" width="75px" height="75px" onclick="mostrarimagen('<?= $clientesv->fotocarnet->direccion_imagen;?>','FOTO CARNET REVERSO')">
@@ -66,8 +71,9 @@
                     <img src="{{$clientesv->fotocroquis->direccion_imagen}}" width="75px" height="75px" onclick="mostrarimagen('<?= $clientesv->fotocroquis->direccion_imagen;?>','FOTO CROQUIS')">
                 </td>
                 <td>
-
+                </div>
                 <a  href="{{ route('clientes.editarclientes',$clientesv->id) }}"  type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
+                <p></p>
                 <form action="{{ route('clientes.eliminarclientes',$clientesv->id) }}" class="d-inline formulario-eliminar">
 
                 @method('DELETE')
@@ -76,14 +82,8 @@
                 </form>
 
                 </td>
-
-
             </tr>
             @endforeach
-
-
-
-
         </tbody>
         </table>
       <center>
@@ -106,16 +106,7 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
 @stop
-
-
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">

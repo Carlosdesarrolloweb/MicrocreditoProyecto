@@ -1,21 +1,25 @@
-<!-- Archivo: resources/views/loans/create.blade.php -->
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
 @section('content_header')
-<center>
-    {{-- <h1>REGISTRAR GARANTIA</h1> --}}
-</center>
+
+    <h1 style="text-align: center;font-weight: bold; color: black;">GARANTIAS</h1>
+
+    <th>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+    </th>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
 @stop
 @section('content')
-
+<div class="container">
 <div class="box">
     <div class="box-body">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
+
                     <th>Garantía</th>
                     <th>Valor Prenda</th>
                     <th>Detalle Prenda</th>
@@ -23,13 +27,14 @@
                     <th>Prestamo</th>
                     <th>Fecha de Entrega</th>
                     <th>Estado</th>
-                    <th>Imagen</th>
+             {{--        <th>Imagen</th> --}}
+                    <th>Acciones</th> <!-- Columna para los botones -->
                 </tr>
             </thead>
             <tbody>
                 @foreach($garantias as $garantia)
                     <tr>
-                        <td>{{ $garantia->id }}</td>
+                        {{-- <td>{{ $garantia->id }}</td> --}}
                         <td>{{ $garantia->garantia }}</td>
                         <td>{{ $garantia->Valor_Prenda }}</td>
                         <td>{{ $garantia->Detalle_Prenda }}</td>
@@ -37,14 +42,35 @@
                         <td>{{ $garantia->id_prestamo }}</td>
                         <td>{{ $garantia->fecha_entrega }}</td>
                         <td>{{ $garantia->estado }}</td>
-                        <td><img src="{{ asset($garantia->imagen) }}" width="50"></td>
+{{--                        <td><img src="{{ asset($garantia->imagen) }}" width="50"></td>
+                        <td> <img src="{{$garantia->foto->direccion_imagen}}" width="75px" height="75px" onclick="mostrarimagen('<?= $garantia->foto->direccion_imagen;?>','FOTO CARNET ANVERSO')" > --}}
+                            <td>
+                                <a href="{{ route('garantias.edit', $garantia->id) }}" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
+                                <form action="{{ route('garantias.destroy', $garantia->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-eliminar" data-id="{{ $garantia->id }}"> <i class='fa fa-trash'></i> ELIMINAR</button>
+                                </form>
+                            </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <center>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Título del modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img id="mi_imagen"/>
+                        </div>
+            </center>
     </div>
 </div>
-
+</div>
 @stop
 
     @section('css')
@@ -53,4 +79,59 @@
 
     @section('js')
     <script> console.log('Hi!'); </script> -->
+    <script>
+$(document).ready(function() {
+    $('.btn-eliminar').click(function(event) {
+        event.preventDefault();
+        const id = $(this).data('id');
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción no se puede deshacer",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/garantias/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: id
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            Swal.fire(
+                                'Eliminado',
+                                'El elemento ha sido eliminado',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                'Ocurrió un error al eliminar el elemento',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function(data) {
+                        Swal.fire(
+                            'Error',
+                            'Ocurrió un error al eliminar el elemento',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    });
+});
+      </script>
+
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     @stop

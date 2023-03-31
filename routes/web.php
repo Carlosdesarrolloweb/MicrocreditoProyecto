@@ -143,6 +143,9 @@ Route::get('/', function () {
      Route::get('/garantias/create', [GarantiaController::class, 'create'])->name('garantias.create');
     Route::post('/garantias/store', [GarantiaController::class, 'store'])->name('garantias.store');
     Route::get('garantias/prestamos_by_cliente/{clienteId}', [GarantiaController::class, 'getPrestamosByCliente'])->name('garantias.prestamos_by_cliente');
+    Route::delete('/garantias/{id}', [GarantiaController::class, 'destroy'])->name('garantias.destroy');
+    Route::get('/garantias/{garantia}/edit', [GarantiaController::class, 'edit'])->name('garantias.edit');
+    Route::put('/garantias/{garantia}', [GarantiaController::class, 'update'])->name('garantias.update');
 
 
 

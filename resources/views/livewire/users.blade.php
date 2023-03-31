@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+<div class="container">
     <center>
     <x-slot name="header">
         <h1 class="text-gray-900">crudddddddd</h1>
@@ -68,8 +69,6 @@
                 <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> ELIMINAR</button>
                 </form>
 
-
-
                 </td>
 
             </tr>
@@ -85,6 +84,7 @@
     </div>
 
 </center>
+</div>
 @stop
 
 @section('css')

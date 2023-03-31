@@ -85,4 +85,38 @@ class GarantiaController extends Controller
         return response()->json(['prestamos' => $prestamos]);
     }
 
+
+    public function destroy($id)
+{
+    $garantia = Garantia::find($id);
+
+    if (!$garantia) {
+        return response()->json(['success' => false]);
+    }
+
+    $garantia->delete();
+
+    return response()->json(['success' => true]);
+}
+public function edit(Garantia $garantia)
+{
+    $clientes = Cliente::all();
+    return view('garantias.edit', compact('garantia', 'clientes'));
+
+}
+
+public function update(Request $request, $id)
+{
+    $garantia = Garantia::findOrFail($id);
+    $garantia->garantia = $request->garantia;
+    $garantia->valor_prenda = $request->Valor_prenda;
+    $garantia->detalle_prenda = $request->Detalle_Prenda;
+    // $garantia->id_cliente = $request->id_cliente;
+    // $garantia->id_prestamo = $request->id_prestamo;
+    $garantia->fecha_entrega = $request->fecha_entrega;
+    $garantia->estado = $request->estado;
+    $garantia->save();
+
+    return redirect()->route('garantias.index')->with('success', 'Garantía actualizada exitosamente');
+}
 }

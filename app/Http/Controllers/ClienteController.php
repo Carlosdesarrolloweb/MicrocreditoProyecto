@@ -170,6 +170,23 @@ class ClienteController extends Controller
         Cliente::find($id)->delete();
         $clientesv=Cliente::all();
         return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok');
+
+
+
+        return response()->json(['success' => true]);
+
+
+
+   /*      $clientesv = Cliente::find($id);
+
+        if (!$clientesv) {
+            return response()->json(['success' => false]);
+        }
+
+        $clientesv->delete();
+
+        return response()->json(['success' => true]);
+        return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok'); */
     }
 
 
