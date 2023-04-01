@@ -176,6 +176,16 @@ Route::get('/', function () {
     Route::put('/modo_pago/{modo_pago}', [App\Http\Controllers\ModoPagoController::class, 'update'])->name('modos_pago.update');
     Route::delete('/modo_pago/{modo_pago}', [App\Http\Controllers\ModoPagoController::class, 'destroy'])->name('modosPago.destroy');
 
+    //REPORTES
+      //CLIENTES
+      Route::get('/reportes/clientes-creados', function () {
+        return view('reportes.clientescreados');
+    })->name('reportes.clientescreados');
+
+      //PRESTAMOS
+      Route::get('/reportes/historial-prestamos', function () {
+        return view('reportes.historialprestamos');
+    })->name('reportes.historialprestamos');
 
 
  });

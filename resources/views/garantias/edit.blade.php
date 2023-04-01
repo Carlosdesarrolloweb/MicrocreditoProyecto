@@ -58,8 +58,8 @@
             <div class="form-group">
                 <label for="estado">Estado</label>
                 <select name="estado" id="estado" class="form-control">
-                    <option value="Activo" {{ $garantia->estado == 'Activo' ? 'selected' : '' }}>Activo</option>
-                    <option value="Inactivo" {{ $garantia->estado == 'Inactivo' ? 'selected' : '' }}>Inactivo</option>
+                    <option value="ARTICULO NUEVO" {{ $garantia->estado == 'Activo' ? 'selected' : '' }}>ARTICULO NUEVO</option>
+                    <option value="ARTICULO USADO" {{ $garantia->estado == 'Inactivo' ? 'selected' : '' }}>ARTICULO USADO</option>
                 </select>
             </div>
 

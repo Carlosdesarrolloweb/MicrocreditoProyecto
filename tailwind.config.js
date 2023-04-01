@@ -7,15 +7,24 @@ module.exports = {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './app/Http/Livewire/**/*Table.php',
+        './vendor/power-components/livewire-powergrid/resources/views/**/*.php',
+        './vendor/power-components/livewire-powergrid/src/Themes/Tailwind.php'
     ],
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
+          fontFamily: {
+            sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+          },
+          backgroundColor: {
+            'table': '#F3F4F6',
+          }
         },
-    },
-
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+      },
+      plugins: [
+        require("@tailwindcss/forms")({
+          strategy: 'class',
+        }),
+      ]
 };

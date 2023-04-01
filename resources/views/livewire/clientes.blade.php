@@ -9,11 +9,20 @@
 
 <th>
     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+        {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
 </th>
+{{-- @livewireStyles
+<link rel="stylesheet" href="{{ asset('vendor/powergrid/powergrid.css') }}"> --}}
+
 @stop
 
 @section('content')
-<div class="container">
+{{--
+    <div class="style:bg-red">
+        <livewire:clientes-table/>
+      </div>
+ --}}
+ <div class="container">
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -41,14 +50,13 @@
         </div>
         <p></p>
 
-      <!-- tabla base de datos abajo -->
+
         <table class="table">
         <thead class="bg-dark">
             <tr scope="col">
 
             <th scope="col">CARNET</th>
             <th scope="col">NOMBRE</th>
-            {{-- <th scope="col">APELLIDO</th> --}}
             <th scope="col">ZONA</th>
             <th scope="col">ESTADO</th>
             <th scope="col">IMAGENES</th>
@@ -61,7 +69,6 @@
 
                 <td scope="col">{{$clientesv->Carnet_cliente}}</td>
                 <td scope="col">{{$clientesv->nombre_cliente}} {{$clientesv->apellido_cliente}}</td>
-                {{-- <td scope="col">{{$clientesv->apellido_cliente}}</td> --}}
                 <td scope="col">{{$clientesv->zona_id}}</td>
                 <td scope="col">{{$clientesv->estado_cliente}}</td>
                 <td>
@@ -84,6 +91,7 @@
                 </td>
             </tr>
             @endforeach
+
         </tbody>
         </table>
       <center>
@@ -105,7 +113,7 @@
             </div>
         </div>
     </div>
-
+</div>
 @stop
 
 @section('css')
@@ -113,7 +121,9 @@
 @stop
 
 @section('js')
-
+@livewireScripts
+{{-- <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script> --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js"></script> --}}
     <script> console.log('Hi!'); </script>
     <script>
      function mostrarimagen(url,titulo) {

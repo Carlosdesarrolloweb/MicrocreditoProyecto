@@ -578,13 +578,15 @@ return [
                 // ],
 
                 [
-                    'text' => 'Prestamos ',
-                    'url'  => '#',
+                    'text' => 'CLIENTES CREADOS ',
+                    'route'  => 'reportes.clientescreados',
+                    'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'Clientes',
-                    'url'  => '#',
+                    'text' => 'HISTORIAL PRESTAMOS ',
+                    'route'  => 'reportes.historialprestamos',
+                    'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
             ],

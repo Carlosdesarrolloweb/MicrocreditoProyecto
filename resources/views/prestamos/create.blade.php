@@ -101,11 +101,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                        <p></p>
-                        <label for="fecha_prestamo">Fecha Prestamo</label>
-                        <?php date_default_timezone_set('America/La_Paz'); ?>
-                        <input type="datetime-local" id="fecha_prestamo" name="fecha_prestamo" class="form-control" value="<?= date('Y-m-d\TH:i:s'); ?>" readonly>
-                      </div>
+                            <p></p>
+                            <label for="fecha_prestamo">Fecha Prestamo</label>
+                            <?php date_default_timezone_set('America/La_Paz'); ?>
+                            <input type="date" id="fecha_prestamo" name="fecha_prestamo" class="form-control" value="<?= date('Y-m-d'); ?>" readonly>
+                        </div>
                       </div>
                             <p><p>
                             </p></p>

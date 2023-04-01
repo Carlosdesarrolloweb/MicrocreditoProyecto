@@ -15,12 +15,13 @@
 
         <!-- Styles -->
         @livewireStyles
+        @powerGridStyles
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
-           
+
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -40,5 +41,6 @@
         @stack('modals')
 
         @livewireScripts
+        @powerGridScripts
     </body>
 </html>
