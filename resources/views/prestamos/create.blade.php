@@ -104,9 +104,9 @@
                             <p></p>
                             <label for="fecha_prestamo">Fecha Prestamo</label>
                             <?php date_default_timezone_set('America/La_Paz'); ?>
-                            <input type="date" id="fecha_prestamo" name="fecha_prestamo" class="form-control" value="<?= date('Y-m-d'); ?>" readonly>
+                            <input type="text" id="fecha_prestamo" name="fecha_prestamo" class="form-control datepicker" value="<?= date('Y-m-d'); ?>">
                         </div>
-                      </div>
+                    </div>
                             <p><p>
                             </p></p>
                             <div class="flex items-center justify-end mt-4">
@@ -189,5 +189,13 @@
         input7.value = monto_prestado.toFixed(2);
         input8.value = "0.00";
     }
+
+    $(document).ready(function() {
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true
+    });
+});
 </script>
 @stop

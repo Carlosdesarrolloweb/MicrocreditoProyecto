@@ -18,6 +18,8 @@
 <div class="container">
     <div class="style:bg-red">
         <livewire:prestamo-table/>
+
+
       </div>
     </div>
     @stop
@@ -28,6 +30,7 @@
 
     @section('js')
     @livewireScripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js"></script>
          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

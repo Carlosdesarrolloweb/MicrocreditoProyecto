@@ -10,7 +10,7 @@ class ModoPago extends Model
     use HasFactory;
 
     protected $table = 'modo_pago';
-    
+
 
     protected $fillable = ['modalidad_pago'];
 

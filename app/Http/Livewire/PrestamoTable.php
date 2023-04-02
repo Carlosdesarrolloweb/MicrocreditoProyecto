@@ -67,14 +67,16 @@ final class PrestamoTable extends PowerGridComponent
             ->join('modo_pago', function ($join) {
                 $join->on('prestamo.id_modo_pago', '=', 'modo_pago.id');
             })
-            ->select([
-                'prestamo.*',
-                'clientes.nombre_cliente as cliente_nombre_cliente',
-                'users.name as nombre_usuario',
-                'intereses.interes_prestamo',
-                'modo_pago.modalidad_pago',
-            ])
-            ->distinct(); // Agrega esta línea para eliminar filas duplicadas
+          ->select([
+    'prestamo.*',
+    'clientes.nombre_cliente as cliente_nombre_cliente',
+    'clientes.apellido_cliente as cliente_apellido_cliente',
+    'users.name as user_Nombre_usuario',
+    'intereses.interes_prestamo as interes_interes_prestamo',
+    'modo_pago.modalidad_pago as modopago_modalidad_pago' ,
+])
+            ->distinct(); //  elimina filas duplicadas
+            
     }
 /*
 
@@ -128,7 +130,7 @@ final class PrestamoTable extends PowerGridComponent
             ->addColumn('id_usuario')
             ->addColumn('id_interes')
             ->addColumn('id_modo_pago')
-            ->addColumn('fecha_prestamo_formatted', fn (Prestamo $model) => Carbon::parse($model->fecha_prestamo)->format('d/m/Y'));
+            ->addColumn('fecha_prestamo_formatted', fn (Prestamo $model) => Carbon::parse($model->fecha_prestamo)->format('Y-m-d'));
     }
 
     /*
@@ -153,7 +155,8 @@ final class PrestamoTable extends PowerGridComponent
 
             Column::make('MONTO PRESTAMO', 'monto_prestamo')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->makeInputText(),
 
             Column::make('DURACION PRESTAMO', 'duracion_prestamo')
                 ->sortable()
@@ -165,7 +168,7 @@ final class PrestamoTable extends PowerGridComponent
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('GARANTIA', 'garantia')
+            Column::make('GANANCIA', 'garantia')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
@@ -187,38 +190,51 @@ final class PrestamoTable extends PowerGridComponent
 
 
 
-            Column::make(__('ID CLIENTE'), 'cliente_nombre_cliente', 'clientes_nombre_cliente')
-            ->makeInputMultiSelect(Cliente::all(), 'name', 'id_cliente')
-            ->sortable(),
+          Column::make(__('CLIENTE'), 'cliente_nombre_cliente', 'clientes.nombre_cliente')
+            // ->makeInputMultiSelect(Cliente::all(), 'nombre_cliente', 'id_cliente')
+            ->sortable()
+            ->searchable()
+            ->makeInputText(),
+
+            Column::make(__('APELLIDOS'), 'cliente_apellido_cliente', 'clientes.apellido_cliente')
+            // ->makeInputMultiSelect(Cliente::all(), 'nombre_cliente', 'id_cliente')
+            ->sortable()
+            ->searchable()
+            ->makeInputText(),
 /*
             Column::make('ID USUARIO', 'id_usuario')
                 ->makeInputRange(), */
 
-            Column::make(__('ID USUARIO'), 'user_Nombre_usuario', 'users_Nombre_usuario')
-            ->makeInputMultiSelect(User::all(), 'name', 'id')
-            ->sortable(),
+            Column::make(__('ID USUARIO'), 'user_Nombre_usuario', 'users.Nombre_usuario')
+            // ->makeInputMultiSelect(User::all(), 'name', 'id')
+            ->sortable()
+            ->searchable()
+            ->makeInputText(),
 
        /*      Column::make('ID INTERES', 'id_interes')
                 ->makeInputRange(), */
 
-            Column::make(__('ID INTERES'), 'interes_interes_prestamo', 'intereses_interes_prestamo')
-            ->makeInputMultiSelect(Interes::all(), 'name', 'id')
-            ->sortable(),
+            Column::make(__('ID INTERES'), 'interes_interes_prestamo', 'intereses.interes_prestamo')
+            // ->makeInputMultiSelect(Interes::all(), 'name', 'id')
+            ->sortable()
+            ->searchable()
+            ->makeInputText(),
 
   /*           Column::make('ID MODO PAGO', 'id_modo_pago')
                 ->makeInputRange(), */
 
-            Column::make(__('ID MODO PAGO'), 'mod_pag_modalidad_pago', 'modo_pago_modalidad_pago')
-            ->makeInputMultiSelect(ModoPago::all(), 'name', 'id')
-            ->sortable(),
+            Column::make(__('ID MODO PAGO'), 'modopago_modalidad_pago', 'modo_pago.modalidad_pago')
+            // ->makeInputMultiSelect(ModoPago::all(), 'name', 'id')
+            ->sortable()
+            ->searchable()
+            ->makeInputText(),
 
             Column::make('FECHA PRESTAMO', 'fecha_prestamo_formatted', 'fecha_prestamo')
-                ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+            ->sortable()
+            ->searchable()
+            ->makeInputDatePicker('d-m-y'),
 
-        ]
-;
+        ];
     }
 
     /*
