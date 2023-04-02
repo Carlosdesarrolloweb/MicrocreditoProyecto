@@ -141,7 +141,8 @@ final class clientesTable extends PowerGridComponent
 
             Column::make('DIRECCION CLIENTE', 'direccion_cliente')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->makeInputText(),
 
      /*        Column::make('EMAIL CLIENTE', 'email_cliente')
                 ->sortable()

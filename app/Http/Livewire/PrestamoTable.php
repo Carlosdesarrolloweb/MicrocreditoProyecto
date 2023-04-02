@@ -74,9 +74,10 @@ final class PrestamoTable extends PowerGridComponent
     'users.name as user_Nombre_usuario',
     'intereses.interes_prestamo as interes_interes_prestamo',
     'modo_pago.modalidad_pago as modopago_modalidad_pago' ,
+    'prestamo.fecha_prestamo as  prestamo_fecha_prestamo',
 ])
             ->distinct(); //  elimina filas duplicadas
-            
+
     }
 /*
 
@@ -111,26 +112,32 @@ final class PrestamoTable extends PowerGridComponent
     */
     public function addColumns(): PowerGridEloquent
     {
-        return PowerGrid::eloquent()
-            ->addColumn('id')
-            ->addColumn('monto_prestamo')
-            ->addColumn('duracion_prestamo')
 
-           /** Example of custom column using a closure **/
-            ->addColumn('duracion_prestamo_lower', function (Prestamo $model) {
-                return strtolower(e($model->duracion_prestamo));
-            })
+        return PowerGrid::eloquent(Prestamo::query()
+        ->select('prestamo.*', 'clientes.nombres', 'clientes.apellidos')
+        ->join('clientes', 'clientes.id', '=', 'prestamo.id_cliente')
+        ->orderBy('fecha_prestamo', 'DESC')
+    )
+    ->addColumn('id')
+    ->addColumn('monto_prestamo')
+    ->addColumn('duracion_prestamo')
+    ->addColumn('duracion_prestamo_lower', function (Prestamo $model) {
+        return strtolower(e($model->duracion_prestamo));
+    })
+    ->addColumn('calculo_cuota')
+    ->addColumn('garantia')
+    ->addColumn('cantidad_cuotas')
+    ->addColumn('monto_cancelado')
+    ->addColumn('monto_prestado')
+    ->addColumn('id_cliente')
+    ->addColumn('id_usuario')
+    ->addColumn('id_interes')
+    ->addColumn('id_modo_pago')
+    ->addColumn('fecha_prestamo_formatted', fn (Prestamo $model) => Carbon::parse($model->fecha_prestamo)->format('Y-m-d'));
 
-            ->addColumn('calculo_cuota')
-            ->addColumn('garantia')
-            ->addColumn('cantidad_cuotas')
-            ->addColumn('monto_cancelado')
-            ->addColumn('monto_prestado')
-            ->addColumn('id_cliente')
-            ->addColumn('id_usuario')
-            ->addColumn('id_interes')
-            ->addColumn('id_modo_pago')
-            ->addColumn('fecha_prestamo_formatted', fn (Prestamo $model) => Carbon::parse($model->fecha_prestamo)->format('Y-m-d'));
+            // ->addColumn('fecha_prestamo_formatted', fn (Prestamo $model) => Carbon::parse($model->fecha_prestamo)->format('Ymd'));
+
+
     }
 
     /*
@@ -188,8 +195,6 @@ final class PrestamoTable extends PowerGridComponent
                 ->searchable()
                 ->makeInputText(),
 
-
-
           Column::make(__('CLIENTE'), 'cliente_nombre_cliente', 'clientes.nombre_cliente')
             // ->makeInputMultiSelect(Cliente::all(), 'nombre_cliente', 'id_cliente')
             ->sortable()
@@ -232,7 +237,8 @@ final class PrestamoTable extends PowerGridComponent
             Column::make('FECHA PRESTAMO', 'fecha_prestamo_formatted', 'fecha_prestamo')
             ->sortable()
             ->searchable()
-            ->makeInputDatePicker('d-m-y'),
+            ->makeInputDatePicker('Y-m-d'),
+
 
         ];
     }

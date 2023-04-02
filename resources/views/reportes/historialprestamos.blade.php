@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">CLIENTES</h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">PRESTAMOS </h1>
 
 <th>
     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
@@ -11,7 +11,7 @@
 </th>
 @livewireStyles
 <link rel="stylesheet" href="{{ asset('vendor/powergrid/powergrid.css') }}">
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 @stop
 
 @section('content')
@@ -31,6 +31,7 @@
     @section('js')
     @livewireScripts
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js"></script>
          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
