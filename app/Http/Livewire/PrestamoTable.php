@@ -157,8 +157,8 @@ final class PrestamoTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->makeInputRange(),
+          /*   Column::make('ID', 'id')
+                ->makeInputRange(), */
 
             Column::make('MONTO PRESTAMO', 'monto_prestamo')
                 ->sortable()

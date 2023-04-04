@@ -187,6 +187,9 @@ Route::get('/', function () {
         return view('reportes.historialprestamos');
     })->name('reportes.historialprestamos');
 
-
+      //GARANTIAS
+      Route::get('/reportes/historial-garantias', function () {
+        return view('reportes.historialgarantias');
+    })->name('reportes.historialgarantias');
  });
 

@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Cliente;
+use App\Models\Garantia;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
+use App\Models\Cliente;
+use App\Models\Prestamo;
 
-final class clientesTable extends PowerGridComponent
+final class GarantiaTable extends PowerGridComponent
 {
     use ActionButton;
 
@@ -46,11 +48,21 @@ final class clientesTable extends PowerGridComponent
     /**
     * PowerGrid datasource.
     *
-    * @return Builder<\App\Models\Cliente>
+    * @return Builder<\App\Models\Garantia>
     */
     public function datasource(): Builder
     {
-        return Cliente::query();
+        return Garantia::query()
+            ->join('clientes', 'garantias.id_cliente', '=', 'clientes.id')
+            ->join('prestamo', 'garantias.id_prestamo', '=', 'prestamo.id')
+            ->select([
+                'garantias.*',
+                'clientes.nombre_cliente as cliente_nombre_cliente',
+                'clientes.apellido_cliente as cliente_apellido_cliente',
+                'prestamo.monto_prestamo',
+                'prestamo.id as id_prestamo',
+            ])
+            ->distinct();
     }
 
     /*
@@ -84,26 +96,30 @@ final class clientesTable extends PowerGridComponent
     */
     public function addColumns(): PowerGridEloquent
     {
-        return PowerGrid::eloquent()
-            ->addColumn('id')
-            ->addColumn('Carnet_cliente')
-
-           /** Example of custom column using a closure **/
-            ->addColumn('Carnet_cliente_lower', function (Cliente $model) {
-                return strtolower(e($model->Carnet_cliente));
-            })
-
-            ->addColumn('nombre_cliente')
-            ->addColumn('apellido_cliente')
-            ->addColumn('direccion_cliente')
-            ->addColumn('email_cliente')
-            ->addColumn('telefono_cliente')
-            ->addColumn('edad_cliente')
-            ->addColumn('telefono_referencia')
-            ->addColumn('estado_cliente')
-            ->addColumn('nombre_zona', function (Cliente $model) {
-                return $model->zona->nombre_zona;
-            });
+        return PowerGrid::eloquent(Garantia::query()
+            ->select('garantias.*', 'clientes.nombres', 'clientes.apellidos', 'prestamos.monto_prestamo', 'prestamos.id as id_prestamo')
+            ->join('clientes', 'garantias.id_cliente', '=', 'clientes.id')
+            ->join('prestamo', 'garantias.id_prestamo', '=', 'prestamo.id')
+            ->orderBy('garantias.fecha_entrega', 'DESC')
+        )
+        ->addColumn('id')
+        ->addColumn('garantia')
+        ->addColumn('Valor_Prenda')
+        ->addColumn('Detalle_Prenda')
+        ->addColumn('id_cliente', function (Garantia $model) {
+            return $model->cliente->nombre_cliente;
+        })
+        ->addColumn('nombre_cliente', function (Garantia $model) {
+            return $model->cliente->nombre_cliente;
+        })
+        ->addColumn('apellido_cliente', function (Garantia $model) {
+            return $model->cliente->apellido_cliente;
+        })
+        ->addColumn('monto_prestamo')
+        ->addColumn('id_prestamo')
+        ->addColumn('id_foto')
+        ->addColumn('fecha_entrega_formatted', fn (Garantia $model) => Carbon::parse($model->fecha_entrega)->format('d/m/Y'))
+        ->addColumn('estado');
     }
 
     /*
@@ -123,56 +139,57 @@ final class clientesTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            // Column::make('ID', 'id')
-            //     ->makeInputRange(),
+         /*    Column::make('ID', 'id')
+                ->makeInputRange(), */
 
-            Column::make('CARNET CLIENTE', 'Carnet_cliente')
+            Column::make('GARANTIA', 'garantia')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('NOMBRE CLIENTE', 'nombre_cliente')
+            Column::make('VALOR PRENDA', 'Valor_Prenda')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('APELLIDO CLIENTE', 'apellido_cliente')
+
+            Column::make('DETALLE PRENDA', 'Detalle_Prenda')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('DIRECCION CLIENTE', 'direccion_cliente')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
-
-     /*        Column::make('EMAIL CLIENTE', 'email_cliente')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(), */
-
-            Column::make('TELEFONO CLIENTE', 'telefono_cliente')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
-
-            Column::make('EDAD CLIENTE', 'edad_cliente')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
-
-      /*       Column::make('TELEFONO REFERENCIA', 'telefono_referencia')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(), */
-
-            Column::make('ESTADO CLIENTE', 'estado_cliente')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
-
-            Column::make('NOMBRE ZONA', 'nombre_zona')
+        /*     Column::make('ID CLIENTE', 'id_cliente')
                 ->makeInputRange(),
+
+            Column::make('ID PRESTAMO', 'id_prestamo')
+                ->makeInputRange(), */
+            Column::make('NOMBRE CLIENTE', 'nombre_cliente')
+                ->searchable()
+                ->sortable()
+                ->makeInputText(),
+
+            Column::make('NOMBRE CLIENTE', 'apellido_cliente')
+                ->searchable()
+                ->sortable()
+                ->makeInputText(),
+
+            Column::make('MONTO PRÉSTAMO', 'monto_prestamo')
+                ->searchable()
+                ->sortable()
+                ->makeInputText(),
+
+     /*        Column::make('ID FOTO', 'id_foto')
+                ->makeInputRange(), */
+
+            Column::make('FECHA ENTREGA', 'fecha_entrega_formatted', 'fecha_entrega')
+                ->searchable()
+                ->sortable()
+                ->makeInputDatePicker(),
+
+            Column::make('ESTADO', 'estado')
+                ->sortable()
+                ->searchable()
+                ->makeInputText(),
 
         ]
 ;
@@ -187,26 +204,26 @@ final class clientesTable extends PowerGridComponent
     */
 
      /**
-     * PowerGrid Cliente Action Buttons.
+     * PowerGrid Garantia Action Buttons.
      *
      * @return array<int, Button>
      */
 
-
-/*     public function actions(): array
+    /*
+    public function actions(): array
     {
        return [
            Button::make('edit', 'Edit')
                ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('clientes.editarclientes', ['cliente' => 'id']),
+               ->route('garantia.edit', ['garantia' => 'id']),
 
            Button::make('destroy', 'Delete')
                ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('cliente.destroy', ['cliente' => 'id'])
+               ->route('garantia.destroy', ['garantia' => 'id'])
                ->method('delete')
         ];
     }
-
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -217,7 +234,7 @@ final class clientesTable extends PowerGridComponent
     */
 
      /**
-     * PowerGrid Cliente Action Rules.
+     * PowerGrid Garantia Action Rules.
      *
      * @return array<int, RuleActions>
      */
@@ -229,7 +246,7 @@ final class clientesTable extends PowerGridComponent
 
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($cliente) => $cliente->id === 1)
+                ->when(fn($garantia) => $garantia->id === 1)
                 ->hide(),
         ];
     }

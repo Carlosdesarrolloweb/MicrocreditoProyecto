@@ -589,6 +589,12 @@ return [
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
+                [
+                    'text' => 'HISTORIAL GARANTIAS ',
+                    'route'  => 'reportes.historialgarantias',
+                    'icon'    => 'fa fa-user-plus',
+                    'icon_color' => 'red',
+                ],
             ],
 
         ],
