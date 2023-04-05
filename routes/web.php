@@ -191,5 +191,9 @@ Route::get('/', function () {
       Route::get('/reportes/historial-garantias', function () {
         return view('reportes.historialgarantias');
     })->name('reportes.historialgarantias');
+      //POWERBI
+      Route::get('/reportes/powerbi', function () {
+        return view('reportes.powerbi');
+    })->name('reportes.powerbi');
  });
 

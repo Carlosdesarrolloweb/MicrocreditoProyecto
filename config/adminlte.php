@@ -595,6 +595,12 @@ return [
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
+                [
+                    'text' => 'GRAFICAS ',
+                    'route'  => 'reportes.powerbi',
+                    'icon'    => 'fa fa-user-plus',
+                    'icon_color' => 'red',
+                ],
             ],
 
         ],
