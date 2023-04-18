@@ -55,8 +55,13 @@ Route::get('/', function () {
 
     //usuarios
     Route::get('/actualizarusuario/{id}',[UsersController::class,'edit'])->name('user.editarusuarios');
-    Route::get('/editarusuario/{id}', [UsersController::class,'update'])->name('user.update');
+    // Route::get('/editarusuario/{id}', [UsersController::class,'update'])->name('user.update');
+
+    Route::match(['get', 'post'], '/editarusuario/{id}', [UsersController::class, 'update'])->name('user.update');
     Route::get('/eliminarusuarios/{id}',[UsersController::class,'destroy'])->name('user.eliminarusuarios');
+    Route::get('/users', [UsersController::class, 'index'])->name('livewire.Users');
+
+ /*    Route::post('/users/banear/{id}', [UserController::class, 'banearUsuario'])->name('user.banearusuarios'); */
 
 
 /*     Route::middleware(['auth'])->group(function () {
@@ -78,8 +83,9 @@ Route::get('/', function () {
 
     Route::post('/clientes',[App\Http\Controllers\ClienteController::class,'index'])->name('clientesv');
     Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv');
-
-    Route::get('/clientes/buscar', 'ClientesController@buscar')->name('clientes.buscar');
+    Route::get('/clientes/buscar', [App\Http\Controllers\ClienteController::class, 'buscar'])->name('clientes.buscar');
+    Route::get('/clientes/mostrar/{criterio}', [ClienteController::class, 'mostrarCliente'])->name('clientes.mostrar');
+    // Route::get('/clientes/buscar', 'ClientesController@buscar')->name('clientes.buscar');
 
 
 
@@ -150,10 +156,8 @@ Route::get('/', function () {
 
 
     //PAGOS
-    Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
     Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');
-    Route::post('/pagos', [PagoController::class, 'store'])->name('pagos.store');
-    Route::get('pagos/prestamos_by_cliente/{clienteId}', [PagoController::class, 'getPrestamosByCliente'])->name('pagos.prestamos_by_cliente');
+    Route::post('/pagos/store', [PagoController::class, 'store'])->name('pagos.store');
 
 
 
@@ -195,5 +199,12 @@ Route::get('/', function () {
       Route::get('/reportes/powerbi', function () {
         return view('reportes.powerbi');
     })->name('reportes.powerbi');
+
+
+
+
+     //DASHBOARD
+     Route::get('/dashboard', [ClienteController::class, 'dashboard'])->name('dashboard');
+/*      Route::get('/dashboard/prestamos', [PrestamoController::class, 'prestamosd'])->name('dashboard.prestamos'); */
  });
 

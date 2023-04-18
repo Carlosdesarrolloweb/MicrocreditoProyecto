@@ -188,6 +188,37 @@ class ClienteController extends Controller
         return response()->json(['success' => true]);
         return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok'); */
     }
+    public function buscar(Request $request)
+    {
+        $cliente_criterio = $request->input('criterio');
+        $cliente = Cliente::where('Carnet_cliente', 'like', '%' . $cliente_criterio . '%')
+            ->orWhere('nombre_cliente', 'like', '%' . $cliente_criterio . '%')
+            ->orWhere('telefono_cliente', 'like', '%' . $cliente_criterio . '%')
+            ->first();
 
+        if ($cliente) {
+            return redirect()->route('clientes.mostrar', ['criterio' => $cliente->Carnet_cliente]);
+        } else {
+            $clientes = Cliente::all();
+            return view('clientes.buscar', compact('clientes', 'cliente_criterio'));
+        }
+    }
+    public function mostrarCliente($criterio)
+    {
+        $clientes = Cliente::where('Carnet_cliente', 'like', '%' . $criterio . '%')
+                            ->orWhere('nombre_cliente', 'like', '%' . $criterio . '%')
+                            ->orWhere('telefono_cliente', 'like', '%' . $criterio . '%')
+                            ->get();
+
+        return view('clientes.mostrar', compact('clientes'));
+    }
+
+    public function dashboard()
+{
+    $clientes = Cliente::all();
+    $cantidad_clientes = Cliente::count();
+
+    return view('dashboard', compact('clientes', 'cantidad_clientes'));
+}
 
 }

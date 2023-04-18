@@ -145,4 +145,20 @@ public function getPrestamosByCliente($clienteId)
 
     return view('prestamos.index', ['prestamos' => $prestamos]);
 }
+
+     //dashboard
+
+/*      public function prestamosd()
+     {
+        $prestamos = Prestamo::all();
+        $cantidad_prestamos = count($prestamos);
+
+        if ($cantidad_prestamos == 0) {
+            $prestamos = null;
+        }
+
+        return view('dashboard', ['prestamos' => $prestamos, 'cantidad_prestamos' => $cantidad_prestamos]);
+     } */
+
+
 }

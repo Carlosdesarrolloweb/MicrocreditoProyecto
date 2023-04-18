@@ -443,18 +443,18 @@ return [
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
-                [
+         /*        [
                     'text' => 'Registrar Pagos',
                     'route'  => 'pagos.create',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
-                ],
-                [
+                ], */
+         /*        [
                     'text' => 'ver pagos ',
                     'route'  => 'pagos.index',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
-                ],
+                ], */
                 [
                     'text' => 'Prestamos Realizados',
                     'route'  => 'prestamos.index',
@@ -492,12 +492,12 @@ return [
                     'icon_color' => 'red',
                 ],
 
-                [
+             /*    [
                     'text' => 'Pago de Cuotas',
-                    // 'route'  => 'pagos',
+                    'route'  => 'pagos.create',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
-                ],
+                ], */
  /*                [
                     'text' => 'Pago Solo Interes',
                     'url'  => '#',
@@ -522,6 +522,12 @@ return [
                 [
                     'text' => 'Consultar Clientes',
                     'route'  => 'clientesv',
+                    'icon'    => 'fa fa-users',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Buscar Clientes',
+                    'route'  => 'clientes.buscar',
                     'icon'    => 'fa fa-users',
                     'icon_color' => 'red',
                 ],

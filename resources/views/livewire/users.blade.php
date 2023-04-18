@@ -32,6 +32,7 @@
             <th scope="col">USUARIO</th>
             <th scope="col">CARGO</th>
             <th scope="col">ESTADO</th>
+            <th scope="col" >  ACCIONES </th>
             </tr>
         </thead>
         <tbody>
@@ -89,6 +90,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}">
 @stop
 
 @section('js')

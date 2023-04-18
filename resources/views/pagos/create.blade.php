@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+{{-- @extends('adminlte::page')
 
 @section('title', 'Obtener Monto de Cuota')
 
@@ -12,22 +12,26 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-body">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Registrar Pago') }}</div>
+
+                <div class="card-body">
                     <form method="POST" action="{{ route('pagos.store') }}">
                         @csrf
 
                         <div class="form-group row">
                             <label for="cliente_id" class="col-md-4 col-form-label text-md-right">{{ __('Cliente') }}</label>
+
                             <div class="col-md-6">
-                                <select name="cliente_id" id="cliente_id" class="form-control @error('cliente_id') is-invalid @enderror" required>
-                                    <option value="">Seleccione un cliente</option>
+                                <select id="cliente_id" name="cliente_id" class="form-control @error('cliente_id') is-invalid @enderror" required>
+                                    <option value="" disabled selected>--Seleccione un cliente--</option>
                                     @foreach($clientes as $cliente)
-                                        <option value="{{ $cliente->id }}" {{ old('cliente_id') == $cliente->id ? 'selected' : '' }}>{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}</option>
+                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}</option>
                                     @endforeach
                                 </select>
+
                                 @error('cliente_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -35,47 +39,28 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="id_usuario">Usuario Que Registra el Pago</label>
-                            <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
-                            <input type="text" class="form-control" value="{{ Auth::user()->name . ' ' . Auth::user()->apellido_usuario }}" disabled>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <h2>Detalles del préstamo</h2>
-                            </div>
-                        </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6">
-                                <label for="monto">Monto Total Del Prestamo:</label>
-                                <input type="text" name="monto" id="monto" readonly class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="monto_cancelado">Tasa de interés:</label>
-                                <input type="text" name="monto_cancelado" id="monto_cancelado" readonly class="form-control">
-                            </div>
-                        </div>
+                            <label for="monto" class="col-md-4 col-form-label text-md-right">{{ __('Monto') }}</label>
 
-                        <div class="form-group row">
                             <div class="col-md-6">
-                                <label for="fecha_inicio">Fecha del Prestamo</label>
-                                <input type="text" name="fecha_inicio" id="fecha_inicio" readonly class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="num_pagos">Número de pagos:</label>
-                                <input type="text" name="num_pagos" id="num_pagos" readonly class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="cuota">cuota a pagar</label>
-                                <input type="text" name="cuota" id="cuota" readonly class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="monto" class="col-md-4 col-form-label text-md-right">{{ __('Monto a pagar') }}</label>
-                            <div class="col-md-6">
-                                <input id="monto" type="number" step="0.01" class="form-control @error('monto') is-invalid @enderror" name="monto" value="{{ old('monto') }}" required>
+                                <input id="monto" type="number" class="form-control @error('monto') is-invalid @enderror" name="monto" value="{{ old('monto') }}" required autocomplete="monto">
+
                                 @error('monto')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="fecha" class="col-md-4 col-form-label text-md-right">{{ __('Fecha') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="fecha" type="date" class="form-control @error('fecha') is-invalid @enderror" name="fecha" value="{{ old('fecha') }}" required autocomplete="fecha">
+
+                                @error('fecha')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -85,50 +70,43 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-success">
-                                {{ __('Registrar Pago') }}
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Guardar') }}
                                 </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-</div>
-
 </div>
 @stop
 
-@section('js')
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    //  $('#cliente_id').on('change', function () {
-        $("#cliente_id").change(function(){
-        //  var clienteId = $(this).val();
-      var clienteId= document.getElementById('cliente_id').value
-        console.log(clienteId);
-        if (clienteId) {
-            $.ajax({
-                url: "{{ route('pagos.prestamos_by_cliente', ':clienteId') }}".replace(':clienteId', clienteId),
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    var prestamo = data.prestamos[0]; // asumiendo que solo hay un préstamo por cliente
-                    console.log(data);
-                    $('#monto').val(prestamo.monto_prestado);
-                    $('#monto_cancelado').val(prestamo.monto_cancelado);
-                    $('#fecha_inicio').val(prestamo.fecha_prestamo);
-                    $('#num_pagos').val(prestamo.cantidad_cuotas);
-                    $('#cuota').val(prestamo.calculo_cuota);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError);
-                }
+
+@section('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#cliente_id").change(function(){
+                var clienteId = $(this).val();
+                $.ajax({
+                    url: "{{ route('cliente.prestamo') }}",
+                    type: "GET",
+                    data: {cliente_id: clienteId},
+                    success: function(respuesta){
+                        $("#proyecto_id").empty();
+                        $.each(respuesta,function(id,proyecto){
+                            $("#proyecto_id").append('<option value="'+id+'">'+proyecto+'</option>');
+                        });
+                    },
+                    error: function() {
+                        console.log('Ha ocurrido un error.');
+                    }
+                });
             });
-        }
-    });
+        });
 
     $('#prestamo_id').on('change', function () {
         var prestamoId = $(this).val();
@@ -148,3 +126,4 @@
     });
 </script>
 @stop
+ --}}

@@ -4,13 +4,15 @@
 
 @section('content_header')
      <h1 style="text-align: center;font-weight: bold; color: black;">ACTUALIZAR DATOS</h1>
+
 @stop
 
 @section('content')
 
 
 
-        <form method="get" action="{{ route('user.update',$usersv->id) }}">
+        {{-- <form method="get" action="{{ route('user.update',$usersv->id) }}"> --}}
+        <form id="form-actualizar" method="post" action="{{ route('user.update', $usersv->id) }}">
             @csrf
             <div class="container">
                 <p> </p>
@@ -90,9 +92,11 @@
             </div>
             <div class="flex items-center justify-end mt-4">
 
-                <x-jet-button class="btn btn-success"><i class='fa fa-save'></i>
+            {{--     <x-jet-button class="btn btn-success"><i class='fa fa-save'></i>
                     {{ __('ACTUALIZAR') }}
-                </x-jet-button>
+                </x-jet-button> --}}
+
+                <button id="btn-actualizar" class="btn btn-primary fa fa-save" type="button">Actualizar</button>
             </div>
         </form>
 
@@ -101,10 +105,37 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}">
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+    <script>
+        document.getElementById('btn-actualizar').addEventListener('click', function() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'No podrás revertir esto',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, actualizar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envía el formulario de actualización
+                    document.forms['form-actualizar'].submit();
+                }
+            });
+        });
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 @stop
 
 

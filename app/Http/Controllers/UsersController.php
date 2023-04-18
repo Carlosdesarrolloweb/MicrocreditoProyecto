@@ -122,7 +122,9 @@ class UsersController extends Controller
         $usersv->estado_usuario  =mb_strtoupper($request->estado_usuario);
         $usersv->save();
         $usersv=User::all();
-        return view('livewire.Users',['Users'=>$usersv ]);
+        // return view('livewire.Users',['Users'=>$usersv ]);
+
+        return redirect()->route('livewire.Users')->with('success', 'Registros actualizados correctamente.');
     }
 
 
@@ -173,5 +175,14 @@ public function updateEstado($id, $estado)
 
     return redirect()->back()->with('message', 'El estado del usuario se actualizó correctamente.');
 } */
+
+public function banearUsuario($id)
+{
+    $usuario = User::findOrFail($id);
+    $usuario->estado_usuario = 'inactivo';
+    $usuario->save();
+
+    return redirect()->route('user.index')->with('banear', 'El usuario ha sido baneado exitosamente');
+}
 
 }
