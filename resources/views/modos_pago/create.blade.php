@@ -17,7 +17,7 @@
                     <div class="card-header">Agregar Modo de Pago</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('modos_pago.store') }}">
+                        <form method="POST" id="guardar" action="{{ route('modos_pago.store') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -55,4 +55,20 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+<Script>
+    $(document).ready(function() {
+        $('#guardar').submit(function(e) {
+
+
+            // Si se llega a este punto, todos los campos están completos
+            Swal.fire({
+            icon: 'success',
+            title: 'Guardado exitosamente',
+            text: 'Tu registro ha sido guardado exitosamente.'
+            });
+        });
+    });
+</script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 @stop

@@ -24,7 +24,8 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-body">
-                    <form action="{{ route('prestamos.store') }}" method="POST">
+                    {{-- <form action="{{ route('prestamos.store') }}" method="POST"> --}}
+                        <form action="{{ route('prestamos.store') }}" method="POST" id="prestamoForm">
                         @csrf
 
                     <div class="row">
@@ -109,10 +110,16 @@
                     </div>
                             <p><p>
                             </p></p>
-                            <div class="flex items-center justify-end mt-4">
+               {{--              <div class="flex items-center justify-end mt-4">
                                  <x-jet-button class="btn btn-success btn-lg mb-2" onclick="Swal.fire('Good job!', 'You clicked the button!', 'success')">
                                     <i class='fa fa-user-plus'></i>
                                      {{ __('REGISTRAR PRESTAMO') }}
+                                </x-jet-button>
+                            </div> --}}
+                            <div class="flex items-center justify-end mt-4">
+                                <x-jet-button class="btn btn-success btn-lg mb-2">
+                                    <i class='fa fa-user-plus'></i>
+                                    {{ __('REGISTRAR PRESTAMO') }}
                                 </x-jet-button>
                             </div>
                     </form>
@@ -190,12 +197,27 @@
         input8.value = "0.00";
     }
 
+
+
+    // ALERTA DEL BOTON GUARDAR
+
     $(document).ready(function() {
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        todayHighlight: true
+    $('#prestamoForm').submit(function(e) {
+
+
+        // Si se llega a este punto, todos los campos están completos
+        Swal.fire({
+        icon: 'success',
+        title: 'Guardado exitosamente',
+        text: 'Tu registro ha sido guardado exitosamente.'
+        });
     });
+
+
+
 });
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 @stop
