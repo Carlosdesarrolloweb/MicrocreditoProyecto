@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <form action="{{ route('modos_pago.update', $modoPago->id) }}" method="POST">
+            <form action="{{ route('modos_pago.update', $modoPago->id) }}" method="POST" id="guardar">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -32,5 +32,22 @@
 
 @section('js')
 <script> console.log('Hi!'); </script>
+
+<Script>
+    $(document).ready(function() {
+        $('#guardar').submit(function(e) {
+
+
+            // Si se llega a este punto, todos los campos están completos
+            Swal.fire({
+            icon: 'success',
+            title: 'Guardado exitosamente',
+            text: 'Tu registro ha sido guardado exitosamente.'
+            });
+        });
+    });
+</script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 @stop
 
