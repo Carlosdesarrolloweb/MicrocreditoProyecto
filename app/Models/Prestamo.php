@@ -16,7 +16,7 @@ class Prestamo extends Model
         'monto_prestamo',
         'duracion_prestamo',
         'calculo_cuota',
-        'garantia',
+        'ganancia',
         'cantidad_cuotas',
         'monto_cancelado',
         'monto_prestado',

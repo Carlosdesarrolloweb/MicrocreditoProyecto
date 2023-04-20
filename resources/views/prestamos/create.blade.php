@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="ganancia">Ganancia</label>
-                            <input type="number" id="ganancia" name="garantia" class="form-control" readonly>
+                            <input type="number" id="ganancia" name="ganancia" class="form-control" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="monto_prestado">Monto Prestado</label>

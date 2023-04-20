@@ -35,7 +35,7 @@ class PrestamoController extends Controller
             'monto_prestamo' => 'required|numeric',
             'duracion_prestamo' => 'required|numeric',
             'calculo_cuota' => 'required|numeric',
-            'garantia' => 'required|max:255',
+            'ganancia' => 'required|max:255',
             'cantidad_cuotas' => 'required|numeric',
             'monto_cancelado' => 'required|numeric',
             'monto_prestado' => 'required|numeric',
@@ -53,7 +53,7 @@ class PrestamoController extends Controller
         $Prestamo->monto_prestamo = $request->monto_prestamo;
         $Prestamo->duracion_prestamo = $request->duracion_prestamo;
         $Prestamo->calculo_cuota = $request->calculo_cuota;
-        $Prestamo->garantia = $request->garantia;
+        $Prestamo->ganancia = $request->ganancia;
         $Prestamo->cantidad_cuotas = $request->cantidad_cuotas;
         $Prestamo->monto_cancelado = $request->monto_cancelado;
         $Prestamo->monto_prestado = $request->monto_prestado;
@@ -90,7 +90,7 @@ class PrestamoController extends Controller
             'monto_prestamo' => 'required|numeric',
             'duracion_prestamo' => 'required|numeric',
             'calculo_cuota' => 'required|numeric',
-            'garantia' => 'required|max:255',
+            'ganancia' => 'required|max:255',
             'cantidad_cuotas' => 'required|numeric',
             'monto_cancelado' => 'required|numeric',
             'monto_prestado' => 'required|numeric',
@@ -108,7 +108,7 @@ class PrestamoController extends Controller
         $prestamo->monto_prestamo = $request->monto_prestamo;
         $prestamo->duracion_prestamo = $request->duracion_prestamo;
         $prestamo->calculo_cuota = $request->calculo_cuota;
-        $prestamo->garantia = $request->garantia;
+        $prestamo->ganancia = $request->ganancia;
         $prestamo->cantidad_cuotas = $request->cantidad_cuotas;
         $prestamo->monto_cancelado = $request->monto_cancelado;
         $prestamo->monto_prestado = $request->monto_prestado;
