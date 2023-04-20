@@ -388,7 +388,7 @@ return [
             ],
 
         ],
-        [
+/*         [
             'text'    => ' Reportes',
             'icon'    => 'fa fa-file',
             'icon_color' => 'red',
@@ -414,8 +414,8 @@ return [
                 ],
             ],
 
-        ],
-        [
+        ], */
+   /*      [
             'text'    => 'Ingresos',
             'icon'    => 'fas fa-money-bill',
             'icon_color' => 'red',
@@ -429,7 +429,7 @@ return [
 
             ],
 
-        ],
+        ], */
 
         ['header' => 'OPCIONES'],
         [

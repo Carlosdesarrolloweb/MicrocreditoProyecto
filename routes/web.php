@@ -205,6 +205,9 @@ Route::get('/', function () {
 
      //DASHBOARD
      Route::get('/dashboard', [ClienteController::class, 'dashboard'])->name('dashboard');
-/*      Route::get('/dashboard/prestamos', [PrestamoController::class, 'prestamosd'])->name('dashboard.prestamos'); */
+    //  Route::get('/dashboard', [PrestamoController::class, 'clientesprestamo'])->name('dashboard');
+     Route::get('/dashboard/prestamos', [PrestamoController::class, 'clientesprestamo'])->name('dashboard.prestamos');
+
+
  });
 

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Helper\Images;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Zona;
+use App\Models\Garantia;
 
 
 class ClienteController extends Controller
@@ -213,12 +214,23 @@ class ClienteController extends Controller
         return view('clientes.mostrar', compact('clientes'));
     }
 
-    public function dashboard()
-{
+ /*    public function dashboard()
+    {
     $clientes = Cliente::all();
     $cantidad_clientes = Cliente::count();
 
     return view('dashboard', compact('clientes', 'cantidad_clientes'));
-}
+    } */
+    public function dashboard()
+    {
+        $clientes = Cliente::all();
+        $cantidad_clientes = Cliente::count();
+        $clientes_con_prestamo = Cliente::has('prestamos')->get();
+        $cantidad_clientes_con_prestamo = count($clientes_con_prestamo);
+        $cantidad_garantias = Garantia::count();
+
+        return view('dashboard', compact('clientes', 'cantidad_clientes', 'cantidad_clientes_con_prestamo', 'cantidad_garantias'));
+    }
+
 
 }

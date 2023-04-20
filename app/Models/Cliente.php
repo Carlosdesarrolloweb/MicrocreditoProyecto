@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Foto;
+use App\Models\Garantia;
 
 class Cliente extends Model
 {
@@ -56,6 +57,10 @@ class Cliente extends Model
         return $this->belongsTo(Zona::class);
     }
 
+    public function prestamos()
+    {
+        return $this->hasMany(Prestamo::class, 'id_cliente');
+    }
 
     public $timestamps = false;
 

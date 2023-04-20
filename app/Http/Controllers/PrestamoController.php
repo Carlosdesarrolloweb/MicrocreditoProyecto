@@ -135,30 +135,26 @@ class PrestamoController extends Controller
             ->with('success', 'Prestamo eliminado exitosamente.');
     }
     public function buscarPrestamo($cliente_id)
-{
+    {
     $prestamo = Prestamo::where('cliente_id', $cliente_id)->first();
     return response()->json(['id' => $prestamo->id, 'monto' => $prestamo->monto]);
-}
-public function getPrestamosByCliente($clienteId)
-{
+    }
+    public function getPrestamosByCliente($clienteId)
+    {
     $prestamos = Prestamo::where('cliente_id', $clienteId)->with('pagos')->get();
 
     return view('prestamos.index', ['prestamos' => $prestamos]);
-}
+    }
 
      //dashboard
 
-/*      public function prestamosd()
-     {
-        $prestamos = Prestamo::all();
-        $cantidad_prestamos = count($prestamos);
-
-        if ($cantidad_prestamos == 0) {
-            $prestamos = null;
-        }
-
-        return view('dashboard', ['prestamos' => $prestamos, 'cantidad_prestamos' => $cantidad_prestamos]);
-     } */
+    public function clientesprestamo()
+    {
+         $clientes = Cliente::all();
+         $cantidad_clientes = Cliente::count();
+         $cantidad_clientes_con_prestamo = Cliente::has('prestamos')->count();
 
 
+         return view('dashboard', compact('clientes', 'cantidad_clientes', 'cantidad_clientes_con_prestamo'));
+    }
 }

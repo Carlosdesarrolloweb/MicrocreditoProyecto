@@ -119,4 +119,6 @@ public function update(Request $request, $id)
 
     return redirect()->route('garantias.index')->with('success', 'Garantía actualizada exitosamente');
 }
+
+
 }
