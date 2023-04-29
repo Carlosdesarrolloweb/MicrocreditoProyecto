@@ -156,8 +156,10 @@ Route::get('/', function () {
 
 
     //PAGOS
-    Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');
-    Route::post('/pagos/store', [PagoController::class, 'store'])->name('pagos.store');
+
+   Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');
+   Route::post('/pagos', [PagoController::class, 'store'])->name('pagos.store');
+   Route::get('/pagos/buscar/{id}', [PagoController::class, 'obtenerPorCliente'])->name('pagos.obtenerPorCliente');
 
 
 

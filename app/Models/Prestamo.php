@@ -42,6 +42,10 @@ class Prestamo extends Model
         return $this->belongsTo(Interes::class, 'id_interes');
     }
 
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class, 'id_prestamo');
+    }
     public function modoPago()
     {
         return $this->belongsTo(ModoPago::class, 'id_modo_pago');

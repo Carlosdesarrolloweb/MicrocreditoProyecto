@@ -50,7 +50,7 @@
                                 <td>{{ $prestamo->duracion_prestamo }}</td>
                                 <td>{{ $prestamo->cantidad_cuotas }}</td>
                                 <td>Bs.{{ $prestamo->calculo_cuota }}</td>
-                                <td>Bs.{{ $prestamo->garantia }}</td>
+                                <td>Bs.{{ $prestamo->ganancia }}</td>
                                 <td>Bs.{{ $prestamo->monto_prestado }}</td>
                                 <td>Bs.{{ $prestamo->monto_cancelado }}</td>
                                 <td>{{ $prestamo->fecha_prestamo }}</td>

@@ -3,40 +3,69 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pago;
-use App\Models\Prestamo;
-use App\Models\Cliente;
-use App\Models\DetallePago;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-
-
+use App\Models\Pago;
+use App\Models\Cliente;
+use App\Models\Prestamo;
 
 class PagoController extends Controller
 {
     public function create()
     {
         $clientes = Cliente::all();
+
         return view('pagos.create', compact('clientes'));
+    }
+
+    public function getPrestamo(Request $request)
+    {
+        $prestamo = Prestamo::where('id_cliente', $request->cliente_id)
+                            ->where('estado', 1)
+                            ->first();
+
+        return response()->json([
+            'monto' => $prestamo->monto,
+            'cuotas' => $prestamo->cuotas,
+        ]);
     }
 
     public function store(Request $request)
     {
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
+            'id_cliente' => 'required|exists:clientes,id',
+            'monto' => 'required',
+            'cuota' => 'required',
+            'fecha_pago' => 'required',
+            'estado' => 'required|boolean',
+            'numero_cuota' => 'required|integer',
+        ]);
+
+        // Crear un nuevo pago
         $pago = new Pago();
-        $pago->id_prestamo = $request->input('id_prestamo');
-        $pago->id_usuario = Auth::user()->id;
-        $pago->monto_pago = $request->input('monto_pago');
+        $pago->cliente_id = $request->id_cliente;
+        $pago->monto = $request->monto;
+        $pago->cuota = $request->cuota;
+        $pago->fecha_pago = $request->fecha_pago;
+        $pago->estado = $request->estado;
+        $pago->numero_cuota = $request->numero_cuota;
         $pago->save();
 
-        $prestamo = Prestamo::find($request->input('id_prestamo'));
-        $prestamo->monto_cancelado += $request->input('monto_pago');
-        $prestamo->cantidad_cuotas--;
-        $prestamo->save();
-
-        $cliente = $prestamo->cliente;
-        $cliente->monto_deuda -= $request->input('monto_pago');
-        $cliente->save();
-
-        return redirect()->back()->with('success', 'Pago registrado correctamente.');
+        // Redirigir al usuario a la página de detalles del pago recién creado
+        return redirect()->route('pagos.show', $pago->id);
     }
+    public function obtenerPorCliente($clienteId)
+{
+    $prestamo = Prestamo::where('id_cliente', $clienteId)->get();
+
+    return response()->json(['prestamo' => $prestamo]);
+  /*       'monto' => $prestamo->monto,
+        'cuota' => $prestamo->cuota,
+        'numero_cuota' => $prestamo->numero_cuota, */
+
+
+
+
+
+}
 }

@@ -1,64 +1,67 @@
 @extends('adminlte::page')
 
-@section('title', 'Registrar Pagos')
+@section('title', 'Obtener Monto de Cuota')
 
 @section('content_header')
-    <h1>Registrar Pagos</h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">pago</h1>
+
+<th>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+</th>
 @stop
 
 @section('content')
-<div class="container">
-    <h1 class="mb-3">Lista de Pagos</h1>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Cliente</th>
-                        <th>Monto</th>
-                        <th>Fecha de Pago</th>
-                        <th>Prestamo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($pagos as $pago)
-                        <tr>
-                            <td>{{ $pago->fecha_pago }}</td>
-                            <td>{{ $pago->prestamo->cliente->nombre_cliente }} {{ $pago->prestamo->cliente->apellido_cliente }}</td>
-                            <td>Bs.{{ $pago->monto_pago }}</td>
-                            <td>Bs.{{ $pago->interes_pago }}</td>
-                            <td>Bs.{{ $pago->capital_pago }}</td>
-                            <td>Bs.{{ $pago->saldo_restante }}</td>
-                            <td>{{ $pago->prestamo->fecha_prestamo }}</td>
-                            <td>Bs.{{ $pago->prestamo->monto_prestamo }}</td>
-                            <td>{{ $pago->prestamo->duracion_prestamo }}</td>
-                            <td>{{ $pago->prestamo->cantidad_cuotas }}</td>
-                            <td>Bs.{{ $pago->prestamo->calculo_cuota }}</td>
-                            <td>
-                                <a href="{{ route('pagos.show', $pago) }}" class="btn btn-primary btn-sm">Ver</a>
-                                <a href="{{ route('pagos.edit', $pago) }}" class="btn btn-secondary btn-sm">Editar</a>
-                                <form method="POST" action="{{ route('pagos.destroy', $pago) }}" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este pago?')">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <div class="d-flex justify-content-center">
-                {!! $pagos->links() !!}
-            </div>
+@if (session('error'))
+<div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+@if (session('success'))
+<div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+<div class="card">
+<div class="card-body">
+    <form method="POST" action="{{ route('pagos.store') }}">
+        @csrf
+
+        <div class="form-group">
+            <label for="cliente_id">Cliente:</label>
+            <select class="form-control" id="cliente_id" name="cliente_id" required>
+                <option value="">Seleccionar cliente</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}" {{ old('cliente_id') == $cliente->id ? 'selected' : '' }}>{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}</option>
+                @endforeach
+            </select>
         </div>
-    </div>
+
+        @if ($prestamo)
+            <div class="form-group">
+                <label for="prestamo_id">Préstamo:</label>
+                <input type="text" class="form-control" id="prestamo_id" value="{{ $prestamo->id }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="monto_cuota">Monto de Cuota:</label>
+                <input type="text" class="form-control" id="monto_cuota" value="{{ $cuota }}" readonly>
+            </div>
+        @endif
+
+        <div class="form-group">
+            <label for="monto">Monto:</label>
+            <input type="number" step="0.01" class="form-control" id="monto" name="monto" value="{{ old('monto') }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Registrar Pago</button>
+    </form>
+</div>
 </div>
 @stop
+@endsection
 
-@section('js')
-    <script>
 
-    </script>
+@section('scripts')
+
+@endsection
 @stop
+
+@section('scripts')
+
+@endsection

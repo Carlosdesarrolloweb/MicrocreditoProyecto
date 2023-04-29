@@ -443,12 +443,12 @@ return [
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
-         /*        [
+                [
                     'text' => 'Registrar Pagos',
                     'route'  => 'pagos.create',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
-                ], */
+                ],
          /*        [
                     'text' => 'ver pagos ',
                     'route'  => 'pagos.index',

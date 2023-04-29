@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,12 +11,7 @@ class Pago extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'id_prestamo',
-        'id_usuario',
-        'monto',
-        'fecha_pago'
-    ];
+    protected $fillable = ['id_prestamo', 'estado', 'Numero_Cuota'];
 
     public function prestamo()
     {
@@ -23,6 +20,6 @@ class Pago extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'id_usuario');
+        return $this->belongsTo(User::class, 'id_usuario');
     }
 }

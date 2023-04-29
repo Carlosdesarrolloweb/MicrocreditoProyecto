@@ -1,17 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DetallePago extends Model
 {
-    protected $fillable = ['fecha_pago', 'monto', 'id_prestamo', 'id_pago'];
+    use HasFactory;
+    public $timestamps = false;
+    protected $table = 'detalle_pago';
 
-    public function pago()
-    {
-        return $this->belongsTo(Pago::class, 'id_pago');
-    }
+    protected $fillable = [
+        'fecha_pago',
+        'monto',
+        'id_prestamo',
+        'id_pago',
+    ];
 
     public function prestamo()
     {
