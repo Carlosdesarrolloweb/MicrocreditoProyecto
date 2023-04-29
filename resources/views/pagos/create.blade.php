@@ -36,7 +36,7 @@
                                         @endforeach
                                     </select>
 
-                                    @error('cliente_id')
+                                    @error('id_cliente')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -44,13 +44,16 @@
                                 </div>
                             </div>
 
+                            <input id="id_prestamo" type="hidden" name="id_prestamo"/>
+
+
                             <div class="form-group row">
-                                <label for="monto" class="col-md-4 col-form-label text-md-right">{{ __('Monto del Préstamo') }}</label>
+                                <label for="monto_prestamo" class="col-md-4 col-form-label text-md-right">{{ __('Monto del Préstamo') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="monto" type="text" class="form-control @error('monto') is-invalid @enderror" name="monto" readonly required autocomplete="monto">
+                                    <input id="monto_prestamo" type="text" class="form-control @error('monto_prestamo') is-invalid @enderror" name="monto_prestamo" readonly required autocomplete="monto_prestamo">
 
-                                    @error('monto')
+                                    @error('monto_prestamo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -72,6 +75,8 @@
                                 </div>
                             </div>
 
+
+
                             <div class="form-group row">
                                 <label for="fecha_pago" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de Pago') }}</label>
 
@@ -86,7 +91,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+       {{--                      <div class="form-group row">
                                 <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
                                 <div class="col-md-6">
@@ -101,15 +106,15 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
-                                <label for="numero_cuota" class="col-md-4 col-form-label text-md-right">{{ __('Número de Cuota') }}</label>
+                                <label for="Numero_Cuota" class="col-md-4 col-form-label text-md-right">{{ __('Número de Cuota') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="numero_cuota" type="number" class="form-control @error('numero_cuota') is-invalid @enderror" name="numero_cuota" value="{{ old('numero_cuota') }}" required readonly>
+                                    <input id="Numero_Cuota" type="text" class="form-control @error('Numero_Cuota') is-invalid @enderror" name="Numero_Cuota" value="{{ old('Numero_Cuota') }}" required readonly>
 
-                                    @error('numero_cuota')
+                                    @error('Numero_Cuota')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -118,12 +123,23 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="monto" class="col-md-4 col-form-label text-md-right">{{ __('Monto a Pagar') }}</label>
+                                <label for="monto_pago" class="col-md-4 col-form-label text-md-right">{{ __('Monto a Pagar') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="monto" type="number" step="0.01" min="0.01" class="form-control @error('monto') is-invalid @enderror" name="monto" value="{{ old('monto') }}" required>
+                                    <input id="monto_pago" type="text"  class="form-control @error('monto_pago') is-invalid @enderror" name="monto_pago" value="{{ old('monto_pago') }}" required>
 
                                     @error('monto')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
+                                <div class="col-md-6">
+                                    <textarea id="descripcion" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" rows="5" cols="50" required>{{ old('descripcion') }}</textarea>
+                                    @error('descripcion')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -150,9 +166,10 @@
     $(document).ready(function() {
         // Obtener los elementos del formulario
         var clienteSelect = $('#id_cliente');
-        var montoInput = $('#monto');
+        var idprestamo =$('#id_prestamo');
+        var montoInput = $('#monto_prestamo');
         var cuotaInput = $('#cuota');
-        var numeroCuotaInput = $('#numero_cuota');
+        var numeroCuotaInput = $('#Numero_Cuota');
 
         // Agregar un evento de cambio al selector de cliente
         clienteSelect.change(function() {
@@ -167,9 +184,10 @@
                 success: function(response) {
                     console.log(response)
                     // Llenar los campos con los datos del préstamo
-                    montoInput.val(response.prestamo[0].monto_prestamo);
-                    cuotaInput.val(response.prestamo[0].calculo_cuota);
-                    numeroCuotaInput.val(response.prestamo[0].cantidad_cuotas);
+                    montoInput.val(response.prestamo.monto_prestamo);
+                    cuotaInput.val(response.prestamo.calculo_cuota);
+                    numeroCuotaInput.val(response.cuota);
+                    idprestamo.val(response.prestamo.id);
                 },
                 error: function(response) {
                     console.log(response); // Manejar errores
