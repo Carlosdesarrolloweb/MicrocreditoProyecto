@@ -20,11 +20,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-body">
-                    <table class="table">
-                        <a href="#" class="btn btn-primary" id="download-btn">Descargar en Excel</a>
-                        <thead class="table-dark" style="text-align: center">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="bg-dark text-white">
                             <tr>
 
                                 <th>Cliente</th>

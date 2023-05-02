@@ -17,7 +17,7 @@
 <div class="box">
     <div class="box-body">
         <table class="table table-striped">
-            <thead>
+            <thead class="bg-dark text-white">
                 <tr>
 
                     <th>Garantía</th>

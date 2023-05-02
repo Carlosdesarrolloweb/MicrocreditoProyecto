@@ -449,12 +449,12 @@ return [
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
                 ],
-         /*        [
-                    'text' => 'ver pagos ',
+               [
+                    'text' => 'Pagos Realizados ',
                     'route'  => 'pagos.index',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
-                ], */
+                ],
                 [
                     'text' => 'Prestamos Realizados',
                     'route'  => 'prestamos.index',

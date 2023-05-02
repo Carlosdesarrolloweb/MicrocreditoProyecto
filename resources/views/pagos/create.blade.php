@@ -90,24 +90,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-       {{--                      <div class="form-group row">
-                                <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
-
-                                <div class="col-md-6">
-                                    <select id="estado" class="form-control @error('estado') is-invalid @enderror" name="estado" required>
-                                        <option value="0" {{ old('estado') == 0 ? 'selected' : '' }}>PAGO EN FECHA</option>
-                                        <option value="1" {{ old('estado') == 1 ? 'selected' : '' }}>PAGO CON RETRASO</option>
-                                    </select>
-
-                                    @error('estado')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
-
                             <div class="form-group row">
                                 <label for="Numero_Cuota" class="col-md-4 col-form-label text-md-right">{{ __('Número de Cuota') }}</label>
 
@@ -154,6 +136,12 @@
                                     </button>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @stop
 
 

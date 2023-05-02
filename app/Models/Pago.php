@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pago extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['id_prestamo','fecha_pago','estado','Numero_Cuota','monto_pago','descripcion'];
 
-    protected $fillable = ['id_prestamo', 'estado', 'Numero_Cuota'];
 
     public function prestamo()
     {

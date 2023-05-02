@@ -34,21 +34,21 @@ class PagoController extends Controller
     {
         // Validar los datos del formulario
         $validatedData = $request->validate([
-            'id_cliente' => 'required',
+            // 'id_cliente' => 'required',
             'id_prestamo'=> 'required',
             // 'monto' => 'required',
             // 'cuota' => 'required',
             'fecha_pago' => 'required',
-            'estado' => 'required|boolean',
+            // 'estado' => 'required|boolean',
             'Numero_Cuota' => 'required|integer',
             'monto_pago' => 'required',
             'descripcion' => 'required'
 
         ]);
-
+        // dd($request);
         // Crear un nuevo pago
         $pago = new Pago();
-        $pago->id_cliente = $request->id_cliente;
+        // $pago->id_cliente = $request->id_cliente;
         $pago->id_prestamo=$request->id_prestamo;
         $pago->fecha_pago = $request->fecha_pago;
         $pago->estado = $request->cuota >= $request->monto_pago ? true : false;
@@ -58,8 +58,15 @@ class PagoController extends Controller
 
         $pago->save();
 
+        $prestamo = Prestamo::findOrFail($request->id_prestamo);
+        $montoactual=$prestamo->monto_cancelado;
+        $prestamo->monto_cancelado=($montoactual+$request->monto_pago);
+        $prestamo->save();
+
+
         // Redirigir al usuario a la página de detalles del pago recién creado
-        return redirect()->route('pagos.show', $pago->id);
+        // return redirect()->route('pagos.show', $pago->id);
+        return redirect()->route('pagos.index');
     }
     public function obtenerPorCliente($clienteId)
     {
@@ -78,4 +85,53 @@ class PagoController extends Controller
         return intval(Pago::where('id_prestamo',$id_prestamo)->sum('id_prestamo'))+1;
 
     }
+
+    public function index()
+{
+    $pagos = Pago::all();
+
+    return view('pagos.index', compact('pagos'));
+}
+
+public function edit($id)
+{
+    $pago = Pago::findOrFail($id);
+    $clientes = Cliente::all();
+    $prestamo = Prestamo::findOrFail($pago->id_prestamo);
+
+    return view('pagos.edit', compact('pago', 'clientes', 'prestamo'));
+}
+
+public function update(Request $request, $id)
+{
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'id_prestamo'=> 'required',
+        'fecha_pago' => 'required',
+        'Numero_Cuota' => 'required|integer',
+        'monto_pago' => 'required',
+        'descripcion' => 'required'
+    ]);
+
+    // Encontrar el pago a actualizar
+    $pago = Pago::findOrFail($id);
+
+    // Actualizar los datos del pago
+    $pago->id_prestamo = $request->id_prestamo;
+    $pago->fecha_pago = $request->fecha_pago;
+    $pago->estado = $request->cuota >= $request->monto_pago ? true : false;
+    $pago->Numero_Cuota = $request->Numero_Cuota;
+    $pago->monto_pago  = $request->monto_pago ;
+    $pago->descripcion = $request->descripcion;
+
+    $pago->save();
+
+    $prestamo = Prestamo::findOrFail($request->id_prestamo);
+    $montoactual = $prestamo->monto_cancelado;
+    $prestamo->monto_cancelado = ($montoactual + $request->monto_pago);
+    $prestamo->save();
+
+    // Redirigir al usuario a la página de detalles del pago actualizado
+    return redirect()->route('pagos.show', $pago->id);
+}
 }

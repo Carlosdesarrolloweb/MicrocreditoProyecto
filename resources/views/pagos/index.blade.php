@@ -1,67 +1,69 @@
 @extends('adminlte::page')
 
-@section('title', 'Obtener Monto de Cuota')
+@section('title', 'Nuevo Préstamo')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">pago</h1>
+    <center>
+        <h1 style="text-align: center;font-weight: bold; color: black;">PAGOS REALIZADOS</h1>
 
-<th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
-</th>
+        <th>
+            <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ date('d/m/Y') }}</P>
+        </th>
+
+    </center>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @stop
 
 @section('content')
-@if (session('error'))
-<div class="alert alert-danger">{{ session('error') }}</div>
-@endif
-@if (session('success'))
-<div class="alert alert-success">{{ session('success') }}</div>
-@endif
-
-<div class="card">
-<div class="card-body">
-    <form method="POST" action="{{ route('pagos.store') }}">
-        @csrf
-
-        <div class="form-group">
-            <label for="cliente_id">Cliente:</label>
-            <select class="form-control" id="cliente_id" name="cliente_id" required>
-                <option value="">Seleccionar cliente</option>
-                @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->id }}" {{ old('cliente_id') == $cliente->id ? 'selected' : '' }}>{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        @if ($prestamo)
-            <div class="form-group">
-                <label for="prestamo_id">Préstamo:</label>
-                <input type="text" class="form-control" id="prestamo_id" value="{{ $prestamo->id }}" readonly>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-dark text-white">
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Prestamo</th>
+                                    <th>Fecha de pago</th>
+                                    <th>Monto de pago</th>
+                                    <th>Descripción</th>
+                                    <th>Acciones</th> <!-- Agregamos una nueva columna para las acciones -->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($pagos as $pago)
+                                    <tr>
+                                        <td>{{ $pago->prestamo->cliente->nombre_cliente}} {{ $pago->prestamo->cliente->apellido_cliente }}</td>
+                                        <td>{{ $pago->prestamo->monto_prestamo }}</td>
+                                        <td>{{ $pago->fecha_pago }}</td>
+                                        <td>{{ $pago->monto_pago }}</td>
+                                        <td>{{ $pago->descripcion }}</td>
+                                        <td>
+                                            <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-primary btn-sm">Editar</a> <!-- Agregamos el botón Editar que redirige a la vista de edición -->
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="monto_cuota">Monto de Cuota:</label>
-                <input type="text" class="form-control" id="monto_cuota" value="{{ $cuota }}" readonly>
-            </div>
-        @endif
-
-        <div class="form-group">
-            <label for="monto">Monto:</label>
-            <input type="number" step="0.01" class="form-control" id="monto" name="monto" value="{{ old('monto') }}" required>
         </div>
-
-        <button type="submit" class="btn btn-primary">Registrar Pago</button>
-    </form>
-</div>
-</div>
-@stop
-@endsection
-
-
-@section('scripts')
-
-@endsection
+    </div>
 @stop
 
-@section('scripts')
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-@endsection
+@section('js')
+    <script src="{{ asset('vendor/jquery-table2excel/dist/jquery.table2excel.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+    </script>
+@stop
