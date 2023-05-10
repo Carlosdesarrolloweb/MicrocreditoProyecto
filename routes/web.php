@@ -83,11 +83,12 @@ Route::get('/', function () {
 
     Route::post('/clientes',[App\Http\Controllers\ClienteController::class,'index'])->name('clientesv');
     Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv');
-    Route::get('/clientes/buscar', [App\Http\Controllers\ClienteController::class, 'buscar'])->name('clientes.buscar');
+    // Route::get('/clientes/buscar', [App\Http\Controllers\ClienteController::class, 'buscar'])->name('clientes.buscar');
     Route::get('/clientes/mostrar/{criterio}', [ClienteController::class, 'mostrarCliente'])->name('clientes.mostrar');
-    // Route::get('/clientes/buscar', 'ClientesController@buscar')->name('clientes.buscar');
+    Route::post('/clientes', [ClienteController::class, 'buscarCliente'])->name('buscar.cliente');
 
 
+    
 
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
     Route::post('/usersv', [UsersController::class,'store'])->name('usersv');
@@ -163,7 +164,7 @@ Route::get('/', function () {
    Route::get('/pagos/{id}', [PagoController::class, 'show'])->name('pagos.show');
    Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
    Route::get('/pagos/{id}/edit', [PagoController::class, 'edit'])->name('pagos.edit');
-   Route::put('/pagos/{pago}', [PagoController::class, 'update'])->name('pagos.update');
+   Route::put('/pagos/{id}', [PagoController::class, 'update'])->name('pagos.update');
 
 
 

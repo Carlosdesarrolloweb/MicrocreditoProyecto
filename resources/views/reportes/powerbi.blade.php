@@ -17,7 +17,7 @@
 @stop
 
 @section('content')
-<div class="container">
+ <div class="container">
     <div class="style:bg-red">
         <iframe title="REPORTEPRESTAMOS" width="1400" height="1000" src="https://app.powerbi.com/reportEmbed?reportId=089e77df-542d-4172-b65b-518c460a81ff&autoAuth=true&ctid=b690017d-ae11-42b5-9f37-74728c6d266d" frameborder="0" allowFullScreen="true"></iframe>
 

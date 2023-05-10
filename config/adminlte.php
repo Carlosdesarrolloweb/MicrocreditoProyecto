@@ -527,7 +527,7 @@ return [
                 ],
                 [
                     'text' => 'Buscar Clientes',
-                    'route'  => 'clientes.buscar',
+                    'route'  => 'buscar.cliente',
                     'icon'    => 'fa fa-users',
                     'icon_color' => 'red',
                 ],

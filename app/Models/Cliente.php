@@ -57,6 +57,7 @@ class Cliente extends Model
         return $this->belongsTo(Zona::class);
     }
 
+    //se modifico prestamos por prestamo en caso de error volver atras
     public function prestamos()
     {
         return $this->hasMany(Prestamo::class, 'id_cliente');

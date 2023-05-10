@@ -19,26 +19,20 @@
         <form action="{{ route('pagos.update', $pago->id) }}" method="POST">
             @csrf
             @method('PUT')
-            {{-- <div class="form-group">
-                <label for="id_cliente">Cliente</label>
-                <select name="id_cliente" id="id_cliente" class="form-control" disabled>
-                    <option value="{{ $pago->cliente->id }}">{{ $pago->cliente->nombre }}</option>
-                </select>
-            </div> --}}
-            <div class="form-group">
+{{--             <div class="form-group">
                 <label for="id_prestamo">Préstamo</label>
                 <select name="id_prestamo" id="id_prestamo" class="form-control" disabled>
                     <option value="{{ $pago->prestamo->id }}">{{ $pago->prestamo->id }}</option>
                 </select>
-            </div>
-            <div class="form-group">
+            </div> --}}
+{{--             <div class="form-group">
                 <label for="fecha_pago">Fecha de pago</label>
                 <input type="date" name="fecha_pago" id="fecha_pago" class="form-control" value="{{ $pago->fecha_pago }}">
-            </div>
-            <div class="form-group">
+            </div> --}}
+        {{--     <div class="form-group">
                 <label for="Numero_Cuota">Número de cuota</label>
                 <input type="number" name="Numero_Cuota" id="Numero_Cuota" class="form-control" value="{{ $pago->Numero_Cuota }}">
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="monto_pago">Monto de pago</label>
                 <input type="number" name="monto_pago" id="monto_pago" class="form-control" value="{{ $pago->monto_pago }}">

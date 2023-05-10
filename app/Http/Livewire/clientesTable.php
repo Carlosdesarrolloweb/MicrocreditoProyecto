@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
+use Illuminate\Mail\Markdown;
+
 
 final class clientesTable extends PowerGridComponent
 {
@@ -103,7 +105,11 @@ final class clientesTable extends PowerGridComponent
             ->addColumn('estado_cliente')
             ->addColumn('nombre_zona', function (Cliente $model) {
                 return $model->zona->nombre_zona;
+            })
+            ->addColumn('imagen_cliente', function (Cliente $model) {
+                return '<img src="'.$model->fotocarnet->direccion_imagen.'" width="75px" height="75px">';
             });
+
     }
 
     /*
@@ -174,8 +180,11 @@ final class clientesTable extends PowerGridComponent
             Column::make('NOMBRE ZONA', 'nombre_zona')
                 ->makeInputRange(),
 
-        ]
-;
+            Column::make('IMAGEN CLIENTE', 'fotocarnet')
+          /*    ->asHtml()
+             ->centered(), */
+
+        ];
     }
 
     /*

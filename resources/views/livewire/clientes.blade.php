@@ -11,18 +11,14 @@
     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
         {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
 </th>
-{{-- @livewireStyles
+@livewireStyles
 <link rel="stylesheet" href="{{ asset('vendor/powergrid/powergrid.css') }}"> --}}
 
 @stop
 
 @section('content')
-{{--
-    <div class="style:bg-red">
-        <livewire:clientes-table/>
-      </div>
- --}}
- <div class="container">
+
+
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -56,7 +52,7 @@
             <tr scope="col">
 
             <th scope="col">CARNET</th>
-            <th scope="col">NOMBRE</th>
+            <th scope="col">NOMBRE </th>
             <th scope="col">ZONA</th>
             <th scope="col">ESTADO</th>
             <th scope="col">IMAGENES</th>
@@ -113,7 +109,8 @@
             </div>
         </div>
     </div>
-</div>
+
+
 @stop
 
 @section('css')

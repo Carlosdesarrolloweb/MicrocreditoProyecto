@@ -15,7 +15,7 @@
 @stop
 
 @section('content')
-<div class="container">
+{{-- <div class="container"> --}}
     <div class="style:bg-red">
         <livewire:prestamo-table/>
 

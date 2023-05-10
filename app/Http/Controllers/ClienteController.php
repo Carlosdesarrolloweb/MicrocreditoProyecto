@@ -189,7 +189,7 @@ class ClienteController extends Controller
         return response()->json(['success' => true]);
         return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok'); */
     }
-    public function buscar(Request $request)
+/*     public function buscar(Request $request)
     {
         $cliente_criterio = $request->input('criterio');
         $cliente = Cliente::where('Carnet_cliente', 'like', '%' . $cliente_criterio . '%')
@@ -203,7 +203,7 @@ class ClienteController extends Controller
             $clientes = Cliente::all();
             return view('clientes.buscar', compact('clientes', 'cliente_criterio'));
         }
-    }
+    } */
     public function mostrarCliente($criterio)
     {
         $clientes = Cliente::where('Carnet_cliente', 'like', '%' . $criterio . '%')
@@ -230,6 +230,26 @@ class ClienteController extends Controller
         $cantidad_garantias = Garantia::count();
 
         return view('dashboard', compact('clientes', 'cantidad_clientes', 'cantidad_clientes_con_prestamo', 'cantidad_garantias'));
+    }
+
+    public function buscarCliente(Request $request)
+    {
+        if ($request->isMethod('post') || $request->isMethod('get')) {
+            $clientes = Cliente::query();
+            $query = $request->input('query');
+
+            if (!empty($query)) {
+                $clientes->where('Carnet_cliente', 'LIKE', '%' . $query . '%')
+                         ->orWhere('nombre_cliente', 'LIKE', '%' . $query . '%')
+                         ->orWhere('apellido_cliente', 'LIKE', '%' . $query . '%');
+            }
+
+            $clientes = $clientes->with('prestamos')->get();
+
+            return view('clientes.buscar', compact('clientes'));
+        } else {
+            return view('clientes.buscar');
+        }
     }
 
 

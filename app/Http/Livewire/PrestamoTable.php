@@ -125,7 +125,7 @@ final class PrestamoTable extends PowerGridComponent
         return strtolower(e($model->duracion_prestamo));
     })
     ->addColumn('calculo_cuota')
-    ->addColumn('garantia')
+    ->addColumn('ganancia')
     ->addColumn('cantidad_cuotas')
     ->addColumn('monto_cancelado')
     ->addColumn('monto_prestado')
@@ -165,7 +165,7 @@ final class PrestamoTable extends PowerGridComponent
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('DURACION PRESTAMO', 'duracion_prestamo')
+            Column::make('DURACION (MESES) ', 'duracion_prestamo')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
@@ -175,7 +175,7 @@ final class PrestamoTable extends PowerGridComponent
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('GANANCIA', 'garantia')
+            Column::make('GANANCIA', 'ganancia')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
