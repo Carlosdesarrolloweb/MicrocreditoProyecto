@@ -105,10 +105,10 @@ final class clientesTable extends PowerGridComponent
             ->addColumn('estado_cliente')
             ->addColumn('nombre_zona', function (Cliente $model) {
                 return $model->zona->nombre_zona;
-            })
-            ->addColumn('imagen_cliente', function (Cliente $model) {
-                return '<img src="'.$model->fotocarnet->direccion_imagen.'" width="75px" height="75px">';
             });
+    /*         ->addColumn('imagen_cliente', function (Cliente $model) {
+                return '<img src="'.$model->fotocarnet->direccion_imagen.'" width="75px" height="75px">';
+            }); */
 
     }
 
@@ -180,7 +180,7 @@ final class clientesTable extends PowerGridComponent
             Column::make('NOMBRE ZONA', 'nombre_zona')
                 ->makeInputRange(),
 
-            Column::make('IMAGEN CLIENTE', 'fotocarnet')
+          /*   Column::make('IMAGEN CLIENTE', 'fotocarnet')
           /*    ->asHtml()
              ->centered(), */
 

@@ -16,7 +16,7 @@
 
 @section('content')
 {{-- <div class="container"> --}}
-    <div class="style:bg-red">
+
         <livewire:clientes-table/>
       </div>
     </div>
@@ -32,4 +32,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js"></script>
          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    @stop
+
+
+@stop
