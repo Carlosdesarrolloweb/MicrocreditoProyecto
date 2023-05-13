@@ -23,19 +23,20 @@
     </x-slot>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Buscar cliente') }}</div>
-                <div class="card-body">
-                    <form action="" method="get">
-                        <div class="form-row">
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="texto" value="">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Buscar cliente') }}</div>
+                    <div class="card-body">
+                        <form id="search-form" method="POST" action="{{ route('clientes.buscarClientes') }}">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" name="search_term" class="form-control" placeholder="Ingrese el término de búsqueda">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <input type="submit" class="btn btn-primary" value="Buscar">
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -43,7 +44,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead class="bg-dark text-white">
-                                <tr scope="col" >
+                                <tr scope="col">
                                     <th scope="col">CARNET</th>
                                     <th scope="col">NOMBRE </th>
                                     <th scope="col">ZONA</th>
@@ -72,23 +73,26 @@
                                         </button>
                                         <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
                                             <i class="fas fa-image"></i>
-                                            <td>
-                                                <a href="{{ route('clientes.editarclientes',$clientesv->id) }}" type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
-                                            </td>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('clientes.editarclientes',$clientesv->id) }}" type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('clientes.eliminarclientes',$clientesv->id) }}" class="d-inline formulario-eliminar">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> ELIMINAR</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $Clientes->links('pagination::bootstrap-5') }}
+                    </div>
 
-                                            <td>
-                                                <form action="{{ route('clientes.eliminarclientes',$clientesv->id) }}" class="d-inline formulario-eliminar">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> ELIMINAR</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
                         <center>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -107,7 +111,9 @@
                         </center>
                     </div>
                 </div>
-                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('css')
@@ -180,6 +186,31 @@
 <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Agregar un evento de escucha para el envío del formulario
+    $('#search-form').submit(function(event) {
+        event.preventDefault(); // Prevenir la acción predeterminada del envío del formulario
+
+        // Obtener el término de búsqueda del campo de entrada de texto
+        var searchTerm = $('#search_term').val();
+
+        // Enviar una solicitud Ajax al servidor
+        $.ajax({
+            url: "{{ route('clientes.buscarClientes') }}",
+            method: "POST",
+            data: { texto: searchTerm, _token: "{{ csrf_token() }}" },
+            dataType: "html",
+            success: function(searchResults) {
+                // Procesar los datos de respuesta y mostrar los resultados en la página
+                $('#search-results').html(searchResults);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+</script>
 <script>
     $(function() {
         $('.thumbnail').click(function() {

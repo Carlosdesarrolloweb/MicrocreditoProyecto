@@ -125,7 +125,22 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script> -->
+    <script> console.log('Hi!'); </script>
+    <script>
+    // ALERTA DEL BOTON GUARDAR
+
+    $(document).ready(function() {
+    $('#prestamoForm').submit(function(e) {
+
+
+        // Si se llega a este punto, todos los campos están completos
+        Swal.fire({
+        icon: 'success',
+        title: 'Guardado exitosamente',
+        text: 'Tu registro ha sido guardado exitosamente.'
+        });
+    });
+    </script>
 @stop
 
 

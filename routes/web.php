@@ -80,6 +80,7 @@ Route::get('/', function () {
     //clientes
     Route::post('/clientes/crearclientes',[App\Http\Controllers\ClienteController::class,'create'])->name('clientes.crearclientes');
     Route::get('/clientes/show',[App\Http\Controllers\ClienteController::class,'show'])->name('clientes.show');
+    Route::post('/buscar-clientes', [App\Http\Controllers\ClienteController::class,'buscarClientes'])->name('clientes.buscarClientes');
 
     Route::post('/clientes',[App\Http\Controllers\ClienteController::class,'index'])->name('clientesv');
     Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv');
@@ -88,7 +89,7 @@ Route::get('/', function () {
     Route::post('/clientes', [ClienteController::class, 'buscarCliente'])->name('buscar.cliente');
 
 
-    
+
 
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
     Route::post('/usersv', [UsersController::class,'store'])->name('usersv');

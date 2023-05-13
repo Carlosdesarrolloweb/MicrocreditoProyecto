@@ -525,12 +525,12 @@ return [
                     'icon'    => 'fa fa-users',
                     'icon_color' => 'red',
                 ],
-                [
+     /*            [
                     'text' => 'Buscar Clientes',
                     'route'  => 'buscar.cliente',
                     'icon'    => 'fa fa-users',
                     'icon_color' => 'red',
-                ],
+                ], */
 
                 [
                     'text' => 'Crear Clientes',
@@ -538,12 +538,12 @@ return [
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
-                [
+      /*           [
                     'text' => 'Clientes Creados',
                     'route'  => 'clientesv',
                     'icon'    => 'fa fa-user-times',
                     'icon_color' => 'red',
-                ],
+                ], */
          /*        [
                     'text' => 'Asignar Garantias',
                     'url'  => '#',
