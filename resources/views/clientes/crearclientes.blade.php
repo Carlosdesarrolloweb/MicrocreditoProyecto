@@ -4,18 +4,23 @@
 
 @section('content_header')
 <h1 style="text-align: center;font-weight: bold; color: black;">CREAR NUEVO CLIENTE</h1>
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 @stop
 
 @section('content')
-
-
-
-        <form method="post" action="{{ route('clientes.crearclientes') }}" enctype="multipart/form-data">
+        <form id="clienteForm" method="post" action="{{ route('clientes.crearclientes') }}" enctype="multipart/form-data">
             @csrf
             <div class="container">
-                <p> </p>
-                <p>  </p>
             <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="col-md-12 text-right mb-3">
+                        <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
+                            <i class="fas fa-times-circle mr-2"></i>Limpiar
+                        </button>
+                    </div>
+                </div>
                 <div class="form-group col-md-6">
                     <x-jet-label for="Carnet_cliente" value="{{ __('CARNET/DNI') }}" />
                     <x-jet-input  maxlength="15" id="Carnet_cliente" class="form-control" type="text" name="Carnet_cliente" :value="old('Carnet_cliente')" required autofocus autocomplete="Carnet_cliente" />
@@ -103,44 +108,89 @@
                 </div>
             </div>
             <div class="flex items-center justify-end mt-4">
-
-
-                <x-jet-button  class="btn btn-success btn-lg mb-2"><i class='fa fa-user-plus' ></i>
-                    {{ __('CREAR') }}
+                <x-jet-button class="btn btn-success btn-lg d-flex align-items-center ml-auto" onclick="confirmSave()">
+                  <i class="fa fa-save mr-2" style="font-size: 1.8em;"></i>
+                  <h4 class="mb-0">{{ __('Crear') }}</h4>
                 </x-jet-button>
-
-            </div>
+              </div>
         </div>
         </form>
-
-
-
-
-
-
 @stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <style>
+        /* Aumentar el tamaño del botón y la fuente */
+        .btn-lg {
+            font-size: 1.25rem;
+            padding: 0.5rem 1rem;
+        }
+        /* Agregar margen derecho al icono */
+        .fa-times-circle {
+            margin-right: 0.5rem;
+        }
+    </style>
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
     <script>
-    // ALERTA DEL BOTON GUARDAR
+        // Selecciona el botón "Limpiar" y agrega un evento click
+        document.getElementById('btnLimpiar').addEventListener('click', function(event) {
+            // Evita que se recargue la página cuando se hace click en el botón
+            event.preventDefault();
 
-    $(document).ready(function() {
-    $('#prestamoForm').submit(function(e) {
+            // Establece el valor de cada campo del formulario a su valor predeterminado
+            document.getElementById('Carnet_cliente').value = '';
+            document.getElementById('nombre_cliente').value = '';
+            document.getElementById('apellido_cliente').value = '';
+            document.getElementById('zona_id').selectedIndex = 0; // selecciona el primer elemento de la lista de opciones
+            document.getElementById('direccion_cliente').value = '';
+            document.getElementById('email_cliente').value = '';
+            document.getElementById('telefono_cliente').value = '';
+            document.getElementById('edad_cliente').value = '';
+            document.getElementById('telefono_referencia').value = '';
+            document.getElementById('estado_cliente').selectedIndex = 0; // selecciona el primer elemento de la lista de opciones
+        });
 
+           // ALERTA DEL BOTON GUARDAR
 
-        // Si se llega a este punto, todos los campos están completos
+           $(document).ready(function() {
+    $('#clienteForm').submit(function(e) {
+        e.preventDefault(); // previene el envío del formulario
+
+        // Mostrar alerta de confirmación antes de enviar el formulario
         Swal.fire({
-        icon: 'success',
-        title: 'Guardado exitosamente',
-        text: 'Tu registro ha sido guardado exitosamente.'
+            title: 'Esta Seguro?',
+            text: "Se guardaran todos los datos del Cliente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Crear Cliente!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Enviar el formulario
+                this.submit();
+
+                // Mostrar mensaje de éxito después de enviar el formulario
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se Creo Correctamente al Cliente',
+                    text: 'Tu registro ha sido guardado exitosamente.'
+                });
+            }
         });
     });
+});
+
+
     </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
 @stop
 
 

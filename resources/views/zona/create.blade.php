@@ -20,10 +20,8 @@
                     @csrf
                     <div class="form-group">
                         <label for="cod_zona">Código de Zona</label>
-                        <input type="text" class="form-control @error('cod_zona') is-invalid @enderror" id="cod_zona" name="cod_zona" value="{{ old('cod_zona') }}" required>
-                        @error('cod_zona')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <input type="text" class="form-control" id="cod_zona" name="cod_zona" value="{{ old('cod_zona') }}" required onblur="buscarZona()">
+                        <div class="invalid-feedback" id="mensaje-error"></div>
                     </div>
                     <div class="form-group">
                         <label for="nombre_zona">Nombre de Zona</label>
@@ -51,4 +49,50 @@
 
 @section('js')
     <script> console.log('Hi!'); </script> -->
+    <script>
+        function buscarZona() {
+            var cod_zona = document.getElementById('cod_zona').value;
+
+            if (cod_zona != '') {
+                $.ajax({
+                    url: '/buscar-zona/' + cod_zona,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.nombre_zona != '') {
+                            document.getElementById('nombre_zona').value = response.nombre_zona;
+                        } else {
+                            document.getElementById('nombre_zona').value = '';
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        document.getElementById('mensaje-error').textContent = 'Ha ocurrido un error al buscar la zona';
+                    }
+                });
+            }
+        }
+    </script>
+    {{-- <script>
+        // Obtener elementos DOM
+        const codZona = document.getElementById('cod_zona');
+        const nombreZona = document.getElementById('nombre_zona');
+
+        // Agregar listener al evento input en el campo cod_zona
+        codZona.addEventListener('input', function() {
+            // Hacer una petición AJAX para obtener la zona correspondiente al código
+            fetch('{{ route('zonas.getByName') }}?cod_zona=' + codZona.value)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        // Si se encuentra la zona, actualizar el valor del campo nombre_zona
+                        nombreZona.value = data.nombre_zona;
+                    } else {
+                        // Si no se encuentra la zona, borrar el valor del campo nombre_zona
+                        nombreZona.value = '';
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    </script> --}}
 @stop

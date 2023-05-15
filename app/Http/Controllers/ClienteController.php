@@ -10,6 +10,8 @@ use App\Helper\Images;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Zona;
 use App\Models\Garantia;
+// use Illuminate\Database\Eloquent\Collection\links;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class ClienteController extends Controller
@@ -20,8 +22,7 @@ class ClienteController extends Controller
     }
     public function index()
     {
-
-        $clientes = Cliente::orderBy('id', 'desc')->paginate(10);
+        $clientes = Cliente::orderBy('id', 'desc')->get();
         return view('livewire.clientes', ['Clientes' => $clientes]);
     }
     public function store(Request $request)
@@ -157,7 +158,9 @@ class ClienteController extends Controller
         $clientesv->zona_id = $request->zona_id;
         $clientesv->save();
         $clientesv=Cliente::all();
-        return view('livewire.Clientes',['Clientes'=>$clientesv ]);
+        // return view('livewire.clientes',['Clientes'=>$clientesv ]);
+
+        return redirect()->route('clientesv');
     }
 
     /**
@@ -170,11 +173,7 @@ class ClienteController extends Controller
     {
         Cliente::find($id)->delete();
         $clientesv=Cliente::all();
-        return view('livewire.Clientes',['Clientes'=>$clientesv ])->with('eliminaru','ok');
-
-
-
-        return response()->json(['success' => true]);
+        return redirect()->route('clientesv');
 
 
     }

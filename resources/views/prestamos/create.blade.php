@@ -199,17 +199,35 @@
 
 
 
-    // ALERTA DEL BOTON GUARDAR
+
+
+         // ALERTA DEL BOTON GUARDAR
 
     $(document).ready(function() {
-    $('#prestamoForm').submit(function(e) {
+        $('#prestamoForm').submit(function(e) {
+        e.preventDefault(); // previene el envío del formulario
 
-
-        // Si se llega a este punto, todos los campos están completos
+        // Mostrar alerta de confirmación antes de enviar el formulario
         Swal.fire({
-        icon: 'success',
-        title: 'Guardado exitosamente',
-        text: 'Tu registro ha sido guardado exitosamente.'
+            title: 'Esta Seguro?',
+            text: "Se Registrara un Prestamo!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Otorgar Prestamo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Enviar el formulario
+                this.submit();
+
+                // Mostrar mensaje de éxito después de enviar el formulario
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Prestamo Registrado',
+                    text: 'Tu registro ha sido guardado exitosamente.'
+                });
+            }
         });
     });
 

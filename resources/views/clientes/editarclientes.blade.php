@@ -10,13 +10,14 @@
 
 
 
-        <form method="get" action="{{ route('clientes.update',$clientesv->id) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('clientes.update',$clientesv->id) }}" enctype="multipart/form-data">
             @csrf
             <div class="container">
                 <p> </p>
                 <p>  </p>
             <div class="form-row">
-                <input type="hidden" value="{{$clientesv->id}}"/>
+                @method('post')
+                <input type="hidden" name="id" value="{{ $clientesv->id }}">
                 <div class="form-group col-md-6">
                     <x-jet-label for="Carnet_cliente" value="{{ __('CARNET/DNI') }}"/>
                     <x-jet-input  maxlength="15" id="Carnet_cliente" class="form-control" type="text" name="Carnet_cliente" value="{{$clientesv->Carnet_cliente}}" required autofocus autocomplete="Carnet_cliente" />

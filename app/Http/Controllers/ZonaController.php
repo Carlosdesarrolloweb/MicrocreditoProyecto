@@ -37,13 +37,28 @@ class ZonaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cod_zona' => 'required',
+            'cod_zona' => 'required|unique:zonas',
             'nombre_zona' => 'required',
         ]);
 
-        $zona = Zona::create($request->all());
+        // Busca una zona con el mismo código
+        $zona = Zona::where('cod_zona', $request->cod_zona)->first();
 
-        return back()->with('success', 'Zona creada correctamente.');
+        if ($zona) {
+            return redirect()->back()
+                             ->withInput($request->input())
+                             ->with('success', 'Ya existe una zona con este código.')
+                             ->with('zona', $zona);
+        }
+
+        // Crea la zona
+        Zona::create([
+            'cod_zona' => $request->cod_zona,
+            'nombre_zona' => $request->nombre_zona,
+        ]);
+
+        return redirect()->route('zonas.index')
+                         ->with('success', 'Zona creada exitosamente.');
     }
     /**
      * Display the specified resource.
@@ -94,5 +109,22 @@ class ZonaController extends Controller
     public function destroy(Zona $zona)
     {
         //
+    }
+    public function buscarZona($cod_zona)
+    {
+    $zona = Zona::where('cod_zona', $cod_zona)->first();
+
+    if ($zona) {
+        return response()->json(['nombre_zona' => $zona->nombre_zona]);
+    }
+
+    return response()->json(['nombre_zona' => '']);
+    }
+
+    public function getByName(Request $request)
+    {
+    $zona = Zona::where('cod_zona', $request->cod_zona)->first();
+
+    return response()->json($zona);
     }
 }

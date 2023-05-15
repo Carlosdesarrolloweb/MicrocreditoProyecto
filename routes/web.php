@@ -97,9 +97,11 @@ Route::get('/', function () {
     Route::post('/clientesv', [ClienteController::class,'store'])->name('clientesv');
 
     //editar clientes
-    Route::get('/actualizarclientes/{id}',[ClienteController::class,'edit'])->name('clientes.editarclientes');
-    Route::get('/editarclientes/{id}', [ClienteController::class,'update'])->name('clientes.update');
+   Route::get('/actualizarclientes/{id}',[ClienteController::class,'edit'])->name('clientes.editarclientes');
+    Route::post('/editarclientes/{id}', [ClienteController::class,'update'])->name('clientes.update');
     Route::get('/eliminarclientes/{id}',[ClienteController::class,'destroy'])->name('clientes.eliminarclientes');
+
+
 
     //Zona
     Route::resource('/zonas', ZonaController::class)->names([
@@ -114,6 +116,8 @@ Route::get('/', function () {
     Route::get('/clientes/zona', [ZonaController::class, 'create'])->name('zona.create');
     Route::get('zonas/{zona}/editar', [ZonaController::class, 'edit'])->name('zonas.edit');
     Route::get('zonas', [ZonaController::class, 'index'])->name('zonas.index');
+    Route::get('buscar-zona/{cod_zona}', [ZonaController::class, 'buscarZona']);
+    // Route::get('zonas/getByName', [ZonaController::class, 'getByName'])->name('zonas.getByName');
     /*  Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create'); */
 
    //CIUDAD

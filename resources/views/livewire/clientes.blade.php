@@ -11,38 +11,23 @@
     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
         {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
 </th>
-@livewireStyles
-<link rel="stylesheet" href="{{ asset('vendor/powergrid/powergrid.css') }}">
 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 @stop
 
 @section('content')
 <div class="container-fluid">
     <x-slot name="header">
-        <h1 class="text-gray-900">crudddddddd</h1>
     </x-slot>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Buscar cliente') }}</div>
-                    <div class="card-body">
-                        <form id="search-form" method="POST" action="{{ route('clientes.buscarClientes') }}">
-                            @csrf
-                            <div class="input-group">
-                                <input type="text" name="search_term" class="form-control" placeholder="Ingrese el término de búsqueda">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary">Buscar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        {{-- <table id="tablabuscar" class="table table-striped table-hover"> --}}
                             <thead class="bg-dark text-white">
                                 <tr scope="col">
                                     <th scope="col">CARNET</th>
@@ -65,13 +50,13 @@
                                         <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->foto->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocarnet->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocarnet->direccion_imagen}}" data-title="FOTO CARNET ATRAS">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotorecibo->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotorecibo->direccion_imagen}}" data-title="FOTO RECIBO AGUA/LUZ">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CROQUIS DOMICILIO">
                                             <i class="fas fa-image"></i>
                                         </button>
                                     </td>
@@ -89,10 +74,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $Clientes->links('pagination::bootstrap-5') }}
                     </div>
-
-
                         <center>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -125,7 +107,7 @@
 }
 
 .modal-dialog {
-    max-width: 100%;
+    max-width: 800px !important;
     margin: 0;
 }
 
@@ -181,12 +163,16 @@
 @stop
 
 @section('js')
-@livewireScripts
-
 <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+
+
+
 <script>
     // Agregar un evento de escucha para el envío del formulario
     $('#search-form').submit(function(event) {
@@ -278,5 +264,12 @@
         </script>
 
      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <Script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+    });
+    </Script>
 @stop
 
