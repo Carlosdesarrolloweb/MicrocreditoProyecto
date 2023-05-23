@@ -374,7 +374,7 @@ return [
                 [
                     'text' => 'Ver Usuarios',
                     'route'  => 'usersv',
-                    'icon'    => 'fa fa-user-times',
+                    'icon'    => 'fas fa-search',
                     'icon_color' => 'red',
 
                 ],
@@ -434,31 +434,31 @@ return [
         ['header' => 'OPCIONES'],
         [
             'text'    => 'Prestamos',
-            'icon'    => 'fa fa-percent',
+            'icon'    => 'fas fa-money-bill',
             'icon_color' => 'red',
             'submenu' => [
                 [
                     'text' => 'Realizar Prestamo',
                     'route'  => 'prestamos.create',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-handshake',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Registrar Pagos',
                     'route'  => 'pagos.create',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-money-bill-wave',
                     'icon_color' => 'red',
                 ],
-               [
+                [
                     'text' => 'Pagos Realizados ',
                     'route'  => 'pagos.index',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-money-check-alt',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Prestamos Realizados',
                     'route'  => 'prestamos.index',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-file-invoice-dollar',
                     'icon_color' => 'red',
                 ],
                 [
@@ -470,47 +470,27 @@ return [
                 [
                     'text' => 'Agregar Modos de Pago',
                     'route'  => 'modosPago.create',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-credit-card',
                     'icon_color' => 'red',
                 ],
                  [
                     'text' => 'Ver Modos de Pago',
                     'route'  => 'modos_pago.index',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-eye',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Registrar Garantia',
                     'route'  => 'garantias.create',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-file-alt',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Consultar Garantias',
                     'route'  => 'garantias.index',
-                    'icon'    => 'fa fa-percent',
+                    'icon'    => 'fas fa-search',
                     'icon_color' => 'red',
                 ],
-
-             /*    [
-                    'text' => 'Pago de Cuotas',
-                    'route'  => 'pagos.create',
-                    'icon'    => 'fa fa-percent',
-                    'icon_color' => 'red',
-                ], */
- /*                [
-                    'text' => 'Pago Solo Interes',
-                    'url'  => '#',
-                    'icon'    => 'fa fa-percent',
-                    'icon_color' => 'red',
-                ],
-                [
-                    'text' => 'Seguimiento Prestamos',
-                    'url'  => '#',
-                    'icon'    => 'fa fa-percent',
-                    'icon_color' => 'red',
-                ], */
-
             ],
 
         ],
@@ -522,50 +502,31 @@ return [
                 [
                     'text' => 'Consultar Clientes',
                     'route'  => 'clientesv',
-                    'icon'    => 'fa fa-users',
+                    'icon'    => 'fas fa-search',
                     'icon_color' => 'red',
                 ],
-     /*            [
-                    'text' => 'Buscar Clientes',
-                    'route'  => 'buscar.cliente',
-                    'icon'    => 'fa fa-users',
-                    'icon_color' => 'red',
-                ], */
-
                 [
                     'text' => 'Crear Clientes',
                     'route'  => 'clientes.show',
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
-      /*           [
-                    'text' => 'Clientes Creados',
-                    'route'  => 'clientesv',
-                    'icon'    => 'fa fa-user-times',
-                    'icon_color' => 'red',
-                ], */
-         /*        [
-                    'text' => 'Asignar Garantias',
-                    'url'  => '#',
-                    'icon'    => 'fa fa-check-square',
-                    'icon_color' => 'red',
-                ], */
                 [
                     'text' => 'Crear Zona',
                     'route'  => 'zona.create',
-                    'icon'    => 'fa fa-user-plus',
+                    'icon'    => 'fas fa-map-marker-alt',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Ver Zonas',
                     'route'  => 'zonas.index',
-                    'icon'    => 'fa fa-user-plus',
+                    'icon'    => 'fas fa-map',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Asignar Ciudad',
                     'route'  => 'ciudades.create',
-                    'icon'    => 'fa fa-user-plus',
+                    'icon'    => 'fas fa-city',
                     'icon_color' => 'red',
                 ],
             ],
@@ -573,16 +534,9 @@ return [
         ],
         [
             'text'    => 'REPORTES',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-file',
             'icon_color' => 'red',
             'submenu' => [
-                // [
-                //     'text' => 'Reporte Prestamos',
-                //     'route'  => 'garantia',
-                //     'icon'    => 'fa fa-percent',
-                //     'icon_color' => 'red',
-                // ],
-
                 [
                     'text' => 'CLIENTES CREADOS ',
                     'route'  => 'reportes.clientescreados',
@@ -592,19 +546,19 @@ return [
                 [
                     'text' => 'HISTORIAL PRESTAMOS ',
                     'route'  => 'reportes.historialprestamos',
-                    'icon'    => 'fa fa-user-plus',
+                    'icon'    => 'fas fa-history',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'HISTORIAL GARANTIAS ',
                     'route'  => 'reportes.historialgarantias',
-                    'icon'    => 'fa fa-user-plus',
+                    'icon'    => 'fas fa-file-alt',
                     'icon_color' => 'red',
                 ],
                 [
                     'text' => 'GRAFICAS ',
                     'route'  => 'reportes.powerbi',
-                    'icon'    => 'fa fa-user-plus',
+                    'icon'    => 'fas fa-chart-bar',
                     'icon_color' => 'red',
                 ],
             ],

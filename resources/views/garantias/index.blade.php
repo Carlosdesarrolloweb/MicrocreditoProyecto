@@ -48,8 +48,8 @@
                                         <td>{{ $garantia->id_prestamo }}</td>
                                         <td>{{ $garantia->fecha_entrega }}</td>
                                         <td>{{ $garantia->estado }}</td>
-                                        {{--<td><img src="{{ asset($garantia->imagen) }}" width="50"></td>
-                                        <td> <img src="{{$garantia->foto->direccion_imagen}}" width="75px" height="75px" onclick="mostrarimagen('<?= $garantia->foto->direccion_imagen;?>','FOTO CARNET ANVERSO')" > --}}
+                                  {{--       <td><img src="{{ asset($garantia->imagen) }}" width="50"></td>
+                                        <td> <img src="{{$garantia->foto->direccion_imagen}}" width="75px" height="75px" onclick="mostrarimagen('<?= $garantia->foto->direccion_imagen;?>','FOTO CARNET ANVERSO')" -->}}</td> --}}
                                         <td>
                                             <a href="{{ route('garantias.edit', $garantia->id) }}" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
                                             <form action="{{ route('garantias.destroy', $garantia->id) }}" method="POST" style="display: inline-block;">

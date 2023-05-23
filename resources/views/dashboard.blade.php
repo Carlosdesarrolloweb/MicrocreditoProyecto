@@ -7,6 +7,8 @@
 <center>
     <h1 style="text-align: center;font-weight: bold; color: red;"> {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</h1>
  </center>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 @stop
 
 @section('content')
@@ -74,6 +76,7 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script src= "{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 @stop
 
