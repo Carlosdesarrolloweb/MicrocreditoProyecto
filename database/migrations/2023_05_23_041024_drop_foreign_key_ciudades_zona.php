@@ -1,10 +1,11 @@
 <?php
 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class DropForeignKeyCiudadesZona extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('detalle_pago');
+        Schema::table('ciudades', function (Blueprint $table) {
+            $table->dropForeign('ciudades_zona_id_foreign');
+        });
     }
 
     /**
@@ -23,8 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalle_pago', function (Blueprint $table) {
-            // Aquí puedes agregar el código para crear la tabla nuevamente
+        Schema::table('ciudades', function (Blueprint $table) {
+            // Aquí puedes agregar el código para recrear la restricción de clave foránea si es necesario
         });
     }
-};
+}

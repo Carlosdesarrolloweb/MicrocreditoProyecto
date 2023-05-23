@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class DropZonaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('detalle_pago');
+        Schema::dropIfExists('zona');
     }
 
     /**
@@ -23,8 +23,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalle_pago', function (Blueprint $table) {
-            // Aquí puedes agregar el código para crear la tabla nuevamente
+        Schema::create('zona', function (Blueprint $table) {
+            // Aquí puedes agregar el código para crear la tabla 'zona' nuevamente si es necesario
         });
     }
-};
+}

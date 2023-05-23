@@ -13,7 +13,7 @@ class CreateZonasTable extends Migration
      */
     public function up()
     {
-        Schema::create('zona', function (Blueprint $table) {
+        Schema::create('zonas', function (Blueprint $table) {
             $table->id();
             $table->string('cod_zona', 10)->unique();
             $table->string('nombre_zona', 50);
@@ -38,6 +38,6 @@ class CreateZonasTable extends Migration
             $table->dropColumn('zona_id');
         });
 
-        Schema::dropIfExists('zona');
+        Schema::dropIfExists('zonas');
     }
 }

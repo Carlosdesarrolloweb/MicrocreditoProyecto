@@ -319,10 +319,9 @@ return [
         [
             'text'        => 'INICIO',
             'route'  => 'dashboard',
-            'icon'        => 'far fa fa-home',
-            // 'label'       => 4,
+            'icon'        => 'fas fa-home',
             'label_color' => 'success',
-            'icon_color' => 'red',
+            'icon_color' => 'black',
         ],
         [
             'text'    => 'PERFIL',
