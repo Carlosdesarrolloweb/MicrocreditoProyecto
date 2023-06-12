@@ -22,7 +22,7 @@
                     <div class="card-header">{{ __('Registrar Pago') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('pagos.store') }}">
+                        <form id="pagoForm" method="POST" action="{{ route('pagos.store')}}">
                             @csrf
 
                             <div class="form-group row">
@@ -74,9 +74,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-
-
                             <div class="form-group row">
                                 <label for="fecha_pago" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de Pago') }}</label>
 
@@ -154,7 +151,7 @@
     $(document).ready(function() {
         // Obtener los elementos del formulario
         var clienteSelect = $('#id_cliente');
-        var idprestamo =$('#id_prestamo');
+        var idprestamo = $('#id_prestamo');
         var montoInput = $('#monto_prestamo');
         var cuotaInput = $('#cuota');
         var numeroCuotaInput = $('#Numero_Cuota');
@@ -162,15 +159,14 @@
         // Agregar un evento de cambio al selector de cliente
         clienteSelect.change(function() {
             var clienteId = $(this).val(); // Obtener el ID del cliente seleccionado
-            console.log(clienteId)
+            console.log(clienteId);
             // Hacer una solicitud AJAX al servidor
             $.ajax({
-              /*   url: '/prestamos/' + clienteId, */ // Ruta para obtener el préstamo del cliente
                 url: "{{ route('pagos.obtenerPorCliente', ':clienteId') }}".replace(':clienteId', clienteId),
                 type: "GET",
                 dataType: "json",
                 success: function(response) {
-                    console.log(response)
+                    console.log(response);
                     // Llenar los campos con los datos del préstamo
                     montoInput.val(response.prestamo.monto_prestamo);
                     cuotaInput.val(response.prestamo.calculo_cuota);
@@ -182,8 +178,37 @@
                 }
             });
         });
+
+        $('#pagoForm').submit(function(e) {
+            e.preventDefault(); // previene el envío del formulario
+
+            // Mostrar alerta de confirmación antes de enviar el formulario
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Se registrará el pago del cliente!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, Registrar Pago!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Enviar el formulario
+                    this.submit();
+
+                    // Mostrar mensaje de éxito después de enviar el formulario
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Pago Registrado',
+                        text: 'Tu registro ha sido guardado exitosamente.'
+                    });
+                }
+            });
+        });
     });
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 @stop
 

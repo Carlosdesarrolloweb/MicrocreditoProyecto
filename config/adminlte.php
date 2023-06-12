@@ -454,6 +454,12 @@ return [
                     'icon'    => 'fas fa-money-check-alt',
                     'icon_color' => 'red',
                 ],
+            /*     [
+                    'text' => 'Calendario ',
+                    'route'  => 'calendarioPagos',
+                    'icon'    => 'fas fa-money-check-alt',
+                    'icon_color' => 'red',
+                ], */
                 [
                     'text' => 'Prestamos Realizados',
                     'route'  => 'prestamos.index',

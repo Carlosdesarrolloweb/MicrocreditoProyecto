@@ -55,49 +55,27 @@ Route::get('/', function () {
 
     //usuarios
     Route::get('/actualizarusuario/{id}',[UsersController::class,'edit'])->name('user.editarusuarios');
-    // Route::get('/editarusuario/{id}', [UsersController::class,'update'])->name('user.update');
-
     Route::match(['get', 'post'], '/editarusuario/{id}', [UsersController::class, 'update'])->name('user.update');
     Route::get('/eliminarusuarios/{id}',[UsersController::class,'destroy'])->name('user.eliminarusuarios');
     Route::get('/users', [UsersController::class, 'index'])->name('livewire.Users');
 
- /*    Route::post('/users/banear/{id}', [UserController::class, 'banearUsuario'])->name('user.banearusuarios'); */
-
-
-/*     Route::middleware(['auth'])->group(function () {
-        // Otras rutas para usuarios autenticados...
-
-        Route::put('/usuarios/{id}/estado/{estado}', [UserController::class, 'updateEstado'])
-            ->name('usuarios.estado.update')
-            ->middleware(['can:updateEstado,App\Models\User']);
-    }); */
-/*    Route::put('/usuarios/{id}/estado/{estado}', [UserController::class, 'updateEstado'])
-    ->name('usuarios.estado.update')
-    ->middleware(['auth', 'can:updateEstado,App\Models\User']); */
-
-
-
-    //clientes
+    //Clientes
     Route::post('/clientes/crearclientes',[App\Http\Controllers\ClienteController::class,'create'])->name('clientes.crearclientes');
     Route::get('/clientes/show',[App\Http\Controllers\ClienteController::class,'show'])->name('clientes.show');
     Route::post('/buscar-clientes', [App\Http\Controllers\ClienteController::class,'buscarClientes'])->name('clientes.buscarClientes');
-
     Route::post('/clientes',[App\Http\Controllers\ClienteController::class,'index'])->name('clientesv');
     Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv');
-    // Route::get('/clientes/buscar', [App\Http\Controllers\ClienteController::class, 'buscar'])->name('clientes.buscar');
     Route::get('/clientes/mostrar/{criterio}', [ClienteController::class, 'mostrarCliente'])->name('clientes.mostrar');
     Route::post('/clientes', [ClienteController::class, 'buscarCliente'])->name('buscar.cliente');
 
-
-
-
+    //MostrarUsuarios
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
     Route::post('/usersv', [UsersController::class,'store'])->name('usersv');
     Route::get('/clientesv', [ClienteController::class,'index'])->name('clientesv');
     Route::post('/clientesv', [ClienteController::class,'store'])->name('clientesv');
 
-    //editar clientes
-   Route::get('/actualizarclientes/{id}',[ClienteController::class,'edit'])->name('clientes.editarclientes');
+    //Editar Clientes
+    Route::get('/actualizarclientes/{id}',[ClienteController::class,'edit'])->name('clientes.editarclientes');
     Route::post('/editarclientes/{id}', [ClienteController::class,'update'])->name('clientes.update');
     Route::get('/eliminarclientes/{id}',[ClienteController::class,'destroy'])->name('clientes.eliminarclientes');
 
@@ -117,26 +95,19 @@ Route::get('/', function () {
     Route::get('zonas/{zona}/editar', [ZonaController::class, 'edit'])->name('zonas.edit');
     Route::get('zonas', [ZonaController::class, 'index'])->name('zonas.index');
     Route::get('buscar-zona/{cod_zona}', [ZonaController::class, 'buscarZona']);
-    // Route::get('zonas/getByName', [ZonaController::class, 'getByName'])->name('zonas.getByName');
-    /*  Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create'); */
 
    //CIUDAD
-   Route::get('/ciudades', [App\Http\Controllers\CiudadController::class, 'index'])->name('ciudades.index');
-   Route::post('/ciudades', [App\Http\Controllers\CiudadController::class, 'store'])->name('ciudades.store');
-   Route::get('/ciudades/create', [App\Http\Controllers\CiudadController::class, 'create'])->name('ciudades.create');
-   Route::get('/ciudades/{id}/edit', [App\Http\Controllers\CiudadController::class, 'edit'])->name('ciudades.edit');
-   Route::put('/ciudades/{id}', [App\Http\Controllers\CiudadController::class, 'update'])->name('ciudades.update');
-
-
-
-
+    Route::get('/ciudades', [App\Http\Controllers\CiudadController::class, 'index'])->name('ciudades.index');
+    Route::post('/ciudades', [App\Http\Controllers\CiudadController::class, 'store'])->name('ciudades.store');
+    Route::get('/ciudades/create', [App\Http\Controllers\CiudadController::class, 'create'])->name('ciudades.create');
+    Route::get('/ciudades/{id}/edit', [App\Http\Controllers\CiudadController::class, 'edit'])->name('ciudades.edit');
+    Route::put('/ciudades/{id}', [App\Http\Controllers\CiudadController::class, 'update'])->name('ciudades.update');
 
     //Registrar nuevo Prestamo
      Route::get('/nuevoprestamo', function () {
         return view('prestamos.nuevoprestamo');
     })->name('nuevoprestamo');
     Route::resource('prestamos', PrestamoController::class);
-
 
     Route::get('/prestamos', [App\Http\Controllers\PrestamoController::class, 'index'])->name('prestamos.index');
     Route::get('/prestamos/create', [App\Http\Controllers\PrestamoController::class, 'create'])->name('prestamos.create');
@@ -145,31 +116,26 @@ Route::get('/', function () {
     Route::get('/prestamos/{prestamo}/edit', [App\Http\Controllers\PrestamoController::class, 'edit'])->name('prestamos.edit');
     Route::put('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'update'])->name('prestamos.update');
     Route::delete('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'destroy'])->name('prestamos.destroy');
+    // Route::get('/prestamos/calendario', [App\Http\Controllers\PrestamoController::class, 'calendarioPagos'])->name('calendarioPagos');
 
     //Registrar Garantia
-    //  Route::get('/garantia', function () {
-    //     return view('garantias.garantias');
-    // })->name('garantia');
-
     Route::get('/garantias/index', [GarantiaController::class, 'index'])->name('garantias.index');
-     Route::get('/garantias/create', [GarantiaController::class, 'create'])->name('garantias.create');
+    Route::get('/garantias/create', [GarantiaController::class, 'create'])->name('garantias.create');
     Route::post('/garantias/store', [GarantiaController::class, 'store'])->name('garantias.store');
     Route::get('garantias/prestamos_by_cliente/{clienteId}', [GarantiaController::class, 'getPrestamosByCliente'])->name('garantias.prestamos_by_cliente');
     Route::delete('/garantias/{id}', [GarantiaController::class, 'destroy'])->name('garantias.destroy');
     Route::get('/garantias/{garantia}/edit', [GarantiaController::class, 'edit'])->name('garantias.edit');
     Route::put('/garantias/{garantia}', [GarantiaController::class, 'update'])->name('garantias.update');
 
-
-
     //PAGOS
-
-   Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');
-   Route::post('/pagos/store', [PagoController::class, 'store'])->name('pagos.store');
-   Route::get('/pagos/buscar/{id}', [PagoController::class, 'obtenerPorCliente'])->name('pagos.obtenerPorCliente');
-   Route::get('/pagos/{id}', [PagoController::class, 'show'])->name('pagos.show');
-   Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
-   Route::get('/pagos/{id}/edit', [PagoController::class, 'edit'])->name('pagos.edit');
-   Route::put('/pagos/{id}', [PagoController::class, 'update'])->name('pagos.update');
+    Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');
+    Route::post('/pagos/store', [PagoController::class, 'store'])->name('pagos.store');
+    Route::get('/pagos/buscar/{id}', [PagoController::class, 'obtenerPorCliente'])->name('pagos.obtenerPorCliente');
+    Route::get('/pagos/{id}', [PagoController::class, 'show'])->name('pagos.show');
+    Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
+    Route::get('/pagos/{id}/edit', [PagoController::class, 'edit'])->name('pagos.edit');
+    Route::put('/pagos/{id}', [PagoController::class, 'update'])->name('pagos.update');
+    Route::get('/pagos/buscar-pagos/{id}', [PagoController::class, 'obtenerPagosPorCliente'])->name('pagos.obtenerPagosPorCliente');
 
 
 

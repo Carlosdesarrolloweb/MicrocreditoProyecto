@@ -25,6 +25,8 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
+                <div class="form-group">
+                </div>
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead class="bg-dark text-white">
@@ -39,16 +41,33 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+
+                                    @php
+                                        $deudasActuales = [];
+                                    @endphp
+
                                 @foreach ($pagos as $pago)
+                                        @php
+                                            $prestamoId = $pago->prestamo->id;
+
+                                                // Verificar si la deuda actual ya existe en la matriz
+                                            $deudaActual = isset($deudasActuales[$prestamoId]) ? $deudasActuales[$prestamoId] : $pago->prestamo->monto_prestamo;
+
+                                                // Calcular la nueva deuda actual
+                                            $deudaActual -= $pago->monto_pago;
+
+                                                // Almacenar la nueva deuda actual en la matriz
+                                            $deudasActuales[$prestamoId] = $deudaActual;
+                                        @endphp
                                     <tr>
-                                        <td>{{ $pago->prestamo->cliente->nombre_cliente}} {{ $pago->prestamo->cliente->apellido_cliente }}</td>
+                                        <td>{{ $pago->prestamo->cliente->nombre_cliente }} {{ $pago->prestamo->cliente->apellido_cliente }}</td>
                                         <td>{{ $pago->prestamo->monto_prestamo }}</td>
                                         <td>{{ $pago->fecha_pago }}</td>
                                         <td>{{ $pago->monto_pago }}</td>
-                                        <td>{{ $pago->prestamo->monto_prestado - $pago->prestamo->pagos->sum('monto_pago') }}</td>
+                                        <td>{{ $deudaActual }}</td>
                                         <td>{{ $pago->descripcion }}</td>
                                         <td>
-                                            <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-edit">Editar</a> <!-- Agregamos el botón Editar que redirige a la vista de edición -->
+                                            <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-edit">Editar</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -72,6 +91,55 @@
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var clienteSelect = $('#id_cliente');
+            var tableBody = $('#example tbody');
+
+            clienteSelect.change(function() {
+                var clienteId = $(this).val();
+
+                $.ajax({
+                    url: "{{ route('pagos.obtenerPagosPorCliente', ':clienteId') }}".replace(':clienteId', clienteId),
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        tableBody.empty();
+
+                        if (response.pagos && response.pagos.length > 0) {
+                            response.pagos.forEach(function(pago) {
+                                var row = `
+                                    <tr>
+                                        <td>${pago.prestamo.cliente.nombre_cliente} ${pago.prestamo.cliente.apellido_cliente}</td>
+                                        <td>${pago.prestamo.monto_prestamo}</td>
+                                        <td>${pago.fecha_pago}</td>
+                                        <td>${pago.monto_pago}</td>
+                                        <td>${pago.deuda_actual}</td>
+                                        <td>${pago.descripcion}</td>
+                                        <td>
+                                            <a href="{{ route('pagos.edit', ['id' => ':id']) }}".replace(':id', pago.id) class="btn btn-warning btn-edit">Editar</a>
+                                        </td>
+                                    </tr>
+                                `;
+
+                                tableBody.append(row);
+                            });
+                        } else {
+                            var noDataRow = `
+                                <tr>
+                                    <td colspan="7">No se encontraron pagos para este cliente.</td>
+                                </tr>
+                            `;
+                            tableBody.append(noDataRow);
+                        }
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+    </script>
     <Script>
         $(document).ready(function () {
         $('#example').DataTable();

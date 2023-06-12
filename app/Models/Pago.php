@@ -23,4 +23,11 @@ class Pago extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+
+    //revisar esta pendiente
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'id_cliente');
+    }
 }

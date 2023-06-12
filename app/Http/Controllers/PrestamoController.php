@@ -157,4 +157,13 @@ class PrestamoController extends Controller
 
          return view('dashboard', compact('clientes', 'cantidad_clientes', 'cantidad_clientes_con_prestamo'));
     }
+/*     public function calendarioPagos()
+    {
+        dd('hola mundo');
+        // Obtener los préstamos y sus pagos
+        $prestamos = Prestamo::with('pagos')->get();
+
+
+        return view('prestamos.calendariopagos', compact('prestamos'));
+    } */
 }

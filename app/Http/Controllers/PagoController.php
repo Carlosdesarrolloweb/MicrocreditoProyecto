@@ -65,19 +65,21 @@ class PagoController extends Controller
     $prestamo = Prestamo::where('id_cliente', $clienteId)->first();
 
     return response()->json(['prestamo' => $prestamo,'cuota'=>$this->suma($prestamo->id)]);
-  /*       'monto' => $prestamo->monto,
-        'cuota' => $prestamo->cuota,
-        'numero_cuota' => $prestamo->numero_cuota, */
+
     }
+
 
     public function suma($id_prestamo)
     {
-        return intval(Pago::where('id_prestamo',$id_prestamo)->sum('id_prestamo'))+1;
+        return intval(Pago::where('id_prestamo',$id_prestamo)->count('id_prestamo'))+1;
     }
     public function index()
 {
     $pagos = Pago::all();
-    return view('pagos.index', compact('pagos'));
+    $clientes = Cliente::all(); // Obténgo todos los clientes
+
+    return view('pagos.index', compact('pagos', 'clientes'));
+
 }
 public function edit($id)
 {
@@ -116,5 +118,23 @@ public function update(Request $request, $id)
 
     // Redirigir al usuario a la página de detalles del pago actualizado
     return redirect()->route('pagos.index', $pago->id);
+}
+
+
+    //revisar esta pendiente
+public function obtenerPagosPorCliente($clienteId)
+{
+    $cliente = Cliente::find($clienteId);
+
+    if ($cliente) {
+        $pagos = Pago::whereHas('prestamo', function ($query) use ($clienteId) {
+            $query->where('id_cliente', $clienteId);
+        })->get();
+
+        return response()->json(['pagos' => $pagos]);
+    }
+
+    // Manejar el caso en el que no se encuentre el cliente
+    return response()->json(['error' => 'Cliente no encontrado'], 404);
 }
 }

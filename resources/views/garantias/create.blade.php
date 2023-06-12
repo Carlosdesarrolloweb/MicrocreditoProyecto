@@ -9,7 +9,7 @@
 <th>
     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
 </th>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @stop
 
 @section('content')
@@ -18,7 +18,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-body">
-                    <form method="POST" action="{{ route('garantias.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('garantias.store') }}" enctype="multipart/form-data" id="garantiaForm">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -163,6 +163,7 @@
                     var prestamo = data.prestamos[0]; // asumiendo que solo hay un préstamo por cliente
                     console.log(data);
                     $('#id_prestamo').val(prestamo.id);
+                    // $('#monto_prestamo').val(prestamo.monto_prestamo);
                     // $('#monto_cancelado').val(prestamo.monto_cancelado);
                     // $('#fecha_inicio').val(prestamo.fecha_prestamo);
                     // $('#num_pagos').val(prestamo.cantidad_cuotas);
@@ -173,7 +174,7 @@
                 }
             });
         }
-    });
+
     $('#prestamo_id').on('change', function () {
         var prestamoId = $(this).val();
         if (prestamoId) {
@@ -190,5 +191,38 @@
             });
         }
     });
+         // ALERTA DEL BOTON GUARDAR
+
+         $(document).ready(function() {
+        $('#garantiaForm').submit(function(e) {
+        e.preventDefault(); // previene el envío del formulario
+
+        // Mostrar alerta de confirmación antes de enviar el formulario
+        Swal.fire({
+            title: 'Esta Seguro?',
+            text: "Se Registrara la garantia!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Registrar Garantia!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Enviar el formulario
+                this.submit();
+
+                // Mostrar mensaje de éxito después de enviar el formulario
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Garantia Registrada',
+                    text: 'Tu registro ha sido guardado exitosamente.'
+                });
+            }
+        });
+    });
+    });
+});
 </script>
-    @stop
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+@stop

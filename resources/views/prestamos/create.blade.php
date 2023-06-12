@@ -196,11 +196,6 @@
         input7.value = monto_prestado.toFixed(2);
         input8.value = "0.00";
     }
-
-
-
-
-
          // ALERTA DEL BOTON GUARDAR
 
     $(document).ready(function() {
@@ -230,9 +225,6 @@
             }
         });
     });
-
-
-
 });
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
