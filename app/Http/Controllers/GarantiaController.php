@@ -25,8 +25,7 @@ class GarantiaController extends Controller
         $clientes = Cliente::all();
         return view('garantias.create', compact('prestamos', 'clientes'));
     }
-
- /*    public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'garantia' => 'required',
@@ -50,19 +49,14 @@ class GarantiaController extends Controller
             $garantia->fecha_entrega = $request->fecha_entrega;
         }
 
+        $helper = new Images(); // Crear una instancia del helper
+
         if ($request->hasFile('id_foto')) {
-            $path = public_path('public/garantias/' . $request->cliente_id);
-            if (!file_exists($path)) {
-                 mkdir($path, 0777, true);
-            }
-            $image = $request->file('id_foto');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move($path, $filename);
-            $rutaImagen = 'public/garantias/' . $request->cliente_id . '/' . $filename;
-            $this->images->setImage($rutaImagen);
-            $fotoid=$this->images->getImage($rutaImagen);
+            $clienteId = $request->cliente_id;
+            $fotoid = $helper->uploadFile($clienteId, $request->file('id_foto'));
 
             $garantia->id_foto = $fotoid;
+
         }
 
         $garantia->id_cliente = $request->cliente_id;
@@ -70,102 +64,14 @@ class GarantiaController extends Controller
         $garantia->save();
 
         return redirect()->route('garantias.index');
-    } */
-
-/*     public function store(Request $request)
-{
-    $request->validate([
-        'garantia' => 'required',
-        'Detalle_Prenda' => 'required',
-        'estado' => 'required',
-        'cliente_id' => 'required',
-        'id_prestamo' => 'required',
-    ]);
-
-    $garantia = new Garantia();
-
-    $garantia->garantia = mb_strtoupper($request->garantia);
-    $garantia->Detalle_Prenda = mb_strtoupper($request->Detalle_Prenda);
-    $garantia->estado = mb_strtoupper($request->estado);
-
-    if ($request->has('Valor_Prenda')) {
-        $garantia->Valor_Prenda = $request->Valor_Prenda;
     }
+    public function index()
+    {
+        $garantias = Garantia::all();
 
-    if ($request->has('fecha_entrega')) {
-        $garantia->fecha_entrega = $request->fecha_entrega;
+        return view('garantias.index', compact('garantias'));
     }
-
-    if ($request->hasFile('id_foto')) {
-        $path = public_path('public/garantias/' . $request->cliente_id);
-        if (!file_exists($path)) {
-             mkdir($path, 0777, true);
-        }
-        $image = $request->file('id_foto');
-        $filename = time() . '.' . $image->getClientOriginalExtension();
-        $image->move($path, $filename);
-
-        $helper = new Images(); // Crear una instancia del helper
-        $rutaImagen = 'public/garantias/' . $request->cliente_id . '/' . $filename;
-        $helper->setImage($rutaImagen);
-        $fotoid = $helper->getImage($rutaImagen);
-
-        $garantia->id_foto = $fotoid;
-    }
-
-    $garantia->id_cliente = $request->cliente_id;
-    $garantia->id_prestamo = $request->id_prestamo;
-    $garantia->save();
-
-    return redirect()->route('garantias.index');
-} */
-public function store(Request $request)
-{
-    $request->validate([
-        'garantia' => 'required',
-        'Detalle_Prenda' => 'required',
-        'estado' => 'required',
-        'cliente_id' => 'required',
-        'id_prestamo' => 'required',
-    ]);
-
-    $garantia = new Garantia();
-
-    $garantia->garantia = mb_strtoupper($request->garantia);
-    $garantia->Detalle_Prenda = mb_strtoupper($request->Detalle_Prenda);
-    $garantia->estado = mb_strtoupper($request->estado);
-
-    if ($request->has('Valor_Prenda')) {
-        $garantia->Valor_Prenda = $request->Valor_Prenda;
-    }
-
-    if ($request->has('fecha_entrega')) {
-        $garantia->fecha_entrega = $request->fecha_entrega;
-    }
-
-    $helper = new Images(); // Crear una instancia del helper
-
-    if ($request->hasFile('id_foto')) {
-        $clienteId = $request->cliente_id;
-        $fotoid = $helper->uploadFile($clienteId, $request->file('id_foto'));
-
-         $garantia->id_foto = $fotoid;
-
-    }
-
-    $garantia->id_cliente = $request->cliente_id;
-    $garantia->id_prestamo = $request->id_prestamo;
-    $garantia->save();
-
-    return redirect()->route('garantias.index');
-}
-  public function index()
-{
-    $garantias = Garantia::all();
-
-    return view('garantias.index', compact('garantias'));
-}
-     public function getPrestamosByCliente($clienteId)
+    public function getPrestamosByCliente($clienteId)
     {
         $prestamos = Prestamo::where('id_cliente', $clienteId)->get();
 
@@ -174,38 +80,38 @@ public function store(Request $request)
 
 
     public function destroy($id)
-{
-    $garantia = Garantia::find($id);
+    {
+        $garantia = Garantia::find($id);
 
-    if (!$garantia) {
-        return response()->json(['success' => false]);
+        if (!$garantia) {
+            return response()->json(['success' => false]);
+        }
+
+        $garantia->delete();
+
+        return response()->json(['success' => true]);
+    }
+    public function edit(Garantia $garantia)
+    {
+        $clientes = Cliente::all();
+        return view('garantias.edit', compact('garantia', 'clientes'));
+
     }
 
-    $garantia->delete();
+    public function update(Request $request, $id)
+    {
+        $garantia = Garantia::findOrFail($id);
+        $garantia->garantia = $request->garantia;
+        $garantia->valor_prenda = $request->Valor_prenda;
+        $garantia->detalle_prenda = $request->Detalle_Prenda;
+        // $garantia->id_cliente = $request->id_cliente;
+        // $garantia->id_prestamo = $request->id_prestamo;
+        $garantia->fecha_entrega = $request->fecha_entrega;
+        $garantia->estado = $request->estado;
+        $garantia->save();
 
-    return response()->json(['success' => true]);
-}
-public function edit(Garantia $garantia)
-{
-    $clientes = Cliente::all();
-    return view('garantias.edit', compact('garantia', 'clientes'));
-
-}
-
-public function update(Request $request, $id)
-{
-    $garantia = Garantia::findOrFail($id);
-    $garantia->garantia = $request->garantia;
-    $garantia->valor_prenda = $request->Valor_prenda;
-    $garantia->detalle_prenda = $request->Detalle_Prenda;
-    // $garantia->id_cliente = $request->id_cliente;
-    // $garantia->id_prestamo = $request->id_prestamo;
-    $garantia->fecha_entrega = $request->fecha_entrega;
-    $garantia->estado = $request->estado;
-    $garantia->save();
-
-    return redirect()->route('garantias.index')->with('success', 'Garantía actualizada exitosamente');
-}
+        return redirect()->route('garantias.index')->with('success', 'Garantía actualizada exitosamente');
+    }
 
 
 }

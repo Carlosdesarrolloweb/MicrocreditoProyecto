@@ -51,6 +51,18 @@
                         <a href="#" class="small-box-footer">Ver detalles <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+       {{--          <div class="col-lg-3 mb-3">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3> {{ $suma_monto_prestado }} </h3>
+                            <p>Suma de Montos Prestados</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-money-bill"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Ver detalles <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div> --}}
 
             </div>
         </body>
