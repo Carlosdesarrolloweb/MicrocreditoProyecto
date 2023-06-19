@@ -33,7 +33,7 @@
                                     <th>Prestamo</th>
                                     <th>Fecha de Entrega</th>
                                     <th>Estado</th>
-                                     {{--        <th>Imagen</th> --}}
+                                    <th>Imagen</th>
                                     <th>Acciones</th> <!-- Columna para los botones -->
                                 </tr>
                             </thead>
@@ -48,8 +48,10 @@
                                         <td>{{ $garantia->id_prestamo }}</td>
                                         <td>{{ $garantia->fecha_entrega }}</td>
                                         <td>{{ $garantia->estado }}</td>
-                                  {{--       <td><img src="{{ asset($garantia->imagen) }}" width="50"></td>
-                                        <td> <img src="{{$garantia->foto->direccion_imagen}}" width="75px" height="75px" onclick="mostrarimagen('<?= $garantia->foto->direccion_imagen;?>','FOTO CARNET ANVERSO')" -->}}</td> --}}
+                                        <td>
+                                            <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{asset($garantia->foto->direccion_imagen) }}" data-title="GARANTIA">
+                                                <i class="fas fa-image"></i>
+                                            </button>
                                         <td>
                                             <a href="{{ route('garantias.edit', $garantia->id) }}" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
                                             <form action="{{ route('garantias.destroy', $garantia->id) }}" method="POST" style="display: inline-block;">
@@ -62,21 +64,22 @@
                                 @endforeach
                             </tbody>
                         </table>
-                                <center>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Título del modal</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img id="mi_imagen"/>
-                                                </div>
-                                            </div>
+                        <center>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Título del modal</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{-- <img id="mi_imagen" src=""> --}}
+                                            <img id="imagenModal" src="" alt="">
                                         </div>
                                     </div>
-                                </center>
+                                </div>
+                            </div>
+                        </center>
                     </div>
                 </div>
             </div>
@@ -87,6 +90,64 @@
 
     @section('css')
         <link rel="stylesheet" href="/css/admin_custom.css">
+        <style>
+      .thumbnail {
+        border: none;
+        padding: 0px;
+    }
+
+    .modal-dialog {
+        max-width: 800px !important;
+        margin: 0;
+    }
+
+    .modal-content {
+        width: 70%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content img {
+      max-width: 95%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+    }
+    .modal-body img {
+        max-width: 100%;
+        max-height: 100%;
+        width: 1000px;
+        height: 800px;
+    }
+
+
+    .modal-close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        padding: 0.75rem;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 0px;
+        transition: background 0.3s ease;
+        font-size: 1.5rem;
+        line-height: 1;
+        text-shadow: none;
+    }
+
+    .modal-close:hover {
+        background: rgba(0, 0, 0, 0.5);
+        text-decoration: none;
+    }
+
+    .modal-close:focus {
+        outline: none;
+        box-shadow: none;
+    }
+        </style>
     @stop
 
     @section('js')
@@ -94,6 +155,11 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
 $(document).ready(function() {
     $('.btn-eliminar').click(function(event) {
@@ -146,7 +212,36 @@ $(document).ready(function() {
         });
     });
 });
+<script>
+    $(function() {
+        $('.thumbnail').click(function() {
+            $('#imagepreview').attr('src', $(this).attr('data-img'));
+            $('#myModalLabel').text($(this).attr('data-title'));
+            $('#imagemodal').modal('show');
+        });
+    });
+</script>
+    <script> console.log('Hi!'); </script>
+    <script>
+     function mostrarimagen(url,titulo) {
+        $("#mi_imagen").attr("src",url);
+        $('#exampleModalLabel').html(titulo);
+        $('#exampleModal').modal('show');
+    }
+    </script>
 
+    <script>
+         $(document).ready(function() {
+        // Agregar evento de clic al icono de la imagen
+        $('button[data-target="#exampleModal"]').click(function() {
+            // Obtener la dirección de la imagen y el título del botón
+            var imgSrc = $(this).data('img');
+            var title = $(this).data('title');
+            // Establecer el contenido del modal con la imagen y el título
+            $('#exampleModal').find('#imagenModal').attr('src', imgSrc);
+            $('#exampleModal').find('.modal-title').text(title);
+        });
+    });
     </script>
 
     <Script>

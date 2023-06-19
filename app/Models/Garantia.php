@@ -31,6 +31,7 @@ class Garantia extends Model
     }
     public function foto()
     {
-        return $this->hasOne(Foto::class,"id","id_foto");
+    return $this->hasOne(Foto::class, 'id', 'id_foto');
     }
+
 }

@@ -26,7 +26,7 @@ class GarantiaController extends Controller
         return view('garantias.create', compact('prestamos', 'clientes'));
     }
 
-    public function store(Request $request)
+ /*    public function store(Request $request)
     {
         $request->validate([
             'garantia' => 'required',
@@ -70,8 +70,95 @@ class GarantiaController extends Controller
         $garantia->save();
 
         return redirect()->route('garantias.index');
+    } */
+
+/*     public function store(Request $request)
+{
+    $request->validate([
+        'garantia' => 'required',
+        'Detalle_Prenda' => 'required',
+        'estado' => 'required',
+        'cliente_id' => 'required',
+        'id_prestamo' => 'required',
+    ]);
+
+    $garantia = new Garantia();
+
+    $garantia->garantia = mb_strtoupper($request->garantia);
+    $garantia->Detalle_Prenda = mb_strtoupper($request->Detalle_Prenda);
+    $garantia->estado = mb_strtoupper($request->estado);
+
+    if ($request->has('Valor_Prenda')) {
+        $garantia->Valor_Prenda = $request->Valor_Prenda;
     }
 
+    if ($request->has('fecha_entrega')) {
+        $garantia->fecha_entrega = $request->fecha_entrega;
+    }
+
+    if ($request->hasFile('id_foto')) {
+        $path = public_path('public/garantias/' . $request->cliente_id);
+        if (!file_exists($path)) {
+             mkdir($path, 0777, true);
+        }
+        $image = $request->file('id_foto');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move($path, $filename);
+
+        $helper = new Images(); // Crear una instancia del helper
+        $rutaImagen = 'public/garantias/' . $request->cliente_id . '/' . $filename;
+        $helper->setImage($rutaImagen);
+        $fotoid = $helper->getImage($rutaImagen);
+
+        $garantia->id_foto = $fotoid;
+    }
+
+    $garantia->id_cliente = $request->cliente_id;
+    $garantia->id_prestamo = $request->id_prestamo;
+    $garantia->save();
+
+    return redirect()->route('garantias.index');
+} */
+public function store(Request $request)
+{
+    $request->validate([
+        'garantia' => 'required',
+        'Detalle_Prenda' => 'required',
+        'estado' => 'required',
+        'cliente_id' => 'required',
+        'id_prestamo' => 'required',
+    ]);
+
+    $garantia = new Garantia();
+
+    $garantia->garantia = mb_strtoupper($request->garantia);
+    $garantia->Detalle_Prenda = mb_strtoupper($request->Detalle_Prenda);
+    $garantia->estado = mb_strtoupper($request->estado);
+
+    if ($request->has('Valor_Prenda')) {
+        $garantia->Valor_Prenda = $request->Valor_Prenda;
+    }
+
+    if ($request->has('fecha_entrega')) {
+        $garantia->fecha_entrega = $request->fecha_entrega;
+    }
+
+    $helper = new Images(); // Crear una instancia del helper
+
+    if ($request->hasFile('id_foto')) {
+        $clienteId = $request->cliente_id;
+        $fotoid = $helper->uploadFile($clienteId, $request->file('id_foto'));
+
+         $garantia->id_foto = $fotoid;
+
+    }
+
+    $garantia->id_cliente = $request->cliente_id;
+    $garantia->id_prestamo = $request->id_prestamo;
+    $garantia->save();
+
+    return redirect()->route('garantias.index');
+}
   public function index()
 {
     $garantias = Garantia::all();
