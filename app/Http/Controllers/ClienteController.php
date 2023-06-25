@@ -169,13 +169,23 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        Cliente::find($id)->delete();
-        $clientesv=Cliente::all();
+        $cliente = Cliente::find($id);
+
+        // Verificar si el cliente tiene préstamos asociados
+        if ($cliente->prestamos()->exists())
+        {
+        return redirect()->route('clientesv')->with('error', 'No se puede borrar el cliente porque tiene un préstamo asignado.');
+        }
+
+        // Si no hay préstamos asociados, proceder a eliminar el cliente
+        $cliente->delete();
+
+        // Redireccionar a la vista de clientes
+        $clientesv = Cliente::all();
         return redirect()->route('clientesv');
-
-
     }
 
     public function mostrarCliente($criterio)

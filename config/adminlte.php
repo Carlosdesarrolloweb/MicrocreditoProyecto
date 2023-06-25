@@ -538,30 +538,49 @@ return [
 
         ],
         [
-            'text'    => 'REPORTES',
+            'text'    => 'Ganancias',
+            'icon'    => 'fa fa-users',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Ingreso Diario',
+                    'route'  => 'clientesv',
+                    'icon'    => 'fas fa-search',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Ingreso Mensual',
+                    'route'  => 'clientes.show',
+                    'icon'    => 'fa fa-user-plus',
+                    'icon_color' => 'red',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Reportes',
             'icon'    => 'fas fa-file',
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'CLIENTES CREADOS ',
+                    'text' => 'Clientes Creados ',
                     'route'  => 'reportes.clientescreados',
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'HISTORIAL PRESTAMOS ',
+                    'text' => 'Historial Prestamos ',
                     'route'  => 'reportes.historialprestamos',
                     'icon'    => 'fas fa-history',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'HISTORIAL GARANTIAS ',
+                    'text' => 'Historial Garantias ',
                     'route'  => 'reportes.historialgarantias',
                     'icon'    => 'fas fa-file-alt',
                     'icon_color' => 'red',
                 ],
                 [
-                    'text' => 'GRAFICAS ',
+                    'text' => 'Graficos ',
                     'route'  => 'reportes.powerbi',
                     'icon'    => 'fas fa-chart-bar',
                     'icon_color' => 'red',

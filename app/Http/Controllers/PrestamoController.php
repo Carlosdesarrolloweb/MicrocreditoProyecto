@@ -129,10 +129,17 @@ class PrestamoController extends Controller
     public function destroy($id)
     {
         $prestamo = Prestamo::findOrFail($id);
-        $prestamo->delete();
+        $cliente = $prestamo->cliente;
 
-        return redirect()->route('prestamos.index')
-            ->with('success', 'Prestamo eliminado exitosamente.');
+        if ($cliente->estado_cliente == 'DEUDA CANCELADA') {
+            $prestamo->delete();
+
+            return redirect()->route('prestamos.index')
+                ->with('success', 'Préstamo eliminado exitosamente.');
+        } else {
+            return redirect()->route('prestamos.index')
+                ->with('error', 'No se puede eliminar el préstamo. El cliente tiene una deuda pendiente verificar !.');
+        }
     }
     public function buscarPrestamo($cliente_id)
     {

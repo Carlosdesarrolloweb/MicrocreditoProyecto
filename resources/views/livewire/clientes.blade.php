@@ -29,13 +29,15 @@
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead class="bg-dark text-white">
                                 <tr scope="col">
-                                    <th scope="col">CARNET</th>
-                                    <th scope="col">NOMBRE </th>
-                                    <th scope="col">ZONA</th>
-                                    <th scope="col">ESTADO</th>
-                                    <th scope="col">IMÁGENES</th>
-                                    <th scope="col">EDITAR</th>
-                                    <th scope="col">ELIMINAR</th>
+                                    <th scope="col">Carnet</th>
+                                    <th scope="col">Nombres </th>
+                                    <th scope="col">Telefono </th>
+                                    <th scope="col">Dirección </th>
+                                    <th scope="col">Zona</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Imágenes</th>
+                                    <th scope="col">Acciones</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,6 +45,8 @@
                                 <tr>
                                     <td scope="col">{{$clientesv->Carnet_cliente}}</td>
                                     <td scope="col">{{$clientesv->nombre_cliente}} {{$clientesv->apellido_cliente}}</td>
+                                    <td scope="col">{{$clientesv->telefono_cliente}}</td>
+                                    <td scope="col">{{$clientesv->direccion_cliente}}</td>
                                     <td scope="col">{{$clientesv->zona->nombre_zona}}</td>
                                     <td scope="col" @if($clientesv->estado_cliente == 'DEUDA PENDIENTE') class="bg-warning text-dark" @elseif($clientesv->estado_cliente == 'DEUDOR MOROSO') class="bg-danger text-white" @elseif($clientesv->estado_cliente == 'DEUDA CANCELADA') class="bg-success text-white" @endif>{{$clientesv->estado_cliente}}</td>
                                     <td>
@@ -60,13 +64,12 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <a href="{{ route('clientes.editarclientes',$clientesv->id) }}" type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
-                                    </td>
-                                    <td>
+                                        <a href="{{ route('clientes.editarclientes',$clientesv->id) }}" type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> </a>
+
                                         <form action="{{ route('clientes.eliminarclientes',$clientesv->id) }}" class="d-inline formulario-eliminar">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> ELIMINAR</button>
+                                            <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -239,6 +242,15 @@
                 )
         </script>
 
+    @endif
+    @if(session('error'))
+    <script>
+        Swal.fire(
+            'Error',
+            '{{ session('error') }}',
+            'error'
+        )
+    </script>
     @endif
         <script>
             $('.formulario-eliminar').submit(function(e){
