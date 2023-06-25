@@ -33,5 +33,9 @@ class Garantia extends Model
     {
     return $this->hasOne(Foto::class, 'id', 'id_foto');
     }
+    public function usuario()
+{
+    return $this->belongsTo(User::class, 'id_usuario');
+}
 
 }

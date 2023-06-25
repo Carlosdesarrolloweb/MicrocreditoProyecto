@@ -11,6 +11,7 @@ use App\Http\Controllers\CiudadController;
 use App\Http\Controllers\GarantiaController;
 use App\Http\Middleware\CheckUserStatus;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\PDFController;
 
 
 
@@ -67,6 +68,8 @@ Route::get('/', function () {
     Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv');
     Route::get('/clientes/mostrar/{criterio}', [ClienteController::class, 'mostrarCliente'])->name('clientes.mostrar');
     Route::post('/clientes', [ClienteController::class, 'buscarCliente'])->name('buscar.cliente');
+    // Route::get('/pdf', [PDFController::class, 'generatePDF'])->name('pdf.generate');
+    Route::get('/pdf/{cliente_id}', [PDFController::class, 'generatePDF'])->name('pdf.generate');
 
     //MostrarUsuarios
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');
@@ -126,6 +129,7 @@ Route::get('/', function () {
     Route::delete('/garantias/{id}', [GarantiaController::class, 'destroy'])->name('garantias.destroy');
     Route::get('/garantias/{garantia}/edit', [GarantiaController::class, 'edit'])->name('garantias.edit');
     Route::put('/garantias/{garantia}', [GarantiaController::class, 'update'])->name('garantias.update');
+    Route::get('/pdf/garantia/{garantia_id}', [PDFController::class, 'generatePDFgarantia'])->name('pdf.garantia');
 
     //PAGOS
     Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');

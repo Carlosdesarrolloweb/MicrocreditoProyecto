@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                         <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead class="bg-dark text-white">
                                 <tr scope="col">
                                     <th>Garantía</th>
@@ -54,12 +54,15 @@
                                                 <i class="fas fa-image"></i>
                                             </button>
                                         <td>
-                                            <a href="{{ route('garantias.edit', $garantia->id) }}" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR </a>
+                                            <a href="{{ route('garantias.edit', $garantia->id) }}" class="btn btn-warning"><i class='fas fa-user-edit'></i>  </a>
                                             <form action="{{ route('garantias.destroy', $garantia->id) }}" method="POST" style="display: inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-eliminar" data-id="{{ $garantia->id }}"> <i class='fa fa-trash'></i> ELIMINAR</button>
+                                                <button type="submit" class="btn btn-danger btn-eliminar" data-id="{{ $garantia->id }}"> <i class='fa fa-trash'></i> </button>
                                             </form>
+                                            <a href="{{ route('pdf.garantia', $garantia->id) }}" class="btn btn-primary"><i class="far fa-file-pdf"></i>
+                                                PDF
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

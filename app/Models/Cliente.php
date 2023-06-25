@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Foto;
 use App\Models\Garantia;
+use App\Models\Zona;
 
 class Cliente extends Model
 {
@@ -61,6 +62,10 @@ class Cliente extends Model
     public function prestamos()
     {
         return $this->hasMany(Prestamo::class, 'id_cliente');
+    }
+    public function images()
+    {
+        return $this->morphMany(Foto::class, 'imageable');
     }
 
     public $timestamps = false;

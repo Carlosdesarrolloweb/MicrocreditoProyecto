@@ -23,6 +23,10 @@ class Foto extends Model
         'url_imagen',
 
     ];
+ /*    public function imageable()
+    {
+        return $this->morphTo();
+    } */
 
     protected $table = 'foto';
 

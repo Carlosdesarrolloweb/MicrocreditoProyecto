@@ -62,6 +62,7 @@
                                         <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CROQUIS DOMICILIO">
                                             <i class="fas fa-image"></i>
                                         </button>
+
                                     </td>
                                     <td>
                                         <a href="{{ route('clientes.editarclientes',$clientesv->id) }}" type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> </a>
@@ -71,6 +72,7 @@
                                             @csrf
                                             <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> </button>
                                         </form>
+                                        <a href="{{ route('pdf.generate', ['cliente_id' => $clientesv->id]) }}" class="btn btn-primary"><i class="far fa-file-pdf"></i> PDF</a>
                                     </td>
                                 </tr>
                                 @endforeach
