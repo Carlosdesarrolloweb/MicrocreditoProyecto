@@ -71,6 +71,7 @@ class PDFController extends Controller
         // Genera el contenido del PDF y lo devuelve como una respuesta de descarga
         return $pdf->Output('imagenes.pdf', 'D');
     }
+
     public function generatePDFgarantia($garantia_id)
     {
         // Crea una instancia de TCPDF
