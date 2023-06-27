@@ -145,10 +145,13 @@ class PDFController extends Controller
             $query->where('id_cliente', $cliente_id);
         })->get();
 
-        // Calcula la deuda actual para cada pago
+       // Calcula la deuda actual para cada pago
+        $deudasActuales = [];
         foreach ($pagos as $pago) {
             $prestamoId = $pago->prestamo->id;
-            $deudaActual = $pago->prestamo->monto_prestamo - $pago->monto_pago;
+            $deudaActual = isset($deudasActuales[$prestamoId]) ? $deudasActuales[$prestamoId] : $pago->prestamo->monto_prestamo;
+            $deudaActual -= $pago->monto_pago;
+            $deudasActuales[$prestamoId] = $deudaActual;
             $pago->deuda_actual = $deudaActual;
         }
 
