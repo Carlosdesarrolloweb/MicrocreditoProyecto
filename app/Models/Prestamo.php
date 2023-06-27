@@ -25,6 +25,7 @@ class Prestamo extends Model
         'id_interes',
         'id_modo_pago',
         'fecha_prestamo',
+        'estado',
     ];
 
     public function cliente()

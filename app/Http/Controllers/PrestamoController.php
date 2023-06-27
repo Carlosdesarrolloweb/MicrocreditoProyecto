@@ -62,7 +62,7 @@ class PrestamoController extends Controller
         $Prestamo->id_interes = $idinteres;
         $Prestamo->id_modo_pago = $request->id_modo_pago;
         $Prestamo->fecha_prestamo = $request->fecha_prestamo;
-
+        $Prestamo->estado=false;
         $Prestamo->save();
 
         // Prestamo::create($request->all());
@@ -129,16 +129,16 @@ class PrestamoController extends Controller
     public function destroy($id)
     {
         $prestamo = Prestamo::findOrFail($id);
-        $cliente = $prestamo->cliente;
+        $pagos = $prestamo->pagos;
 
-        if ($cliente->estado_cliente == 'DEUDA CANCELADA') {
+        if ($prestamo->monto_cancelado == 0 && $pagos->isEmpty()) {
             $prestamo->delete();
 
             return redirect()->route('prestamos.index')
                 ->with('success', 'Préstamo eliminado exitosamente.');
         } else {
             return redirect()->route('prestamos.index')
-                ->with('error', 'No se puede eliminar el préstamo. El cliente tiene una deuda pendiente verificar !.');
+                ->with('error', 'No se puede eliminar el préstamo. Verifica que el monto cancelado sea 0 y que no haya pagos asociados al préstamo.');
         }
     }
     public function buscarPrestamo($cliente_id)

@@ -28,7 +28,7 @@
                 <div class="form-group">
                 </div>
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                   {{--  <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead class="bg-dark text-white">
                                 <tr>
                                     <th>Cliente</th>
@@ -72,7 +72,49 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table>
+                            </table> --}}
+
+                            <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
+                                <thead class="bg-dark text-white">
+                                  <tr>
+                                    <th>Cliente</th>
+                                    <th>Prestamo</th>
+                                    <th>Fecha de pago</th>
+                                    <th>Monto de pago</th>
+                                    <th>Deuda actual</th>
+                                    <th>Descripción</th>
+                                    <th>Estado Pago</th> <!-- Nueva columna para el estado de pago -->
+                                    <th>Acciones</th> <!-- Agregamos una nueva columna para las acciones -->
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @php
+                                    $deudasActuales = [];
+                                  @endphp
+                                  @foreach ($pagos as $pago)
+                                    @php
+                                      $prestamoId = $pago->prestamo->id;
+                                      $deudaActual = isset($deudasActuales[$prestamoId]) ? $deudasActuales[$prestamoId] : $pago->prestamo->monto_prestamo;
+                                      $deudaActual -= $pago->monto_pago;
+                                      $deudasActuales[$prestamoId] = $deudaActual;
+                                    @endphp
+                                    <tr>
+                                      <td>{{ $pago->prestamo->cliente->nombre_cliente }} {{ $pago->prestamo->cliente->apellido_cliente }}</td>
+                                      <td>{{ $pago->prestamo->monto_prestamo }}</td>
+                                      <td>{{ $pago->fecha_pago }}</td>
+                                      <td>{{ $pago->monto_pago }}</td>
+                                      <td>{{ $deudaActual }}</td>
+                                      <td>{{ $pago->descripcion }}</td>
+                                      <td style="color: #000000; background-color: {{ $pago->prestamo->estado == 1 ? '#00b347' : 'white' }}">
+                                        {{ $pago->prestamo->estado == 1 ? 'DEUDA CANCELADA' : '' }}
+                                      </td>
+                                      <td>
+                                        <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-edit">Editar</a>
+                                      </td>
+                                    </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
                         </div>
                     </div>
                 </div>

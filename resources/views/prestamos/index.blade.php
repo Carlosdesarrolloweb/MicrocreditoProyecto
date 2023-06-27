@@ -27,20 +27,21 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th>Cliente</th>
+                                    <th style="width: 15%">Cliente</th>
                                     <th>Interés</th>
-                                    <th>Monto del Préstamo</th>
-                                    <th>Plazo (en meses)</th>
+                                    <th>Monto Préstamo</th>
+                                    <th style="width: 5%">Plazo (meses)</th>
                                     <th>Cantidad de Cuotas</th>
                                     <th>Cuota</th>
                                     <th>Ganancia</th>
                                     <th>Monto Prestado</th>
                                     <th>Monto Cancelado</th>
                                     <th>Fecha Préstamo</th>
-                                    <th>Acción</th>
+                                    <th>estado</th>
+                                   <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,7 +63,10 @@
                                         <td>Bs.{{ $prestamo->monto_prestado }}</td>
                                         <td>Bs.{{ $prestamo->monto_cancelado }}</td>
                                         <td>{{ $prestamo->fecha_prestamo }}</td>
-                                        <td>
+                                        <td style="background-color: {{ $prestamo->estado == 0 ? 'yellow' : '#00b347' }}; color: black">
+                                            {{ $prestamo->estado == 0 ? 'PENDIENTE' : 'PAGADO' }}
+                                        </td>
+                                         <td>
                                             <form action="{{ route('prestamos.destroy', $prestamo->id) }}" method="POST" class="formulario-eliminar">
                                                 @csrf
                                                 @method('DELETE')
@@ -196,6 +200,12 @@
             if (result.isConfirmed) {
 
                   this.submit();
+                     // Mostrar mensaje de éxito después de enviar el formulario
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se elimino correctamente',
+                    text: 'Prestamo borrado !'
+                });
             }
             })
         });

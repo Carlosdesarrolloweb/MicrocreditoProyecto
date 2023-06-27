@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
                             <thead class="bg-dark text-white">
                                 <tr scope="col">
                                     <th>Garantía</th>

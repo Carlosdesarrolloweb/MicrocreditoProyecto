@@ -53,6 +53,11 @@ class PagoController extends Controller
         $prestamo = Prestamo::findOrFail($request->id_prestamo);
         $montoactual=$prestamo->monto_cancelado;
         $prestamo->monto_cancelado=($montoactual+$request->monto_pago);
+
+        if ($prestamo->monto_cancelado==$prestamo->monto_prestado) {
+            $prestamo->estado = true;
+
+        }
         $prestamo->save();
 
 
@@ -62,7 +67,7 @@ class PagoController extends Controller
     }
     public function obtenerPorCliente($clienteId)
     {
-    $prestamo = Prestamo::where('id_cliente', $clienteId)->first();
+    $prestamo = Prestamo::where('id_cliente', $clienteId)->where('estado', 0)->first();
 
     return response()->json(['prestamo' => $prestamo,'cuota'=>$this->suma($prestamo->id)]);
 

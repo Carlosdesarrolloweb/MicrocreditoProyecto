@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
                             <thead class="bg-dark text-white">
                                 <tr scope="col">
                                     <th scope="col">Carnet</th>
@@ -48,7 +48,7 @@
                                     <td scope="col">{{$clientesv->telefono_cliente}}</td>
                                     <td scope="col">{{$clientesv->direccion_cliente}}</td>
                                     <td scope="col">{{$clientesv->zona->nombre_zona}}</td>
-                                    <td scope="col" @if($clientesv->estado_cliente == 'DEUDA PENDIENTE') class="bg-warning text-dark" @elseif($clientesv->estado_cliente == 'DEUDOR MOROSO') class="bg-danger text-white" @elseif($clientesv->estado_cliente == 'DEUDA CANCELADA') class="bg-success text-white" @endif>{{$clientesv->estado_cliente}}</td>
+                                    <td scope="col" @if($clientesv->estado_cliente == 'CLIENTE NUEVO') class="bg-warning text-dark" @elseif($clientesv->estado_cliente == 'MAL CLIENTE') class="bg-danger text-white" @elseif($clientesv->estado_cliente == 'BUEN CLIENTE') class="bg-success text-white" @endif>{{$clientesv->estado_cliente}}</td>
                                     <td>
                                         <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->foto->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
                                             <i class="fas fa-image"></i>
