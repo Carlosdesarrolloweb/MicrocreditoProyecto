@@ -78,9 +78,9 @@
                 <div class="form-group col-md-6">
                     <x-jet-label for="estado_cliente" value="{{ __('ESTADO CLIENTE') }}" />
                     <select name="estado_cliente">
-                        <option value="DEUDA PENDIENTE">DEUDA PENDIENTE</option>
-                        <option value="DEUDA CANCELADA">DEUDA CANCELADA</option>
-                        <option value="DEUDOR MOROSO">DEUDOR MOROSO</option>
+                        <option value="CLIENTE NUEVO">CLIENTE NUEVO</option>
+                        <option value="BUEN CLIENTE">BUEN CLIENTE</option>
+                        <option value="MAL CLIENTE">MAL CLIENTE</option>
                     </select>
                 </div>
             </div>

@@ -48,7 +48,16 @@
                                     <td scope="col">{{$clientesv->telefono_cliente}}</td>
                                     <td scope="col">{{$clientesv->direccion_cliente}}</td>
                                     <td scope="col">{{$clientesv->zona->nombre_zona}}</td>
-                                    <td scope="col" @if($clientesv->estado_cliente == 'CLIENTE NUEVO') class="bg-warning text-dark" @elseif($clientesv->estado_cliente == 'MAL CLIENTE') class="bg-danger text-white" @elseif($clientesv->estado_cliente == 'BUEN CLIENTE') class="bg-success text-white" @endif>{{$clientesv->estado_cliente}}</td>
+                                    <td scope="col">
+                                        <span class="badge
+                                          @if($clientesv->estado_cliente == 'CLIENTE NUEVO') badge-warning
+                                          @elseif($clientesv->estado_cliente == 'MAL CLIENTE') badge-danger
+                                          @elseif($clientesv->estado_cliente == 'BUEN CLIENTE') badge-success
+                                          @endif
+                                          text-dark">
+                                          {{ $clientesv->estado_cliente }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->foto->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
                                             <i class="fas fa-image"></i>

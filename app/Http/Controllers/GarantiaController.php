@@ -103,7 +103,7 @@ class GarantiaController extends Controller
         $garantia = Garantia::findOrFail($id);
         $garantia->garantia = $request->garantia;
         $garantia->valor_prenda = $request->Valor_prenda;
-        $garantia->detalle_prenda = $request->Detalle_Prenda;
+        $garantia->Detalle_Prenda = $request->Detalle_Prenda;
         // $garantia->id_cliente = $request->id_cliente;
         // $garantia->id_prestamo = $request->id_prestamo;
         $garantia->fecha_entrega = $request->fecha_entrega;

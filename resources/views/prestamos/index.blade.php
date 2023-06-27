@@ -40,7 +40,7 @@
                                     <th>Monto Prestado</th>
                                     <th>Monto Cancelado</th>
                                     <th>Fecha Préstamo</th>
-                                    <th>estado</th>
+                                    <th>Estado</th>
                                    <th>Acción</th>
                                 </tr>
                             </thead>
@@ -63,9 +63,11 @@
                                         <td>Bs.{{ $prestamo->monto_prestado }}</td>
                                         <td>Bs.{{ $prestamo->monto_cancelado }}</td>
                                         <td>{{ $prestamo->fecha_prestamo }}</td>
-                                        <td style="background-color: {{ $prestamo->estado == 0 ? 'yellow' : '#00b347' }}; color: black">
-                                            {{ $prestamo->estado == 0 ? 'PENDIENTE' : 'PAGADO' }}
-                                        </td>
+                                        <td>
+                                            <span class="badge {{ $prestamo->estado == 0 ? 'badge-warning' : 'badge-success' }}">
+                                              {{ $prestamo->estado == 0 ? 'PENDIENTE' : 'PAGADO' }}
+                                            </span>
+                                          </td>
                                          <td>
                                             <form action="{{ route('prestamos.destroy', $prestamo->id) }}" method="POST" class="formulario-eliminar">
                                                 @csrf

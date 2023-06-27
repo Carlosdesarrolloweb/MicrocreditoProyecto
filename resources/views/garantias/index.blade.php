@@ -48,7 +48,14 @@
                                         <td >{{ $garantia->cliente->nombre_cliente }} {{ $garantia->cliente->apellido_cliente }}</td>
                                         <td >{{ $garantia->id_prestamo }}</td>
                                         <td >{{ $garantia->fecha_entrega }}</td>
-                                        <td >{{ $garantia->estado }}</td>
+                                        <td>
+                                            <span class="badge
+                                              @if($garantia->estado == 'ARTICULO NUEVO') badge-success
+                                              @elseif($garantia->estado == 'ARTICULO USADO') badge-warning
+                                              @endif">
+                                              {{ $garantia->estado }}
+                                            </span>
+                                          </td>
                                         <td >
                                             <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{asset($garantia->foto->direccion_imagen) }}" data-title="GARANTIA">
                                                 <i class="fas fa-image"></i>

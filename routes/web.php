@@ -140,6 +140,7 @@ Route::get('/', function () {
     Route::get('/pagos/{id}/edit', [PagoController::class, 'edit'])->name('pagos.edit');
     Route::put('/pagos/{id}', [PagoController::class, 'update'])->name('pagos.update');
     Route::get('/pagos/buscar-pagos/{id}', [PagoController::class, 'obtenerPagosPorCliente'])->name('pagos.obtenerPagosPorCliente');
+    Route::get('/clientes/{cliente_id}/pdf', [PDFController::class, 'generatePDFcliente'])->name('pdf.generatePDFcliente');
 
 
 

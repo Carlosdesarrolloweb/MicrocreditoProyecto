@@ -28,52 +28,6 @@
                 <div class="form-group">
                 </div>
                 <div class="table-responsive">
-                   {{--  <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <thead class="bg-dark text-white">
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Prestamo</th>
-                                    <th>Fecha de pago</th>
-                                    <th>Monto de pago</th>
-                                    <th>Deuda actual</th>
-                                    <th>Descripción</th>
-                                    <th>Acciones</th> <!-- Agregamos una nueva columna para las acciones -->
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                    @php
-                                        $deudasActuales = [];
-                                    @endphp
-
-                                @foreach ($pagos as $pago)
-                                        @php
-                                            $prestamoId = $pago->prestamo->id;
-
-                                                // Verificar si la deuda actual ya existe en la matriz
-                                            $deudaActual = isset($deudasActuales[$prestamoId]) ? $deudasActuales[$prestamoId] : $pago->prestamo->monto_prestamo;
-
-                                                // Calcular la nueva deuda actual
-                                            $deudaActual -= $pago->monto_pago;
-
-                                                // Almacenar la nueva deuda actual en la matriz
-                                            $deudasActuales[$prestamoId] = $deudaActual;
-                                        @endphp
-                                    <tr>
-                                        <td>{{ $pago->prestamo->cliente->nombre_cliente }} {{ $pago->prestamo->cliente->apellido_cliente }}</td>
-                                        <td>{{ $pago->prestamo->monto_prestamo }}</td>
-                                        <td>{{ $pago->fecha_pago }}</td>
-                                        <td>{{ $pago->monto_pago }}</td>
-                                        <td>{{ $deudaActual }}</td>
-                                        <td>{{ $pago->descripcion }}</td>
-                                        <td>
-                                            <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-edit">Editar</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table> --}}
-
                             <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
                                 <thead class="bg-dark text-white">
                                   <tr>
@@ -105,11 +59,16 @@
                                       <td>{{ $pago->monto_pago }}</td>
                                       <td>{{ $deudaActual }}</td>
                                       <td>{{ $pago->descripcion }}</td>
-                                      <td style="color: #000000; background-color: {{ $pago->prestamo->estado == 1 ? '#00b347' : 'white' }}">
-                                        {{ $pago->prestamo->estado == 1 ? 'DEUDA CANCELADA' : '' }}
+                                      <td>
+                                        @if ($pago->prestamo->estado == 1)
+                                          <span class="badge badge-success">DEUDA CANCELADA</span>
+                                        @else
+                                          <span class="badge badge-warning">DEUDA PENDIENTE</span>
+                                        @endif
                                       </td>
                                       <td>
-                                        <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-edit">Editar</a>
+                                        <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-edit"><i class='fas fa-user-edit'></i></a>
+                                        <a href="{{ route('pdf.generatePDFcliente', ['cliente_id' => $pago->prestamo->cliente->id]) }}" class="btn btn-primary"><i class="far fa-file-pdf"></i> PDF</a>
                                       </td>
                                     </tr>
                                   @endforeach
