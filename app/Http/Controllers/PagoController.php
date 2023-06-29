@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Pago;
 use App\Models\Cliente;
 use App\Models\Prestamo;
+use Illuminate\Support\Facades\Auth;
 
 class PagoController extends Controller
 {
@@ -60,9 +61,25 @@ class PagoController extends Controller
         }
         $prestamo->save();
 
+        // Obtener el monto del pago y el número de cuota asociados al pago
+        $montoPago = $pago->monto_pago;
+        $numeroCuota = $pago->Numero_Cuota;
 
-        // Redirigir al usuario a la página de detalles del pago recién creado
-        // return redirect()->route('pagos.show', $pago->id);
+        // Obtener el nombre del cliente asociado al préstamo del pago
+        $prestamo = Prestamo::findOrFail($pago->id_prestamo);
+        $nombreCliente = $prestamo->cliente->nombre_cliente . ' ' . $prestamo->cliente->apellido_cliente;
+
+        // Registro en la bitácora
+        $usuarioId = Auth::id();
+        $accion = 'Registro de pago - "Monto: ' . $montoPago . ', Número de cuota: ' . $numeroCuota . ', Cliente: ' . $nombreCliente . '"';
+        $tablaAfectada = 'pagos';
+        DB::table('bitacora')->insert([
+            'usuario_id' => $usuarioId,
+            'accion' => $accion,
+            'tabla_afectada' => $tablaAfectada,
+            'fecha_registro' => DB::raw('CURRENT_TIMESTAMP')
+        ]);
+
         return redirect()->route('pagos.index');
     }
     public function obtenerPorCliente($clienteId)
@@ -116,10 +133,22 @@ public function update(Request $request, $id)
     $montoanteriorcancelado= $prestamo->monto_cancelado;
     $montoactualizado= $montoanteriorcancelado-$montoanterior;
     $montocorregido= $montoactualizado + $request->monto_pago;
+
     // Actualizar el monto_cancelado en el prestamo correspondiente
-    // $prestamo = $pago->prestamo;
     $prestamo->monto_cancelado = $montocorregido;
     $prestamo->save();
+    $nombreCliente = $prestamo->cliente->nombre_cliente . ' ' . $prestamo->cliente->apellido_cliente;
+
+    // Registro en la bitácora
+    $usuarioId = Auth::id();
+    $accion = 'Edición de pago - ID: ' . $id . ', Monto anterior: ' . $montoanterior . ', Monto actual: ' . $pago->monto_pago . ', Cliente: ' . $nombreCliente . '"';
+    $tablaAfectada = 'pagos';
+    DB::table('bitacora')->insert([
+        'usuario_id' => $usuarioId,
+        'accion' => $accion,
+        'tabla_afectada' => $tablaAfectada,
+        'fecha_registro' => DB::raw('CURRENT_TIMESTAMP')
+    ]);
 
     // Redirigir al usuario a la página de detalles del pago actualizado
     return redirect()->route('pagos.index', $pago->id);

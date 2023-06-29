@@ -8,6 +8,8 @@ use App\Models\Cliente;
 use App\Models\Interes;
 use App\Models\ModoPago;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PrestamoController extends Controller
 {
@@ -65,7 +67,20 @@ class PrestamoController extends Controller
         $Prestamo->estado=false;
         $Prestamo->save();
 
-        // Prestamo::create($request->all());
+            // Obténer los valores necesarios para el registro en la bitácora
+        $clienteNombre = $Prestamo->cliente->nombre_cliente;
+        $clienteApellido = $Prestamo->cliente->apellido_cliente;
+
+        // Registro en la bitácora
+        $usuarioId = Auth::id();
+        $accion = 'Creación de préstamo - "Monto: ' . $Prestamo->monto_prestamo . ', Duración: ' . $Prestamo->duracion_prestamo . ' meses, Cliente: ' . $clienteNombre . ' ' . $clienteApellido . '"';
+        $tablaAfectada = 'prestamo';
+        DB::table('bitacora')->insert([
+            'usuario_id' => $usuarioId,
+            'accion' => $accion,
+            'tabla_afectada' => $tablaAfectada,
+            'fecha_registro' => DB::raw('CURRENT_TIMESTAMP')
+        ]);
 
         return redirect()->route('prestamos.create')
             ->with('success', 'Prestamo creado exitosamente.');
@@ -130,8 +145,21 @@ class PrestamoController extends Controller
     {
         $prestamo = Prestamo::findOrFail($id);
         $pagos = $prestamo->pagos;
+        $montoPrestamo = $prestamo->monto_prestamo;
+        $nombreCliente = $prestamo->cliente->nombre_cliente . ' ' . $prestamo->cliente->apellido_cliente;
 
         if ($prestamo->monto_cancelado == 0 && $pagos->isEmpty()) {
+
+                // Registro en la bitácora
+            $usuarioId = Auth::id();
+            $accion = 'Eliminación de préstamo - "Monto: ' . $montoPrestamo . ', Cliente: ' . $nombreCliente . '"';
+            $tablaAfectada = 'prestamo';
+            DB::table('bitacora')->insert([
+                'usuario_id' => $usuarioId,
+                'accion' => $accion,
+                'tabla_afectada' => $tablaAfectada,
+                'fecha_registro' => DB::raw('CURRENT_TIMESTAMP')
+            ]);
             $prestamo->delete();
 
             return redirect()->route('prestamos.index')

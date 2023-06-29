@@ -72,7 +72,9 @@
                                             <form action="{{ route('prestamos.destroy', $prestamo->id) }}" method="POST" class="formulario-eliminar">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> </button>
+                                                @if ($prestamo->monto_cancelado == 0)
+                                                    <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> </button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

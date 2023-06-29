@@ -68,7 +68,6 @@ Route::get('/', function () {
     Route::get('/clientes',[App\Http\Controllers\ClienteController::class,'store'])->name('clientesv');
     Route::get('/clientes/mostrar/{criterio}', [ClienteController::class, 'mostrarCliente'])->name('clientes.mostrar');
     Route::post('/clientes', [ClienteController::class, 'buscarCliente'])->name('buscar.cliente');
-    // Route::get('/pdf', [PDFController::class, 'generatePDF'])->name('pdf.generate');
     Route::get('/pdf/{cliente_id}', [PDFController::class, 'generatePDF'])->name('pdf.generate');
 
     //MostrarUsuarios
@@ -89,7 +88,7 @@ Route::get('/', function () {
         'index' => 'zonas.index',
         'create' => 'zonas.create',
         'store' => 'zonas.store',
-        'show' => 'zonas.show', // Aquí se define la ruta para mostrar una zona específica
+        'show' => 'zonas.show',
         'edit' => 'zonas.edit',
         'update' => 'zonas.update',
         'destroy' => 'zonas.destroy',

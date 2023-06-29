@@ -4,7 +4,9 @@
 
 @section('content_header')
 <h1 style="text-align: center;font-weight: bold; color: black;">CREAR NUEVO CLIENTE</h1>
-
+<th>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ date('d/m/Y') }}</P>
+</th>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 @stop
@@ -17,7 +19,7 @@
                 <div class="form-group col-md-12">
                     <div class="col-md-12 text-right mb-3">
                         <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
-                            <i class="fas fa-times-circle mr-2"></i>Limpiar
+                            <i class="fas fa-times-circle mr-2"></i>
                         </button>
                     </div>
                 </div>
@@ -112,7 +114,7 @@
                   <i class="fa fa-save mr-2" style="font-size: 1.8em;"></i>
                   <h4 class="mb-0">{{ __('Crear') }}</h4>
                 </x-jet-button>
-              </div>
+            </div>
         </div>
         </form>
 @stop

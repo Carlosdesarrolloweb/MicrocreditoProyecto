@@ -41,7 +41,7 @@
                 <label for="descripcion">Descripción</label>
                 <textarea name="descripcion" id="descripcion" class="form-control">{{ $pago->descripcion }}</textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button type="submit" class="btn btn-success">Actualizar</button>
         </form>
     </div>
     @endif

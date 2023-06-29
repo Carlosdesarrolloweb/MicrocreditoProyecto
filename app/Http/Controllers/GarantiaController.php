@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use App\Helper\Images;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GarantiaController extends Controller
 {
@@ -63,6 +65,23 @@ class GarantiaController extends Controller
         $garantia->id_prestamo = $request->id_prestamo;
         $garantia->save();
 
+            // Bitacora
+        $garantia->id_cliente = $request->cliente_id;
+        $garantia->id_prestamo = $request->id_prestamo;
+        $garantia->garantia = $request->garantia;
+        $garantia->save();
+
+            // Registro en la bitácora
+        $usuarioId = Auth::id();
+        $accion = 'Creación de garantía - ID: ' . $garantia->id .  ', Garantia: ' . $garantia->garantia . ', Cliente: ' . $garantia->cliente->nombre_cliente . ' ' . $garantia->cliente->apellido_cliente;
+        $tablaAfectada = 'garantias';
+        DB::table('bitacora')->insert([
+            'usuario_id' => $usuarioId,
+            'accion' => $accion,
+            'tabla_afectada' => $tablaAfectada,
+            'fecha_registro' => DB::raw('CURRENT_TIMESTAMP')
+        ]);
+
         return redirect()->route('garantias.index');
     }
     public function index()
@@ -81,11 +100,18 @@ class GarantiaController extends Controller
 
     public function destroy($id)
     {
-        $garantia = Garantia::find($id);
+        $garantia = Garantia::findOrFail($id);
 
-        if (!$garantia) {
-            return response()->json(['success' => false]);
-        }
+        // Registro en la bitácora
+        $usuarioId = Auth::id();
+        $accion = 'Eliminación de garantía - ID: ' . $garantia->id . ', Valor: ' . $garantia->valor_prenda . ', Detalle: ' . $garantia->Detalle_Prenda . ', Cliente: ' . $garantia->cliente->nombre_cliente . ' ' . $garantia->cliente->apellido_cliente;
+        $tablaAfectada = 'garantias';
+        DB::table('bitacora')->insert([
+            'usuario_id' => $usuarioId,
+            'accion' => $accion,
+            'tabla_afectada' => $tablaAfectada,
+            'fecha_registro' => DB::raw('CURRENT_TIMESTAMP')
+        ]);
 
         $garantia->delete();
 
@@ -101,14 +127,26 @@ class GarantiaController extends Controller
     public function update(Request $request, $id)
     {
         $garantia = Garantia::findOrFail($id);
+        $valorPrendaAnterior = $garantia->valor_prenda;
+        $detallePrendaAnterior = $garantia->Detalle_Prenda;
+
         $garantia->garantia = $request->garantia;
         $garantia->valor_prenda = $request->Valor_prenda;
         $garantia->Detalle_Prenda = $request->Detalle_Prenda;
-        // $garantia->id_cliente = $request->id_cliente;
-        // $garantia->id_prestamo = $request->id_prestamo;
         $garantia->fecha_entrega = $request->fecha_entrega;
         $garantia->estado = $request->estado;
         $garantia->save();
+
+        // Registro en la bitácora
+        $usuarioId = Auth::id();
+        $accion = 'Actualización de garantía - ID: ' . $garantia->id . ', Valor anterior: ' . $valorPrendaAnterior . ', Nuevo valor: ' . $garantia->valor_prenda . ', Detalle anterior: ' . $detallePrendaAnterior . ', Nuevo detalle: ' . $garantia->Detalle_Prenda . ', Cliente: ' . $garantia->cliente->nombre_cliente . ' ' . $garantia->cliente->apellido_cliente;
+        $tablaAfectada = 'garantias';
+        DB::table('bitacora')->insert([
+            'usuario_id' => $usuarioId,
+            'accion' => $accion,
+            'tabla_afectada' => $tablaAfectada,
+            'fecha_registro' => DB::raw('CURRENT_TIMESTAMP')
+        ]);
 
         return redirect()->route('garantias.index')->with('success', 'Garantía actualizada exitosamente');
     }
