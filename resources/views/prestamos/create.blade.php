@@ -22,107 +22,100 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-primary">
+            <div class="custom-box">
                 <div class="box-body">
-                    {{-- <form action="{{ route('prestamos.store') }}" method="POST"> --}}
                         <form action="{{ route('prestamos.store') }}" method="POST" id="prestamoForm">
-                        @csrf
+                            @csrf
 
-                    <div class="row">
-                      <div class="col-md-6">
-                            <label for="id_cliente">Cliente</label>
-                            <select name="id_cliente" class="form-control" required>
-                                <option value="">Seleccione un cliente</option>
-                                @foreach($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}.  . {{ $cliente->Carnet_cliente }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="id_usuario">Usuario que otorga el préstamo</label>
-                            <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
-                            <input type="text" class="form-control" value="{{ Auth::user()->name . ' ' . Auth::user()->apellido_usuario }}" disabled>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="id_interes">Tipo de Interés</label>
-                            <select name="id_interes" id="interes" class="form-control" required>
-                                <option value="">Seleccione un tipo de interés</option>
-                                @foreach($intereses as $interes)
-                                    <option value="{{ $interes->interes_prestamo }}">{{ $interes->interes_prestamo }}%</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="id_modo_pago">Modo de Pago</label>
-                            <select name="id_modo_pago" id="id_modo_pago" class="form-control" required>
-                                <option value="">Seleccione un modo de pago</option>
-                                @foreach($modo_pago as $modos_pago)
-                                    <option value="{{ $modos_pago->id }}">{{ $modos_pago->modalidad_pago }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="monto_prestamo">Monto del Préstamo</label>
-                            <input type="number" id="monto" name="monto_prestamo" class="form-control" required>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="id_cliente"> <i class="fas fa-user"></i> Cliente</label>
+                                    <select name="id_cliente" class="form-control" required>
+                                        <option value="">Seleccione un cliente</option>
+                                        @foreach($clientes as $cliente)
+                                            <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}.  . {{ $cliente->Carnet_cliente }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="id_usuario"><i class="fas fa-user"></i> Usuario que otorga el préstamo</label>
+                                    <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
+                                    <input type="text" class="form-control" value="{{ Auth::user()->name . ' ' . Auth::user()->apellido_usuario }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"><p></p>
+                                    <label for="id_interes"><i class="fas fa-percentage"></i> Tipo de Interés</label>
+                                    <select name="id_interes" id="interes" class="form-control" required>
+                                        <option value="">Seleccione un tipo de interés</option>
+                                        @foreach($intereses as $interes)
+                                            <option value="{{ $interes->interes_prestamo }}">{{ $interes->interes_prestamo }}%</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6"><p></p>
+                                    <label for="id_modo_pago"><i class="fas fa-money-check"></i> Modo de Pago</label>
+                                    <select name="id_modo_pago" id="id_modo_pago" class="form-control" required>
+                                        <option value="">Seleccione un modo de pago</option>
+                                        @foreach($modo_pago as $modos_pago)
+                                            <option value="{{ $modos_pago->id }}">{{ $modos_pago->modalidad_pago }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"><p></p>
+                                    <label for="monto_prestamo"><i class="fas fa-dollar-sign"></i> Monto del Préstamo</label>
+                                    <input type="number" id="monto" name="monto_prestamo" class="form-control" required><p></p>
+                                </div>
 
-                        <div class="col-md-6">
-                            <label for="duracion_prestamo">Duración del Préstamo (en meses)</label>
-                            <input type="number" id="duracion" name="duracion_prestamo" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="cantidad_cuotas">Cantidad de Cuotas</label>
-                            <input type="number" id="cantidad_cuotas" name="cantidad_cuotas" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="calculo_cuota">Cálculo de Cuota</label>
-                            <input type="number" id="calculo_cuota" name="calculo_cuota" class="form-control" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="ganancia">Ganancia</label>
-                            <input type="number" id="ganancia" name="ganancia" class="form-control" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="monto_prestado">Monto Prestado</label>
-                            <input type="number" id="monto_prestado" name="monto_prestado" class="form-control" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="monto_cancelado">Monto Cancelado</label>
-                            <input type="number" id="monto_cancelado" name="monto_cancelado" class="form-control" readonly>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p></p>
-                            <label for="fecha_prestamo">Fecha Prestamo</label>
-                            <?php date_default_timezone_set('America/La_Paz'); ?>
-                            <input type="text" id="fecha_prestamo" name="fecha_prestamo" class="form-control datepicker" value="<?= date('Y-m-d'); ?>">
-                        </div>
-                    </div>
+                                <div class="col-md-6"><p></p>
+                                    <label for="duracion_prestamo"><i class="far fa-calendar-alt"></i> Duración del Préstamo (en meses)</label>
+                                    <input type="number" id="duracion" name="duracion_prestamo" class="form-control" required><p></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="cantidad_cuotas"><i class="fas fa-sort-numeric-up"></i> Cantidad de Cuotas</label>
+                                    <input type="number" id="cantidad_cuotas" name="cantidad_cuotas" class="form-control" required><p></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="calculo_cuota"><i class="fas fa-calculator"></i> Cálculo de Cuota</label>
+                                    <input type="number" id="calculo_cuota" name="calculo_cuota" class="form-control" readonly><p></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="ganancia"><i class="fas fa-chart-line"></i> Ganancia</label>
+                                    <input type="number" id="ganancia" name="ganancia" class="form-control" readonly><p></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="monto_prestado"><i class="fas fa-money-bill"></i> Monto Prestado</label>
+                                    <input type="number" id="monto_prestado" name="monto_prestado" class="form-control" readonly><p></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="monto_cancelado"><i class="fas fa-money-bill"></i> Monto Cancelado</label>
+                                    <input type="number" id="monto_cancelado" name="monto_cancelado" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p></p>
+                                    <label for="fecha_prestamo"><i class="far fa-calendar-alt"></i> Fecha Prestamo</label>
+                                    <?php date_default_timezone_set('America/La_Paz'); ?>
+                                    <input type="text" id="fecha_prestamo" name="fecha_prestamo" class="form-control datepicker" value="<?= date('Y-m-d'); ?>">
+                                </div>
+                            </div>
                             <p><p>
                             </p></p>
-               {{--              <div class="flex items-center justify-end mt-4">
-                                 <x-jet-button class="btn btn-success btn-lg mb-2" onclick="Swal.fire('Good job!', 'You clicked the button!', 'success')">
-                                    <i class='fa fa-user-plus'></i>
-                                     {{ __('REGISTRAR PRESTAMO') }}
-                                </x-jet-button>
-                            </div> --}}
                             <div class="flex items-center justify-end mt-4">
                                 <x-jet-button class="btn btn-success btn-lg mb-2">
                                     <i class='fa fa-user-plus'></i>
                                     {{ __('REGISTRAR PRESTAMO') }}
                                 </x-jet-button>
                             </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,6 +125,14 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+        .custom-box {
+    background-color: #75606069;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    }
+    </style>
 @stop
 
 @section('js')

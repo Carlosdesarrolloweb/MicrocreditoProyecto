@@ -194,7 +194,7 @@ class PDFController extends Controller
 
         // Agrega las líneas de firma al PDF
         $pdf->SetFont('helvetica', 'B', 10);
-        $pdf->SetY(140); // Ajusta la posición vertical de las líneas de firma
+        $pdf->SetY(200); // Ajusta la posición vertical de las líneas de firma
 
         // Línea de firma del cliente
         $pdf->Cell(60, 10, 'Firma del cliente:', 0, 1, 'L');
