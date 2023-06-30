@@ -2,20 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gananciadia extends Model
+class GananciaDia extends Model
 {
-    use HasFactory;
+    protected $table = 'ganancia_dia';
     public $timestamps = false;
     protected $fillable = [
-        'monto',
         'fecha',
-        'id_cliente',
-        'id_pago',
-        'id_usuario',
-
+        'monto'
     ];
-
 }

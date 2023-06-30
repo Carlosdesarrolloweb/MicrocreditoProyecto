@@ -461,7 +461,7 @@ return [
                     'icon_color' => 'red',
                 ], */
                 [
-                    'text' => 'Prestamos Realizados',
+                    'text' => ' Prestamos Realizados',
                     'route'  => 'prestamos.index',
                     'icon'    => 'fas fa-file-invoice-dollar',
                     'icon_color' => 'red',
