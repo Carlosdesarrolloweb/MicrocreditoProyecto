@@ -13,140 +13,182 @@
 </center>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 @stop
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Registrar Pago') }}</div>
-
-                    <div class="card-body">
-                        <form id="pagoForm" method="POST" action="{{ route('pagos.store')}}">
-                            @csrf
-
-                            <div class="form-group row">
-                                <label for="id_cliente" class="col-md-4 col-form-label text-md-right">{{ __('Cliente') }}</label>
-
-                                <div class="col-md-6">
-                                    <select id="id_cliente" class="form-control @error('id_cliente') is-invalid @enderror" name="id_cliente" required autocomplete="id_cliente" autofocus>
-                                        <option value="">Seleccione un cliente</option>
-                                        @foreach ($clientes as $cliente)
-                                            <option value="{{ $cliente->id }}" {{ old('id_cliente') == $cliente->id ? 'selected' : '' }}>{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}</option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('id_cliente')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <input id="id_prestamo" type="hidden" name="id_prestamo"/>
-
-
-                            <div class="form-group row">
-                                <label for="monto_prestamo" class="col-md-4 col-form-label text-md-right">{{ __('Monto del Préstamo') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="monto_prestamo" type="text" class="form-control @error('monto_prestamo') is-invalid @enderror" name="monto_prestamo" readonly required autocomplete="monto_prestamo">
-
-                                    @error('monto_prestamo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="cuota" class="col-md-4 col-form-label text-md-right">{{ __('Cuota a Pagar') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="cuota" type="text" class="form-control @error('cuota') is-invalid @enderror" name="cuota" readonly required autocomplete="cuota">
-
-                                    @error('cuota')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="fecha_pago" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de Pago') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="fecha_pago" type="date" class="form-control @error('fecha_pago') is-invalid @enderror" name="fecha_pago" value="{{ old('fecha_pago') }}" required autocomplete="fecha_pago" autofocus>
-
-                                    @error('fecha_pago')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="Numero_Cuota" class="col-md-4 col-form-label text-md-right">{{ __('Número de Cuota') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="Numero_Cuota" type="text" class="form-control @error('Numero_Cuota') is-invalid @enderror" name="Numero_Cuota" value="{{ old('Numero_Cuota') }}" required readonly>
-
-                                    @error('Numero_Cuota')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="monto_pago" class="col-md-4 col-form-label text-md-right">{{ __('Monto a Pagar') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="monto_pago" type="text"  class="form-control @error('monto_pago') is-invalid @enderror" name="monto_pago" value="{{ old('monto_pago') }}" required>
-
-                                    @error('monto')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
-                                <div class="col-md-6">
-                                    <textarea id="descripcion" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" rows="5" cols="50" required>{{ old('descripcion') }}</textarea>
-                                    @error('descripcion')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-success">
-                                        {{ __('Guardar Pago') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-12 text-right mb-3">
+                <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
+                    <i class="far fa-file-alt fa-lg"></i> Limpiar
+                </button>
+                <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
+                    <i class="fas fa-question-circle fa-lg"></i> Ayuda
+                </button>
+                <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                    <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                </button>
             </div>
         </div>
+        <div class="custom-box" style="background-color: #75606069; border: 1px solid #ccc; padding: 20px; border-radius: 5px;">
+            <form id="pagoForm" method="POST" action="{{ route('pagos.store')}}">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="id_cliente" class="col-md-8 col-form-label">
+                            <i class="fas fa-user fa-fw"></i> {{ __('Cliente') }}
+                        </label>
+                        <select id="id_cliente" class="form-control @error('id_cliente') is-invalid @enderror" name="id_cliente" required autocomplete="id_cliente" autofocus>
+                            <option value="">Seleccione un cliente</option>
+                            @foreach ($clientes as $cliente)
+                                <option value="{{ $cliente->id }}" {{ old('id_cliente') == $cliente->id ? 'selected' : '' }}>{{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_cliente')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="monto_prestamo" class="col-md-8 col-form-label">
+                            <i class="fas fa-money-bill fa-fw"></i> {{ __('Monto del Préstamo') }}
+                        </label>
+                        <input id="id_prestamo" type="hidden" name="id_prestamo"/>
+                            <input id="monto_prestamo" type="text" class="form-control @error('monto_prestamo') is-invalid @enderror" name="monto_prestamo" readonly required autocomplete="monto_prestamo">
+                            @error('monto_prestamo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="cuota" class="col-md-8 col-form-label">
+                            <i class="fas fa-dollar-sign fa-fw"></i> {{ __('Cuota a Pagar') }}
+                        </label>
+                            <input id="cuota" type="text" class="form-control @error('cuota') is-invalid @enderror" name="cuota" readonly required autocomplete="cuota">
+                            @error('cuota')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha_pago" class="col-md-8 col-form-label">
+                            <i class="far fa-calendar-alt fa-fw"></i> {{ __('Fecha de Pago') }}
+                        </label>
+                            <input id="fecha_pago" type="date" class="form-control @error('fecha_pago') is-invalid @enderror" name="fecha_pago" value="{{ old('fecha_pago') }}" required autocomplete="fecha_pago" autofocus>
+                            @error('fecha_pago')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="Numero_Cuota" class="col-md-8 col-form-label">
+                            <i class="fas fa-list-ol fa-fw"></i> {{ __('Número de Cuota') }}
+                        </label>
+                            <input id="Numero_Cuota" type="text" class="form-control @error('Numero_Cuota') is-invalid @enderror" name="Numero_Cuota" value="{{ old('Numero_Cuota') }}" required readonly>
+                            @error('Numero_Cuota')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="monto_pago" class="col-md-8 col-form-label">
+                            <i class="fas fa-money-check-alt fa-fw"></i> {{ __('Monto a Pagar') }}
+                        </label>
+                            <input id="monto_pago" type="text"  class="form-control @error('monto_pago') is-invalid @enderror" name="monto_pago" value="{{ old('monto_pago') }}" required>
+                            @error('monto_pago')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="descripcion" class="col-md-8 col-form-label">
+                            <i class="fas fa-comment-alt fa-fw"></i> {{ __('Descripcion') }}
+                        </label>
+                            <textarea id="descripcion" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" rows="5" cols="50" required>{{ old('descripcion') }}</textarea>
+                            @error('descripcion')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
+                </div>
+                <p></p> <p></p>
+
+            {{-- <div class="form-group row mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-success">
+                        {{ __('Guardar Pago') }}
+                    </button>
+                </div>
+            </div> --}}
+            <div class="form-group row mb-0">
+                <div class="col-md-6 offset-md-4 text-center align-items-center">
+                    <button type="submit" class="btn btn-success btn-lg d-flex justify-content-center">
+                        <i class="fas fa-save fa-lg mr-2"></i> {{ __('Guardar Pago') }}
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-    @stop
+
+
+@stop
 
 
 @section('css')
+<style>
+     .custom-box {
+        background-color: #75606069;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        }
+    .custom-modal {
+        width: 90% !important;
+        max-width: 1200px !important;
+        }
+</style>
 
 @stop
 
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5"></script>
+<script>
+        //BOTON DE AYUDA
+    document.getElementById('btnAyuda').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Ayuda',
+            html: '<embed src="/pdf/crearprestamo.pdf" type="application/pdf" width="100%" height="800px" />',
+            confirmButtonText: 'Cerrar',
+            customClass: {
+            content: 'modal-lg',
+            popup: 'custom-modal'
+            }
+        });
+    });
+        //BOTON DE SALIR
+    document.getElementById('btnSalir').addEventListener('click', function() {
+    window.location.href = "{{ route('dashboard') }}";
+    });
+
+        //BOTON DE LIMPIAR
+    document.getElementById("btnLimpiar").addEventListener("click", function() {
+        document.getElementById("pagoForm").reset();
+    });
+
+</script>
 <script>
     $(document).ready(function() {
         // Obtener los elementos del formulario
