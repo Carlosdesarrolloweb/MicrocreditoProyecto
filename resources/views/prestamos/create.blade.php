@@ -20,6 +20,21 @@
 
 @section('content')
 <div class="container">
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-12">
+            <div class="col-md-12 text-right mb-3">
+                <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
+                    <i class="far fa-file-alt fa-lg"></i> Limpiar
+                </button>
+                <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
+                    <i class="fas fa-question-circle fa-lg"></i> Ayuda
+                </button>
+                <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                    <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="custom-box">
@@ -29,7 +44,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="id_cliente"> <i class="fas fa-user"></i> Cliente</label>
+                                    <label for="id_cliente"> <i class="fas fa-user"></i> CLIENTE</label>
                                     <select name="id_cliente" class="form-control" required>
                                         <option value="">Seleccione un cliente</option>
                                         @foreach($clientes as $cliente)
@@ -38,14 +53,14 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="id_usuario"><i class="fas fa-user"></i> Usuario que otorga el préstamo</label>
+                                    <label for="id_usuario"><i class="fas fa-user"></i> USUARIO</label>
                                     <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                                     <input type="text" class="form-control" value="{{ Auth::user()->name . ' ' . Auth::user()->apellido_usuario }}" disabled>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><p></p>
-                                    <label for="id_interes"><i class="fas fa-percentage"></i> Tipo de Interés</label>
+                                    <label for="id_interes"><i class="fas fa-percentage"></i> TIPO DE INTERÉS</label>
                                     <select name="id_interes" id="interes" class="form-control" required>
                                         <option value="">Seleccione un tipo de interés</option>
                                         @foreach($intereses as $interes)
@@ -54,7 +69,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6"><p></p>
-                                    <label for="id_modo_pago"><i class="fas fa-money-check"></i> Modo de Pago</label>
+                                    <label for="id_modo_pago"><i class="fas fa-money-check"></i> MODO DE PAGO</label>
                                     <select name="id_modo_pago" id="id_modo_pago" class="form-control" required>
                                         <option value="">Seleccione un modo de pago</option>
                                         @foreach($modo_pago as $modos_pago)
@@ -65,43 +80,43 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><p></p>
-                                    <label for="monto_prestamo"><i class="fas fa-dollar-sign"></i> Monto del Préstamo</label>
+                                    <label for="monto_prestamo"><i class="fas fa-dollar-sign"></i> MONTO DEL PRESTAMO</label>
                                     <input type="number" id="monto" name="monto_prestamo" class="form-control" required><p></p>
                                 </div>
 
                                 <div class="col-md-6"><p></p>
-                                    <label for="duracion_prestamo"><i class="far fa-calendar-alt"></i> Duración del Préstamo (en meses)</label>
+                                    <label for="duracion_prestamo"><i class="far fa-calendar-alt"></i> DURACIÓN PRESTAMO (MESES)</label>
                                     <input type="number" id="duracion" name="duracion_prestamo" class="form-control" required><p></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="cantidad_cuotas"><i class="fas fa-sort-numeric-up"></i> Cantidad de Cuotas</label>
+                                    <label for="cantidad_cuotas"><i class="fas fa-sort-numeric-up"></i> CANTIDAD DE CUOTAS</label>
                                     <input type="number" id="cantidad_cuotas" name="cantidad_cuotas" class="form-control" required><p></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="calculo_cuota"><i class="fas fa-calculator"></i> Cálculo de Cuota</label>
+                                    <label for="calculo_cuota"><i class="fas fa-calculator"></i> CALCULO DE CUOTA</label>
                                     <input type="number" id="calculo_cuota" name="calculo_cuota" class="form-control" readonly><p></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="ganancia"><i class="fas fa-chart-line"></i> Ganancia</label>
+                                    <label for="ganancia"><i class="fas fa-chart-line"></i> GANANCIA</label>
                                     <input type="number" id="ganancia" name="ganancia" class="form-control" readonly><p></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="monto_prestado"><i class="fas fa-money-bill"></i> Monto Prestado</label>
+                                    <label for="monto_prestado"><i class="fas fa-money-bill"></i> MONTO PRESTAOD</label>
                                     <input type="number" id="monto_prestado" name="monto_prestado" class="form-control" readonly><p></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="monto_cancelado"><i class="fas fa-money-bill"></i> Monto Cancelado</label>
+                                    <label for="monto_cancelado"><i class="fas fa-money-bill"></i> MONTO CANCELADO</label>
                                     <input type="number" id="monto_cancelado" name="monto_cancelado" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p></p>
-                                    <label for="fecha_prestamo"><i class="far fa-calendar-alt"></i> Fecha Prestamo</label>
+                                    <label for="fecha_prestamo"><i class="far fa-calendar-alt"></i> FECHA PRESTAMO</label>
                                     <?php date_default_timezone_set('America/La_Paz'); ?>
                                     <input type="text" id="fecha_prestamo" name="fecha_prestamo" class="form-control datepicker" value="<?= date('Y-m-d'); ?>">
                                 </div>
@@ -132,10 +147,75 @@
     padding: 20px;
     border-radius: 5px;
     }
+    .custom-modal {
+        width: 90% !important;
+        max-width: 1200px !important;
+        }
     </style>
 @stop
 
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5"></script>
+<script>
+        //BOTON DE AYUDA
+    document.getElementById('btnAyuda').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Ayuda',
+            html: '<embed src="/pdf/crearprestamo.pdf" type="application/pdf" width="100%" height="800px" />',
+            confirmButtonText: 'Cerrar',
+            customClass: {
+            content: 'modal-lg',
+            popup: 'custom-modal'
+            }
+        });
+    });
+        //BOTON DE SALIR
+    document.getElementById('btnSalir').addEventListener('click', function() {
+    window.location.href = "{{ route('dashboard') }}";
+    });
+        //BOTON LIMPIAR
+    document.getElementById('btnLimpiar').addEventListener('click', function() {
+        // Limpiar el campo de cliente
+        document.getElementsByName('id_cliente')[0].value = '';
+
+        // Limpiar el campo de usuario
+        document.getElementsByName('id_usuario')[0].value = '';
+        document.getElementsByName('id_usuario')[0].disabled = false;
+
+        // Limpiar el campo de tipo de interés
+        document.getElementsByName('id_interes')[0].value = '';
+
+        // Limpiar el campo de modo de pago
+        document.getElementsByName('id_modo_pago')[0].value = '';
+
+        // Limpiar el campo de monto del préstamo
+        document.getElementById('monto').value = '';
+
+        // Limpiar el campo de duración del préstamo
+        document.getElementById('duracion').value = '';
+
+        // Limpiar el campo de cantidad de cuotas
+        document.getElementById('cantidad_cuotas').value = '';
+
+        // Limpiar el campo de cálculo de cuota
+        document.getElementById('calculo_cuota').value = '';
+
+        // Limpiar el campo de ganancia
+        document.getElementById('ganancia').value = '';
+
+        // Limpiar el campo de monto prestado
+        document.getElementById('monto_prestado').value = '';
+
+        // Limpiar el campo de monto cancelado
+        document.getElementById('monto_cancelado').value = '';
+
+        // Limpiar el campo de fecha de préstamo
+        document.getElementById('fecha_prestamo').value = '';
+
+        // Otras acciones de limpieza que desees realizar
+
+    });
+</script>
  <script>
     // Seleccionamos los inputs
     const input1 = document.getElementById("interes");

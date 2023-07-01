@@ -9,21 +9,33 @@
 </th>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 @stop
 
 @section('content')
         <form id="clienteForm" method="post" action="{{ route('clientes.crearclientes') }}" enctype="multipart/form-data">
             @csrf
             <div class="container">
+                <div class="form-group col-md-12">
+                    <div class="form-group col-md-12">
+                        <div class="col-md-12 text-right mb-3">
+                            <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
+                                <i class="far fa-file-alt fa-lg"></i> Limpiar
+                            </button>
+                            <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
+                                <i class="fas fa-question-circle fa-lg"></i> Ayuda
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                                <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="custom-box">
                     <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <div class="col-md-12 text-right mb-3">
-                                <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
-                                    <i class="fas fa-times-circle mr-2"></i>
-                                </button>
-                            </div>
-                        </div>
                         <div class="form-group col-md-6">
                             <label for="Carnet_cliente" value="{{ __('CARNET/DNI') }}" > <i class="fas fa-id-card"></i> CARNET/DNI</label>
                             <x-jet-input  maxlength="15" id="Carnet_cliente" class="form-control" type="text" name="Carnet_cliente" :value="old('Carnet_cliente')" required autofocus autocomplete="Carnet_cliente" />
@@ -42,7 +54,7 @@
                             <x-jet-input-error for="apellido_cliente" class="mt-2 text-danger" />
                         </div>
                         <div class="form-group">
-                            <label for="zona_id"><i class="fas fa-map-marker-alt"></i> Zona</label>
+                            <label for="zona_id"><i class="fas fa-map-marker-alt"></i> ZONA</label>
                             <select class="form-control" id="zona_id" name="zona_id">
                                 @foreach ($zonas as $zona)
                                     <option value="{{ $zona->id }}">{{ $zona->nombre_zona }}</option>
@@ -92,22 +104,30 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="id_foto" value="{{ __('FOTO ANVERSO CARNET') }}" > <i class="far fa-image"></i> FOTO ANVERSO CARNET</label>
-                            <x-jet-input  id="id_foto" class="form-control" type="FILE" name="id_foto" :value="old('id_foto')" required />
+                            <label for="id_foto" value="{{ __('FOTO ANVERSO CARNET') }}">
+                                <i class="far fa-image"></i> FOTO ANVERSO CARNET
+                            </label>
+                            <input id="id_foto" class="form-control-file" type="file" name="id_foto" :value="old('id_foto')" required onchange="handleImageUpload(event)" />
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="id_fotocarnet" value="{{ __('FOTO REVERSO CARNET') }}" > <i class="far fa-image"></i> FOTO REVERSO CARNET</label>
-                            <x-jet-input  id="id_fotocarnet" class="form-control" type="FILE" name="id_fotocarnet" :value="old('id_fotocarnet')" required />
+                            <label for="id_fotocarnet" value="{{ __('FOTO REVERSO CARNET') }}">
+                                <i class="far fa-image"></i> FOTO REVERSO CARNET
+                            </label>
+                            <input id="id_fotocarnet" class="form-control-file" type="file" name="id_fotocarnet" :value="old('id_fotocarnet')" required onchange="handleImageUpload(event)" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="id_fotorecibo" value="{{ __('FOTO RECIBO AGUA/LUZ') }}" > <i class="far fa-image"></i> FOTO RECIBO AGUA/LUZ</label>
-                            <x-jet-input  id="id_fotorecibo" class="form-control" type="FILE" name="id_fotorecibo" :value="old('id_fotorecibo')" required />
+                            <label for="id_fotorecibo" value="{{ __('FOTO RECIBO AGUA/LUZ') }}">
+                                <i class="far fa-image"></i> FOTO RECIBO AGUA/LUZ
+                            </label>
+                            <input id="id_fotorecibo" class="form-control-file" type="file" name="id_fotorecibo" :value="old('id_fotorecibo')" required onchange="handleImageUpload(event)" />
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="id_fotocroquis" value="{{ __('FOTO CROQUIS CASA') }}" > <i class="far fa-image"></i> FOTO CROQUIS CASA</label>
-                            <x-jet-input  id="id_fotocroquis" class="form-control" type="FILE" name="id_fotocroquis" :value="old('id_fotocroquis')" required />
+                            <label for="id_fotocroquis" value="{{ __('FOTO CROQUIS CASA') }}">
+                                <i class="far fa-image"></i> FOTO CROQUIS CASA
+                            </label>
+                            <input id="id_fotocroquis" class="form-control-file" type="file" name="id_fotocroquis" :value="old('id_fotocroquis')" required onchange="handleImageUpload(event)" />
                         </div>
                     </div>
                     <div class="flex items-center justify-end mt-4">
@@ -140,12 +160,33 @@
         padding: 20px;
         border-radius: 5px;
         }
+        .custom-modal {
+        width: 90% !important;
+        max-width: 1200px !important;
+        }
 
     </style>
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5"></script>
+    <script>
+        document.getElementById('btnAyuda').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Ayuda',
+                html: '<embed src="/pdf/crearcliente.pdf" type="application/pdf" width="100%" height="800px" />',
+                confirmButtonText: 'Cerrar',
+                customClass: {
+                content: 'modal-lg',
+                popup: 'custom-modal'
+                }
+            });
+        });
+        document.getElementById('btnSalir').addEventListener('click', function() {
+        window.location.href = "{{ route('dashboard') }}";
+        });
+    </script>
     <script>
         // Selecciona el botón "Limpiar" y agrega un evento click
         document.getElementById('btnLimpiar').addEventListener('click', function(event) {
@@ -199,7 +240,7 @@
 
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 @stop
