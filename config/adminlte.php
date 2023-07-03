@@ -544,7 +544,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Ingreso Diario',
-                    'route'  => 'clientesv',
+                    'route'  => 'ganancia.create',
                     'icon'    => 'fas fa-search',
                     'icon_color' => 'red',
                 ],

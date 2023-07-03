@@ -124,10 +124,18 @@
                                 </div>
                             </div>
                         </div>
+                 {{--        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body bg-primary text-white">
+                                    <h5 class="card-title"><i class="fas fa-exclamation-circle"></i> Deuda General: Bs.{{ $totalMontoPrestamo - $totalCancelado }}</h5>
+                                </div>
+                            </div>
+                        </div> --}}
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body bg-primary text-white">
                                     <h5 class="card-title"><i class="fas fa-exclamation-circle"></i> Deuda General: Bs.{{ $totalMontoPrestamo - $totalCancelado }}</h5>
+                                    <input type="hidden" name="deuda_general" value="{{ $totalMontoPrestamo - $totalCancelado }}">
                                 </div>
                             </div>
                         </div>

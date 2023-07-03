@@ -44,7 +44,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="id_cliente"> <i class="fas fa-user"></i> CLIENTE</label>
+                                    <label for="id_cliente"> <i class="fas fa-user"></i> Cliente</label>
                                     <select name="id_cliente" class="form-control" required>
                                         <option value="">Seleccione un cliente</option>
                                         @foreach($clientes as $cliente)
@@ -53,14 +53,14 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="id_usuario"><i class="fas fa-user"></i> USUARIO</label>
+                                    <label for="id_usuario"><i class="fas fa-user"></i> Usuario</label>
                                     <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                                     <input type="text" class="form-control" value="{{ Auth::user()->name . ' ' . Auth::user()->apellido_usuario }}" disabled>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><p></p>
-                                    <label for="id_interes"><i class="fas fa-percentage"></i> TIPO DE INTERÉS</label>
+                                    <label for="id_interes"><i class="fas fa-percentage"></i> Tipo de Interés</label>
                                     <select name="id_interes" id="interes" class="form-control" required>
                                         <option value="">Seleccione un tipo de interés</option>
                                         @foreach($intereses as $interes)
@@ -69,7 +69,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6"><p></p>
-                                    <label for="id_modo_pago"><i class="fas fa-money-check"></i> MODO DE PAGO</label>
+                                    <label for="id_modo_pago"><i class="fas fa-money-check"></i> Modo de Pago</label>
                                     <select name="id_modo_pago" id="id_modo_pago" class="form-control" required>
                                         <option value="">Seleccione un modo de pago</option>
                                         @foreach($modo_pago as $modos_pago)
@@ -80,43 +80,43 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><p></p>
-                                    <label for="monto_prestamo"><i class="fas fa-dollar-sign"></i> MONTO DEL PRESTAMO</label>
+                                    <label for="monto_prestamo"><i class="fas fa-dollar-sign"></i> Monto del Prestamo</label>
                                     <input type="number" id="monto" name="monto_prestamo" class="form-control" required><p></p>
                                 </div>
 
                                 <div class="col-md-6"><p></p>
-                                    <label for="duracion_prestamo"><i class="far fa-calendar-alt"></i> DURACIÓN PRESTAMO (MESES)</label>
+                                    <label for="duracion_prestamo"><i class="far fa-calendar-alt"></i> Duración Prestamo(Meses)</label>
                                     <input type="number" id="duracion" name="duracion_prestamo" class="form-control" required><p></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="cantidad_cuotas"><i class="fas fa-sort-numeric-up"></i> CANTIDAD DE CUOTAS</label>
+                                    <label for="cantidad_cuotas"><i class="fas fa-sort-numeric-up"></i> Cantidad de Cuotas</label>
                                     <input type="number" id="cantidad_cuotas" name="cantidad_cuotas" class="form-control" required><p></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="calculo_cuota"><i class="fas fa-calculator"></i> CALCULO DE CUOTA</label>
+                                    <label for="calculo_cuota"><i class="fas fa-calculator"></i> Calculo de Cuota</label>
                                     <input type="number" id="calculo_cuota" name="calculo_cuota" class="form-control" readonly><p></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="ganancia"><i class="fas fa-chart-line"></i> GANANCIA</label>
+                                    <label for="ganancia"><i class="fas fa-chart-line"></i> Ganancia</label>
                                     <input type="number" id="ganancia" name="ganancia" class="form-control" readonly><p></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="monto_prestado"><i class="fas fa-money-bill"></i> MONTO PRESTAOD</label>
+                                    <label for="monto_prestado"><i class="fas fa-money-bill"></i> Monto Prestado</label>
                                     <input type="number" id="monto_prestado" name="monto_prestado" class="form-control" readonly><p></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="monto_cancelado"><i class="fas fa-money-bill"></i> MONTO CANCELADO</label>
+                                    <label for="monto_cancelado"><i class="fas fa-money-bill"></i> Monto Cancelado</label>
                                     <input type="number" id="monto_cancelado" name="monto_cancelado" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p></p>
-                                    <label for="fecha_prestamo"><i class="far fa-calendar-alt"></i> FECHA PRESTAMO</label>
+                                    <label for="fecha_prestamo"><i class="far fa-calendar-alt"></i> Fecha PrÉstamo</label>
                                     <?php date_default_timezone_set('America/La_Paz'); ?>
                                     <input type="text" id="fecha_prestamo" name="fecha_prestamo" class="form-control datepicker" value="<?= date('Y-m-d'); ?>">
                                 </div>
@@ -124,10 +124,10 @@
                             <p><p>
                             </p></p>
                             <div class="flex items-center justify-end mt-4">
-                                <x-jet-button class="btn btn-success btn-lg mb-2">
+                                <button class="btn btn-success btn-lg d-flex align-items-center ml-auto" >
                                     <i class='fa fa-user-plus'></i>
-                                    {{ __('REGISTRAR PRESTAMO') }}
-                                </x-jet-button>
+                                    {{ __('Registrar Préstamo') }}
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -150,7 +150,7 @@
     .custom-modal {
         width: 90% !important;
         max-width: 1200px !important;
-        }
+    }
     </style>
 @stop
 

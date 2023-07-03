@@ -12,6 +12,7 @@ use App\Http\Controllers\GarantiaController;
 use App\Http\Middleware\CheckUserStatus;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\GananciasController;
 
 
 
@@ -152,6 +153,13 @@ Route::get('/', function () {
     Route::get('/test', function () {
         return view('interests.create');
     });
+
+    //Ganancias
+
+    // Route::get('/ganancia/create', [GananciasController::class, 'create'])->name('ganancia.create');
+    // Route::post('/calcular-deuda', [GananciasController::class, 'calcularDeuda'])->name('calcular_deuda');
+    Route::get('/ganancia/create', [GananciasController::class, 'calcularDeuda'])->name('ganancia.create');
+
 
     //Modos de Pagos
     Route::get('/modo_pago', [App\Http\Controllers\ModoPagoController::class, 'index'])->name('modos_pago.index');
