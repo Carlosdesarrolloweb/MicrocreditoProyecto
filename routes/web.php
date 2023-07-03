@@ -119,7 +119,7 @@ Route::get('/', function () {
     Route::get('/prestamos/{prestamo}/edit', [App\Http\Controllers\PrestamoController::class, 'edit'])->name('prestamos.edit');
     Route::put('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'update'])->name('prestamos.update');
     Route::delete('/prestamos/{prestamo}', [App\Http\Controllers\PrestamoController::class, 'destroy'])->name('prestamos.destroy');
-    // Route::get('/prestamos/calendario', [App\Http\Controllers\PrestamoController::class, 'calendarioPagos'])->name('calendarioPagos');
+    Route::get('/obtener-datos-prestamo', [PrestamoController::class, 'obtenerDatosPrestamografico'])->name('obtener_datos_prestamo');
 
     //Registrar Garantia
     Route::get('/garantias/index', [GarantiaController::class, 'index'])->name('garantias.index');
@@ -141,8 +141,7 @@ Route::get('/', function () {
     Route::put('/pagos/{id}', [PagoController::class, 'update'])->name('pagos.update');
     Route::get('/pagos/buscar-pagos/{id}', [PagoController::class, 'obtenerPagosPorCliente'])->name('pagos.obtenerPagosPorCliente');
     Route::get('/clientes/{cliente_id}/pdf', [PDFController::class, 'generatePDFcliente'])->name('pdf.generatePDFcliente');
-
-
+    Route::get('/obtener-datos-pagos-grafico', [PagoController::class, 'obtenerDatosPagosGrafico'])->name('obtener_datos_pagos_grafico');
 
     //Registrar Interes
     Route::get('/interests', [InteresController::class, 'index'])->name('interests.index');

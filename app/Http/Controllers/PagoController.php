@@ -189,4 +189,12 @@ class PagoController extends Controller
         // Manejar el caso en el que no se encuentre el cliente
         return response()->json(['error' => 'Cliente no encontrado'], 404);
     }
+    public function obtenerDatosPagosGrafico()
+    {
+    $datosPagos = Pago::select('fecha_pago', DB::raw('SUM(monto_pago) as total_monto_pago'))
+        ->groupBy('fecha_pago')
+        ->get();
+
+    return response()->json($datosPagos);
+    }
 }

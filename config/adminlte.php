@@ -319,24 +319,21 @@ return [
         [
             'text'        => 'INICIO',
             'route'  => 'dashboard',
-            'icon'        => 'fas fa-home',
+            'icon'        => 'fas fa-home fa-lg',
             'label_color' => 'success',
             'icon_color' => 'black',
         ],
         [
             'text'    => 'PERFIL',
-            'icon'    => 'fa fa-user',
+            'icon'    => 'fas fa-user-circle fa-lg',
             'icon_color' => 'red',
             'submenu' => [
                 [
                     'text' => 'Ver Perfil',
                     'route'  => 'profile.show',
-                    'icon'    => 'fa fa-user',
+                    'icon'    => 'fas fa-eye',
                     'icon_color' => 'red',
                 ],
-
-
-
             ],
 
         ],
@@ -354,7 +351,7 @@ return [
         ], */
         [
             'text'    => 'Usuarios',
-            'icon'    => 'fas fa-user-shield',
+            'icon'    => 'fas fa-user-shield fa-lg',
             'icon_color' => 'red',
             'submenu' => [
                 // [
@@ -433,7 +430,7 @@ return [
         ['header' => 'OPCIONES'],
         [
             'text'    => 'Prestamos',
-            'icon'    => 'fas fa-money-bill',
+            'icon'    => 'fas fa-money-bill fa-lg',
             'icon_color' => 'red',
             'submenu' => [
                 [
@@ -442,7 +439,7 @@ return [
                     'icon'    => 'fas fa-handshake',
                     'icon_color' => 'red',
                 ],
-                [
+/*                 [
                     'text' => 'Registrar Pagos',
                     'route'  => 'pagos.create',
                     'icon'    => 'fas fa-money-bill-wave',
@@ -453,7 +450,7 @@ return [
                     'route'  => 'pagos.index',
                     'icon'    => 'fas fa-money-check-alt',
                     'icon_color' => 'red',
-                ],
+                ], */
             /*     [
                     'text' => 'Calendario ',
                     'route'  => 'calendarioPagos',
@@ -466,8 +463,92 @@ return [
                     'icon'    => 'fas fa-file-invoice-dollar',
                     'icon_color' => 'red',
                 ],
+
+     /*            [
+                    'text' => 'Registrar Garantia',
+                    'route'  => 'garantias.create',
+                    'icon'    => 'fas fa-file-alt',
+                    'icon_color' => 'red',
+                ],
                 [
-                    'text' => 'Interes',
+                    'text' => 'Consultar Garantias',
+                    'route'  => 'garantias.index',
+                    'icon'    => 'fas fa-search',
+                    'icon_color' => 'red',
+                ], */
+            ],
+
+        ],
+        [
+            'text'    => 'Pagos',
+            'icon'    => 'fas fa-dollar-sign fa-2x',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Registrar Pagos',
+                    'route'  => 'pagos.create',
+                    'icon'    => 'fas fa-money-bill-wave',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Pagos Realizados ',
+                    'route'  => 'pagos.index',
+                    'icon'    => 'fas fa-money-check-alt',
+                    'icon_color' => 'red',
+                ],
+
+            ],
+
+        ],
+        [
+            'text'    => 'Clientes',
+            'icon'    => 'fa fa-users fa-lg',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Consultar Clientes',
+                    'route'  => 'clientesv',
+                    'icon'    => 'fas fa-search',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Crear Clientes',
+                    'route'  => 'clientes.show',
+                    'icon'    => 'fa fa-user-plus',
+                    'icon_color' => 'red',
+                ],
+            ],
+
+        ],
+
+        [
+            'text'    => 'Garantias',
+            'icon'    => 'fas fa-shield-alt fa-lg',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Registrar Garantia',
+                    'route'  => 'garantias.create',
+                    'icon'    => 'fas fa-file-alt',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Consultar Garantias',
+                    'route'  => 'garantias.index',
+                    'icon'    => 'fas fa-search',
+                    'icon_color' => 'red',
+                ],
+
+            ],
+
+        ],
+        [
+            'text'    => 'Procesos',
+            'icon'    => 'fas fa-cogs fa-lg',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Agregar Interes',
                     'route'  => 'interests.create',
                     'icon'    => 'fa fa-percent',
                     'icon_color' => 'red',
@@ -482,38 +563,6 @@ return [
                     'text' => 'Ver Modos de Pago',
                     'route'  => 'modos_pago.index',
                     'icon'    => 'fas fa-eye',
-                    'icon_color' => 'red',
-                ],
-                [
-                    'text' => 'Registrar Garantia',
-                    'route'  => 'garantias.create',
-                    'icon'    => 'fas fa-file-alt',
-                    'icon_color' => 'red',
-                ],
-                [
-                    'text' => 'Consultar Garantias',
-                    'route'  => 'garantias.index',
-                    'icon'    => 'fas fa-search',
-                    'icon_color' => 'red',
-                ],
-            ],
-
-        ],
-        [
-            'text'    => 'Clientes',
-            'icon'    => 'fa fa-users',
-            'icon_color' => 'red',
-            'submenu' => [
-                [
-                    'text' => 'Consultar Clientes',
-                    'route'  => 'clientesv',
-                    'icon'    => 'fas fa-search',
-                    'icon_color' => 'red',
-                ],
-                [
-                    'text' => 'Crear Clientes',
-                    'route'  => 'clientes.show',
-                    'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],
                 [
@@ -534,12 +583,13 @@ return [
                     'icon'    => 'fas fa-city',
                     'icon_color' => 'red',
                 ],
+
             ],
 
         ],
         [
             'text'    => 'Ganancias',
-            'icon'    => 'fa fa-users',
+            'icon'    => 'fa fa-users fa-lg',
             'icon_color' => 'red',
             'submenu' => [
                 [
@@ -558,7 +608,7 @@ return [
         ],
         [
             'text'    => 'Reportes',
-            'icon'    => 'fas fa-file',
+            'icon'    => 'fas fa-file fa-lg',
             'icon_color' => 'red',
             'submenu' => [
                 [

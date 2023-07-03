@@ -192,6 +192,14 @@ class PrestamoController extends Controller
 
          return view('dashboard', compact('clientes', 'cantidad_clientes', 'cantidad_clientes_con_prestamo'));
     }
+    public function obtenerDatosPrestamografico()
+    {
+    $datosPrestamo = Prestamo::select('fecha_prestamo', DB::raw('SUM(monto_prestado) as total_monto_prestado'))
+        ->groupBy('fecha_prestamo')
+        ->get();
+
+    return response()->json($datosPrestamo);
+    }
 
   /*   public function mostrarTarjeta()
     {
