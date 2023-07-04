@@ -26,7 +26,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-  
+
     protected $fillable = [
         'Carnet_usuario',
         'name',
@@ -77,6 +77,17 @@ class User extends Authenticatable
     public function adminlte_profile_url()
     {
         return'profile/username';
+    }
+
+    public function getRole()
+    {
+        if ($this->cargo_usuario === 'administrador') {
+            return 'Admin';
+        } elseif ($this->cargo_usuario === 'encargado') {
+            return 'Encargado';
+        } else {
+            return 'default'; // Definir un rol predeterminado si no se cumple ninguna condición
+        }
     }
 
 /*     public function can($ability, $arguments = [])

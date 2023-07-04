@@ -16,21 +16,27 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-         $role1= Role::create(['name' => 'Admin']);
-         $role2= Role::create(['name' => 'Encargado']);
+/*         $roleAdmin = Role::create(['name' => 'admin']);
+        $roleAdmin = Role::create(['name' => 'encargado']);
 
-         Permission::create(['name' => 'user.editarusuarios'])->syncRoles([$role1]);
-         Permission::create(['name' => 'user.eliminarusuarios'])->syncRoles([$role1]);
-         Permission::create(['name' => 'clientes.crearclientes'])->syncRoles([$role1,$role2]);
-         Permission::create(['name' => 'clientes.editarclientes'])->syncRoles([$role1,$role2]);
-         Permission::create(['name' => 'dashboard'])->syncRoles([$role1,$role2]);
+        $permissions = [
+            'ver:role',
+            'crear:role',
+            'editar:role',
+            'eliminar:role',
+            'ver:permiso',
+            'ver:usuario',
+            'crear:usuario',
+            'editar:usuario',
+            'eliminar:usuario',
+        ];
 
-         Permission::create(['name' => 'zonas.create'])->syncRoles([$role1,$role2]);
-         Permission::create(['name' => 'zonas.edit'])->syncRoles([$role1,$role2]);
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
 
-         Permission::create(['name' => 'ciudades.create'])->syncRoles([$role1,$role2]);
-         Permission::create(['name' => 'ciudades.edit'])->syncRoles([$role1,$role2]); 
-
+        $roleAdmin->givePermissionTo($permissions);
+ */
 
     }
 }

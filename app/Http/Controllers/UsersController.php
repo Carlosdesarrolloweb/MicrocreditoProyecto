@@ -185,4 +185,27 @@ public function banearUsuario($id)
     return redirect()->route('user.index')->with('banear', 'El usuario ha sido baneado exitosamente');
 }
 
+public function login(Request $request)
+{
+    // ...
+
+    $user = User::where('email', $request->email)->first();
+
+    if ($user && Hash::check($request->password, $user->password)) {
+        // Autenticar al usuario
+        Auth::login($user);
+
+        // Redirigir al usuario según su rol
+        if ($user->cargo_usuario === 'administrador') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->cargo_usuario === 'encargado') {
+            return redirect()->route('encargado.dashboard');
+        } else {
+            return redirect()->route('default.dashboard'); // Definir una ruta predeterminada para usuarios sin roles asignados
+        }
+    }
+
+    // ...
+}
+
 }

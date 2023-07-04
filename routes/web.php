@@ -13,6 +13,9 @@ use App\Http\Middleware\CheckUserStatus;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\GananciasController;
+use App\Http\Controllers\Seguridad;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 
 
@@ -42,14 +45,29 @@ Route::get('/', function () {
     'verified',
    /*   CheckUserStatus::class // Nuevo middleware */
 
+
+
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/crearclientes', function () {
-        return view('crearclientes');
-    })->name('crearclientes');
 
+   /*  Route::middleware(['role:Admin'])->group(function () {
+        Route::get('/crearclientes', function () {
+            return view('crearclientes');
+        })->name('crearclientes');
+
+        Route::get('/crearusuario', function () {
+            return view('usuarios.crearusuarios');
+        })->name('crearusuario');
+    });*/
+     Route::get('/permisos', [Seguridad\PermisosController::class,'index'])->name('permisos.index');
+     Route::get('/roles', [Seguridad\RolesController::class,'index'])->name('roles.index');
+
+
+    Route::get('/crearclientes', function () {
+            return view('crearclientes');
+        })->name('crearclientes');
     Route::get('/crearusuario', function () {
         return view('usuarios.crearusuarios');
     })->name('crearusuario');

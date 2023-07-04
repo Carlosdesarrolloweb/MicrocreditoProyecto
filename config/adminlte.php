@@ -366,10 +366,25 @@ return [
                     'route'  => 'crearusuario',
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
+                    /* 'can' => 'eliminar:usuario', */
                 ],
                 [
                     'text' => 'Ver Usuarios',
                     'route'  => 'usersv',
+                    'icon'    => 'fas fa-search',
+                    'icon_color' => 'red',
+
+                ],
+                [
+                    'text' => 'Ver Permisos',
+                    'route'  => 'permisos.index',
+                    'icon'    => 'fas fa-search',
+                    'icon_color' => 'red',
+
+                ],
+                [
+                    'text' => 'Ver Roles',
+                    'route'  => 'roles.index',
                     'icon'    => 'fas fa-search',
                     'icon_color' => 'red',
 
