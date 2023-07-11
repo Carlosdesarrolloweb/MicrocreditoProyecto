@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Prestamo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,4 +13,9 @@ class GananciaDia extends Model
         'fecha',
         'monto'
     ];
+
+    public function prestamo()
+{
+    return $this->hasOne(Prestamo::class, 'fecha_prestamo', 'fecha');
+}
 }
