@@ -64,6 +64,16 @@ class ClienteController extends Controller
             'telefono_referencia' => 'required|min:8',
         ]);
 
+        $carnetCliente = $request->input('Carnet_cliente');
+
+        // Verificar si ya existe un cliente con el carnet proporcionado
+        $clienteExistente = Cliente::where('Carnet_cliente', $carnetCliente)->first();
+
+        if ($clienteExistente) {
+            return redirect()->back()->withErrors(['Carnet_cliente' => 'Ya existe un cliente con este carnet.']);
+        }
+
+
 
         $cliente = new Cliente();
         $zonas = Zona::all();
@@ -160,7 +170,7 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function update(Request $request)
     {
         $clientesv = Cliente::findOrFail($request->id);
@@ -311,4 +321,26 @@ class ClienteController extends Controller
         return view('clientes.clientesv', compact('clientes'));
     }
 
+    public function obtenerDatosCliente(Request $request)
+    {
+        $validatedData = $request->validate([
+            'Carnet_cliente' => 'required'
+        ]);
+
+        $carnetCliente = $request->Carnet_cliente;
+
+        $cliente = Cliente::where('Carnet_cliente', $carnetCliente)->first();
+
+        if ($cliente) {
+            return response()->json([
+                'success' => true,
+                'cliente' => $cliente
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Cliente no encontrado'
+            ]);
+        }
+    }
 }

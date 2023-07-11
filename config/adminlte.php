@@ -378,14 +378,14 @@ return [
                 [
                     'text' => 'Ver Permisos',
                     'route'  => 'permisos.index',
-                    'icon'    => 'fas fa-search',
+                    'icon'    => 'fas fa-eye',
                     'icon_color' => 'red',
 
                 ],
                 [
                     'text' => 'Ver Roles',
                     'route'  => 'roles.index',
-                    'icon'    => 'fas fa-search',
+                    'icon'    => 'fas fa-user',
                     'icon_color' => 'red',
 
                 ],

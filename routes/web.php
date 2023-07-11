@@ -38,32 +38,23 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-
  Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-   /*   CheckUserStatus::class // Nuevo middleware */
 
 
-
-])->group(function () {
+    ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-   /*  Route::middleware(['role:Admin'])->group(function () {
-        Route::get('/crearclientes', function () {
-            return view('crearclientes');
-        })->name('crearclientes');
+/*     Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->middleware(['auth'])->name('verification.notice'); */
 
-        Route::get('/crearusuario', function () {
-            return view('usuarios.crearusuarios');
-        })->name('crearusuario');
-    });*/
-     Route::get('/permisos', [Seguridad\PermisosController::class,'index'])->name('permisos.index');
-     Route::get('/roles', [Seguridad\RolesController::class,'index'])->name('roles.index');
-
+    Route::get('/permisos', [Seguridad\PermisosController::class,'index'])->name('permisos.index');
+    Route::get('/roles', [Seguridad\RolesController::class,'index'])->name('roles.index');
 
     Route::get('/crearclientes', function () {
             return view('crearclientes');
@@ -78,6 +69,7 @@ Route::get('/', function () {
     Route::match(['get', 'post'], '/editarusuario/{id}', [UsersController::class, 'update'])->name('user.update');
     Route::get('/eliminarusuarios/{id}',[UsersController::class,'destroy'])->name('user.eliminarusuarios');
     Route::get('/users', [UsersController::class, 'index'])->name('livewire.Users');
+    Route::post('/user/cambiarEstado/{id}', [UsersController::class,'cambiarEstado'])->name('user.cambiarEstado');
 
     //Clientes
     Route::post('/clientes/crearclientes',[App\Http\Controllers\ClienteController::class,'create'])->name('clientes.crearclientes');
@@ -88,6 +80,7 @@ Route::get('/', function () {
     Route::get('/clientes/mostrar/{criterio}', [ClienteController::class, 'mostrarCliente'])->name('clientes.mostrar');
     Route::post('/clientes', [ClienteController::class, 'buscarCliente'])->name('buscar.cliente');
     Route::get('/pdf/{cliente_id}', [PDFController::class, 'generatePDF'])->name('pdf.generate');
+    Route::get('/clientes/obtenerdatoscliente', [ClienteController::class, 'obtenerDatosCliente'])->name('clientes.obtenerdatoscliente');
 
     //MostrarUsuarios
     Route::get('/usersv', [UsersController::class,'index'])->name('usersv');

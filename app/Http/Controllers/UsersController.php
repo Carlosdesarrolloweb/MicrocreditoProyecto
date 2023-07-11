@@ -141,71 +141,49 @@ class UsersController extends Controller
         return view('livewire.Users',['Users'=>$usersv ])->with('eliminaru','ok');
     }
 
-/*     public function login(Request $request)
+     public function cambiarEstado($id)
     {
-        $credentials = $request->only('Nombre_usuario', 'password');
+        $usuario = User::find($id);
+        if ($usuario->estado_usuario == 'ACTIVO') {
+            $usuario->estado_usuario = 'INACTIVO';
+        } else {
+            $usuario->estado_usuario = 'ACTIVO';
+        }
+        $usuario->save();
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            if ($user->estado_usuario === 'inactivo') {
-                Auth::logout();
-                return redirect('/')->with('status', 'Tu cuenta ha sido desactivada.');
+        return redirect()->back();
+    } 
+
+    public function banearUsuario($id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->estado_usuario = 'inactivo';
+        $usuario->save();
+
+        return redirect()->route('user.index')->with('banear', 'El usuario ha sido baneado exitosamente');
+    }
+
+    public function login(Request $request)
+    {
+        // ...
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            // Autenticar al usuario
+            Auth::login($user);
+
+            // Redirigir al usuario según su rol
+            if ($user->cargo_usuario === 'administrador') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->cargo_usuario === 'encargado') {
+                return redirect()->route('encargado.dashboard');
+            } else {
+                return redirect()->route('default.dashboard'); // Definir una ruta predeterminada para usuarios sin roles asignados
             }
-            return redirect()->intended('/dashboard');
-        } else {
-            return redirect()->back()->withErrors([
-                'email' => 'Las credenciales proporcionadas son inválidas.',
-            ]);
         }
+
+        // ...
     }
-
-
-public function updateEstado($id, $estado)
-{
-    $user = User::findOrFail($id);
-
-    // Verificar que el estado sea válido
-    if (!in_array($estado, ['activo', 'inactivo'])) {
-        abort(400, 'Estado inválido');
-    }
-
-    // Actualizar el estado del usuario
-    $user->estado_usuario = $estado;
-    $user->save();
-
-    return redirect()->back()->with('message', 'El estado del usuario se actualizó correctamente.');
-} */
-
-public function banearUsuario($id)
-{
-    $usuario = User::findOrFail($id);
-    $usuario->estado_usuario = 'inactivo';
-    $usuario->save();
-
-    return redirect()->route('user.index')->with('banear', 'El usuario ha sido baneado exitosamente');
-}
-
-public function login(Request $request)
-{
-    // ...
-
-    $user = User::where('email', $request->email)->first();
-
-    if ($user && Hash::check($request->password, $user->password)) {
-        // Autenticar al usuario
-        Auth::login($user);
-
-        // Redirigir al usuario según su rol
-        if ($user->cargo_usuario === 'administrador') {
-            return redirect()->route('admin.dashboard');
-        } elseif ($user->cargo_usuario === 'encargado') {
-            return redirect()->route('encargado.dashboard');
-        } else {
-            return redirect()->route('default.dashboard'); // Definir una ruta predeterminada para usuarios sin roles asignados
-        }
-    }
-
-    // ...
-}
 
 }

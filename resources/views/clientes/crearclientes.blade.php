@@ -139,6 +139,16 @@
                 </div>
             </div>
         </form>
+                <!-- Mostrar errores -->
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 @stop
 
 @section('css')
@@ -188,60 +198,105 @@
         });
     </script>
     <script>
-        // Selecciona el botón "Limpiar" y agrega un evento click
-        document.getElementById('btnLimpiar').addEventListener('click', function(event) {
-            // Evita que se recargue la página cuando se hace click en el botón
-            event.preventDefault();
+                // Selecciona el botón "Limpiar" y agrega un evento click
+                document.getElementById('btnLimpiar').addEventListener('click', function(event) {
+                    // Evita que se recargue la página cuando se hace click en el botón
+                    event.preventDefault();
 
-            // Establece el valor de cada campo del formulario a su valor predeterminado
-            document.getElementById('Carnet_cliente').value = '';
-            document.getElementById('nombre_cliente').value = '';
-            document.getElementById('apellido_cliente').value = '';
-            document.getElementById('zona_id').selectedIndex = 0; // selecciona el primer elemento de la lista de opciones
-            document.getElementById('direccion_cliente').value = '';
-            document.getElementById('email_cliente').value = '';
-            document.getElementById('telefono_cliente').value = '';
-            document.getElementById('edad_cliente').value = '';
-            document.getElementById('telefono_referencia').value = '';
-            document.getElementById('estado_cliente').selectedIndex = 0; // selecciona el primer elemento de la lista de opciones
-        });
-
-           // ALERTA DEL BOTON GUARDAR
-
-           $(document).ready(function() {
-    $('#clienteForm').submit(function(e) {
-        e.preventDefault(); // previene el envío del formulario
-
-        // Mostrar alerta de confirmación antes de enviar el formulario
-        Swal.fire({
-            title: 'Esta Seguro?',
-            text: "Se guardaran todos los datos del Cliente!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Crear Cliente!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Enviar el formulario
-                this.submit();
-
-                // Mostrar mensaje de éxito después de enviar el formulario
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Se Creo Correctamente al Cliente',
-                    text: 'Tu registro ha sido guardado exitosamente.'
+                    // Establece el valor de cada campo del formulario a su valor predeterminado
+                    document.getElementById('Carnet_cliente').value = '';
+                    document.getElementById('nombre_cliente').value = '';
+                    document.getElementById('apellido_cliente').value = '';
+                    document.getElementById('zona_id').selectedIndex = 0; // selecciona el primer elemento de la lista de opciones
+                    document.getElementById('direccion_cliente').value = '';
+                    document.getElementById('email_cliente').value = '';
+                    document.getElementById('telefono_cliente').value = '';
+                    document.getElementById('edad_cliente').value = '';
+                    document.getElementById('telefono_referencia').value = '';
+                    document.getElementById('estado_cliente').selectedIndex = 0; // selecciona el primer elemento de la lista de opciones
                 });
-            }
-        });
-    });
-});
 
+                // ALERTA DEL BOTON GUARDAR
+
+                $(document).ready(function() {
+            $('#clienteForm').submit(function(e) {
+                e.preventDefault(); // previene el envío del formulario
+
+                // Mostrar alerta de confirmación antes de enviar el formulario
+                Swal.fire({
+                    title: 'Esta Seguro?',
+                    text: "Se guardaran todos los datos del Cliente!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Crear Cliente!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Enviar el formulario
+                        this.submit();
+
+                        // Mostrar mensaje de éxito después de enviar el formulario
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Se Creo Correctamente al Cliente',
+                            text: 'Tu registro ha sido guardado exitosamente.'
+                        });
+                    }
+                });
+            });
+        });
 
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+            $(document).ready(function() {
+            // Manejar el evento keyup en el campo de carnet
+            $('#Carnet_cliente').keyup(function() {
+                var carnet = $(this).val();
+                if (carnet !== '') {
+                    obtenerDatosCliente(carnet);
+                }
+            });
+
+            // Función para obtener los datos del cliente
+            function obtenerDatosCliente(carnet) {
+                $.ajax({
+                    url: '/clientes/obtenerdatoscliente',
+                    method: 'GET',
+                    data: {
+                        Carnet_cliente: carnet
+                    },
+                    success: function(response) {
+                        console.log(response); // Imprimir en la consola los datos recibidos
+                        if (response.success) {
+                            var cliente = response.cliente;
+                            if (cliente) {
+                                // Llenar automáticamente los campos del formulario
+                                $('#nombre_cliente').val(cliente.nombre_cliente);
+                                $('#apellido_cliente').val(cliente.apellido_cliente);
+                                $('#direccion_cliente').val(cliente.direccion_cliente);
+                                $('#email_cliente').val(cliente.email_cliente);
+                                $('#telefono_cliente').val(cliente.telefono_cliente);
+                                $('#edad_cliente').val(cliente.edad_cliente);
+                                $('#telefono_referencia').val(cliente.telefono_referencia);
+                                $('#estado_cliente').val(cliente.estado_cliente);
+                                // Llenar el resto de los campos del formulario
+                            } else {
+                                console.log('Cliente no encontrado');
+                            }
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+        });
+    </script>
 
 @stop
 

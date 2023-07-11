@@ -14,8 +14,8 @@
 
 @section('content')
 <div class="container-fluid">
-        <x-slot name="header">
-        </x-slot>
+    <x-slot name="header">
+    </x-slot>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -24,50 +24,46 @@
                         <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
                             <thead class="bg-dark">
                                 <tr scope="col">
-                                    {{-- <th scope="col">ID</th> --}}
                                     <th scope="col">CARNET</th>
                                     <th scope="col">NOMBRE</th>
-                                    {{-- <th scope="col">APELLIDO</th> --}}
                                     <th scope="col">USUARIO</th>
                                     <th scope="col">CARGO</th>
                                     <th scope="col">ESTADO</th>
-                                    <th scope="col" >  ACCIONES </th>
+                                    <th scope="col">ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($Users as $usersv)
                                     <tr>
-                                        {{-- <td scope="col">{{$usersv->id}}</td> --}}
                                         <td scope="col">{{$usersv->Carnet_usuario}}</td>
                                         <td scope="col">{{$usersv->name}} {{$usersv->apellido_usuario}}</td>
-                                        {{-- <td scope="col">{{$usersv->apellido_usuario}}</td> --}}
                                         <td scope="col">{{$usersv->Nombre_usuario}}</td>
                                         <td scope="col">{{$usersv->cargo_usuario}}</td>
-                                        <td scope="col">{{$usersv->estado_usuario}}</td>
-                                        {{--<td>
-                                        @if($usersv->estado_usuario == 'activo')
-                                            <span class="badge badge-success">Activo</span>
-                                                <form action="{{ route('user.updateEstado', [$usersv->id, 'inactivo']) }}" method="POST"> @method('PUT')
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-warning">Cambiar estado</button>
-                                            </form>
-                                        @else
-                                            <span class="badge badge-danger">Inactivo</span>
-                                                <form action="{{ route('user.updateEstado', [$usersv->id, 'activo']) }}" method="POST"> @method('PUT')
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-success">Cambiar estado</button>
-                                            </form>
-                                        @endif
-                                        </td> --}}
+                                        <td scope="col">
+                                            @if($usersv->estado_usuario == 'ACTIVO')
+                                                <span class="badge badge-success">Activo</span>
+                                            @else
+                                                <span class="badge badge-danger">Inactivo</span>
+                                            @endif
+                                        </td>
                                         <td>
-
-                                            <a  href="{{ route('user.editarusuarios',$usersv->id) }}"  type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i> EDITAR</a>
-                                            <form action="{{ route('user.eliminarusuarios',$usersv->id) }}" class="d-inline formulario-eliminaru">
+                                           <a href="{{ route('user.editarusuarios', $usersv->id) }}" type="button" class="btn btn-warning"><i class='fas fa-user-edit'></i></a>
+                                      {{--       <form action="{{ route('user.eliminarusuarios', $usersv->id) }}" class="d-inline formulario-eliminaru">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger"><i class='fa fa-trash'></i> DAR DE BAJA</button>
-                                            </form>
-
+                                            </form> --}}
+                                            @if($usersv->estado_usuario == 'ACTIVO')
+                                                <form action="{{ route('user.cambiarEstado', $usersv->id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary"><i class="fas fa-toggle-on"></i> </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('user.cambiarEstado', $usersv->id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success"><i class="fas fa-toggle-off"></i> </button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
