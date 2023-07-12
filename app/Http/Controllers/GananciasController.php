@@ -10,9 +10,14 @@ class GananciasController extends Controller
 {
     public function mostrarFormularioEfectivo()
     {
-        $ganancias = GananciaDia::orderBy('fecha', 'desc')->get();
+        {
+            $ganancias = GananciaDia::orderBy('fecha', 'desc')->get();
 
-        return view('ganancia.create', compact('ganancias',));
+            // Obtén los préstamos relacionados utilizando la relación en el modelo GananciaDia
+            $prestamos = Prestamo::whereIn('fecha_prestamo', $ganancias->pluck('fecha'))->get();
+
+            return view('ganancia.create', compact('ganancias', 'prestamos'));
+        }
     }
 
     public function actualizarEfectivo(Request $request)

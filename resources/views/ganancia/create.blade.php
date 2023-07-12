@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-<div class="container-fluid">
+{{-- <div class="container-fluid">
     <x-slot name="header"></x-slot>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -36,8 +36,8 @@
                             <tr>
                                 <th>Fecha</th>
                                 <th>Monto Cobrado</th>
-                                <th>Monto en Caja</th>
-                                <th>Monto Prestado</th>
+                                <th>Dinero Prestado</th>
+                                <th>Dinero Efectivo</th>
                                 <th>Total</th>
                                 <th>Ganancia</th>
                             </tr>
@@ -62,8 +62,8 @@
                             <tr>
                                 <td>{{ $ganancia->fecha }}</td>
                                 <td>{{ $ganancia->monto }}</td>
-                                <td>{{ $ganancia->efectivo }}</td>
                                 <td>{{ $montoPrestado }}</td>
+                                <td>{{ $ganancia->efectivo }}</td>
                                 <td>{{ $total }}</td>
                                 <td>{{ $ganancia->fecha == date('Y-m-d') ? $gananciaHoy : '' }}</td>
                             </tr>
@@ -74,8 +74,82 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+<div class="container-fluid">
+    <x-slot name="header"></x-slot>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('ganancia.actualizar') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="efectivo">Efectivo actual:</label>
+                            <input type="number" step="0.01" name="efectivo" id="efectivo" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Actualizar Efectivo</button>
+                    </form>
+                    <br>
+                    <table id="example" class="table table-striped table-bordered table-sm text-center">
+                        <thead class="bg-dark">
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Monto Cobrado</th>
+                                <th>Dinero Prestado</th>
+                                <th>Dinero Efectivo</th>
+                                <th>Total</th>
+                                <th>Ganancia</th>
 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $gananciaTotalAnterior = 0;
+                                $totalMontoPrestado = 0;
+                                $montoCancelado = 0;
+                            @endphp
+
+                                    @foreach ($ganancias as $key => $ganancia)
+                                    @php
+                                      $total = $ganancia->monto + $ganancia->efectivo;
+                                        $gananciaHoy = $total - $gananciaTotalAnterior;
+                                        $gananciaTotalAnterior = $total;
+
+                                        $gananciaAyer = isset($ganancias[$key - 1]) ? $ganancias[$key - 1]->monto + $ganancias[$key - 1]->efectivo : 0;
+                                        $gananciaCalculada = $total - $gananciaAyer;
+
+                                        // Consultas para obtener los montos prestados y cancelados
+                                        $montoPrestado = App\Models\Prestamo::sum('monto_prestado');
+                                        $montoCancelado = App\Models\Prestamo::sum('monto_cancelado');
+                                        $totalMontoPrestado = $montoPrestado - $montoCancelado;
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $ganancia->fecha }}</td>
+                                        <td>{{ $ganancia->monto }}</td>
+                                        <td>
+                                            {{ $totalMontoPrestado }}
+                                            @if ($ganancia->fecha == date('Y-m-d'))
+                                                (Deuda General: {{ $totalMontoPrestado - $montoCancelado }})
+                                            @endif
+                                        </td>
+                                        <td>{{ $ganancia->efectivo }}</td>
+                                        <td>{{ $totalMontoPrestado + $ganancia->efectivo }}</td>
+                                        <td>
+                                            @if ($ganancia->fecha == date('Y-m-d'))
+                                                {{ $gananciaHoy }}
+                                            @else
+                                                {{ $gananciaCalculada }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @stop
 

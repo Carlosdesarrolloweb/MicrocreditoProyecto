@@ -150,9 +150,10 @@ class UsersController extends Controller
             $usuario->estado_usuario = 'ACTIVO';
         }
         $usuario->save();
+       /*  Auth::logout(); */
 
         return redirect()->back();
-    } 
+    }
 
     public function banearUsuario($id)
     {
