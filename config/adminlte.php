@@ -615,7 +615,7 @@ return [
                 ],
                 [
                     'text' => 'Ingreso Mensual',
-                    'route'  => 'clientes.show',
+                    'route'  => 'ganancia.calculomensual',
                     'icon'    => 'fa fa-user-plus',
                     'icon_color' => 'red',
                 ],

@@ -55,6 +55,7 @@
                                 $totalMontoPrestado = 0;
                                 $montoCancelado = 0;
                                 $gananciaTotalayer=0;
+                                $dineroPrestadoAnterior = 0;
                             @endphp
 
                                     @foreach ($ganancias as $key => $ganancia)
