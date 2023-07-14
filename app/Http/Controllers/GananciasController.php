@@ -11,7 +11,7 @@ class GananciasController extends Controller
     public function mostrarFormularioEfectivo()
     {
         {
-            $ganancias = GananciaDia::orderBy('fecha', 'desc')->get();
+            $ganancias = GananciaDia::orderBy('fecha', 'asc')->get();
 
             // Obtén los préstamos relacionados utilizando la relación en el modelo GananciaDia
             $prestamos = Prestamo::whereIn('fecha_prestamo', $ganancias->pluck('fecha'))->get();
@@ -19,7 +19,7 @@ class GananciasController extends Controller
             return view('ganancia.create', compact('ganancias', 'prestamos'));
         }
     }
-
+/*
     public function actualizarEfectivo(Request $request)
     {
         $request->validate([
@@ -40,6 +40,38 @@ class GananciasController extends Controller
         }
 
         $ganancias = GananciaDia::orderBy('fecha', 'desc')->get();
+        $sumaMontoPrestado = Prestamo::sum('monto_prestado');
+        $sumaMontoCancelado = Prestamo::sum('monto_cancelado');
+        $totalMontoPrestado = $sumaMontoPrestado - $sumaMontoCancelado;
+
+        return view('ganancia.create', compact('ganancias', 'totalMontoPrestado', 'sumaMontoPrestado', 'sumaMontoCancelado'))
+            ->with('success', 'Efectivo actualizado correctamente');
+    } */
+
+    public function actualizarEfectivo(Request $request)
+    {
+        $request->validate([
+            'efectivo' => 'required|numeric',
+            'fecha' => 'required|date',
+        ]);
+
+        $fecha = $request->input('fecha');
+        $efectivo = $request->input('efectivo');
+
+        $gananciaDia = GananciaDia::where('fecha', $fecha)->first();
+
+        if ($gananciaDia) {
+            $gananciaDia->efectivo = $efectivo;
+            $gananciaDia->save();
+        } else {
+            $gananciaDia = new GananciaDia();
+            $gananciaDia->efectivo = $efectivo;
+            $gananciaDia->monto = 0;
+            $gananciaDia->fecha = $fecha;
+            $gananciaDia->save();
+        }
+
+        $ganancias = GananciaDia::orderBy('fecha', 'asc')->get();
         $sumaMontoPrestado = Prestamo::sum('monto_prestado');
         $sumaMontoCancelado = Prestamo::sum('monto_cancelado');
         $totalMontoPrestado = $sumaMontoPrestado - $sumaMontoCancelado;
