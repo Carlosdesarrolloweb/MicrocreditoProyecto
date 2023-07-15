@@ -13,30 +13,42 @@
 @section('content')
 
 <div class="container">
-    <h1>Roles</h1>
-
-    <table id="roles-table" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Permisos</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($roles as $rol)
-                <tr>
-                    <td>{{ $rol->id }}</td>
-                    <td>{{ $rol->name }}</td>
-                    <td>
-                        @foreach ($rol->permissions as $permiso)
-                            <span class="badge badge-primary">{{ $permiso->name }}</span>
-                        @endforeach
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Roles</h1>
+        </div>
+        <div class="col-md-4 text-right">
+            <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+            </button>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <table id="roles-table" class="table table-bordered table-striped">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Permisos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($roles as $rol)
+                        <tr>
+                            <td>{{ $rol->id }}</td>
+                            <td>{{ $rol->name }}</td>
+                            <td>
+                                @foreach ($rol->permissions as $permiso)
+                                    <span class="badge badge-success">{{ $permiso->name }}</span>
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 @stop
 

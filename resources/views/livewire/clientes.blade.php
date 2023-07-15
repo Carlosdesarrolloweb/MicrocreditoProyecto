@@ -8,7 +8,7 @@
 <h1 style="text-align: center;font-weight: bold; color: black;">CLIENTES</h1>
 
 <th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
         {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
 </th>
 
@@ -23,6 +23,16 @@
     </x-slot>
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="form-group col-md-12">
+                <div class="col-md-12 text-right mb-3">
+                    <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
+                        <i class="fas fa-question-circle fa-lg"></i> Ayuda
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                        <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                    </button>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -114,64 +124,73 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <style>
-  .thumbnail {
-    border: none;
-    padding: 0px;
-}
+        .thumbnail {
+            border: none;
+            padding: 0px;
+        }
 
-.modal-dialog {
-    max-width: 800px !important;
-    margin: 0;
-}
+        .modal-dialog {
+            max-width: 800px !important;
+            margin: 0;
+        }
 
-.modal-content {
-    width: 70%;
-    height: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .modal-content {
+            width: 70%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.modal-content img {
-  max-width: 95%;
-  max-height: 90%;
-  width: auto;
-  height: auto;
-}
-.modal-body img {
-    max-width: 100%;
-    max-height: 100%;
-    width: 1000px;
-    height: 800px;
-}
-
-
-.modal-close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    padding: 0.75rem;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 0px;
-    transition: background 0.3s ease;
-    font-size: 1.5rem;
-    line-height: 1;
-    text-shadow: none;
-}
-
-.modal-close:hover {
-    background: rgba(0, 0, 0, 0.5);
-    text-decoration: none;
-}
-
-.modal-close:focus {
-    outline: none;
-    box-shadow: none;
-}
+        .modal-content img {
+        max-width: 95%;
+        max-height: 90%;
+        width: auto;
+        height: auto;
+        }
+        .modal-body img {
+            max-width: 100%;
+            max-height: 100%;
+            width: 1000px;
+            height: 800px;
+        }
 
 
+        .modal-close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+            padding: 0.75rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0px;
+            transition: background 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+            text-shadow: none;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+        }
+
+        .modal-close:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .custom-box {
+            background-color: #75606069;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .custom-modal {
+            width: 90% !important;
+            max-width: 1200px !important;
+        }
     </style>
 @stop
 
@@ -288,10 +307,37 @@
      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-    <Script>
+    <script>
     $(document).ready(function () {
     $('#example').DataTable();
     });
-    </Script>
+    </script>
+    <script>
+        //BOTON DE AYUDA
+    document.getElementById('btnAyuda').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Ayuda',
+            html: '<embed src="/pdf/crearpago.pdf" type="application/pdf" width="100%" height="800px" />',
+            confirmButtonText: 'Cerrar',
+            customClass: {
+            content: 'modal-lg',
+            popup: 'custom-modal'
+            }
+        });
+    });
+        //BOTON DE SALIR
+    document.getElementById('btnSalir').addEventListener('click', function() {
+    window.location.href = "{{ route('dashboard') }}";
+    });
+
+        //BOTON DE LIMPIAR
+    document.getElementById("btnLimpiar").addEventListener("click", function() {
+        document.getElementById("pagoForm").reset();
+    });
+
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 @stop
 

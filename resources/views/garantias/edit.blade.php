@@ -7,7 +7,7 @@
 <h1 style="text-align: center;font-weight: bold; color: black;">EDITAR GARANTIAS</h1>
 
 <th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
 </th>
 
 @stop

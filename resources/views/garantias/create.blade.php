@@ -7,7 +7,7 @@
 <h1 style="text-align: center;font-weight: bold; color: black;">AGREGAR GARANTIAS</h1>
 
 <th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
 </th>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @stop

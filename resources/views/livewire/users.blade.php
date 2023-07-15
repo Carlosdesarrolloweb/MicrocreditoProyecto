@@ -10,10 +10,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+
+<th>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+</th>
 @stop
 
 @section('content')
 <div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+                <div class="text-right mt-3">
+                    <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                        <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                    </button>
+                    <p></p>
+                </div>
+        </div>
+    </div>
     <x-slot name="header">
     </x-slot>
     <div class="row justify-content-center">
@@ -130,4 +144,10 @@
             $('#example').DataTable();
             });
         </Script>
+        <script>
+            //BOTON DE SALIR
+    document.getElementById('btnSalir').addEventListener('click', function() {
+    window.location.href = "{{ route('dashboard') }}";
+    });
+        </script>
 @stop

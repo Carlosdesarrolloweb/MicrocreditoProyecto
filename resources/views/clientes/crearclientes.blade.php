@@ -5,7 +5,7 @@
 @section('content_header')
 <h1 style="text-align: center;font-weight: bold; color: black;">CREAR NUEVO CLIENTE</h1>
 <th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ date('d/m/Y') }}</P>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
 </th>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>

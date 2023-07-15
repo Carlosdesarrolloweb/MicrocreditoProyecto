@@ -57,7 +57,7 @@
                 <div class="col-lg-9" >
                     <div class="card">
                         <div class="card-body"style="background-color: #75606069;">
-                            <canvas id="prestamoChart"></canvas>
+                            <canvas style="width: auto; height: 370px;" id="prestamoChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="col-lg-9" >
                     <div class="card">
                         <div class="card-body" style="background-color: #75606069;">
-                            <canvas id="pagosChart"></canvas>
+                            <canvas style="width: auto; height: 370px;" id="pagosChart"></canvas>
                         </div>
                     </div>
                 </div>

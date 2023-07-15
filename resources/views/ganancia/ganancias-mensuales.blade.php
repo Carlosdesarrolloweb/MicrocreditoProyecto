@@ -6,7 +6,7 @@
 <h1 style="text-align: center;font-weight: bold; color: black;">GANANCIAS MENSUALES</h1>
 
 <th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
+    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
 </th>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -19,6 +19,16 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="form-group col-md-12">
+                <div class="col-md-12 text-right mb-3">
+                    <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
+                        <i class="fas fa-question-circle fa-lg"></i> Ayuda
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                        <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                    </button>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <h4>Ganancias Mensuales</h4>
@@ -49,11 +59,8 @@
 <div class="container-fluid mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card my-0"> <!-- Agregada la clase "my-2" -->
-                <div class="card-body">
-                    <h4>Gráfico de Ganancias Mensuales</h4>
-                    <canvas id="lineChart"></canvas>
-                </div>
+            <div class="card my-2"> <!-- Agregada la clase "my-2" -->
+                    <canvas style="width: auto; height: 500px;" id="lineChart"></canvas>
             </div>
         </div>
     </div>
@@ -62,6 +69,18 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+        .custom-box {
+           background-color: #75606069;
+           border: 1px solid #ccc;
+           padding: 20px;
+           border-radius: 5px;
+           }
+       .custom-modal {
+           width: 90% !important;
+           max-width: 1200px !important;
+           }
+   </style>
 @stop
 
 @section('js')
@@ -112,6 +131,8 @@
                 }]
             },
             options: {
+                maintainAspectRatio: false, // Desactivar el ajuste automático del tamaño
+                responsive: false, // Desactivar la respuesta a cambios de tamaño
                 scales: {
                     y: {
                         beginAtZero: true,
@@ -125,4 +146,33 @@
             }
         });
     </script>
+    <script>
+        //BOTON DE AYUDA
+    document.getElementById('btnAyuda').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Ayuda',
+            html: '<embed src="/pdf/crearpago.pdf" type="application/pdf" width="100%" height="800px" />',
+            confirmButtonText: 'Cerrar',
+            customClass: {
+            content: 'modal-lg',
+            popup: 'custom-modal'
+            }
+        });
+    });
+        //BOTON DE SALIR
+    document.getElementById('btnSalir').addEventListener('click', function() {
+    window.location.href = "{{ route('dashboard') }}";
+    });
+
+      /*   //BOTON DE LIMPIAR
+    document.getElementById("btnLimpiar").addEventListener("click", function() {
+        document.getElementById("cod_zona").value = "";
+        document.getElementById("nombre_zona").value = "";
+        document.getElementById("mensaje-error").innerHTML = "";
+    });
+    */
+
+    </script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 @stop

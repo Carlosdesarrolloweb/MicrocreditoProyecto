@@ -13,10 +13,19 @@
 @section('content')
 
 <div class="container">
-    <h1> </h1>
-
+    <div class="row">
+        <div class="col-md-8">
+            <h1> </h1>
+        </div>
+        <div class="col-md-4 text-right">
+            <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+            </button>
+            <p></p>
+        </div>
+    </div>
     <table id="permisos-table" class="table table-bordered table-striped">
-        <thead>
+        <thead class="bg-dark text-white">
             <tr>
                 <th>ID</th>
                 <th>Nombre Permiso</th>
