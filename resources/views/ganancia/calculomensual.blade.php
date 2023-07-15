@@ -17,7 +17,7 @@
 
 @section('content')
 
-<div class="container-fluid">
+{{-- <div class="container-fluid">
     <x-slot name="header"></x-slot>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -47,7 +47,7 @@
                 @endif
         </div>
     </div>
-</div>
+</div> --}}
 
 @stop
 

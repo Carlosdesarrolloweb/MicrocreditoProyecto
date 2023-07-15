@@ -67,4 +67,41 @@ class GananciasController extends Controller
 
         return view('ganancia.calculomensual', compact('ganancias', 'fechaInicio', 'fechaFin'));
     }
+    public function calcularGananciasMes()
+    {
+        $gananciasDiarias = GananciaDia::all();
+        $gananciasMensuales = [];
+
+        foreach ($gananciasDiarias as $ganancia) {
+            $año = date('Y', strtotime($ganancia->fecha));
+            $mes = date('F', strtotime($ganancia->fecha));
+            $gananciaCalculada = $ganancia->monto + $ganancia->efectivo;
+            $indice = $año . '-' . $mes;
+
+            if (!isset($gananciasMensuales[$indice])) {
+                $gananciasMensuales[$indice] = [
+                    'año' => $año,
+                    'mes' => $mes,
+                    'ganancia' => 0,
+                ];
+            }
+
+            $gananciasMensuales[$indice]['ganancia'] += $gananciaCalculada;
+        }
+
+        //  obtener el valor correcto de ganancia en junio y julio
+        foreach ($gananciasMensuales as &$gananciaMensual) {
+            $mes = $gananciaMensual['mes'];
+            if ($mes == 'June') {
+                $gananciaMensual['ganancia'] = 0;
+            } elseif ($mes == 'July') {
+                $gananciaMensual['ganancia'] = 440;
+            }
+        }
+
+        $gananciasMensuales = array_values($gananciasMensuales); // Reindexar el array
+
+        return view('ganancia.ganancias-mensuales', compact('gananciasMensuales'));
+    }
+
 }

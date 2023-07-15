@@ -166,11 +166,10 @@ Route::get('/', function () {
 
     //Ganancias
 
-    // Route::get('/ganancia/create', [GananciasController::class, 'create'])->name('ganancia.create');
-    // Route::post('/calcular-deuda', [GananciasController::class, 'calcularDeuda'])->name('calcular_deuda');
     Route::get('/ganancia/create', [GananciasController::class, 'mostrarFormularioEfectivo'])->name('ganancia.create');
     Route::post('/ganancia/actualizar', [GananciasController::class, 'actualizarEfectivo'])->name('ganancia.actualizar');
     Route::get('/ganancia/calculomensual', [GananciasController::class, 'calcularGanancias'])->name('ganancia.calculomensual');
+    Route::get('/ganancia/ganancias-mensuales', [GananciasController::class, 'calcularGananciasMes'])->name('ganancia.ganancias-mensuales');
 
     //Modos de Pagos
     Route::get('/modo_pago', [App\Http\Controllers\ModoPagoController::class, 'index'])->name('modos_pago.index');

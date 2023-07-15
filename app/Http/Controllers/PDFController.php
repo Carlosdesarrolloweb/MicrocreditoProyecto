@@ -134,7 +134,6 @@ class PDFController extends Controller
         // Genera el contenido del PDF y lo devuelve como una respuesta de descarga
         return $pdf->Output('garantia.pdf', 'D');
     }
-
     public function generatePDFcliente($cliente_id)
     {
         // Obtén el cliente desde la base de datos
@@ -145,7 +144,7 @@ class PDFController extends Controller
             $query->where('id_cliente', $cliente_id);
         })->get();
 
-       // Calcula la deuda actual para cada pago
+        // Calcula la deuda actual para cada pago
         $deudasActuales = [];
         foreach ($pagos as $pago) {
             $prestamoId = $pago->prestamo->id;
@@ -176,25 +175,39 @@ class PDFController extends Controller
         $pdf->Image($logoPath, $logoX, $logoY, $logoWidth, $logoHeight);
 
         $pdf->SetFont('helvetica', 'B', 10);
-        $pdf->SetY(95); // Ajusta la posición vertical de la tabla de pagos
-        $pdf->Cell(30, 7, 'Prestamo', 1, 0, 'C');
-        $pdf->Cell(30, 7, 'Fecha de pago', 1, 0, 'C');
-        $pdf->Cell(30, 7, 'Monto de pago', 1, 0, 'C');
-        $pdf->Cell(30, 7, 'Deuda actual', 1, 0, 'C');
-        $pdf->Cell(60, 7, 'Descripción', 1, 1, 'C');
+
+        // Calcula la posición vertical inicial de la tabla de pagos
+        $tablaPagosY = 95;
+        $alturaFila = 7;
+        $numeroPagos = count($pagos);
+        $tablaAltura = $alturaFila * $numeroPagos;
+
+        // Agrega los títulos de la tabla de pagos
+        $pdf->SetY($tablaPagosY);
+        $pdf->Cell(30, $alturaFila, 'Prestamo', 1, 0, 'C');
+        $pdf->Cell(30, $alturaFila, 'Fecha de pago', 1, 0, 'C');
+        $pdf->Cell(30, $alturaFila, 'Monto de pago', 1, 0, 'C');
+        $pdf->Cell(30, $alturaFila, 'Deuda actual', 1, 0, 'C');
+        $pdf->Cell(60, $alturaFila, 'Descripción', 1, 1, 'C');
 
         $pdf->SetFont('helvetica', '', 9);
+        $posicionVertical = $tablaPagosY + $alturaFila;
         foreach ($pagos as $pago) {
-            $pdf->Cell(30, 7, $pago->prestamo->monto_prestamo, 1, 0, 'C');
-            $pdf->Cell(30, 7, $pago->fecha_pago, 1, 0, 'C');
-            $pdf->Cell(30, 7, $pago->monto_pago, 1, 0, 'C');
-            $pdf->Cell(30, 7, $pago->deuda_actual , 1, 0, 'C');
-            $pdf->Cell(60, 7, $pago->descripcion, 1, 1, 'L');
+            $pdf->SetY($posicionVertical);
+            $pdf->Cell(30, $alturaFila, $pago->prestamo->monto_prestamo, 1, 0, 'C');
+            $pdf->Cell(30, $alturaFila, $pago->fecha_pago, 1, 0, 'C');
+            $pdf->Cell(30, $alturaFila, $pago->monto_pago, 1, 0, 'C');
+            $pdf->Cell(30, $alturaFila, $pago->deuda_actual, 1, 0, 'C');
+            $pdf->Cell(60, $alturaFila, $pago->descripcion, 1, 1, 'L');
+            $posicionVertical += $alturaFila;
         }
+
+        // Calcula la posición vertical de las líneas de firma
+        $lineaFirmaY = $posicionVertical + $alturaFila * 2;
 
         // Agrega las líneas de firma al PDF
         $pdf->SetFont('helvetica', 'B', 10);
-        $pdf->SetY(200); // Ajusta la posición vertical de las líneas de firma
+        $pdf->SetY($lineaFirmaY);
 
         // Línea de firma del cliente
         $pdf->Cell(60, 10, 'Firma del cliente:', 0, 1, 'L');

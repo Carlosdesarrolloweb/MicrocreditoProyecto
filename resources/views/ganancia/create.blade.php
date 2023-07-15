@@ -111,7 +111,6 @@
         </div>
     </div>
 </div>
-
 @stop
 
 @section('css')
@@ -129,33 +128,4 @@
             $('#example').DataTable();
         });
     </script>
-{{--     <script>
-            $(document).ready(function() {
-            $('#efectivoForm').submit(function(e) {
-                e.preventDefault(); // previene el envío del formulario
-
-                var efectivo = parseFloat($('#efectivo').val());
-
-                // Aquí puedes hacer una llamada AJAX para enviar el valor de efectivo al servidor
-                // y realizar las operaciones necesarias, como actualizar la base de datos o realizar cálculos adicionales.
-
-                // Ejemplo de llamada AJAX
-                $.ajax({
-                    url: '/actualizar-efectivo', // Ruta del controlador que manejará la actualización del efectivo
-                    method: 'POST',
-                    data: {
-                        efectivo: efectivo
-                    },
-                    success: function(response) {
-                        // Manejar la respuesta del servidor si es necesario
-                        console.log(response);
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script> --}}
-
 @stop
