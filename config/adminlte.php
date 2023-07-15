@@ -645,6 +645,12 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
+                    'text' => 'Movimientos Usuarios ',
+                    'route'  => 'reportes.movimientosbitacora',
+                    'icon'    => 'fas fa-users',
+                    'icon_color' => 'red',
+                ],
+                [
                     'text' => 'Graficos ',
                     'route'  => 'reportes.powerbi',
                     'icon'    => 'fas fa-chart-bar',

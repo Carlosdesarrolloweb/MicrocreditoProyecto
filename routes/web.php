@@ -195,6 +195,11 @@ Route::get('/', function () {
       Route::get('/reportes/historial-garantias', function () {
         return view('reportes.historialgarantias');
     })->name('reportes.historialgarantias');
+
+     //BITACORA
+     Route::get('/reportes/movimientos-bitacora', function () {
+        return view('reportes.movimientosbitacora');
+    })->name('reportes.movimientosbitacora');
       //POWERBI
       Route::get('/reportes/powerbi', function () {
         return view('reportes.powerbi');

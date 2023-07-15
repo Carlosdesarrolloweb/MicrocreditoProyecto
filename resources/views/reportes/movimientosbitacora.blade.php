@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">HISTORIAL PRESTAMOS REALIZADOS </h1>
+<h1 style="text-align: center;font-weight: bold; color: black;">MOVIMIENTO USUARIOS </h1>
 
 <th>
     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
@@ -20,15 +20,12 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                    <livewire:prestamo-table/>
+                    <livewire:movimientosbitacora/>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
     @stop
 
     @section('css')
@@ -41,9 +38,8 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script>
+         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+         <script>
             // Aquí configuro las opciones de PowerGrid
             const powerGridOptions = {
                 // Ajustar el ancho de la tabla y las columnas
@@ -63,4 +59,5 @@
                 powerGrid.refresh(data);
             });
         </script>
+
     @stop
