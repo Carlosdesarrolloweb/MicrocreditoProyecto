@@ -173,7 +173,7 @@
     document.getElementById('btnAyuda').addEventListener('click', function() {
         Swal.fire({
             title: 'Ayuda',
-            html: '<embed src="/pdf/crearpago.pdf" type="application/pdf" width="100%" height="800px" />',
+            html: '<embed src="/pdf/vistapagos.pdf" type="application/pdf" width="100%" height="800px" />',
             confirmButtonText: 'Cerrar',
             customClass: {
             content: 'modal-lg',
