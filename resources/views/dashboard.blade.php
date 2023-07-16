@@ -56,7 +56,7 @@
             <div class="row" >
                 <div class="col-lg-9" >
                     <div class="card">
-                        <div class="card-body"style="background-color: #75606069;">
+                        <div class="card-body">
                             <canvas style="width: auto; height: 370px;" id="prestamoChart"></canvas>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
             <div class="row" >
                 <div class="col-lg-9" >
                     <div class="card">
-                        <div class="card-body" style="background-color: #75606069;">
+                        <div class="card-body">
                             <canvas style="width: auto; height: 370px;" id="pagosChart"></canvas>
                         </div>
                     </div>
@@ -116,8 +116,8 @@
                         {
                             label: 'Prestamos por dia',
                             data: montosPrestados,
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(0, 102, 255, 0.5)',
+                            borderColor: 'rgba(0, 102, 255, 1)',
                             borderWidth: 1,
                             type: 'bar'
                         }
@@ -162,8 +162,8 @@
                             label: 'Total de Pagos por Día',
                             data: montosPagados,
                             pointStyle: 'circle',
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(0, 102, 255, 0.5)',
+                            borderColor: 'rgba(0, 102, 255, 1)',
                             borderWidth: 1
                         }]
                     },
