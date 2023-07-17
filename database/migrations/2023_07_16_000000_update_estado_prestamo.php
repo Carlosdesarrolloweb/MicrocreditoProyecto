@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prestamo', function (Blueprint $table) {
+        Schema::table('prestamo', function (Blueprint $table) {
             $table->boolean('estado');
         });
     }
