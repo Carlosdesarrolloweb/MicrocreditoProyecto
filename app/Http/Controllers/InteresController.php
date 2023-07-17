@@ -38,7 +38,7 @@ class InteresController extends Controller
         $interest->interes_prestamo = $validatedData['interes_prestamo'];
         $interest->save();
 
-        return redirect()->route('interests.index')
+        return redirect()->route('index.blade')
             ->with('success', 'El interés se ha agregado correctamente.');
     }
 
