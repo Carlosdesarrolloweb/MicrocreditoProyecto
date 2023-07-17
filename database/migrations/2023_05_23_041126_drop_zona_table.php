@@ -13,7 +13,7 @@ class DropZonaTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('zona');
+        Schema::dropIfExists('zonas');
     }
 
     /**
@@ -23,7 +23,7 @@ class DropZonaTable extends Migration
      */
     public function down()
     {
-        Schema::create('zona', function (Blueprint $table) {
+        Schema::create('zonas', function (Blueprint $table) {
             // Aquí puedes agregar el código para crear la tabla 'zona' nuevamente si es necesario
         });
     }

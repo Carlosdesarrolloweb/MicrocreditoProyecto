@@ -24,7 +24,7 @@ class CreateCiudadTable  extends Migration
             // Clave foránea
             $table->foreign('zona_id')
                 ->references('id')
-                ->on('zona')
+                ->on('zonas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
