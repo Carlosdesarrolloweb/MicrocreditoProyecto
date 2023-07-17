@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black; font-size: 6em;">BIENVENID@</h1>
+<h1 style="text-align: center;font-weight: bold; color: black; font-size: 6em;">PRUEBA DE QUE CAMBIE@</h1>
 <center>
     <h1 style="text-align: center;font-weight: bold; color: red;"> {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</h1>
  </center>
