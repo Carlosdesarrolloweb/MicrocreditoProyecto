@@ -34,8 +34,7 @@ class CreateZonasTable extends Migration
     public function down()
     {
         Schema::table('clientes', function (Blueprint $table) {
-            $table->dropForeign(['zona_id']);
-            $table->dropColumn('zona_id');
+            $table->dropConstrainedForeignId('zona_id');
         });
 
         Schema::dropIfExists('zonas');
