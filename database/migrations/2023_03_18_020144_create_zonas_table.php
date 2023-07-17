@@ -22,7 +22,7 @@ class CreateZonasTable extends Migration
 
         Schema::table('clientes', function (Blueprint $table) {
             $table->unsignedBigInteger('zona_id')->nullable();
-            $table->foreign('zona_id')->references('id')->on('zona')->onDelete('set null');
+            $table->foreign('zona_id')->references('id')->on('zonas')->onDelete('cascade');
         });
     }
 
@@ -34,8 +34,7 @@ class CreateZonasTable extends Migration
     public function down()
     {
         Schema::table('clientes', function (Blueprint $table) {
-            $table->dropForeign(['zona_id']);
-            $table->dropColumn('zona_id');
+            $table->dropConstrainedForeignId('zona_id');
         });
 
         Schema::dropIfExists('zonas');
