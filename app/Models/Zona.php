@@ -9,13 +9,14 @@ class Zona extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'cod_zona',
-        'nombre_zona',
-    ];
+    protected $table = 'zonas';
+
+    protected $fillable = ['cod_zona', 'nombre_zona'];
+
+    protected $hidden = ['id'];
+
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'integer';
+    public $timestamps = false;
 }

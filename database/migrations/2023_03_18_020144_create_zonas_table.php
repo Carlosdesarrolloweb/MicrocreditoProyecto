@@ -37,6 +37,6 @@ class CreateZonasTable extends Migration
             $table->dropConstrainedForeignId('zona_id');
         });
 
-        Schema::dropIfExists('zonas');
+        //Schema::dropIfExists('zonas');
     }
 }
