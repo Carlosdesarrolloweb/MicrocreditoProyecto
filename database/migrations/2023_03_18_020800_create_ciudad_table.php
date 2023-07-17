@@ -25,7 +25,7 @@ class CreateCiudadTable  extends Migration
             $table->foreign('zona_id')
                 ->references('id')
                 ->on('zona')
-                ->onDelete('set null')
+                ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
     }

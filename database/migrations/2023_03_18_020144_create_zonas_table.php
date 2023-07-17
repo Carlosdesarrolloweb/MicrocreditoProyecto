@@ -22,7 +22,7 @@ class CreateZonasTable extends Migration
 
         Schema::table('clientes', function (Blueprint $table) {
             $table->unsignedBigInteger('zona_id')->nullable();
-            $table->foreign('zona_id')->references('id')->on('zona')->onDelete('set null');
+            $table->foreign('zona_id')->references('id')->on('zona')->onDelete('cascade');
         });
     }
 
