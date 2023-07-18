@@ -67,7 +67,7 @@
                                             </span>
                                           </td>
                                         <td >
-                                            <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{asset($garantia->foto->direccion_imagen) }}" data-title="GARANTIA">
+                                            <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{asset(env('APP_URL').'public/'.$garantia->foto->direccion_imagen) }}" data-title="GARANTIA">
                                                 <i class="fas fa-image"></i>
                                             </button>
                                         <td>

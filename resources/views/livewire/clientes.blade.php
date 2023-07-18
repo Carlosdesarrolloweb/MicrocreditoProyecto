@@ -69,16 +69,16 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->foto->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->foto->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocarnet->direccion_imagen}}" data-title="FOTO CARNET ATRAS">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->fotocarnet->direccion_imagen}}" data-title="FOTO CARNET ATRAS">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotorecibo->direccion_imagen}}" data-title="FOTO RECIBO AGUA/LUZ">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->fotorecibo->direccion_imagen}}" data-title="FOTO RECIBO AGUA/LUZ">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CROQUIS DOMICILIO">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CROQUIS DOMICILIO">
                                             <i class="fas fa-image"></i>
                                         </button>
 
