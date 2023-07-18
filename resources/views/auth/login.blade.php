@@ -2,9 +2,13 @@
     <head>
 
     </head>
-    <div class="bg-green">
+    <div style="background-image: url('{{ asset('fondologin.jpg') }}');
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                height: 100vh;">
         <!-- tu formulario de inicio de sesión aquí -->
-        <x-jet-authentication-card>
+        <x-jet-authentication-card style="background-color: #df1313;">
             <x-slot name="logo">
                 <x-jet-authentication-card-logo />
             </x-slot>
