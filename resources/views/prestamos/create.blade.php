@@ -7,19 +7,17 @@
 
 @section('content_header')
 <center>
-    <h1 style="text-align: center;font-weight: bold; color: black;">NUEVO PRESTAMO</h1>
-
-    <th>
-        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-    </th>
-
+        <div class="logo-container">
+            <img class="logo" src="{{ asset('nuevoprestamo.png') }}" alt="Logo Microcréditos Mary">
+            <h1 class="title">NUEVO PRÉSTAMO</h1>
+            <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+        </div>
 </center>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @stop
 
 @section('content')
-<div class="container">
+<div class="custom-container">
     <div class="form-group col-md-12">
         <div class="form-group col-md-12">
             <div class="col-md-12 text-right mb-3">
@@ -116,7 +114,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <p></p>
-                                    <label for="fecha_prestamo"><i class="far fa-calendar-alt"></i> Fecha PrÉstamo</label>
+                                    <label for="fecha_prestamo"><i class="far fa-calendar-alt"></i> Fecha Préstamo</label>
                                     <?php date_default_timezone_set('America/La_Paz'); ?>
                                     <input type="text" id="fecha_prestamo" name="fecha_prestamo" class="form-control datepicker" value="<?= date('Y-m-d'); ?>">
                                 </div>
@@ -141,7 +139,7 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <style>
-        .custom-box {
+    .custom-box {
     background-color: #75606069;
     border: 1px solid #ccc;
     padding: 20px;
@@ -150,6 +148,59 @@
     .custom-modal {
         width: 90% !important;
         max-width: 1200px !important;
+    }
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 1500px;
+        height: 200px;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: lightgray;
+        }
+
+    .logo-container {
+            text-align: center;
+        }
+
+    .logo {
+            width: 100px;
+            height: auto;
+        }
+
+    .title {
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            font-size: 2em;
+            margin: 0;
+            margin-top: -5px;
+        }
+
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        color: black;
+        font-size: 8em;
+        margin-bottom: 0;
+    }
+    .input-label {
+        display: flex;
+        align-items: center;
+        font-size: 5em;
+        margin-bottom: 10px;
+        }
+
+    .input-label i {
+        margin-right: 10px;
+    }
+    .custom-container {
+            max-width: 1500px;
+            margin: 0 auto; /* Para centrar horizontalmente */
+            margin-top: 50px;
     }
     </style>
 @stop

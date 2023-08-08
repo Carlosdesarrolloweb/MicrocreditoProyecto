@@ -3,36 +3,67 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">HISTORIAL DE GARANTIAS DE CLIENTES</h1>
-
-<th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }}</P>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</th>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('repogarantia.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">HISTORIAL GARANTÍAS</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 @livewireStyles
 <link rel="stylesheet" href="{{ asset('vendor/powergrid/powergrid.css') }}">
 
 @stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-body">
-                    <livewire:garantia-table/>
-                </div>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card" style="background-color: #75606069;">
+            <div class="card-body">
+                <livewire:garantia-table/>
             </div>
         </div>
     </div>
 </div>
+@stop
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+        .btn-secondary.dropdown-toggle {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            }
+        .btn-secondary.dropdown-toggle .file-excel-icon {
+            font-size: 5rem;
+            margin-right: 5rem;
+            }
+        .btn-secondary.dropdown-toggle span {
+            margin-right: 0.25rem;
+            }
+        .bg-blue-header {
+            background-color: #3490dc;
+            color: white;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 4px;
+        }
+        .logo-container {
+        text-align: center;
+        }
 
-
-    @stop
-
-    @section('css')
-        <link rel="stylesheet" href="/css/admin_custom.css">
-    @stop
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+@stop
 
     @section('js')
     @livewireScripts

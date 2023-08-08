@@ -4,20 +4,17 @@
 
 @section('content_header')
 <center>
-    <h1 style="text-align: center;font-weight: bold; color: black;">PRESTAMOS REALIZADOS</h1>
-
-    <th>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('prestamosrealizados.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">PRÉSTAMOS REALIZADOS</h1>
         <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-    </th>
-
+    </div>
 </center>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 @stop
-
 @section('content')
 <div class="container-fluid">
     <x-slot name="header">
@@ -34,10 +31,10 @@
                     </button>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="background-color: #75606069">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="background-color: white" >
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th style="width: 15%">Cliente</th>
@@ -105,7 +102,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8 mt-3">
-            <div class="card">
+            <div class="card" style="background-color: #75606069">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
@@ -163,6 +160,46 @@
            width: 90% !important;
            max-width: 1200px !important;
            }
+           .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+                width: 100px;
+                height: auto;
+            }
+
+        .title {
+                text-align: center;
+                font-weight: bold;
+                color: black;
+                font-size: 2em;
+                margin: 0;
+                margin-top: -5px;
+            }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            font-size: 8em;
+            margin-bottom: 0;
+        }
+        .input-label {
+            display: flex;
+            align-items: center;
+            font-size: 5em;
+            margin-bottom: 10px;
+            }
+
+        .input-label i {
+            margin-right: 10px;
+        }
+        .custom-container {
+                max-width: 1500px;
+                margin: 0 auto; /* Para centrar horizontalmente */
+                margin-top: 50px; /* Ajusta el valor según tu diseño */
+        }
    </style>
 @stop
 
@@ -241,15 +278,29 @@
 
  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <Script>
+        $(document).ready(function() {
+        $('#example').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron registros",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrados de _MAX_ registros totales)",
+                "search" : 'Buscar',
+                "paginate" : {
+                    'next' : 'Siguiente',
+                    'previous':'Anterior'
+
+                }
+            }
+        });
+    });
+    </Script>
+   {{--  <Script>
         $(document).ready(function () {
         $('#example').DataTable();
         });
-    </Script>
-    <Script>
-        $(document).ready(function () {
-        $('#example').DataTable();
-        });
-    </Script>
+    </Script> --}}
     <script>
         //BOTON DE AYUDA
     document.getElementById('btnAyuda').addEventListener('click', function() {

@@ -5,6 +5,10 @@
 @section('content_header')
      <h1 style="text-align: center;font-weight: bold; color: black;">ZONAS CREADAS</h1>
      <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 @stop
 
 @section('content')
@@ -23,12 +27,12 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card" style="background-color: #75606069">
                 <div class="card-header">
                     <h5 class="card-title">Zonas</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table id="example" class="table table-bordered" style="background-color: white">
                         <thead class="table-dark">
                             <tr>
                                 <th>Código</th>
@@ -74,6 +78,16 @@
 
 @section('js')
     <script> console.log('Hi!'); </script> -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
     <script>
         //BOTON DE AYUDA
     document.getElementById('btnAyuda').addEventListener('click', function() {
@@ -92,15 +106,7 @@
     window.location.href = "{{ route('dashboard') }}";
     });
 
-      /*   //BOTON DE LIMPIAR
-    document.getElementById("btnLimpiar").addEventListener("click", function() {
-        document.getElementById("cod_zona").value = "";
-        document.getElementById("nombre_zona").value = "";
-        document.getElementById("mensaje-error").innerHTML = "";
-    });
- */
-
-</script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 @stop

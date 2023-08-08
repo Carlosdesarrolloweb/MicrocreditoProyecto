@@ -3,8 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-     <h1 style="text-align: center;font-weight: bold; color: black;">CREAR NUEVO USUARIO</h1>
-     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('nuevousuario.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">CREAR USUARIO</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 @stop
 
 @section('content')
@@ -162,6 +167,14 @@
            width: 90% !important;
            max-width: 1200px !important;
            }
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
    </style>
 @stop
 

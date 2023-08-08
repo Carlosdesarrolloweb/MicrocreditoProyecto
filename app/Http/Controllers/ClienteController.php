@@ -343,4 +343,12 @@ class ClienteController extends Controller
             ]);
         }
     }
+    public function obtenerEstadosClientes()
+    {
+        $estadosClientes = Cliente::select(DB::raw('estado_cliente as estado, count(*) as cantidad'))
+            ->groupBy('estado_cliente')
+            ->get();
+
+        return response()->json($estadosClientes);
+    }
 }

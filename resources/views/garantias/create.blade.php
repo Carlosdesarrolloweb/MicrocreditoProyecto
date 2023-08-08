@@ -4,11 +4,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">AGREGAR GARANTIAS</h1>
-
-<th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-</th>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('creargarantia.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">NUEVA GARANTIA</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @stop
 
@@ -218,6 +220,45 @@
         .custom-modal {
             width: 90% !important;
             max-width: 1200px !important;
+        }
+        .logo-container {
+            text-align: center;
+        }
+        .logo {
+                width: 100px;
+                height: auto;
+            }
+
+        .title {
+                text-align: center;
+                font-weight: bold;
+                color: black;
+                font-size: 2em;
+                margin: 0;
+                margin-top: -5px;
+            }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            font-size: 8em;
+            margin-bottom: 0;
+        }
+        .input-label {
+            display: flex;
+            align-items: center;
+            font-size: 5em;
+            margin-bottom: 10px;
+            }
+
+        .input-label i {
+            margin-right: 10px;
+        }
+        .custom-container {
+                max-width: 1500px;
+                margin: 0 auto; /* Para centrar horizontalmente */
+                margin-top: 50px;
         }
         </style>
     @stop

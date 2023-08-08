@@ -3,14 +3,13 @@
 @section('title', 'Nuevo Préstamo')
 
 @section('content_header')
-    <center>
-        <h1 style="text-align: center;font-weight: bold; color: black;">PAGOS REALIZADOS</h1>
-
-        <th>
-            <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-        </th>
-
-    </center>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('pagos.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">PAGOS REALIZADOS</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
@@ -33,12 +32,12 @@
                 </button>
             </div>
         </div>
-        <div class="card">
+        <div class="card" style="background-color: #75606069">
             <div class="card-body">
                 <div class="form-group">
                 </div>
                 <div class="table-responsive">
-                            <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
+                            <table id="example" class="table table-striped table-bordered table-sm text-center" style="background-color: white">
                                 <thead class="bg-dark text-white">
                                   <tr>
                                     <th>Cliente</th>
@@ -104,6 +103,13 @@
            width: 90% !important;
            max-width: 1200px !important;
            }
+        .logo-container {
+            text-align: center;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+        }
    </style>
 @stop
 

@@ -4,11 +4,13 @@
 
 @section('content_header')
 
-    <h1 style="text-align: center;font-weight: bold; color: black;">GARANTIAS</h1>
-
-    <th>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('garantias.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">GARANTIAS</h1>
         <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-    </th>
+    </div>
+</center>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
@@ -31,10 +33,10 @@
                     </button>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="background-color: #75606069">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="background-color: white">
                             <thead class="bg-dark text-white">
                                 <tr scope="col">
                                     <th>Garantía</th>
@@ -67,7 +69,7 @@
                                             </span>
                                           </td>
                                         <td >
-                                            <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{asset(env('APP_URL').'public/'.$garantia->foto->direccion_imagen) }}" data-title="GARANTIA">
+                                            <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal"  data-img="{{asset($garantia->foto->direccion_imagen) }}" data-title="GARANTIA">
                                                 <i class="fas fa-image"></i>
                                             </button>
                                         <td>
@@ -87,7 +89,7 @@
                         </table>
                         <center>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-dialog-centered custom-modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Título del modal</h5>
@@ -178,22 +180,71 @@
            width: 90% !important;
            max-width: 1200px !important;
            }
+        .custom-modal-xl {
+            max-width: 200%;
+            width: 95%;
+            max-height: 90%;
+            height: 90%;
+        }
+
+        .custom-modal-xl .modal-dialog {
+            max-width: 95%;
+        }
+
+        .custom-modal-xl .modal-content {
+            width: 100%;
+        }
+        .custom-modal-xl .modal-content img {
+            object-fit: contain;
+        }
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
     </style>
 
 @stop
 
 @section('js')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <Script>
-        $(document).ready(function () {
-        $('#example').DataTable();
+       $(document).ready(function() {
+        $('#example').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron registros",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrados de _MAX_ registros totales)",
+                "search" : 'Buscar',
+                "paginate" : {
+                    'next' : 'Siguiente',
+                    'previous':'Anterior'
+
+                }
+            }
         });
+    });
     </Script>
     <script>
         $(document).ready(function() {
@@ -297,16 +348,23 @@
     window.location.href = "{{ route('dashboard') }}";
     });
 
-      /*   //BOTON DE LIMPIAR
-    document.getElementById("btnLimpiar").addEventListener("click", function() {
-        document.getElementById("cod_zona").value = "";
-        document.getElementById("nombre_zona").value = "";
-        document.getElementById("mensaje-error").innerHTML = "";
-    });
-    */
-
     </script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#exampleModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var imgSrc = button.data('img');
+                    var modal = $(this);
+
+                    modal.find('.modal-body img').attr('src', imgSrc);
+
+                    // Habilitar el zoom en la imagen
+                    modal.find('.modal-body img').zoom();
+                });
+            });
+        </script>
 
 @stop

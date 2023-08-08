@@ -4,45 +4,42 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">EDITAR GARANTIAS</h1>
-
-<th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-</th>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('pagos.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">EDITAR PAGO</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 
 @stop
 
 @section('content')
     <div class="container">
-        <h1>Editar pago</h1>
-        @if ($pago)
-        <form action="{{ route('pagos.update', $pago->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-{{--             <div class="form-group">
-                <label for="id_prestamo">Préstamo</label>
-                <select name="id_prestamo" id="id_prestamo" class="form-control" disabled>
-                    <option value="{{ $pago->prestamo->id }}">{{ $pago->prestamo->id }}</option>
-                </select>
-            </div> --}}
-{{--             <div class="form-group">
-                <label for="fecha_pago">Fecha de pago</label>
-                <input type="date" name="fecha_pago" id="fecha_pago" class="form-control" value="{{ $pago->fecha_pago }}">
-            </div> --}}
-        {{--     <div class="form-group">
-                <label for="Numero_Cuota">Número de cuota</label>
-                <input type="number" name="Numero_Cuota" id="Numero_Cuota" class="form-control" value="{{ $pago->Numero_Cuota }}">
-            </div> --}}
-            <div class="form-group">
-                <label for="monto_pago">Monto de pago</label>
-                <input type="number" name="monto_pago" id="monto_pago" class="form-control" value="{{ $pago->monto_pago }}">
-            </div>
-            <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea name="descripcion" id="descripcion" class="form-control">{{ $pago->descripcion }}</textarea>
-            </div>
-            <button type="submit" class="btn btn-success">Actualizar</button>
-        </form>
+        <div class="card" style="background-color: #75606069">
+            @if ($pago)
+            <form action="{{ route('pagos.update', $pago->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <div class="input-label">
+                        <i class="fas fa-dollar-sign"></i>
+                        <label for="monto_pago"> Monto de pago</label>
+                    </div>
+                    <input type="number" name="monto_pago" id="monto_pago" class="form-control" value="{{ $pago->monto_pago }}">
+                </div>
+                <div class="form-group">
+                    <div class="input-label">
+                        <i class="fas fa-file-alt"></i>
+                        <label for="descripcion"> Descripción</label>
+                    </div>
+                    <textarea name="descripcion" id="descripcion" class="form-control">{{ $pago->descripcion }}</textarea>
+                </div>
+                <center>
+                    <button type="submit" class="btn btn-success fas fa-save"> Actualizar</button>
+                </center>
+            </form>
+        </div>
     </div>
     @endif
 
@@ -53,6 +50,17 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+         .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+
 @stop
 
 @section('js')

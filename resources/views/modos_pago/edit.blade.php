@@ -12,28 +12,31 @@
 
 @section('content')
 <div class="container">
-    <div class="card-footer text-right">
-        {{--  <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
-             <i class="far fa-file-alt fa-lg"></i> Limpiar
-         </button> --}}
-         <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
-             <i class="fas fa-question-circle fa-lg"></i> Ayuda
-         </button>
-         <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
-             <i class="fas fa-sign-out-alt fa-lg"></i> Salir
-         </button>
-    </div>
     <div class="row">
-        <div class="col-md-6">
-            <form action="{{ route('modos_pago.update', $modoPago->id) }}" method="POST" id="guardar">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="modalidad_pago">Modalidad de Pago</label>
-                    <input type="text" class="form-control" name="modalidad_pago" value="{{ $modoPago->modalidad_pago }}" required>
+        <div class="col-md-8 offset-md-2">
+            <div class="card bg-light border p-4 rounded">
+                <div class="card-footer text-right">
+                    <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
+                        <i class="fas fa-question-circle fa-lg"></i> Ayuda
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                        <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                    </button>
                 </div>
-                <button type="submit" class="btn btn-success">Actualizar</button>
-            </form>
+                <div class="card-body" style="background-color: #75606069">
+                    <form action="{{ route('modos_pago.update', $modoPago->id) }}" method="POST" id="guardar">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="modalidad_pago"><i class="fas fa-credit-card"></i> Modalidad de Pago</label>
+                            <input type="text" class="form-control" name="modalidad_pago" value="{{ $modoPago->modalidad_pago }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Actualizar
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

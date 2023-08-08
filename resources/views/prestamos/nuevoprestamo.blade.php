@@ -5,7 +5,10 @@
 
 @section('content_header')
 <center>
-    <h1 style="text-align: center;font-weight: bold; color: black;">REGISTRAR NUEVO PRESTAMO</h1>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('logomicrocreditosmary.png') }}" alt="Logo Microcréditos Mary">
+        <h1 style="text-align: center; font-weight: bold; color: black; font-size: 4em; margin-bottom: -5;">REGISTRAR NUEVO PRESTAMO</h1>
+    </div>
 
     <p style="text-align: center;font-weight: bold; color: black;"> {{ Auth::user()->name }}</P>
 </center>

@@ -36,7 +36,7 @@
                             <x-livewire-powergrid::icons.download
                                 style="width: 1.5rem;
                                            margin-right: 6px;
-                                           color: #2d3034;"/>
+                                           color: #006af5;"/>
                             <a
                                 wire:click="downloadExport('{{ $file }}')">
                                 {{ $file }}

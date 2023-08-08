@@ -651,6 +651,18 @@ return [
                     'icon_color' => 'red',
                 ],
                 [
+                    'text' => 'Reporte Pagos ',
+                    'route'  => 'reportes.historialpagos',
+                    'icon'    => 'fas fa-file-invoice-dollar',
+                    'icon_color' => 'red',
+                ],
+                [
+                    'text' => 'Reporte Ganancias ',
+                    'route'  => 'reportes.ganancias',
+                    'icon'    => 'fas fa-chart-line',
+                    'icon_color' => 'red',
+                ],
+                [
                     'text' => 'Graficos ',
                     'route'  => 'reportes.powerbi',
                     'icon'    => 'fas fa-chart-bar',

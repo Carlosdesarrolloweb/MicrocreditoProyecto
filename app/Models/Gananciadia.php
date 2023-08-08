@@ -12,7 +12,8 @@ class GananciaDia extends Model
     protected $fillable = [
         'fecha',
         'monto',
-        'efectivo'
+        'efectivo',
+        'ganancia'
     ];
 
     public function prestamo()

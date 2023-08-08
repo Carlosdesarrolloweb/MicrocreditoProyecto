@@ -5,13 +5,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">CLIENTES</h1>
-
-<th>
+<center>
+<div class="logo-container">
+    <img class="logo" src="{{ asset('clientes.png') }}" alt="Logo Microcréditos Mary">
+    <h1 class="title">CLIENTES</h1>
     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-        {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
-</th>
-
+</div>
+</center>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
@@ -33,10 +33,10 @@
                     </button>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="background-color: #75606069">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="background-color: white">
                             <thead class="bg-dark text-white">
                                 <tr scope="col">
                                     <th scope="col">Carnet</th>
@@ -69,16 +69,16 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->foto->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal"  data-img="{{$clientesv->foto->direccion_imagen}}" data-title="FOTO CARNET ANVERSO">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->fotocarnet->direccion_imagen}}" data-title="FOTO CARNET ATRAS">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocarnet->direccion_imagen}}" data-title="FOTO CARNET ATRAS">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->fotorecibo->direccion_imagen}}" data-title="FOTO RECIBO AGUA/LUZ">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotorecibo->direccion_imagen}}" data-title="FOTO RECIBO AGUA/LUZ">
                                             <i class="fas fa-image"></i>
                                         </button>
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{env('APP_URL').'public/'.$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CROQUIS DOMICILIO">
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-img="{{$clientesv->fotocroquis->direccion_imagen}}" data-title="FOTO CROQUIS DOMICILIO">
                                             <i class="fas fa-image"></i>
                                         </button>
 
@@ -100,7 +100,7 @@
                     </div>
                         <center>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-dialog-centered custom-modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Título del modal</h5>
@@ -190,6 +190,46 @@
         .custom-modal {
             width: 90% !important;
             max-width: 1200px !important;
+        }
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+                width: 100px;
+                height: auto;
+            }
+
+        .title {
+                text-align: center;
+                font-weight: bold;
+                color: black;
+                font-size: 2em;
+                margin: 0;
+                margin-top: -5px;
+            }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            font-size: 8em;
+            margin-bottom: 0;
+        }
+        .input-label {
+            display: flex;
+            align-items: center;
+            font-size: 5em;
+            margin-bottom: 10px;
+            }
+
+        .input-label i {
+            margin-right: 10px;
+        }
+        .custom-container {
+                max-width: 1500px;
+                margin: 0 auto; /* Para centrar horizontalmente */
+                margin-top: 50px;
         }
     </style>
 @stop
@@ -308,8 +348,22 @@
 
 
     <script>
-    $(document).ready(function () {
-    $('#example').DataTable();
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron registros",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrados de _MAX_ registros totales)",
+                "search" : 'Buscar',
+                "paginate" : {
+                    'next' : 'Siguiente',
+                    'previous':'Anterior'
+
+                }
+            }
+        });
     });
     </script>
     <script>
@@ -338,6 +392,25 @@
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inicializa la biblioteca de zooming en la imagen del modal
+        const zooming = new Zooming({
+            bgColor: 'rgba(0, 0, 0, 0.8)' // Cambia el fondo de la ventana emergente de zoom según tus preferencias
+        });
+
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            const imgSrc = button.data('img');
+            const title = button.data('title');
+
+            const modal = $(this);
+            modal.find('.modal-title').text(title);
+            modal.find('#imagenModal').attr('src', imgSrc);
+
+            // Inicializa el zooming en la imagen al abrir el modal
+            zooming.listen('.modal-body img');
+        });
+    </script>
 
 @stop
 

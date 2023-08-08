@@ -3,11 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">GANANCIAS MENSUALES</h1>
-
-<th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-</th>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('gananciam.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">GANANCIAS MENSUALES</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
@@ -29,10 +31,10 @@
                     </button>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="background-color: #75606069;" >
                 <div class="card-body">
                     <h4>Ganancias Mensuales</h4>
-                    <table id="gananciasMensuales" class="table table-striped table-bordered table-sm text-center">
+                    <table id="gananciasMensuales" class="table table-striped table-bordered table-sm text-center" >
                         <thead class="bg-dark">
                             <tr>
                                 <th>Año</th>
@@ -56,10 +58,10 @@
     </div>
 </div>
 <!-- Gráfico Line Chart -->
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4" >
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card my-2"> <!-- Agregada la clase "my-2" -->
+            <div class="card my-2" style="background-color: #75606069;"> <!-- Agregada la clase "my-2" -->
                     <canvas style="width: auto; height: 500px;" id="lineChart"></canvas>
             </div>
         </div>
@@ -80,6 +82,14 @@
            width: 90% !important;
            max-width: 1200px !important;
            }
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
    </style>
 @stop
 
@@ -91,8 +101,22 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
-            $('#gananciasMensuales').DataTable();
+        $('#gananciasMensuales').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron registros",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrados de _MAX_ registros totales)",
+                "search" : 'Buscar',
+                "paginate" : {
+                    'next' : 'Siguiente',
+                    'previous':'Anterior'
+
+                }
+            }
         });
+    });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

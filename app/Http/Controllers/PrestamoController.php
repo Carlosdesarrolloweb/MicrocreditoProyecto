@@ -208,5 +208,29 @@ class PrestamoController extends Controller
         return view('dashboard', compact('suma_monto_prestado'));
     } */
 
+    public function obtenerRegistrosPorModoPago()
+    {
+        $registrosPorModoPago = Prestamo::with('modoPago')
+            ->select('id_modo_pago', DB::raw('count(*) as cantidad_registros'))
+            ->groupBy('id_modo_pago')
+            ->get();
 
+        $data = [];
+        foreach ($registrosPorModoPago as $registro) {
+            $data[] = [
+                'modalidad_pago' => $registro->modoPago->modalidad_pago,
+                'cantidad_registros' => $registro->cantidad_registros,
+            ];
+        }
+
+        return response()->json($data);
+    }
+    public function obtenerEstadosPrestamos()
+    {
+        $estadosPrestamos = Prestamo::select(DB::raw('estado, count(*) as cantidad'))
+            ->groupBy('estado')
+            ->get();
+
+        return response()->json($estadosPrestamos);
+    }
 }

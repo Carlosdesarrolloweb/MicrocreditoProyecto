@@ -127,4 +127,17 @@ class ZonaController extends Controller
 
     return response()->json($zona);
     }
+    public function obtenerZonas()
+    {
+        $zonas = Zona::all();
+
+        $data = [];
+        foreach ($zonas as $zona) {
+            $data[] = [
+                'nombre_zona' => $zona->nombre_zona,
+            ];
+        }
+
+        return response()->json($data);
+    }
 }

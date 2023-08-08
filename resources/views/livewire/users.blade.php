@@ -5,15 +5,19 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1 style="text-align: center;font-weight: bold; color: black;">USUARIOS REGISTRADOS</h1>
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 
-<th>
-    <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-</th>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('verusuario.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">USUARIOS</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 @stop
 
 @section('content')
@@ -32,10 +36,10 @@
     </x-slot>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="background-color: #75606069">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered table-sm text-center" style="background-color: white">
                             <thead class="bg-dark">
                                 <tr scope="col">
                                     <th scope="col">CARNET</th>
@@ -94,6 +98,16 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}">
+    <style>
+        .logo-container {
+        text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+    </style>
 @stop
 
 @section('js')
@@ -140,8 +154,22 @@
 
         </script>
         <Script>
-            $(document).ready(function () {
-            $('#example').DataTable();
+            $(document).ready(function() {
+                $('#example').DataTable({
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ registros por página",
+                        "zeroRecords": "No se encontraron registros",
+                        "info": "Mostrando página _PAGE_ de _PAGES_",
+                        "infoEmpty": "No hay registros disponibles",
+                        "infoFiltered": "(filtrados de _MAX_ registros totales)",
+                        "search" : 'Buscar',
+                        "paginate" : {
+                            'next' : 'Siguiente',
+                            'previous':'Anterior'
+
+                        }
+                    }
+                });
             });
         </Script>
         <script>

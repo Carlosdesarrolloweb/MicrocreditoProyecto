@@ -24,9 +24,6 @@ class PDFController extends Controller
         $pdf->SetMargins(10, 10, 10);
         $pdf->SetAutoPageBreak(true, 10);
 
-        // Agrega una página al PDF
-        $pdf->AddPage();
-
         // Obtiene el cliente con sus imágenes desde la base de datos
         $cliente = Cliente::findOrFail($cliente_id);
 
@@ -36,37 +33,28 @@ class PDFController extends Controller
         $width = 150;
         $height = 150;
 
-          // Ruta de la imagen del logo
+        // Ruta de la imagen del logo
         $logoPath = public_path('logomicrocredito.JPG');
 
-          // Coordenadas y tamaño de la imagen del logo
+        // Coordenadas y tamaño de la imagen del logo
         $logoX = 160;  // Ajusta la posición X de la imagen del logo
         $logoY = 15;   // Ajusta la posición Y de la imagen del logo
         $logoWidth = 40;   // Ajusta el ancho de la imagen del logo
         $logoHeight = 40;  // Ajusta la altura de la imagen del logo
 
-          // Agrega la imagen del logo al PDF
-        $pdf->Image($logoPath, $logoX, $logoY, $logoWidth, $logoHeight);
+        // Genera las páginas para cada imagen del cliente
+        $imagenes = [$cliente->foto, $cliente->fotocarnet, $cliente->fotorecibo, $cliente->fotocroquis];
+        foreach ($imagenes as $imagen) {
+            // Agrega una página al PDF
+            $pdf->AddPage();
 
-        // Agrega las imágenes del cliente al PDF
-        if ($cliente->foto) {
-            $imagen = $cliente->foto->direccion_imagen;
-            $pdf->Image($imagen, $x, $y, $width, $height);
-        }
+            // Agrega la imagen del logo al PDF en todas las páginas
+            $pdf->Image($logoPath, $logoX, $logoY, $logoWidth, $logoHeight);
 
-        if ($cliente->fotocarnet) {
-            $imagen = $cliente->fotocarnet->direccion_imagen;
-            $pdf->Image($imagen, $x, $y + $height + 10, $width, $height);
-        }
-
-        if ($cliente->fotorecibo) {
-            $imagen = $cliente->fotorecibo->direccion_imagen;
-            $pdf->Image($imagen, $x, $y + ($height + 10) * 2, $width, $height);
-        }
-
-        if ($cliente->fotocroquis) {
-            $imagen = $cliente->fotocroquis->direccion_imagen;
-            $pdf->Image($imagen, $x, $y + ($height + 10) * 3, $width, $height);
+            // Agrega la imagen del cliente al PDF en la página actual
+            if ($imagen) {
+                $pdf->Image($imagen->direccion_imagen, $x, $y, $width, $height, '', '', '', false, 300);
+            }
         }
 
         // Genera el contenido del PDF y lo devuelve como una respuesta de descarga

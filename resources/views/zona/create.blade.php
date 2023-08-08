@@ -25,18 +25,18 @@
     <div class="col-md-10 offset-md-2">
         <div class="custom-box" style="background-color: #75606069; border: 1px solid #ccc; padding: 20px; border-radius: 5px;">
             <div class="card-header">
-                    <h5 class="card-title">Crear Zona</h5>
+
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('zonas.store') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="cod_zona">Código de Zona</label>
+                            <label for="cod_zona"><i class="fas fa-key"></i> Código de Zona</label>
                             <input type="text" class="form-control" id="cod_zona" name="cod_zona" value="{{ old('cod_zona') }}" required onblur="buscarZona()">
                             <div class="invalid-feedback" id="mensaje-error"></div>
                         </div>
                         <div class="form-group">
-                            <label for="nombre_zona">Nombre de Zona</label>
+                            <label for="nombre_zona"><i class="fas fa-map"></i> Nombre de Zona</label>
                             <input type="text" class="form-control @error('nombre_zona') is-invalid @enderror" id="nombre_zona" name="nombre_zona" value="{{ old('nombre_zona') }}" required>
                             @error('nombre_zona')
                                 <div class="invalid-feedback">{{ $message }}</div>

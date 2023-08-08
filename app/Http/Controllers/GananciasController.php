@@ -69,37 +69,29 @@ class GananciasController extends Controller
     }
     public function calcularGananciasMes()
     {
-        $gananciasDiarias = GananciaDia::all();
-        $gananciasMensuales = [];
+        $ganancias = GananciaDia::all(); // Obtener las ganancias diarias
 
-        foreach ($gananciasDiarias as $ganancia) {
-            $año = date('Y', strtotime($ganancia->fecha));
-            $mes = date('F', strtotime($ganancia->fecha));
-            $gananciaCalculada = $ganancia->monto + $ganancia->efectivo;
-            $indice = $año . '-' . $mes;
+        $gananciasMensuales = $ganancias->groupBy(function ($item) {
+            // Convertir la cadena de fecha en un objeto DateTime
+            $fecha = new \DateTime($item->fecha);
 
-            if (!isset($gananciasMensuales[$indice])) {
-                $gananciasMensuales[$indice] = [
-                    'año' => $año,
-                    'mes' => $mes,
-                    'ganancia' => 0,
-                ];
-            }
+            // Agrupamos las ganancias por año y mes
+            return $fecha->format('Y-m');
+        })->map(function ($group) {
+            // Sumar la columna ganancia para cada grupo
+            $sumaGanancia = $group->sum('ganancia');
 
-            $gananciasMensuales[$indice]['ganancia'] += $gananciaCalculada;
-        }
+            // Obtener el año y mes del primer elemento en el grupo
+            $fecha = new \DateTime($group->first()->fecha);
+            $año = $fecha->format('Y');
+            $mes = $fecha->format('F'); // Obtener el nombre del mes en inglés
 
-        //  obtener el valor correcto de ganancia en junio y julio
-        foreach ($gananciasMensuales as &$gananciaMensual) {
-            $mes = $gananciaMensual['mes'];
-            if ($mes == 'June') {
-                $gananciaMensual['ganancia'] = 0;
-            } elseif ($mes == 'July') {
-                $gananciaMensual['ganancia'] = 440;
-            }
-        }
-
-        $gananciasMensuales = array_values($gananciasMensuales); // Reindexar el array
+            return [
+                'año' => $año,
+                'mes' => $mes,
+                'ganancia' => $sumaGanancia
+            ];
+        })->values();
 
         return view('ganancia.ganancias-mensuales', compact('gananciasMensuales'));
     }

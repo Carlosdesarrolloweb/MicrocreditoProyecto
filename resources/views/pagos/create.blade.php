@@ -4,12 +4,11 @@
 
 @section('content_header')
 <center>
-    <h1 style="text-align: center;font-weight: bold; color: black;">REGISTRAR PAGO</h1>
-
-    <th>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('guardarpago.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">REGISTRAR PAGO</h1>
         <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
-    </th>
-
+    </div>
 </center>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -159,6 +158,14 @@
         width: 90% !important;
         max-width: 1200px !important;
         }
+    .logo-container {
+        text-align: center;
+        }
+
+    .logo {
+        width: 100px;
+        height: auto;
+    }
 </style>
 
 @stop

@@ -49,10 +49,6 @@ Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
-/*     Route::get('/email/verify', function () {
-        return view('auth.verify-email');
-    })->middleware(['auth'])->name('verification.notice'); */
-
     Route::get('/permisos', [Seguridad\PermisosController::class,'index'])->name('permisos.index');
     Route::get('/roles', [Seguridad\RolesController::class,'index'])->name('roles.index');
 
@@ -200,6 +196,17 @@ Route::get('/', function () {
      Route::get('/reportes/movimientos-bitacora', function () {
         return view('reportes.movimientosbitacora');
     })->name('reportes.movimientosbitacora');
+
+      //GANANCIAS
+      Route::get('/reportes/ganancias', function () {
+        return view('reportes.ganancias');
+    })->name('reportes.ganancias');
+
+    //GANANCIAS
+    Route::get('/reportes/historialpagos', function () {
+        return view('reportes.historialpagos');
+    })->name('reportes.historialpagos');
+
       //POWERBI
       Route::get('/reportes/powerbi', function () {
         return view('reportes.powerbi');
@@ -211,6 +218,10 @@ Route::get('/', function () {
      //DASHBOARD
      Route::get('/dashboard', [ClienteController::class, 'dashboard'])->name('dashboard');
      Route::get('/dashboard/prestamos', [PrestamoController::class, 'clientesprestamo'])->name('dashboard.prestamos');
+     Route::get('/dashboard/zonas', [ZonaController::class, 'obtenerZonas'])->name('dashboard.zonas');
+     Route::get('/dashboard/modos-pago', [PrestamoController::class, 'obtenerRegistrosPorModoPago'])->name('dashboard.modos-pago');
+     Route::get('/dashboard/estados-prestamos', [PrestamoController::class, 'obtenerEstadosPrestamos'])->name('dashboard.estados-prestamos');
+     Route::get('/dashboard/estados-clientes', [ClienteController::class, 'obtenerEstadosClientes'])->name('dashboard.estados-clientes');
     //  Route::get('/dashboard/tarjeta', [PrestamoController::class, 'mostrarTarjeta'])->name('dashboard.tarjeta');
 
 

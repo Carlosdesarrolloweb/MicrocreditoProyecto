@@ -3,8 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-     <h1 style="text-align: center;font-weight: bold; color: black;">ACTUALIZAR DATOS</h1>
-     <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+<center>
+    <div class="logo-container">
+        <img class="logo" src="{{ asset('actuser.png') }}" alt="Logo Microcréditos Mary">
+        <h1 class="title">ACTUALIZAR USUARIO</h1>
+        <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+    </div>
+</center>
 @stop
 
 @section('content')
@@ -17,7 +22,7 @@
             <div class="container">
                 <p> </p>
                 <p>  </p>
-            <div class="form-row">
+            <div class="form-row" style="background-color: #75606069">
                 <input type="hidden" value="{{$usersv->id}}">
                 <div class="form-group col-md-6">
                     <x-jet-label for="Carnet" value="{{ __('CARNET/DNI') }}" />
@@ -31,7 +36,7 @@
                     <x-jet-input-error for="name" class="mt-2 text-danger" />
                     </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" style="background-color: #75606069">
                 <div class="form-group col-md-6">
                     <x-jet-label for="Apellidos" value="{{ __('APELLIDOS') }}" />
                     <x-jet-input  id="apellido_usuario" class="form-control" type="text" name="apellido_usuario" value="{{$usersv->apellido_usuario}}" required autofocus autocomplete="apellido_usuario" />
@@ -43,7 +48,7 @@
                     <x-jet-input-error for="Nombre_usuario" class="mt-2 text-danger" />
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" style="background-color: #75606069">
                 <div class="form-group col-md-6">
                     <x-jet-label for="estado_usuario" value="{{ __('ESTADO USUARIO') }}" />
                     <select name="estado_usuario">
@@ -52,7 +57,7 @@
                     </select>
 
                </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" >
                     <x-jet-label for="Cargo" value="{{ __('CARGO LABORAL') }}" />
                     <select name="cargo_usuario">
                         <option value="ADMINISTRADOR">ADMINISTRADOR</option>
@@ -60,13 +65,13 @@
                     </select>
 
                </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" >
                     <x-jet-label for="Direccion" value="{{ __('DIRECCION') }}" />
                     <x-jet-input  id="direccion_usuario" class="form-control" type="text" name="direccion_usuario" value="{{$usersv->direccion_usuario}}" required autofocus autocomplete="direccion_usuario" />
                     <x-jet-input-error for="direccion_usuario" class="mt-2 text-danger" />
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" style="background-color: #75606069">
                 <div class="form-group col-md-6">
                     <x-jet-label for="Telefono" value="{{ __('TELEFONO') }}" />
                     <x-jet-input  id="telefono_usuario" class="form-control" type="text" name="telefono_usuario" value="{{$usersv->telefono_usuario}}" required autofocus autocomplete="telefono_usuario" />
@@ -78,7 +83,7 @@
                     <x-jet-input-error for="email" class="mt-2 text-danger" />
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" style="background-color: #75606069">
                 <div class="form-group col-md-6">
                     <x-jet-label for="password" value="{{ __('CONTRASEÑA') }}" />
                     <x-jet-input  id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
@@ -95,9 +100,10 @@
             {{--     <x-jet-button class="btn btn-success"><i class='fa fa-save'></i>
                     {{ __('ACTUALIZAR') }}
                 </x-jet-button> --}}
-
-                <button id="btn-actualizar" class="btn btn-primary fa fa-save" type="button">Actualizar</button>
+        <center>
+                <button id="btn-actualizar" class="btn btn-success fa fa-save" type="button"> Actualizar</button>
             </div>
+        </center>
         </form>
 
 
@@ -106,6 +112,16 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}">
+    <style>
+        .logo-container {
+        text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+    </style>
 @stop
 
 @section('js')

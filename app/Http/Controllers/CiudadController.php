@@ -57,5 +57,32 @@ public function update(Request $request, $id)
 
     return redirect()->route('ciudades.create');
 }
+public function obtenerCiudades()
+{
+    $ciudades = Ciudad::all();
+
+    $data = [];
+    foreach ($ciudades as $ciudad) {
+        $data[] = [
+            'nombre_ciudad' => $ciudad->nombre_ciudad,
+        ];
+    }
+
+    return response()->json($data);
+}
+public function obtenerPrestamosPorCiudad()
+{
+    $ciudades = Ciudad::withCount('prestamos')->get();
+
+    $data = [];
+    foreach ($ciudades as $ciudad) {
+        $data[] = [
+            'nombre_ciudad' => $ciudad->nombre_ciudad,
+            'cantidad_prestamos' => $ciudad->prestamos_count,
+        ];
+    }
+
+    return response()->json($data);
+}
 
 }

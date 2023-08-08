@@ -5,6 +5,9 @@
 @section('content_header')
 <h1 style="text-align: center;font-weight: bold; color: black;">CIUDADES</h1>
 <p style="text-align: center;font-weight: bold; color: red;">USUARIO :  {{ Auth::user()->name }} {{ Auth::user()->apellido_usuario }} {{ date('d/m/Y') }}</P>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 @stop
 
 @section('content')
@@ -14,40 +17,53 @@
         <div class="container">
             <div class="card-footer text-right">
                 <button type="button" class="btn btn-danger btn-lg" id="btnLimpiar">
-                     <i class="far fa-file-alt fa-lg"></i> Limpiar
-                 </button>
-                 <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
-                     <i class="fas fa-question-circle fa-lg"></i> Ayuda
-                 </button>
-                 <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
-                     <i class="fas fa-sign-out-alt fa-lg"></i> Salir
-                 </button>
-             </div>
-            <div class="form-group">
-                <label for="cod_ciudad">Código de ciudad</label>
-                <input type="text" class="form-control" id="cod_ciudad" name="cod_ciudad">
+                    <i class="far fa-file-alt fa-lg"></i> Limpiar
+                </button>
+                <button type="button" class="btn btn-info btn-lg" id="btnAyuda" data-toggle="modal" data-target="#modalAyuda">
+                    <i class="fas fa-question-circle fa-lg"></i> Ayuda
+                </button>
+                <button type="button" class="btn btn-primary btn-lg" id="btnSalir">
+                    <i class="fas fa-sign-out-alt fa-lg"></i> Salir
+                </button>
             </div>
 
-            <div class="form-group">
-                <label for="nombre_ciudad">Nombre de ciudad</label>
-                <input type="text" class="form-control" id="nombre_ciudad" name="nombre_ciudad">
+            <div class="card" style="background-color: #75606069">
+                <div class="form-group">
+                    <label for="cod_ciudad">
+                        <i class="fas fa-city"></i> Código de ciudad
+                    </label>
+                    <input type="text" class="form-control" id="cod_ciudad" name="cod_ciudad">
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre_ciudad">
+                        <i class="fas fa-map-marker-alt"></i> Nombre de ciudad
+                    </label>
+                    <input type="text" class="form-control" id="nombre_ciudad" name="nombre_ciudad">
+                </div>
+
+                <div class="form-group">
+                    <label for="zona_id">
+                        <i class="fas fa-globe"></i> Zona
+                    </label>
+                    <select class="form-control" id="zona_id" name="zona_id">
+                        @foreach ($zonas as $zona)
+                            <option value="{{ $zona->id }}">{{ $zona->nombre_zona }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="zona_id">Zona</label>
-                <select class="form-control" id="zona_id" name="zona_id">
-                    @foreach ($zonas as $zona)
-                        <option value="{{ $zona->id }}">{{ $zona->nombre_zona }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Guardar
+            </button>
 
-            <button type="submit" class="btn btn-success fa fa-save"> Guardar</button>
-    </form>
+
+        </form>
 
             <br>
             <p><p></p></p>
-        <table class="table">
+        <table class="table" id="example">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
@@ -94,7 +110,16 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script> -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 
     <Script>
         $(document).ready(function() {

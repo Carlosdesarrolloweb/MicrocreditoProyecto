@@ -23,8 +23,6 @@ class CreatePropiedadesFoto extends Migration
         });
     }
 
-
-
     /**
      * Reverse the migrations.
      *
@@ -32,12 +30,12 @@ class CreatePropiedadesFoto extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('propiedades_foto', function (Blueprint $table) {            
+        Schema::dropIfExists('propiedades_foto', function (Blueprint $table) {
             $table->dropForeign('id_foto');
             $table->dropIndex('id_foto');
             $table->dropColumn('id_foto');
         });
-          
+
     }
-   
+
 }
